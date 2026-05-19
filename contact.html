@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Corter Digital</title>
+  <meta name="description" content="Get in touch with Corter Digital. Call, email, or fill out a form.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #F4F1EC;
+      --ink:       #0E0E0C;
+      --ink-mid:   #3A3835;
+      --ink-muted: #6A6560;
+      --accent:    #044fca;
+      --surface:   #EAE7E1;
+      --dark:      #0E0E0C;
+      --dark-text: #F4F1EC;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--ink);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    @media (pointer: fine) { body, a, button { cursor: none; } }
+    ::selection { background: var(--ink); color: var(--bg); }
+    *:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    /* Cursor */
+    #cd-cursor {
+      position: fixed; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--ink); pointer-events: none; z-index: 9999;
+      top: 0; left: 0; transform: translate(-50%,-50%);
+      transition: width .25s cubic-bezier(.34,1.56,.64,1), height .25s cubic-bezier(.34,1.56,.64,1), background .2s ease;
+      will-change: transform;
+    }
+    #cd-cursor.expanded { width: 48px; height: 48px; background: transparent; border: 1.5px solid rgba(14,14,12,.25); }
+    #cd-cursor.light { background: var(--dark-text); }
+    #cd-cursor.light.expanded { background: transparent; border-color: rgba(244,241,236,.35); }
+
+    /* Nav */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 32px 48px; transition: padding .35s ease, background .35s ease;
+    }
+    #navbar.scrolled {
+      padding: 18px 48px; background: rgba(244,241,236,.95);
+      backdrop-filter: blur(12px); border-bottom: 1px solid rgba(14,14,12,.07);
+    }
+    .nav-wordmark {
+      font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--ink); text-decoration: none;
+    }
+    .nav-links { display: flex; align-items: center; gap: 40px; }
+    .nav-lnk {
+      font-size: 11px; font-weight: 500; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--ink-muted); text-decoration: none; transition: color .2s ease;
+    }
+    .nav-lnk:hover { color: var(--ink); }
+    .nav-lnk.active { color: var(--ink); }
+    .nav-lnk.hi { color: var(--accent); font-weight: 600; }
+    #nav-ham {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; padding: 4px;
+    }
+    #nav-ham span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: transform .25s ease, opacity .25s ease; }
+    #mob-menu {
+      position: fixed; inset: 0; z-index: 400; background: var(--bg);
+      display: flex; flex-direction: column; justify-content: center; padding: 48px;
+      transform: translateX(100%); transition: transform .42s cubic-bezier(.76,0,.24,1);
+    }
+    #mob-menu.open { transform: translateX(0); }
+    .mob-lnk {
+      font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px,14vw,80px);
+      letter-spacing: .05em; line-height: 1.0; text-transform: uppercase;
+      color: var(--ink); text-decoration: none; display: block; margin-bottom: 8px;
+      opacity: 0; transform: translateX(20px); transition: opacity .3s ease, transform .3s ease, color .2s ease;
+    }
+    .mob-lnk:hover { color: var(--accent); }
+    #mob-menu.open .mob-lnk:nth-child(1) { opacity:1;transform:none;transition-delay:.1s; }
+    #mob-menu.open .mob-lnk:nth-child(2) { opacity:1;transform:none;transition-delay:.17s; }
+    #mob-menu.open .mob-lnk:nth-child(3) { opacity:1;transform:none;transition-delay:.24s; }
+    .mob-foot { margin-top: auto; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-muted); }
+
+    /* Page layout */
+    .contact-wrap {
+      max-width: 1200px; margin: 0 auto;
+      padding: 180px 48px 120px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+
+    /* Left column */
+    .eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--ink-muted);
+      display: flex; align-items: center; gap: 16px; margin-bottom: 32px;
+    }
+    .eyebrow::before { content:''; display:block; width:32px; height:1px; background:var(--accent); }
+
+    .contact-hl {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 8vw, 100px);
+      letter-spacing: .03em; line-height: .92;
+      text-transform: uppercase;
+      color: var(--ink); margin-bottom: 24px;
+    }
+    .contact-hl em { font-style: normal; color: var(--accent); }
+
+    .contact-sub {
+      font-size: 15px; color: var(--ink-muted);
+      line-height: 1.7; margin-bottom: 56px; max-width: 360px;
+    }
+
+    /* Contact info blocks */
+    .info-block {
+      display: flex; align-items: center; gap: 20px;
+      padding: 20px 0; border-bottom: 1px solid rgba(14,14,12,.08);
+      text-decoration: none; color: inherit;
+      transition: border-bottom-color .2s ease;
+    }
+    .info-block:first-of-type { border-top: 1px solid rgba(14,14,12,.08); }
+    .info-block:hover { border-bottom-color: var(--accent); }
+    .info-block:hover .info-arrow { transform: translate(3px,-3px); }
+
+    .info-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(4,79,202,.07);
+      border: 1px solid rgba(4,79,202,.12);
+    }
+
+    .info-text { flex: 1; min-width: 0; }
+    .info-label {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: .13em; text-transform: uppercase;
+      color: var(--ink-muted); margin-bottom: 4px;
+    }
+    .info-value { font-size: 15px; font-weight: 500; color: var(--ink); }
+
+    .info-arrow {
+      width: 14px; height: 14px; flex-shrink: 0; color: var(--ink-muted);
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    .response-note {
+      margin-top: 32px; padding: 18px 20px;
+      background: var(--surface); border-left: 2px solid var(--accent);
+      font-size: 13px; color: var(--ink-muted); line-height: 1.65;
+    }
+
+    /* Right column — form */
+    .form-wrap { position: sticky; top: 120px; }
+
+    .form-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--ink-muted);
+      display: block; margin-bottom: 10px;
+    }
+
+    .form-field {
+      width: 100%; background: var(--surface);
+      border: 1px solid rgba(14,14,12,.1);
+      padding: 14px 16px; font-size: 14px;
+      font-family: 'Inter Tight', sans-serif; color: var(--ink);
+      outline: none; appearance: none;
+      transition: border-color .18s ease, background .18s ease, box-shadow .18s ease;
+    }
+    .form-field::placeholder { color: var(--ink-muted); }
+    .form-field:focus {
+      border-color: var(--accent); background: #fff;
+      box-shadow: 0 0 0 3px rgba(4,79,202,.08);
+    }
+    textarea.form-field { resize: vertical; min-height: 130px; }
+    select.form-field { cursor: pointer; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-group { margin-bottom: 16px; }
+
+    .submit-btn {
+      width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: var(--ink); color: var(--dark-text);
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+      padding: 18px 36px; border: none;
+      transition: background .2s ease, transform .3s cubic-bezier(.34,1.56,.64,1);
+      margin-top: 4px;
+    }
+    .submit-btn:hover { background: var(--accent); }
+    .submit-btn:active { transform: scale(.99); }
+    .submit-btn:disabled { opacity: .5; }
+
+    #form-success {
+      display: none; padding: 16px 20px; margin-bottom: 20px;
+      background: #F0FDF4; border-left: 2px solid #22C55E;
+      font-size: 14px; color: #166534; line-height: 1.55;
+    }
+    #form-error {
+      display: none; padding: 16px 20px; margin-bottom: 20px;
+      background: #FEF2F2; border-left: 2px solid #F87171;
+      font-size: 14px; color: #991B1B; line-height: 1.55;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark); border-top: 1px solid rgba(244,241,236,.07);
+      padding: 28px 48px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    footer span, footer a {
+      font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(244,241,236,.25); text-decoration: none; transition: color .2s ease;
+    }
+    footer a:hover { color: rgba(244,241,236,.6); }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
+    .reveal.in { opacity: 1; transform: none; }
+    .rd1 { transition-delay: .1s; }
+    .rd2 { transition-delay: .2s; }
+    .rd3 { transition-delay: .3s; }
+
+    @media (max-width: 900px) {
+      .contact-wrap { grid-template-columns: 1fr; gap: 56px; padding-top: 140px; }
+      .form-wrap { position: static; }
+    }
+    @media (max-width: 768px) {
+      #navbar { padding: 20px 24px; }
+      #navbar.scrolled { padding: 14px 24px; }
+      .nav-links { display: none; }
+      #nav-ham { display: flex; }
+      .contact-wrap { padding: 120px 24px 80px; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { padding: 24px; flex-wrap: wrap; justify-content: center; text-align: center; }
+      #mob-menu { padding: 100px 32px 48px; justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="cd-cursor" aria-hidden="true"></div>
+
+<div id="mob-menu" role="dialog" aria-modal="true" aria-label="Navigation">
+  <a href="index.html"    class="mob-lnk">Home</a>
+  <a href="services.html" class="mob-lnk">Services</a>
+  <a href="contact.html"  class="mob-lnk">Contact</a>
+  <div class="mob-foot">(570) 502-4036</div>
+</div>
+
+<nav id="navbar" role="navigation" aria-label="Main navigation">
+  <a href="index.html" class="nav-wordmark">Corter Digital</a>
+  <div class="nav-links">
+    <a href="services.html" class="nav-lnk">Services</a>
+    <a href="contact.html"  class="nav-lnk active">Contact</a>
+    <a href="tel:+15705024036" class="nav-lnk hi">(570) 502-4036</a>
+  </div>
+  <button id="nav-ham" aria-label="Open menu" aria-expanded="false">
+    <span id="hb1"></span><span id="hb2"></span><span id="hb3"></span>
+  </button>
+</nav>
+
+
+<div class="contact-wrap">
+
+  <!-- LEFT: headline + contact info -->
+  <div>
+    <div class="eyebrow reveal">Get In Touch</div>
+    <h1 class="contact-hl reveal rd1">
+      Let's talk about<br><em>your business.</em>
+    </h1>
+    <p class="contact-sub reveal rd2">
+      No pitch. No runaround. Just a straight conversation about where you are and where you want to be.
+    </p>
+
+    <a href="tel:+15705024036" class="info-block reveal rd2">
+      <div class="info-icon">
+        <svg width="18" height="18" fill="#044fca" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/>
+        </svg>
+      </div>
+      <div class="info-text">
+        <div class="info-label">Phone</div>
+        <div class="info-value">(570) 502-4036</div>
+      </div>
+      <svg class="info-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/>
+      </svg>
+    </a>
+
+    <a href="mailto:andrewcsmma@gmail.com" class="info-block reveal rd3">
+      <div class="info-icon">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#044fca" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+      </div>
+      <div class="info-text">
+        <div class="info-label">Email</div>
+        <div class="info-value" style="word-break:break-all;">andrewcsmma@gmail.com</div>
+      </div>
+      <svg class="info-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/>
+      </svg>
+    </a>
+
+    <div class="response-note reveal rd3">
+      We typically respond the same day. For the fastest response — call us directly.
+    </div>
+  </div>
+
+  <!-- RIGHT: form -->
+  <div class="form-wrap reveal rd2">
+
+    <div id="form-success" role="alert"><strong>Message sent.</strong> We'll be in touch shortly.</div>
+    <div id="form-error"   role="alert">Something went wrong. Try again or call us directly.</div>
+
+    <form id="contact-form" action="https://formspree.io/f/mwvzvkaw" method="POST" novalidate>
+
+      <div class="form-row">
+        <div>
+          <label class="form-label" for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" class="form-field" required>
+        </div>
+        <div>
+          <label class="form-label" for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="(570) 000-0000" class="form-field">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" class="form-field" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Tell us about your business and what you're looking for…" class="form-field"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submit-btn">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+        </svg>
+        Send Message
+      </button>
+
+    </form>
+  </div>
+
+</div>
+
+
+<footer>
+  <span>© 2025 Corter Digital</span>
+  <span>NEPA's Marketing Partner</span>
+  <a href="mailto:andrewcsmma@gmail.com">andrewcsmma@gmail.com</a>
+</footer>
+
+
+<script>
+  const cur=document.getElementById('cd-cursor');
+  let mx=0,my=0,cx=0,cy=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  (function tick(){cx+=(mx-cx)*.13;cy+=(my-cy)*.13;cur.style.left=cx+'px';cur.style.top=cy+'px';requestAnimationFrame(tick);})();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cur.classList.add('expanded'));
+    el.addEventListener('mouseleave',()=>cur.classList.remove('expanded'));
+  });
+  document.addEventListener('mousemove',e=>{
+    const r=document.querySelector('footer').getBoundingClientRect();
+    cur.classList.toggle('light',e.clientY>=r.top&&e.clientY<=r.bottom);
+  });
+
+  const navbar=document.getElementById('navbar');
+  window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>40),{passive:true});
+
+  const ham=document.getElementById('nav-ham'),mob=document.getElementById('mob-menu');
+  const hb1=document.getElementById('hb1'),hb2=document.getElementById('hb2'),hb3=document.getElementById('hb3');
+  let open=false;
+  ham.addEventListener('click',()=>{
+    open=!open;mob.classList.toggle('open',open);ham.setAttribute('aria-expanded',String(open));
+    document.body.style.overflow=open?'hidden':'';
+  });
+  mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{if(open)ham.click();}));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&open)ham.click();});
+
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Formspree submit
+  const form=document.getElementById('contact-form');
+  const successEl=document.getElementById('form-success');
+  const errorEl=document.getElementById('form-error');
+  const submitBtn=document.getElementById('submit-btn');
+
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();
+    successEl.style.display='none'; errorEl.style.display='none';
+    submitBtn.disabled=true; submitBtn.textContent='Sending…';
+    try {
+      const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});
+      if(res.ok){successEl.style.display='block';form.reset();}
+      else{errorEl.style.display='block';}
+    } catch{errorEl.style.display='block';}
+    finally{
+      submitBtn.disabled=false;
+      submitBtn.innerHTML='<svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg> Send Message';
+    }
+  });
+</script>
+
+</body>
+</html>

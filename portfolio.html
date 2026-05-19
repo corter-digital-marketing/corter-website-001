@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio — Corter Digital</title>
+  <meta name="description" content="Browse websites built by Corter Digital for local businesses across a range of industries.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Playfair Display', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            ink:        '#0D0D0D',
+            'ink-muted':'#4B4B4B',
+            'ink-faint':'#8A8A8A',
+            'off':      '#F7F6F3',
+            navy: {
+              DEFAULT: '#1A2744',
+              light:   '#243561',
+            },
+            gold: {
+              DEFAULT: '#C8A96E',
+            },
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    ::selection { background: #1A2744; color: #fff; }
+    body { -webkit-font-smoothing: antialiased; }
+
+    #navbar { transition: box-shadow 0.3s ease, background 0.3s ease; }
+    #navbar.scrolled {
+      background: rgba(255,255,255,0.97) !important;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.07), 0 2px 16px rgba(0,0,0,0.04);
+    }
+
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: #1A2744;
+      transition: width 0.22s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    *:focus-visible { outline: 2px solid #1A2744; outline-offset: 3px; border-radius: 2px; }
+
+    /* Portfolio card hover */
+    .portfolio-card {
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+    }
+    .portfolio-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05), 0 20px 48px rgba(0,0,0,0.1) !important;
+    }
+    .portfolio-card:hover .card-overlay {
+      opacity: 1;
+    }
+    .portfolio-card:hover .card-image {
+      transform: scale(1.03);
+    }
+
+    .card-overlay {
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .card-image {
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Filter button */
+    .filter-btn {
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    .filter-btn.active {
+      background: #1A2744;
+      color: #fff;
+      border-color: #1A2744;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    .delay-1 { animation-delay: 0.08s; }
+    .delay-2 { animation-delay: 0.16s; }
+  </style>
+</head>
+<body class="bg-white font-sans text-ink">
+
+
+<!-- ================================================================
+     NAVIGATION
+================================================================ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm" role="navigation" aria-label="Main navigation">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+    <div class="flex items-center justify-between" style="height: 110px;">
+
+      <a href="index.html" aria-label="Corter Digital — home" style="display:flex; align-items:center; flex-shrink:0;">
+        <img src="cdlogo.png" alt="Corter Digital" style="height:200px; width:auto; display:block;">
+      </a>
+
+      <div class="hidden md:flex items-center gap-8">
+        <a href="index.html#services"    class="nav-link text-sm font-medium text-ink-muted hover:text-ink transition-colors duration-150">Services</a>
+        <a href="index.html#specialized" class="nav-link text-sm font-medium text-ink-muted hover:text-ink transition-colors duration-150">Specialized Design</a>
+        <a href="portfolio.html"         class="nav-link text-sm font-medium text-ink transition-colors duration-150">Portfolio</a>
+        <a href="index.html#contact"     class="nav-link text-sm font-medium text-ink-muted hover:text-ink transition-colors duration-150">Contact</a>
+      </div>
+
+      <a href="tel:+15705024036"
+         class="hidden md:inline-flex items-center gap-2 bg-navy text-white text-sm font-semibold px-5 py-2.5 rounded"
+         style="box-shadow: 0 1px 2px rgba(26,39,68,0.25), 0 4px 14px rgba(26,39,68,0.18); transition: background 0.15s ease, transform 0.1s ease;"
+         onmouseenter="this.style.background='#243561'"
+         onmouseleave="this.style.background='#1A2744'"
+         onmousedown="this.style.transform='scale(0.97)'"
+         onmouseup="this.style.transform='scale(1)'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/>
+        </svg>
+        Call Now
+      </a>
+
+      <button id="mobile-toggle" class="md:hidden p-2 rounded text-ink-muted hover:text-ink hover:bg-black/5 transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16"/>
+        </svg>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden border-t border-black/6 py-5 space-y-4">
+      <a href="index.html#services"    class="block text-sm font-medium text-ink-muted hover:text-ink transition-colors py-1">Services</a>
+      <a href="index.html#specialized" class="block text-sm font-medium text-ink-muted hover:text-ink transition-colors py-1">Specialized Design</a>
+      <a href="portfolio.html"         class="block text-sm font-medium text-ink transition-colors py-1">Portfolio</a>
+      <a href="index.html#contact"     class="block text-sm font-medium text-ink-muted hover:text-ink transition-colors py-1">Contact</a>
+      <a href="tel:+15705024036" class="inline-flex items-center gap-2 bg-navy text-white text-sm font-semibold px-5 py-2.5 rounded mt-2">
+        Call (570) 502-4036
+      </a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ================================================================
+     PAGE HEADER
+================================================================ -->
+<header class="pt-32 pb-16 lg:pb-20 bg-white" style="padding-top: calc(110px + 5rem);">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+
+    <div class="fade-up flex items-center gap-3 mb-6">
+      <div class="h-px w-8" style="background: #C8A96E;"></div>
+      <span class="text-xs font-semibold uppercase tracking-widest text-ink-faint">Our Work</span>
+    </div>
+
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+      <div>
+        <h1 class="fade-up delay-1 font-display font-black text-ink mb-4" style="font-size: clamp(2.5rem, 5.5vw, 4rem); letter-spacing: -0.035em; line-height: 1.0;">
+          Portfolio
+        </h1>
+        <p class="fade-up delay-2 text-ink-muted text-lg max-w-xl" style="line-height: 1.72;">
+          Real websites built for real local businesses. Every project is designed to convert visitors into customers.
+        </p>
+      </div>
+
+      <!-- CTA -->
+      <a href="tel:+15705024036"
+         class="flex-shrink-0 inline-flex items-center gap-2 bg-navy text-white font-semibold text-sm px-6 py-3.5 rounded self-start"
+         style="box-shadow: 0 1px 2px rgba(26,39,68,0.22), 0 4px 14px rgba(26,39,68,0.18); transition: background 0.15s ease, transform 0.1s ease;"
+         onmouseenter="this.style.background='#243561'"
+         onmouseleave="this.style.background='#1A2744'"
+         onmousedown="this.style.transform='scale(0.97)'"
+         onmouseup="this.style.transform='scale(1)'">
+        Start Your Project
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</header>
+
+<!-- Divider -->
+<div class="max-w-6xl mx-auto px-6 lg:px-8" aria-hidden="true">
+  <div class="h-px bg-black/7"></div>
+</div>
+
+
+<!-- ================================================================
+     FILTER BAR
+================================================================ -->
+<div class="sticky top-[66px] z-30 bg-white/95 backdrop-blur-sm border-b border-black/7 py-4">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+    <div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar" role="group" aria-label="Filter by industry">
+      <button class="filter-btn active flex-shrink-0 text-xs font-semibold px-4 py-2 rounded-full border border-black/12" data-filter="all">All Work</button>
+      <button class="filter-btn flex-shrink-0 text-xs font-semibold px-4 py-2 rounded-full border border-black/12 text-ink-muted hover:border-black/25 hover:text-ink" data-filter="home-services">Home Services</button>
+      <button class="filter-btn flex-shrink-0 text-xs font-semibold px-4 py-2 rounded-full border border-black/12 text-ink-muted hover:border-black/25 hover:text-ink" data-filter="health">Health &amp; Wellness</button>
+      <button class="filter-btn flex-shrink-0 text-xs font-semibold px-4 py-2 rounded-full border border-black/12 text-ink-muted hover:border-black/25 hover:text-ink" data-filter="food">Food &amp; Hospitality</button>
+      <button class="filter-btn flex-shrink-0 text-xs font-semibold px-4 py-2 rounded-full border border-black/12 text-ink-muted hover:border-black/25 hover:text-ink" data-filter="professional">Professional Services</button>
+      <button class="filter-btn flex-shrink-0 text-xs font-semibold px-4 py-2 rounded-full border border-black/12 text-ink-muted hover:border-black/25 hover:text-ink" data-filter="retail">Retail</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ================================================================
+     PORTFOLIO GRID
+================================================================ -->
+<main class="py-14 lg:py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+
+    <div id="portfolio-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Project 1 -->
+      <article class="portfolio-card rounded-xl overflow-hidden border border-black/8 bg-white" data-category="home-services"
+               style="box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.05);">
+        <div class="relative overflow-hidden" style="aspect-ratio: 16/10;">
+          <img class="card-image w-full h-full object-cover" src="https://placehold.co/720x450/E8E4DC/4B4B4B?text=Summit+Roofing" alt="Summit Roofing website screenshot">
+          <div class="card-overlay absolute inset-0 flex items-center justify-center" style="background: rgba(26,39,68,0.7);">
+            <span class="text-white font-semibold text-sm border border-white/30 px-5 py-2.5 rounded">View Project</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-start justify-between gap-3 mb-2">
+            <h2 class="font-display font-bold text-ink text-lg" style="letter-spacing: -0.02em;">Summit Roofing Co.</h2>
+            <span class="flex-shrink-0 text-xs font-medium text-ink-faint bg-off px-2.5 py-1 rounded-full mt-0.5">Home Services</span>
+          </div>
+          <p class="text-ink-muted text-sm mb-4" style="line-height: 1.65;">Full site build with quote request forms, before/after gallery, and local SEO targeting three service counties.</p>
+          <div class="flex items-center gap-2 text-xs text-ink-faint">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0"></span>
+            Live since Jan 2025
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="portfolio-card rounded-xl overflow-hidden border border-black/8 bg-white" data-category="health"
+               style="box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.05);">
+        <div class="relative overflow-hidden" style="aspect-ratio: 16/10;">
+          <img class="card-image w-full h-full object-cover" src="https://placehold.co/720x450/EEE9E0/4B4B4B?text=Clarity+Chiropractic" alt="Clarity Chiropractic website screenshot">
+          <div class="card-overlay absolute inset-0 flex items-center justify-center" style="background: rgba(26,39,68,0.7);">
+            <span class="text-white font-semibold text-sm border border-white/30 px-5 py-2.5 rounded">View Project</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-start justify-between gap-3 mb-2">
+            <h2 class="font-display font-bold text-ink text-lg" style="letter-spacing: -0.02em;">Clarity Chiropractic</h2>
+            <span class="flex-shrink-0 text-xs font-medium text-ink-faint bg-off px-2.5 py-1 rounded-full mt-0.5">Health &amp; Wellness</span>
+          </div>
+          <p class="text-ink-muted text-sm mb-4" style="line-height: 1.65;">Online booking integration, patient FAQ section, and Google Business profile optimization driving 40% more calls.</p>
+          <div class="flex items-center gap-2 text-xs text-ink-faint">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0"></span>
+            Live since Nov 2024
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 3 -->
+      <article class="portfolio-card rounded-xl overflow-hidden border border-black/8 bg-white" data-category="food"
+               style="box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.05);">
+        <div class="relative overflow-hidden" style="aspect-ratio: 16/10;">
+          <img class="card-image w-full h-full object-cover" src="https://placehold.co/720x450/E2DDD4/4B4B4B?text=Ember+Kitchen" alt="Ember Kitchen website screenshot">
+          <div class="card-overlay absolute inset-0 flex items-center justify-center" style="background: rgba(26,39,68,0.7);">
+            <span class="text-white font-semibold text-sm border border-white/30 px-5 py-2.5 rounded">View Project</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-start justify-between gap-3 mb-2">
+            <h2 class="font-display font-bold text-ink text-lg" style="letter-spacing: -0.02em;">Ember Kitchen</h2>
+            <span class="flex-shrink-0 text-xs font-medium text-ink-faint bg-off px-2.5 py-1 rounded-full mt-0.5">Food &amp; Hospitality</span>
+          </div>
+          <p class="text-ink-muted text-sm mb-4" style="line-height: 1.65;">Menu display, reservation widget, and catering inquiry system for a locally owned restaurant.</p>
+          <div class="flex items-center gap-2 text-xs text-ink-faint">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0"></span>
+            Live since Mar 2025
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 4 -->
+      <article class="portfolio-card rounded-xl overflow-hidden border border-black/8 bg-white" data-category="professional"
+               style="box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.05);">
+        <div class="relative overflow-hidden" style="aspect-ratio: 16/10;">
+          <img class="card-image w-full h-full object-cover" src="https://placehold.co/720x450/DDD9D0/4B4B4B?text=Hartwell+Law" alt="Hartwell Law website screenshot">
+          <div class="card-overlay absolute inset-0 flex items-center justify-center" style="background: rgba(26,39,68,0.7);">
+            <span class="text-white font-semibold text-sm border border-white/30 px-5 py-2.5 rounded">View Project</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-start justify-between gap-3 mb-2">
+            <h2 class="font-display font-bold text-ink text-lg" style="letter-spacing: -0.02em;">Hartwell Law Group</h2>
+            <span class="flex-shrink-0 text-xs font-medium text-ink-faint bg-off px-2.5 py-1 rounded-full mt-0.5">Professional Services</span>
+          </div>
+          <p class="text-ink-muted text-sm mb-4" style="line-height: 1.65;">Practice area pages, attorney profiles, and confidential intake form with direct-to-phone notification.</p>
+          <div class="flex items-center gap-2 text-xs text-ink-faint">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0"></span>
+            Live since Feb 2025
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 5 -->
+      <article class="portfolio-card rounded-xl overflow-hidden border border-black/8 bg-white" data-category="home-services"
+               style="box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.05);">
+        <div class="relative overflow-hidden" style="aspect-ratio: 16/10;">
+          <img class="card-image w-full h-full object-cover" src="https://placehold.co/720x450/E5E1D7/4B4B4B?text=Bluewater+Plumbing" alt="Bluewater Plumbing website screenshot">
+          <div class="card-overlay absolute inset-0 flex items-center justify-center" style="background: rgba(26,39,68,0.7);">
+            <span class="text-white font-semibold text-sm border border-white/30 px-5 py-2.5 rounded">View Project</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-start justify-between gap-3 mb-2">
+            <h2 class="font-display font-bold text-ink text-lg" style="letter-spacing: -0.02em;">Bluewater Plumbing</h2>
+            <span class="flex-shrink-0 text-xs font-medium text-ink-faint bg-off px-2.5 py-1 rounded-full mt-0.5">Home Services</span>
+          </div>
+          <p class="text-ink-muted text-sm mb-4" style="line-height: 1.65;">Emergency service landing page with one-tap call button driving 3x increase in after-hours leads.</p>
+          <div class="flex items-center gap-2 text-xs text-ink-faint">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0"></span>
+            Live since Dec 2024
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 6 -->
+      <article class="portfolio-card rounded-xl overflow-hidden border border-black/8 bg-white" data-category="retail"
+               style="box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.05);">
+        <div class="relative overflow-hidden" style="aspect-ratio: 16/10;">
+          <img class="card-image w-full h-full object-cover" src="https://placehold.co/720x450/E9E5DC/4B4B4B?text=Grove+Goods" alt="Grove Goods website screenshot">
+          <div class="card-overlay absolute inset-0 flex items-center justify-center" style="background: rgba(26,39,68,0.7);">
+            <span class="text-white font-semibold text-sm border border-white/30 px-5 py-2.5 rounded">View Project</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-start justify-between gap-3 mb-2">
+            <h2 class="font-display font-bold text-ink text-lg" style="letter-spacing: -0.02em;">Grove Goods</h2>
+            <span class="flex-shrink-0 text-xs font-medium text-ink-faint bg-off px-2.5 py-1 rounded-full mt-0.5">Retail</span>
+          </div>
+          <p class="text-ink-muted text-sm mb-4" style="line-height: 1.65;">Boutique retail site with product catalog, store hours widget, and Google Maps integration.</p>
+          <div class="flex items-center gap-2 text-xs text-ink-faint">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0"></span>
+            Live since Apr 2025
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- No results state (hidden by default) -->
+    <div id="no-results" class="hidden py-20 text-center">
+      <p class="text-ink-muted">No projects in this category yet.</p>
+    </div>
+
+  </div>
+</main>
+
+
+<!-- ================================================================
+     BOTTOM CTA
+================================================================ -->
+<section class="py-20 lg:py-28 relative overflow-hidden" style="background: #1A2744;">
+  <div aria-hidden="true" style="position:absolute; inset:0; pointer-events:none;">
+    <div style="position:absolute; top:-40%; right:-15%; width:60%; padding-top:60%; border-radius:50%; background: radial-gradient(ellipse, rgba(200,169,110,0.09) 0%, transparent 65%);"></div>
+  </div>
+  <div class="max-w-3xl mx-auto px-6 lg:px-8 text-center relative z-10">
+    <div class="flex items-center justify-center gap-3 mb-6">
+      <div class="h-px w-8" style="background: rgba(200,169,110,0.5);"></div>
+      <span class="text-xs font-semibold uppercase tracking-widest" style="color: rgba(255,255,255,0.45);">Your Business Next</span>
+      <div class="h-px w-8" style="background: rgba(200,169,110,0.5);"></div>
+    </div>
+    <h2 class="font-display font-black text-white mb-5" style="font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -0.035em; line-height: 1.05;">
+      Ready to add your business to this list?
+    </h2>
+    <p class="text-lg mb-10 max-w-md mx-auto" style="color: rgba(255,255,255,0.55); line-height: 1.72;">
+      Call us and we'll figure out exactly what your business needs.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="tel:+15705024036"
+         class="inline-flex items-center justify-center gap-2.5 bg-white text-navy font-bold text-base px-9 py-4 rounded"
+         style="box-shadow: 0 2px 8px rgba(0,0,0,0.25), 0 10px 36px rgba(0,0,0,0.2); transition: background 0.15s ease, transform 0.1s ease;"
+         onmouseenter="this.style.background='#F0EFEC'"
+         onmouseleave="this.style.background='#FFFFFF'"
+         onmousedown="this.style.transform='scale(0.97)'"
+         onmouseup="this.style.transform='scale(1)'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/>
+        </svg>
+        Call (570) 502-4036
+      </a>
+      <a href="index.html#services"
+         class="inline-flex items-center justify-center gap-2 font-semibold text-sm px-9 py-4 rounded"
+         style="border: 1.5px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.8); transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;"
+         onmouseenter="this.style.borderColor='rgba(255,255,255,0.35)'; this.style.color='#fff'; this.style.background='rgba(255,255,255,0.05)'"
+         onmouseleave="this.style.borderColor='rgba(255,255,255,0.2)'; this.style.color='rgba(255,255,255,0.8)'; this.style.background='transparent'">
+        View Pricing
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="bg-white border-t border-black/7 py-9">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-5">
+    <a href="index.html" aria-label="Corter Digital — home">
+      <img src="cdlogo.png" alt="Corter Digital" style="height:200px; width:auto; display:block;">
+    </a>
+    <p class="text-xs text-ink-faint text-center order-last sm:order-none">&copy; 2025 Corter Digital. All rights reserved.</p>
+    <a href="tel:+15705024036" class="text-sm text-ink-muted hover:text-ink font-medium transition-colors duration-150">(570) 502-4036</a>
+  </div>
+</footer>
+
+
+<script>
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 24);
+  }, { passive: true });
+
+  // Mobile menu
+  const toggle = document.getElementById('mobile-toggle');
+  const menu   = document.getElementById('mobile-menu');
+  toggle.addEventListener('click', () => {
+    const isOpen = !menu.classList.contains('hidden');
+    menu.classList.toggle('hidden', isOpen);
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  // Portfolio filter
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards      = document.querySelectorAll('#portfolio-grid article');
+  const noResults  = document.getElementById('no-results');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter;
+      let visible = 0;
+
+      cards.forEach(card => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+
+      noResults.classList.toggle('hidden', visible > 0);
+    });
+  });
+</script>
+
+</body>
+</html>
