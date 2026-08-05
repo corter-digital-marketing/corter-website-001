@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Work — Corter Digital</title>
-  <meta name="description" content="Browse websites, online marketing, and video work built by Corter Digital for local businesses.">
+  <title>Learn — Corter Digital</title>
+  <meta name="description" content="Courses from Corter Digital on building websites, growing social media, and creating content that converts.">
 
   <link rel="preconnect" href="https://api.fontshare.com">
   <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
@@ -130,168 +130,74 @@
     #mob-menu.open .mob-lnk:nth-child(6) { opacity:1; transform:none; transition-delay:.26s; }
     .mob-foot { margin-top: auto; font-size: 14px; font-weight: 500; color: var(--ink-45); }
 
-    /* ── HERO ── */
-    .hero-split {
-      padding: 170px 48px 64px;
-      max-width: 1280px; margin: 0 auto;
-      display: flex; flex-direction: column; align-items: center; text-align: center;
-    }
-    .hero-split-logo { width: clamp(220px, 27vw, 360px); margin: 0 auto 40px; }
-    .hero-split-logo img { width: 100%; height: auto; display: block; }
-    .hero-split-text { max-width: 640px; }
-    .hero-split-text h1 {
+    /* Page header */
+    .page-header { padding: 168px 48px 88px; max-width: 1280px; margin: 0 auto; }
+    .page-hl {
       font-family: 'General Sans', sans-serif;
       font-weight: 600;
-      font-size: clamp(40px, 5.5vw, 68px);
-      letter-spacing: -.03em; line-height: 1.05;
-      color: var(--ink); margin: 0 0 22px;
+      font-size: clamp(44px, 6.5vw, 88px);
+      letter-spacing: -.03em; line-height: 1.03;
+      color: var(--ink); margin: 18px 0 24px;
+      max-width: 16ch;
     }
-    .hero-split-note {
-      font-size: 15px; font-weight: 500; color: var(--ink-45); margin-bottom: 44px;
-    }
-    .hero-cta {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 14px; font-weight: 600;
-      color: #fff; background: var(--ink);
-      padding: 15px 30px; border-radius: var(--radius);
-      text-decoration: none;
-      transition: background .2s var(--ease);
-    }
-    .hero-cta:hover { background: var(--accent); }
+    .page-hl em { font-style: normal; color: var(--accent); }
+    .page-sub { font-size: 17px; color: var(--ink-70); line-height: 1.65; max-width: 46ch; }
 
-    /* ── PORTFOLIO SECTIONS ── */
-    .port-section { padding: 96px 48px; border-top: 1px solid var(--ink-15); scroll-margin-top: 140px; }
-    .port-section-inner { max-width: 1280px; margin: 0 auto; }
+    /* Notice */
+    .notice-band {
+      max-width: 1280px; margin: 0 auto; padding: 0 48px 64px;
+    }
+    .notice {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--accent-08); border: 1px solid rgba(14,91,207,.2);
+      border-radius: var(--radius); padding: 18px 22px;
+      font-size: 15px; color: var(--ink-70);
+    }
+    .notice strong { color: var(--ink); font-weight: 700; }
 
-    .port-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 56px; flex-wrap: wrap; }
-    .port-label {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600;
-      font-size: clamp(30px, 3.6vw, 44px);
-      letter-spacing: -.02em; line-height: 1;
-      color: var(--ink); margin-top: 14px;
+    /* Courses */
+    .courses-section { max-width: 1280px; margin: 0 auto; padding: 0 48px 152px; }
+    .course-list { border-top: 1px solid var(--ink-15); }
+    .course-row {
+      display: grid; grid-template-columns: 100px 1fr 1.15fr; gap: 48px;
+      align-items: start; padding: 56px 0;
+      border-bottom: 1px solid var(--ink-15);
     }
-
-    .port-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
+    .course-index { font-family: 'General Sans', sans-serif; font-size: 15px; font-weight: 600; color: var(--ink-45); padding-top: 4px; }
+    .course-title {
+      font-family: 'General Sans', sans-serif; font-weight: 600;
+      font-size: clamp(26px, 2.6vw, 34px); letter-spacing: -.015em; line-height: 1.1;
+      color: var(--ink);
     }
-
-    .port-card {
-      border-radius: 10px;
-      text-decoration: none; color: inherit;
-      display: block; overflow: hidden;
-      transition: transform .3s var(--ease);
+    .course-meta { font-size: 13px; font-weight: 600; letter-spacing: .04em; color: var(--accent); margin-top: 14px; }
+    .course-modules { list-style: none; margin: 20px 0 0; padding: 0; }
+    .course-modules li {
+      font-size: 14px; font-weight: 600; color: var(--accent);
+      padding: 9px 0; border-top: 1px solid var(--ink-08);
     }
-    .port-card:hover { transform: translateY(-4px); }
-    .port-card-media { position: relative; overflow: hidden; aspect-ratio: 16/10; background: var(--bg-alt); border: 1px solid var(--ink-08); border-radius: 10px; }
-    .port-card-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s var(--ease); }
-    .port-card:hover .port-card-media img { transform: scale(1.04); }
-    .port-card-media.soon { background: var(--bg-alt); display: flex; align-items: center; justify-content: center; }
-    .port-card-media.logo { background: #fff; display: flex; align-items: center; justify-content: center; padding: 32px; }
-    .port-card-media.logo img { width: auto; height: auto; max-width: 78%; max-height: 60%; object-fit: contain; }
-    .port-card-media.logo.lg img { max-width: 94%; max-height: 82%; }
-    .port-card-visit-label {
-      display: block; font-size: 12px; font-weight: 600; letter-spacing: .04em;
-      color: var(--ink-45); margin-bottom: 12px;
-      transition: color .2s var(--ease);
-    }
-    .port-card:hover .port-card-visit-label { color: var(--accent); }
-    .port-card-soon-badge {
-      font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--ink-45); border: 1px solid var(--ink-15); border-radius: 999px;
-      padding: 8px 18px;
-    }
-    .port-card-overlay {
-      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-      background: rgba(10,10,10,.5); opacity: 0; transition: opacity .3s var(--ease);
-    }
-    .port-card:hover .port-card-overlay { opacity: 1; }
-    .port-card-overlay span {
-      color: #fff; font-size: 13px; font-weight: 600; letter-spacing: .04em;
-      border: 1px solid rgba(255,255,255,.4); border-radius: var(--radius); padding: 10px 20px;
-    }
-    .port-card-body { padding: 22px 4px 0; }
-    .port-card-tag {
-      font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 10px;
-    }
-    .port-card-name {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600;
-      font-size: 19px; letter-spacing: -.01em; line-height: 1.2;
-      color: var(--ink); margin-bottom: 10px;
-    }
-    .port-card-desc { font-size: 14px; font-weight: 500; line-height: 1.6; color: var(--ink-45); }
-
-    /* ── PRODUCTS PANEL ── */
-    .products-panel {
-      background: linear-gradient(155deg, #1a6ce8 0%, #0e5bcf 55%, #0a49ab 100%);
-      border-radius: 16px;
-      padding: 64px 56px;
-      box-shadow: 0 24px 48px rgba(14,91,207,.25);
-    }
-    .products-panel-badge {
-      display: inline-block;
-      font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-      color: #fff; border: 1px solid rgba(255,255,255,.4); border-radius: 999px;
-      padding: 8px 18px; margin-bottom: 24px;
-    }
-    .products-panel h3 {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600; font-size: clamp(26px, 3vw, 38px);
-      letter-spacing: -.02em; line-height: 1.15;
-      color: #fff; margin-bottom: 16px;
-    }
-    .products-panel p {
-      font-size: 17px; font-weight: 500; line-height: 1.65;
-      color: rgba(255,255,255,.85); max-width: 60ch;
-    }
-
-    /* ── SOCIAL MEDIA PANEL ── */
-    .social-panel {
-      background: #fff; border: 1px solid var(--ink-08); border-radius: 16px;
-      padding: 56px;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 48px; flex-wrap: wrap;
-    }
-    .social-panel-tag {
-      font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 12px;
-    }
-    .social-panel-name {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600; font-size: clamp(24px, 2.6vw, 32px);
-      letter-spacing: -.015em; color: var(--ink); margin-bottom: 24px;
-    }
-    .social-panel-fb {
-      display: inline-flex; align-items: center; gap: 10px;
+    .course-modules li:first-child { border-top: none; }
+    .course-right { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+    .course-desc { font-size: 17px; line-height: 1.6; color: var(--ink-70); max-width: 46ch; }
+    .course-includes { display: flex; flex-direction: column; gap: 10px; }
+    .course-includes div { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--ink-70); }
+    .course-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .course-btn {
+      display: inline-flex; align-items: center; gap: 8px;
       font-size: 14px; font-weight: 600; color: #fff;
       background: var(--accent); border-radius: var(--radius);
       padding: 13px 24px; text-decoration: none;
-      transition: background .2s var(--ease);
+      transition: background .2s var(--ease), gap .2s var(--ease);
     }
-    .social-panel-fb:hover { background: #0a49ab; }
-    .social-panel-stat { text-align: center; flex-shrink: 0; }
-    .social-panel-num {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 700; font-size: clamp(42px, 5vw, 64px);
-      line-height: 1; letter-spacing: -.02em; color: var(--ink);
-    }
-    .social-panel-label {
-      font-size: 13px; font-weight: 700; letter-spacing: .04em;
-      color: var(--ink-45); margin-top: 10px;
-    }
+    .course-btn:hover { background: #0a49ab; gap: 12px; }
+    .course-btn svg { transition: transform .2s var(--ease); }
+    .course-btn:hover svg { transform: translateX(2px); }
 
-    /* ── CTA BAND ── */
+    /* CTA */
     .cta-band { background: var(--dark); color: var(--dark-text); padding: 152px 48px; }
     .cta-inner { max-width: 1280px; margin: 0 auto; }
     .cta-hl {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600;
-      font-size: clamp(38px, 6vw, 76px);
-      letter-spacing: -.03em; line-height: 1.05;
+      font-family: 'General Sans', sans-serif; font-weight: 600;
+      font-size: clamp(38px, 6vw, 76px); letter-spacing: -.03em; line-height: 1.05;
       color: var(--dark-text); margin-bottom: 52px;
     }
     .cta-hl em { font-style: normal; color: var(--accent); }
@@ -305,10 +211,7 @@
       transition: background .2s var(--ease), color .2s var(--ease);
     }
     .cta-btn:hover { background: var(--accent); color: #fff; }
-    .cta-tel {
-      font-size: 14px; color: var(--dark-text-60); text-decoration: none;
-      transition: color .2s var(--ease);
-    }
+    .cta-tel { font-size: 14px; color: var(--dark-text-60); text-decoration: none; transition: color .2s var(--ease); }
     .cta-tel:hover { color: var(--dark-text); }
 
     /* ── FOOTER ── */
@@ -316,15 +219,11 @@
     .foot-inner { max-width: 1280px; margin: 0 auto; padding: 96px 48px 48px; }
     .foot-top { display: grid; grid-template-columns: 1.3fr .7fr .7fr .9fr; gap: 48px; padding-bottom: 80px; }
     .foot-word {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600; font-size: 24px; letter-spacing: -.01em;
+      font-family: 'General Sans', sans-serif; font-weight: 600; font-size: 24px; letter-spacing: -.01em;
       color: var(--dark-text); text-decoration: none; display: inline-block; margin-bottom: 20px;
     }
     .foot-tag { font-size: 15px; color: var(--dark-text-60); line-height: 1.6; max-width: 34ch; }
-    .foot-col-label {
-      font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--dark-text-60); margin-bottom: 22px;
-    }
+    .foot-col-label { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--dark-text-60); margin-bottom: 22px; }
     .foot-links { display: flex; flex-direction: column; gap: 14px; }
     .foot-links a { font-size: 15px; color: var(--dark-text); text-decoration: none; transition: color .2s var(--ease); }
     .foot-links a:hover { color: var(--accent); }
@@ -335,22 +234,21 @@
       color: var(--dark-text); transition: border-color .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
     }
     .foot-social:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-    .foot-bottom {
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
-      padding-top: 32px; border-top: 1px solid var(--dark-line); flex-wrap: wrap;
-    }
+    .foot-bottom { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 32px; border-top: 1px solid var(--dark-line); flex-wrap: wrap; }
     .foot-bottom span, .foot-bottom a { font-size: 13px; color: var(--dark-text-60); text-decoration: none; transition: color .2s var(--ease); }
     .foot-bottom a:hover { color: var(--dark-text); }
 
-    /* ── REVEAL ── */
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
     .reveal.in { opacity: 1; transform: none; }
     .rd1 { transition-delay: .08s; }
-    .rd2 { transition-delay: .16s; }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 960px) {
-      .port-grid { grid-template-columns: 1fr 1fr; }
+    @media (max-width: 900px) {
+      .course-row { grid-template-columns: 1fr; gap: 16px; text-align: center; }
+      .course-index { padding-top: 0; }
+      .course-right { align-items: center; }
+      .course-desc { margin-left: auto; margin-right: auto; }
+      .course-includes div { justify-content: center; }
+      .course-modules { max-width: 320px; margin-left: auto; margin-right: auto; }
       .foot-top { grid-template-columns: 1fr 1fr; gap: 40px 24px; text-align: center; }
       .foot-links { align-items: center; }
       .foot-socials { justify-content: center; }
@@ -360,15 +258,11 @@
       #navbar.scrolled { padding: 14px 24px; }
       .nav-links, .nav-cta { display: none; }
       #nav-ham { display: flex; }
-      .hero-split { padding: 120px 24px 32px; }
-      .port-section { padding: 64px 24px; scroll-margin-top: 116px; }
-      .port-head { justify-content: center; text-align: center; }
-      .port-grid { grid-template-columns: 1fr; }
-      .port-card { text-align: center; }
-      .products-panel { padding: 40px 28px; text-align: center; }
-      .products-panel p { margin: 0 auto; }
-      .social-panel { padding: 36px 28px; flex-direction: column; text-align: center; }
-      .port-card-visit-label { text-align: center; }
+      .page-header { padding: 120px 24px 56px; text-align: center; }
+      .page-sub { margin: 0 auto; }
+      .notice-band { padding: 0 24px 48px; }
+      .notice { flex-direction: column; text-align: center; }
+      .courses-section { padding: 0 24px 112px; }
       .cta-band { padding: 96px 24px; text-align: center; }
       .cta-actions { justify-content: center; }
       .foot-inner { padding: 72px 24px 32px; }
@@ -389,7 +283,6 @@
   <a href="learn.html"     class="mob-lnk">Learn</a>
   <a href="about.html"     class="mob-lnk">About</a>
   <a href="contact.html"   class="mob-lnk">Contact</a>
-  <div class="mob-foot">(570) 502-4036</div>
 </div>
 
 <!-- NAV -->
@@ -398,138 +291,122 @@
     <a href="index.html" class="nav-word" aria-label="Corter Digital — home"><img src="CD-Transparent.png" alt="Corter Digital"></a>
     <div class="nav-links">
       <a href="index.html#services" class="nav-lnk">Services</a>
-      <a href="portfolio.html"      class="nav-lnk active">Our Work</a>
-      <a href="learn.html"          class="nav-lnk">Learn</a>
+      <a href="portfolio.html"      class="nav-lnk">Our Work</a>
+      <a href="learn.html"          class="nav-lnk active">Learn</a>
       <a href="about.html"          class="nav-lnk">About</a>
     </div>
   </div>
-  <a href="contact.html" class="nav-cta">Start a project</a>
+  <a href="contact.html" class="nav-cta">Contact Us</a>
   <button id="nav-ham" aria-label="Open menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
 
-<!-- HERO -->
-<section class="hero-split" aria-label="Portfolio hero">
-  <div class="hero-split-logo">
-    <img src="cdlogoCrop.png" alt="Corter Digital">
+<!-- PAGE HEADER -->
+<header>
+  <div class="page-header">
+    <h1 class="page-hl reveal rd1">Learn what actually <em>works.</em></h1>
+    <p class="page-sub reveal rd1">The same strategies behind 10M+ views and 60K+ followers, broken down into courses you can go through at your own pace.</p>
   </div>
-  <div class="hero-split-text">
-    <h1 class="reveal rd1">Our Work</h1>
-    <p class="hero-split-note reveal rd2">A look at the websites, campaigns, and content we've built for real businesses.</p>
-    <a href="contact.html" class="hero-cta reveal rd2">Start your project</a>
+</header>
+
+<div class="notice-band">
+  <div class="notice reveal">
+    <span><strong>Courses are launching soon.</strong> Join the waitlist and we'll email you the moment enrollment opens.</span>
   </div>
-</section>
+</div>
 
 
-<!-- WEBSITES -->
-<section id="websites" class="port-section">
-  <div class="port-section-inner">
-    <div class="port-head">
+<!-- COURSES -->
+<section class="courses-section">
+  <div class="course-list">
+
+    <div class="course-row reveal">
+      <div class="course-index">01</div>
       <div>
-        <h2 class="port-label reveal">Websites</h2>
+        <div class="course-title">Websites that convert</div>
+        <div class="course-meta">Self-paced · 6 modules</div>
+        <ol class="course-modules">
+          <li>01 — Planning your site structure</li>
+          <li>02 — Local SEO fundamentals</li>
+          <li>03 — Writing copy that converts</li>
+          <li>04 — Contact forms &amp; lead capture</li>
+          <li>05 — Mobile-first design principles</li>
+          <li>06 — Launch &amp; ongoing maintenance</li>
+        </ol>
       </div>
-    </div>
-
-    <div class="port-grid">
-
-      <a href="https://foundedceo.com/" target="_blank" rel="noopener" class="port-card reveal">
-        <span class="port-card-visit-label">Click to visit site</span>
-        <div class="port-card-media logo">
-          <img src="partnerLogos/black-newlogo.png" alt="FoundedCEO logo">
-          <div class="port-card-overlay"><span>Visit site</span></div>
+      <div class="course-right">
+        <p class="course-desc">Everything we know about building a local business website that actually drives calls and bookings — structure, copy, SEO, and the small details most sites get wrong.</p>
+        <div class="course-includes">
+          <div><span class="course-dot"></span>Site structure &amp; conversion-focused layout</div>
+          <div><span class="course-dot"></span>Local SEO fundamentals</div>
+          <div><span class="course-dot"></span>Copywriting for local service pages</div>
         </div>
-        <div class="port-card-body">
-          <div class="port-card-tag">Venture Capital Media</div>
-          <div class="port-card-name">FoundedCEO</div>
-          <p class="port-card-desc">Full site build with comprehensive VC Raises database, newsletter, and customer conversion.</p>
-        </div>
-      </a>
-
-      <a href="https://www.thejasonstewartcollection.com/" target="_blank" rel="noopener" class="port-card reveal rd1">
-        <span class="port-card-visit-label">Click to visit site</span>
-        <div class="port-card-media logo lg">
-          <img src="partnerLogos/black-cropped.png" alt="The Jason Stewart Collection logo">
-          <div class="port-card-overlay"><span>Visit site</span></div>
-        </div>
-        <div class="port-card-body">
-          <div class="port-card-tag">Premium Drinkware</div>
-          <div class="port-card-name">The Jason Stewart Collection</div>
-          <p class="port-card-desc">Full site build with integrated checkout handling, order notification, and corporate bulk orders.</p>
-        </div>
-      </a>
-
-      <a href="https://danmcdermottentertainment.com/" target="_blank" rel="noopener" class="port-card reveal rd2">
-        <span class="port-card-visit-label">Click to visit site</span>
-        <div class="port-card-media logo lg">
-          <img src="partnerLogos/danCrop.png" alt="Dan McDermott Entertainment logo">
-          <div class="port-card-overlay"><span>Visit site</span></div>
-        </div>
-        <div class="port-card-body">
-          <div class="port-card-tag">DJ &amp; Entertainment</div>
-          <div class="port-card-name">Dan McDermott</div>
-          <p class="port-card-desc">Website for DJ Dan showcasing services, with client booking forms sent directly to his email.</p>
-        </div>
-      </a>
-
-      <div class="port-card reveal">
-        <div class="port-card-media soon">
-          <span class="port-card-soon-badge">Coming Soon</span>
-        </div>
-        <div class="port-card-body">
-          <div class="port-card-tag">Local Antique Store</div>
-          <div class="port-card-name">Finding Treasures 4 U</div>
-          <p class="port-card-desc">Store item catalog, payment processing, and a backend that lets the client add products to the site themselves.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- SOCIAL MEDIA -->
-<section id="social-media" class="port-section" style="background: var(--bg-alt);">
-  <div class="port-section-inner">
-    <div class="port-head">
-      <div>
-        <h2 class="port-label reveal">Social Media</h2>
-      </div>
-    </div>
-
-    <div class="social-panel reveal">
-      <div class="social-panel-left">
-        <div class="social-panel-tag">Local Antique Store</div>
-        <div class="social-panel-name">Finding Treasures 4 U</div>
-        <a href="https://www.facebook.com/profile.php?id=61590902003983" target="_blank" rel="noopener" class="social-panel-fb">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          Visit Facebook page
+        <a href="contact.html" class="course-btn">
+          Join the waitlist
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
-      <div class="social-panel-stat">
-        <div class="social-panel-num">250K+</div>
-        <div class="social-panel-label">Views in the last 30 days</div>
-      </div>
     </div>
-  </div>
-</section>
 
-
-<!-- CORTER DIGITAL PRODUCTS -->
-<section id="products" class="port-section">
-  <div class="port-section-inner">
-    <div class="port-head">
+    <div class="course-row reveal">
+      <div class="course-index">02</div>
       <div>
-        <h2 class="port-label reveal">Corter Digital Products</h2>
+        <div class="course-title">Social growth playbook</div>
+        <div class="course-meta">Self-paced · 8 modules</div>
+        <ol class="course-modules">
+          <li>01 — Finding your content pillars</li>
+          <li>02 — Building a content calendar</li>
+          <li>03 — Shooting on a phone</li>
+          <li>04 — Hooks that stop the scroll</li>
+          <li>05 — Editing for short-form</li>
+          <li>06 — Posting cadence &amp; timing</li>
+          <li>07 — Growing real engagement</li>
+          <li>08 — Turning followers into customers</li>
+        </ol>
+      </div>
+      <div class="course-right">
+        <p class="course-desc">The exact approach behind 10M+ views and 60K+ followers gained across social media — content strategy, posting cadence, and how to turn followers into customers.</p>
+        <div class="course-includes">
+          <div><span class="course-dot"></span>Content calendars that actually get used</div>
+          <div><span class="course-dot"></span>What makes content get shared</div>
+          <div><span class="course-dot"></span>Turning engagement into leads</div>
+        </div>
+        <a href="contact.html" class="course-btn">
+          Join the waitlist
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </div>
     </div>
 
-    <div class="products-panel reveal">
-      <span class="products-panel-badge">Coming Soon</span>
-      <h3>A social media post scheduler.</h3>
-      <p>This is where we post our own personal projects — built and shipped by Corter Digital, not a client. First up is a scheduler for planning and posting content across every platform from one place.</p>
+    <div class="course-row reveal">
+      <div class="course-index">03</div>
+      <div>
+        <div class="course-title">Content creation fundamentals</div>
+        <div class="course-meta">Self-paced · 5 modules</div>
+        <ol class="course-modules">
+          <li>01 — Camera &amp; gear basics</li>
+          <li>02 — Lighting on a budget</li>
+          <li>03 — Audio that doesn't suck</li>
+          <li>04 — Framing &amp; composition</li>
+          <li>05 — Editing for short-form platforms</li>
+        </ol>
+      </div>
+      <div class="course-right">
+        <p class="course-desc">A practical guide to shooting and editing content in-house — no film degree required. Camera basics, lighting on a budget, and editing for short-form platforms.</p>
+        <div class="course-includes">
+          <div><span class="course-dot"></span>Shooting on a phone or entry-level camera</div>
+          <div><span class="course-dot"></span>Lighting and audio on a budget</div>
+          <div><span class="course-dot"></span>Editing for short-form platforms</div>
+        </div>
+        <a href="contact.html" class="course-btn">
+          Join the waitlist
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -537,7 +414,7 @@
 <!-- CTA -->
 <section class="cta-band">
   <div class="cta-inner">
-    <h2 class="cta-hl reveal">Ready to add your business<br><em>to this list?</em></h2>
+    <h2 class="cta-hl reveal">Skip the course.<br><em>Let us do it for you.</em></h2>
     <div class="cta-actions reveal rd1">
       <a href="contact.html" class="cta-btn">Start the conversation</a>
       <a href="tel:+15705024036" class="cta-tel">(570) 502-4036</a>
@@ -593,13 +470,11 @@
 
 
 <script>
-  // Navbar
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
 
-  // Mobile menu
   const ham = document.getElementById('nav-ham');
   const mob = document.getElementById('mob-menu');
   let open = false;
@@ -612,12 +487,10 @@
   mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { if (open) ham.click(); }));
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) ham.click(); });
 
-  // Scroll reveal
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
 </script>
 
 </body>
