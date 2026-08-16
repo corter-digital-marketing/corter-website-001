@@ -18,19 +18,22 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:         #FAFAF8;
-      --bg-alt:     #F1EFEA;
-      --ink:        #111111;
-      --ink-70:     rgba(17,17,17,.68);
-      --ink-45:     rgba(17,17,17,.45);
-      --ink-15:     rgba(17,17,17,.13);
-      --ink-08:     rgba(17,17,17,.07);
-      --accent:     #0E5BCF;
-      --accent-08:  rgba(14,91,207,.08);
-      --dark:       #0A0A0A;
-      --dark-text:  #F7F6F3;
-      --dark-text-60: rgba(247,246,243,.58);
-      --dark-line:  rgba(247,246,243,.12);
+      --bg:         #1D1A17;
+      --bg-alt:     #262220;
+      --surface:    #262220;
+      --surface-hi: #2E2925;
+      --ink:        #F3EFE8;
+      --ink-70:     rgba(243,239,232,.70);
+      --ink-45:     rgba(243,239,232,.45);
+      --ink-15:     rgba(243,239,232,.15);
+      --ink-08:     rgba(243,239,232,.08);
+      --accent:     #2F7DF6;
+      --accent-hover: #1E5FD1;
+      --accent-08:  rgba(47,125,246,.14);
+      --dark:       #121009;
+      --dark-text:  #F5F2EC;
+      --dark-text-60: rgba(245,242,236,.6);
+      --dark-line:  rgba(245,242,236,.12);
       --radius:     6px;
       --ease:       cubic-bezier(.16,1,.3,1);
     }
@@ -65,7 +68,7 @@
     }
     #navbar.scrolled {
       padding: 18px 48px;
-      background: rgba(250,249,248,.86);
+      background: rgba(29,26,23,.86);
       backdrop-filter: blur(14px);
       border-bottom-color: var(--ink-08);
     }
@@ -85,14 +88,41 @@
     }
     .nav-lnk:hover { color: var(--ink); }
     .nav-lnk.active { color: var(--ink); }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger { display: inline-flex; align-items: center; gap: 5px; }
+    .nav-dropdown-trigger svg { transition: transform .2s var(--ease); }
+    .nav-dropdown:hover .nav-dropdown-trigger svg,
+    .nav-dropdown:focus-within .nav-dropdown-trigger svg { transform: rotate(180deg); }
+    .nav-dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); padding-top: 16px; }
+    .nav-dropdown-menu-inner {
+      min-width: 230px;
+      background: var(--surface-hi); border: 1px solid var(--ink-08); border-radius: 14px;
+      padding: 10px; box-shadow: 0 20px 44px rgba(0,0,0,.45);
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transform: translateY(-6px);
+      transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu-inner,
+    .nav-dropdown:focus-within .nav-dropdown-menu-inner {
+      opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0);
+    }
+    .nav-dropdown-item {
+      display: flex; flex-direction: column; gap: 2px;
+      padding: 12px 14px; border-radius: 8px;
+      text-decoration: none; color: inherit;
+      transition: background .15s var(--ease);
+    }
+    .nav-dropdown-item:hover { background: var(--bg-alt); }
+    .nav-dropdown-item-title { font-size: 14px; font-weight: 600; color: var(--ink); }
+    .nav-dropdown-item-desc { font-size: 12px; color: var(--ink-45); margin-top: 1px; }
     .nav-cta {
       font-size: 14px; font-weight: 600;
-      color: #fff; background: var(--ink);
+      color: var(--bg); background: var(--ink);
       padding: 11px 22px; border-radius: var(--radius);
       text-decoration: none;
-      transition: background .2s var(--ease), transform .15s var(--ease);
+      transition: background .2s var(--ease), color .2s var(--ease), transform .15s var(--ease);
     }
-    .nav-cta:hover { background: var(--accent); }
+    .nav-cta:hover { background: var(--accent); color: #fff; }
     .nav-cta:active { transform: scale(.97); }
 
     #nav-ham {
@@ -171,13 +201,13 @@
     .pricing-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
 
     .price-card {
-      background: #fff; border: 1px solid var(--ink-08); border-radius: 14px;
+      background: var(--surface); border: 1px solid var(--ink-08); border-radius: 14px;
       padding: 36px 32px; display: flex; flex-direction: column;
       transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
     }
-    .price-card:hover { transform: translateY(-4px); box-shadow: 0 20px 44px rgba(17,17,17,.08); }
-    .price-card.featured { border-color: rgba(14,91,207,.35); box-shadow: 0 20px 48px rgba(14,91,207,.14); }
-    .price-card.featured:hover { box-shadow: 0 26px 56px rgba(14,91,207,.2); }
+    .price-card:hover { transform: translateY(-4px); box-shadow: 0 20px 44px rgba(0,0,0,.35); }
+    .price-card.featured { border-color: rgba(47,125,246,.4); box-shadow: 0 20px 48px rgba(47,125,246,.18); }
+    .price-card.featured:hover { box-shadow: 0 26px 56px rgba(47,125,246,.24); }
     .price-card-name {
       font-family: 'General Sans', sans-serif;
       font-weight: 600; font-size: 19px; letter-spacing: -.01em; color: var(--ink);
@@ -206,9 +236,9 @@
       padding: 13px 20px; text-decoration: none;
       transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease), gap .2s var(--ease);
     }
-    .price-card-cta:hover { background: var(--ink); color: #fff; border-color: var(--ink); gap: 11px; }
+    .price-card-cta:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); gap: 11px; }
     .price-card.featured .price-card-cta { background: var(--accent); color: #fff; border-color: var(--accent); }
-    .price-card.featured .price-card-cta:hover { background: #0a49ab; border-color: #0a49ab; }
+    .price-card.featured .price-card-cta:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
     .price-card-cta svg { transition: transform .2s var(--ease); }
     .price-card-cta:hover svg { transform: translateX(2px); }
 
@@ -322,6 +352,8 @@
       .pricing-group { padding: 56px 0; text-align: center; }
       .pricing-group-head { margin: 0 auto 36px; }
       .pricing-eyebrow { justify-content: center; }
+      .price-card { align-items: center; }
+      .price-card-amount { justify-content: center; }
       .port-section { padding: 24px 24px 96px; }
       .port-head { justify-content: center; text-align: center; }
       .port-grid { grid-template-columns: 1fr; }
@@ -343,7 +375,6 @@
 <div id="mob-menu" role="dialog" aria-modal="true" aria-label="Site navigation">
   <a href="/"     class="mob-lnk">Home</a>
   <a href="/#services" class="mob-lnk">Services</a>
-  <a href="portfolio.html" class="mob-lnk">Our Work</a>
   <a href="learn.html"     class="mob-lnk">Learn</a>
   <a href="about.html"     class="mob-lnk">About</a>
   <a href="contact.html"   class="mob-lnk">Contact</a>
@@ -353,10 +384,26 @@
 <!-- NAV -->
 <nav id="navbar" role="navigation" aria-label="Main navigation">
   <div class="nav-left">
-    <a href="/" class="nav-word" aria-label="Corter Digital — home"><img src="CD-Transparent.png" alt="Corter Digital"></a>
+    <a href="/" class="nav-word" aria-label="Corter Digital — home"><img src="blackout.png" alt="Corter Digital"></a>
     <div class="nav-links">
-      <a href="/#services" class="nav-lnk active">Services</a>
-      <a href="portfolio.html" class="nav-lnk">Our Work</a>
+      <div class="nav-dropdown">
+        <a href="/#services" class="nav-lnk nav-dropdown-trigger active">
+          Services
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+        <div class="nav-dropdown-menu">
+          <div class="nav-dropdown-menu-inner">
+            <a href="websites.html" class="nav-dropdown-item">
+              <span class="nav-dropdown-item-title">Websites</span>
+              <span class="nav-dropdown-item-desc">Build, host &amp; maintain</span>
+            </a>
+            <a href="social-media.html" class="nav-dropdown-item">
+              <span class="nav-dropdown-item-title">Social Media</span>
+              <span class="nav-dropdown-item-desc">Grow your following</span>
+            </a>
+          </div>
+        </div>
+      </div>
       <a href="learn.html"     class="nav-lnk">Learn</a>
       <a href="about.html"     class="nav-lnk">About</a>
     </div>
