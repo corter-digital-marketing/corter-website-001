@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Websites — Corter Digital</title>
+  <meta name="description" content="Template and custom website builds, plus ongoing maintenance and care plans, from Corter Digital.">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/icon-512.png" sizes="512x512">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #FAFAF8;
+      --bg-alt:     #F1EFEA;
+      --ink:        #111111;
+      --ink-70:     rgba(17,17,17,.68);
+      --ink-45:     rgba(17,17,17,.45);
+      --ink-15:     rgba(17,17,17,.13);
+      --ink-08:     rgba(17,17,17,.07);
+      --accent:     #0E5BCF;
+      --accent-08:  rgba(14,91,207,.08);
+      --dark:       #0A0A0A;
+      --dark-text:  #F7F6F3;
+      --dark-text-60: rgba(247,246,243,.58);
+      --dark-line:  rgba(247,246,243,.12);
+      --radius:     6px;
+      --ease:       cubic-bezier(.16,1,.3,1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--ink);
+      font-family: 'General Sans', system-ui, sans-serif;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--ink); color: var(--bg); }
+    *:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    a { color: inherit; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important; scroll-behavior: auto !important;
+      }
+    }
+
+    /* ── NAV ── */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 48px;
+      border-bottom: 1px solid transparent;
+      transition: padding .3s var(--ease), background .3s var(--ease), border-color .3s var(--ease);
+    }
+    #navbar.scrolled {
+      padding: 18px 48px;
+      background: rgba(250,249,248,.86);
+      backdrop-filter: blur(14px);
+      border-bottom-color: var(--ink-08);
+    }
+    .nav-word {
+      font-family: 'General Sans', sans-serif;
+      font-weight: 600; font-size: 18px; letter-spacing: -.01em;
+      color: var(--ink); text-decoration: none;
+      display: flex; align-items: center;
+    }
+    .nav-word img { height: 34px; width: auto; display: block; }
+    .nav-left { display: flex; align-items: center; gap: 44px; }
+    .nav-links { display: flex; align-items: center; gap: 36px; }
+    .nav-lnk {
+      font-size: 14px; font-weight: 500;
+      color: var(--ink-70); text-decoration: none;
+      transition: color .2s var(--ease);
+    }
+    .nav-lnk:hover { color: var(--ink); }
+    .nav-lnk.active { color: var(--ink); }
+    .nav-cta {
+      font-size: 14px; font-weight: 600;
+      color: #fff; background: var(--ink);
+      padding: 11px 22px; border-radius: var(--radius);
+      text-decoration: none;
+      transition: background .2s var(--ease), transform .15s var(--ease);
+    }
+    .nav-cta:hover { background: var(--accent); }
+    .nav-cta:active { transform: scale(.97); }
+
+    #nav-ham {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; padding: 4px;
+    }
+    #nav-ham span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: transform .25s var(--ease), opacity .25s var(--ease); }
+
+    #mob-menu {
+      position: fixed; inset: 0; z-index: 400;
+      background: var(--bg);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 48px; overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform .5s var(--ease);
+    }
+    #mob-menu.open { transform: translateX(0); }
+    .mob-lnk {
+      font-family: 'General Sans', sans-serif;
+      font-size: clamp(30px, 8vw, 46px);
+      letter-spacing: -.02em; line-height: 1.15;
+      color: var(--ink); text-decoration: none;
+      display: block; margin-bottom: 4px;
+      opacity: 0; transform: translateX(16px);
+      transition: opacity .4s var(--ease), transform .4s var(--ease), color .2s var(--ease);
+    }
+    .mob-lnk:hover { color: var(--accent); }
+    #mob-menu.open .mob-lnk:nth-child(1) { opacity:1; transform:none; transition-delay:.06s; }
+    #mob-menu.open .mob-lnk:nth-child(2) { opacity:1; transform:none; transition-delay:.10s; }
+    #mob-menu.open .mob-lnk:nth-child(3) { opacity:1; transform:none; transition-delay:.14s; }
+    #mob-menu.open .mob-lnk:nth-child(4) { opacity:1; transform:none; transition-delay:.18s; }
+    #mob-menu.open .mob-lnk:nth-child(5) { opacity:1; transform:none; transition-delay:.22s; }
+    #mob-menu.open .mob-lnk:nth-child(6) { opacity:1; transform:none; transition-delay:.26s; }
+    .mob-foot { margin-top: auto; font-size: 14px; font-weight: 500; color: var(--ink-45); }
+
+    /* ── PAGE HEADER ── */
+    .page-header { padding: 168px 48px 40px; max-width: 1280px; margin: 0 auto; }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; color: var(--ink-45);
+      text-decoration: none; transition: color .2s var(--ease), gap .2s var(--ease);
+    }
+    .back-link:hover { color: var(--accent); gap: 11px; }
+    .back-link svg { transition: transform .2s var(--ease); }
+    .page-hl {
+      font-family: 'General Sans', sans-serif;
+      font-weight: 600;
+      font-size: clamp(44px, 6.5vw, 84px);
+      letter-spacing: -.03em; line-height: 1.03;
+      color: var(--ink); margin: 22px 0 20px;
+    }
+    .page-hl em { font-style: normal; color: var(--accent); }
+    .page-sub { font-size: 17px; color: var(--ink-70); line-height: 1.65; max-width: 52ch; }
+
+    /* ── PRICING ── */
+    .pricing-section { max-width: 1280px; margin: 0 auto; padding: 72px 48px 0; }
+    .pricing-group { padding: 72px 0; border-top: 1px solid var(--ink-15); }
+    .pricing-group-head { margin-bottom: 44px; max-width: 60ch; }
+    .pricing-eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 13px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--ink-45); margin-bottom: 16px;
+    }
+    .pricing-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--accent); flex-shrink: 0; }
+    .pricing-group-title {
+      font-family: 'General Sans', sans-serif;
+      font-weight: 600;
+      font-size: clamp(26px, 2.8vw, 36px);
+      letter-spacing: -.02em; line-height: 1.15;
+      color: var(--ink); margin-bottom: 14px;
+    }
+    .pricing-group-note { font-size: 15px; color: var(--ink-45); line-height: 1.6; }
+
+    .pricing-grid { display: grid; gap: 24px; }
+    .pricing-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .pricing-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+    .price-card {
+      background: #fff; border: 1px solid var(--ink-08); border-radius: 14px;
+      padding: 36px 32px; display: flex; flex-direction: column;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+    }
+    .price-card:hover { transform: translateY(-4px); box-shadow: 0 20px 44px rgba(17,17,17,.08); }
+    .price-card.featured { border-color: rgba(14,91,207,.35); box-shadow: 0 20px 48px rgba(14,91,207,.14); }
+    .price-card.featured:hover { box-shadow: 0 26px 56px rgba(14,91,207,.2); }
+    .price-card-name {
+      font-family: 'General Sans', sans-serif;
+      font-weight: 600; font-size: 19px; letter-spacing: -.01em; color: var(--ink);
+    }
+    .price-card-amount {
+      display: flex; align-items: baseline; gap: 5px;
+      font-family: 'General Sans', sans-serif; font-weight: 700;
+      font-size: clamp(32px, 3.4vw, 40px); letter-spacing: -.02em;
+      color: var(--ink); margin: 18px 0 4px;
+    }
+    .price-card-amount .unit { font-size: 13px; font-weight: 600; color: var(--ink-45); }
+    .price-card-note { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 22px; }
+    .price-card-list { display: flex; flex-direction: column; margin-bottom: 28px; }
+    .price-card-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 0; border-top: 1px solid var(--ink-08);
+      font-size: 14px; color: var(--ink-70); line-height: 1.5;
+    }
+    .price-card-item:first-child { border-top: none; }
+    .price-card-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
+    .price-card-cta {
+      margin-top: auto;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font-size: 14px; font-weight: 600; color: var(--ink);
+      background: transparent; border: 1px solid var(--ink-15); border-radius: var(--radius);
+      padding: 13px 20px; text-decoration: none;
+      transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease), gap .2s var(--ease);
+    }
+    .price-card-cta:hover { background: var(--ink); color: #fff; border-color: var(--ink); gap: 11px; }
+    .price-card.featured .price-card-cta { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .price-card.featured .price-card-cta:hover { background: #0a49ab; border-color: #0a49ab; }
+    .price-card-cta svg { transition: transform .2s var(--ease); }
+    .price-card-cta:hover svg { transform: translateX(2px); }
+
+    /* ── PORTFOLIO (Our Work) ── */
+    .port-section { padding: 40px 48px 120px; }
+    .port-section-inner { max-width: 1280px; margin: 0 auto; }
+    .port-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 56px; flex-wrap: wrap; }
+    .port-label {
+      font-family: 'General Sans', sans-serif;
+      font-weight: 600;
+      font-size: clamp(28px, 3.2vw, 40px);
+      letter-spacing: -.02em; line-height: 1;
+      color: var(--ink);
+    }
+    .port-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .port-card { border-radius: 10px; text-decoration: none; color: inherit; display: block; overflow: hidden; transition: transform .3s var(--ease); }
+    .port-card:hover { transform: translateY(-4px); }
+    .port-card-media { position: relative; overflow: hidden; aspect-ratio: 16/10; background: var(--bg-alt); border: 1px solid var(--ink-08); border-radius: 10px; }
+    .port-card-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s var(--ease); }
+    .port-card:hover .port-card-media img { transform: scale(1.04); }
+    .port-card-media.soon { background: var(--bg-alt); display: flex; align-items: center; justify-content: center; }
+    .port-card-media.logo { background: #fff; display: flex; align-items: center; justify-content: center; padding: 32px; }
+    .port-card-media.logo img { width: auto; height: auto; max-width: 78%; max-height: 60%; object-fit: contain; }
+    .port-card-media.logo.lg img { max-width: 94%; max-height: 82%; }
+    .port-card-visit-label { display: block; font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--ink-45); margin-bottom: 12px; transition: color .2s var(--ease); }
+    .port-card:hover .port-card-visit-label { color: var(--accent); }
+    .port-card-soon-badge {
+      font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--ink-45); border: 1px solid var(--ink-15); border-radius: 999px; padding: 8px 18px;
+    }
+    .port-card-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(10,10,10,.5); opacity: 0; transition: opacity .3s var(--ease); }
+    .port-card:hover .port-card-overlay { opacity: 1; }
+    .port-card-overlay span { color: #fff; font-size: 13px; font-weight: 600; letter-spacing: .04em; border: 1px solid rgba(255,255,255,.4); border-radius: var(--radius); padding: 10px 20px; }
+    .port-card-body { padding: 22px 4px 0; }
+    .port-card-tag { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .port-card-name { font-family: 'General Sans', sans-serif; font-weight: 600; font-size: 19px; letter-spacing: -.01em; line-height: 1.2; color: var(--ink); margin-bottom: 10px; }
+    .port-card-desc { font-size: 14px; font-weight: 500; line-height: 1.6; color: var(--ink-45); }
+
+    /* ── CTA ── */
+    .cta-band { background: var(--dark); color: var(--dark-text); padding: 152px 48px; }
+    .cta-inner { max-width: 1280px; margin: 0 auto; }
+    .cta-hl {
+      font-family: 'General Sans', sans-serif;
+      font-weight: 600;
+      font-size: clamp(38px, 6vw, 76px);
+      letter-spacing: -.03em; line-height: 1.05;
+      color: var(--dark-text); margin-bottom: 52px;
+    }
+    .cta-hl em { font-style: normal; color: var(--accent); }
+    .cta-actions { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--dark-text); color: var(--dark);
+      font-size: 14px; font-weight: 700; letter-spacing: .01em;
+      padding: 17px 34px; border-radius: var(--radius);
+      text-decoration: none;
+      transition: background .2s var(--ease), color .2s var(--ease);
+    }
+    .cta-btn:hover { background: var(--accent); color: #fff; }
+    .cta-tel { font-size: 14px; color: var(--dark-text-60); text-decoration: none; transition: color .2s var(--ease); }
+    .cta-tel:hover { color: var(--dark-text); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--dark); color: var(--dark-text); border-top: 1px solid var(--dark-line); }
+    .foot-inner { max-width: 1280px; margin: 0 auto; padding: 96px 48px 48px; }
+    .foot-top { display: grid; grid-template-columns: 1.3fr .7fr .7fr .9fr; gap: 48px; padding-bottom: 80px; }
+    .foot-word {
+      font-family: 'General Sans', sans-serif;
+      font-weight: 600; font-size: 24px; letter-spacing: -.01em;
+      color: var(--dark-text); text-decoration: none; display: inline-block; margin-bottom: 20px;
+    }
+    .foot-tag { font-size: 15px; color: var(--dark-text-60); line-height: 1.6; max-width: 34ch; }
+    .foot-col-label { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--dark-text-60); margin-bottom: 22px; }
+    .foot-links { display: flex; flex-direction: column; gap: 14px; }
+    .foot-links a { font-size: 15px; color: var(--dark-text); text-decoration: none; transition: color .2s var(--ease); }
+    .foot-links a:hover { color: var(--accent); }
+    .foot-socials { display: flex; align-items: center; gap: 14px; }
+    .foot-social {
+      width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--dark-line); border-radius: var(--radius);
+      color: var(--dark-text); transition: border-color .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
+    }
+    .foot-social:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .foot-bottom { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 32px; border-top: 1px solid var(--dark-line); flex-wrap: wrap; }
+    .foot-bottom span, .foot-bottom a { font-size: 13px; color: var(--dark-text-60); text-decoration: none; transition: color .2s var(--ease); }
+    .foot-bottom a:hover { color: var(--dark-text); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+    .rd1 { transition-delay: .08s; }
+    .rd2 { transition-delay: .16s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .pricing-grid.cols-2, .pricing-grid.cols-3 { grid-template-columns: 1fr; }
+      .port-grid { grid-template-columns: 1fr 1fr; }
+      .foot-top { grid-template-columns: 1fr 1fr; gap: 40px 24px; text-align: center; }
+      .foot-links { align-items: center; }
+      .foot-socials { justify-content: center; }
+    }
+    @media (max-width: 768px) {
+      #navbar { padding: 18px 24px; }
+      #navbar.scrolled { padding: 14px 24px; }
+      .nav-links, .nav-cta { display: none; }
+      #nav-ham { display: flex; }
+      .page-header { padding: 120px 24px 32px; text-align: center; }
+      .back-link { margin: 0 auto; }
+      .page-sub { margin: 0 auto; }
+      .pricing-section { padding: 56px 24px 0; }
+      .pricing-group { padding: 56px 0; text-align: center; }
+      .pricing-group-head { margin: 0 auto 36px; }
+      .pricing-eyebrow { justify-content: center; }
+      .port-section { padding: 24px 24px 96px; }
+      .port-head { justify-content: center; text-align: center; }
+      .port-grid { grid-template-columns: 1fr; }
+      .port-card { text-align: center; }
+      .port-card-visit-label { text-align: center; }
+      .cta-band { padding: 96px 24px; text-align: center; }
+      .cta-actions { justify-content: center; }
+      .foot-inner { padding: 72px 24px 32px; }
+      .foot-top { grid-template-columns: 1fr; gap: 40px; padding-bottom: 56px; }
+      .foot-bottom { flex-direction: column; align-items: center; gap: 12px; }
+      .foot-tag { margin: 0 auto; }
+      #mob-menu { padding: 100px 32px 48px; justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Mobile menu -->
+<div id="mob-menu" role="dialog" aria-modal="true" aria-label="Site navigation">
+  <a href="/"     class="mob-lnk">Home</a>
+  <a href="/#services" class="mob-lnk">Services</a>
+  <a href="portfolio.html" class="mob-lnk">Our Work</a>
+  <a href="learn.html"     class="mob-lnk">Learn</a>
+  <a href="about.html"     class="mob-lnk">About</a>
+  <a href="contact.html"   class="mob-lnk">Contact</a>
+  <div class="mob-foot">(570) 502-4036</div>
+</div>
+
+<!-- NAV -->
+<nav id="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-left">
+    <a href="/" class="nav-word" aria-label="Corter Digital — home"><img src="CD-Transparent.png" alt="Corter Digital"></a>
+    <div class="nav-links">
+      <a href="/#services" class="nav-lnk active">Services</a>
+      <a href="portfolio.html" class="nav-lnk">Our Work</a>
+      <a href="learn.html"     class="nav-lnk">Learn</a>
+      <a href="about.html"     class="nav-lnk">About</a>
+    </div>
+  </div>
+  <a href="contact.html" class="nav-cta">Start a project</a>
+  <button id="nav-ham" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+
+<!-- PAGE HEADER -->
+<header>
+  <div class="page-header">
+    <a href="/#services" class="back-link reveal">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+      All services
+    </a>
+    <h1 class="page-hl reveal rd1">Built. Hosted.<br><em>Cared for.</em></h1>
+    <p class="page-sub reveal rd1">Custom tailored websites built to serve your business. We build, deploy and maintain your site to ensure quality and consistency throughout the entire process.</p>
+  </div>
+</header>
+
+
+<!-- PRICING -->
+<section class="pricing-section">
+
+  <!-- Website Build -->
+  <div class="pricing-group">
+    <div class="pricing-group-head reveal">
+      <div class="pricing-eyebrow">Website build</div>
+      <h2 class="pricing-group-title">Pick your starting point</h2>
+      <p class="pricing-group-note">A one-time build to get your business online — from a fast template launch to a fully custom site.</p>
+    </div>
+    <div class="pricing-grid cols-2">
+
+      <div class="price-card reveal">
+        <div class="price-card-name">Template Build</div>
+        <div class="price-card-amount">$200<span class="unit">one-time</span></div>
+        <div class="price-card-note">Fastest way to get online</div>
+        <div class="price-card-list">
+          <div class="price-card-item"><span class="price-card-dot"></span>Professionally designed template, customized to your brand</div>
+          <div class="price-card-item"><span class="price-card-dot"></span>Mobile-first, fast-loading build</div>
+          <div class="price-card-item"><span class="price-card-dot"></span>Direct-to-email contact forms</div>
+        </div>
+        <a href="contact.html" class="price-card-cta">
+          Get started
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <div class="price-card featured reveal rd1">
+        <div class="price-card-name">Custom Build</div>
+        <div class="price-card-amount">Quoted</div>
+        <div class="price-card-note">Built around your business</div>
+        <div class="price-card-list">
+          <div class="price-card-item"><span class="price-card-dot"></span>Fully custom design, no template</div>
+          <div class="price-card-item"><span class="price-card-dot"></span>Local SEO architecture &amp; Google Business integration</div>
+          <div class="price-card-item"><span class="price-card-dot"></span>Built for whatever your business actually needs — booking, ecommerce, databases, and more</div>
+        </div>
+        <a href="contact.html" class="price-card-cta">
+          Request a quote
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Maintenance & Care Plans -->
+  <div class="pricing-group">
+    <div class="pricing-group-head reveal">
+      <div class="pricing-eyebrow">Website maintenance</div>
+      <h2 class="pricing-group-title">Care plans</h2>
+      <p class="pricing-group-note">Ongoing hosting and upkeep so your site stays fast, secure, and up to date long after launch.</p>
+    </div>
+    <div class="pricing-grid cols-3">
+
+      <div class="price-card reveal">
+        <div class="price-card-name">Essentials</div>
+        <div class="price-card-amount">$99<span class="unit">/mo</span></div>
+        <div class="price-card-note">Keep it running</div>
+        <div class="price-card-list">
+          <div class="price-card-item"><span class="price-card-dot"></span>Hosting</div>
+          <div class="price-card-item"><span class="price-card-dot"></span>Backups</div>
+          <div class="price-card-item"><span class="price-card-dot"></span>Security monitoring</div>
+          <div class="price-card-item"><span class="price-card-dot"></span>Uptime monitoring</div>
+        </div>
+        <a href="contact.html" class="price-card-cta">
+          Get started
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <div class="price-card featured reveal rd1">
+        <div class="price-card-name">Growth</div>
+        <div class="price-card-amount">$199<span class="unit">/mo</span></div>
+        <div class="price-card-note">Everything in Essentials, plus:</div>
+        <div class="price-card-list">
+          <div class="price-card-item"><span class="price-card-dot"></span>Monthly content edits</div>
+          <div class="price-card-item"><span class="price-card-dot"></span>Monthly performance reporting</div>
+          <div class="price-card-item"><span class="price-card-dot"></span>Speed optimization</div>
+        </div>
+        <a href="contact.html" class="price-card-cta">
+          Get started
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <div class="price-card reveal rd2">
+        <div class="price-card-name">Priority</div>
+        <div class="price-card-amount">$349<span class="unit">/mo</span></div>
+        <div class="price-card-note">Everything in Growth, plus:</div>
+        <div class="price-card-list">
+          <div class="price-card-item"><span class="price-card-dot"></span>Same-day changes</div>
+          <div class="price-card-item"><span class="price-card-dot"></span>Conversion tweaks</div>
+          <div class="price-card-item"><span class="price-card-dot"></span>A/B testing</div>
+        </div>
+        <a href="contact.html" class="price-card-cta">
+          Get started
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+
+<!-- OUR WORK — WEBSITES -->
+<section class="port-section">
+  <div class="port-section-inner">
+    <div class="port-head">
+      <div>
+        <div class="pricing-eyebrow">Our work</div>
+        <h2 class="port-label reveal">Websites we've built</h2>
+      </div>
+    </div>
+
+    <div class="port-grid">
+
+      <a href="https://foundedceo.com/" target="_blank" rel="noopener" class="port-card reveal">
+        <span class="port-card-visit-label">Click to visit site</span>
+        <div class="port-card-media logo">
+          <img src="partnerLogos/black-newlogo.png" alt="FoundedCEO logo">
+          <div class="port-card-overlay"><span>Visit site</span></div>
+        </div>
+        <div class="port-card-body">
+          <div class="port-card-tag">Venture Capital Media</div>
+          <div class="port-card-name">FoundedCEO</div>
+          <p class="port-card-desc">Full site build with comprehensive VC Raises database, newsletter, and customer conversion.</p>
+        </div>
+      </a>
+
+      <a href="https://www.thejasonstewartcollection.com/" target="_blank" rel="noopener" class="port-card reveal rd1">
+        <span class="port-card-visit-label">Click to visit site</span>
+        <div class="port-card-media logo lg">
+          <img src="partnerLogos/black-cropped.png" alt="The Jason Stewart Collection logo">
+          <div class="port-card-overlay"><span>Visit site</span></div>
+        </div>
+        <div class="port-card-body">
+          <div class="port-card-tag">Premium Drinkware</div>
+          <div class="port-card-name">The Jason Stewart Collection</div>
+          <p class="port-card-desc">Full site build with integrated checkout handling, order notification, and corporate bulk orders.</p>
+        </div>
+      </a>
+
+      <a href="https://danmcdermottentertainment.com/" target="_blank" rel="noopener" class="port-card reveal rd2">
+        <span class="port-card-visit-label">Click to visit site</span>
+        <div class="port-card-media logo lg">
+          <img src="partnerLogos/danCrop.png" alt="Dan McDermott Entertainment logo">
+          <div class="port-card-overlay"><span>Visit site</span></div>
+        </div>
+        <div class="port-card-body">
+          <div class="port-card-tag">DJ &amp; Entertainment</div>
+          <div class="port-card-name">Dan McDermott</div>
+          <p class="port-card-desc">Website for DJ Dan showcasing services, with client booking forms sent directly to his email.</p>
+        </div>
+      </a>
+
+      <div class="port-card reveal">
+        <div class="port-card-media soon">
+          <span class="port-card-soon-badge">Coming Soon</span>
+        </div>
+        <div class="port-card-body">
+          <div class="port-card-tag">Local Antique Store</div>
+          <div class="port-card-name">Finding Treasures 4 U</div>
+          <p class="port-card-desc">Store item catalog, payment processing, and a backend that lets the client add products to the site themselves.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="cta-inner">
+    <h2 class="cta-hl reveal">Ready to get your<br><em>site online?</em></h2>
+    <div class="cta-actions reveal rd1">
+      <a href="contact.html" class="cta-btn">Start the conversation</a>
+      <a href="tel:+15705024036" class="cta-tel">(570) 502-4036</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-top">
+      <div>
+        <a href="/" class="foot-word">Corter Digital</a>
+        <p class="foot-tag">Websites, social media marketing, and content creation for businesses that want real customers.</p>
+      </div>
+      <div>
+        <div class="foot-col-label">Site</div>
+        <div class="foot-links">
+          <a href="/">Home</a>
+          <a href="/#services">Services</a>
+          <a href="portfolio.html">Our Work</a>
+          <a href="learn.html">Learn</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="foot-col-label">Contact</div>
+        <div class="foot-links">
+          <a href="tel:+15705024036">(570) 502-4036</a>
+          <a href="mailto:andrewcsmma@gmail.com">andrewcsmma@gmail.com</a>
+        </div>
+      </div>
+      <div>
+        <div class="foot-col-label">Follow</div>
+        <div class="foot-socials">
+          <a href="https://www.instagram.com/corterdigital" target="_blank" rel="noopener" class="foot-social" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61583891445369" target="_blank" rel="noopener" class="foot-social" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2025 Corter Digital. All rights reserved.</span>
+      <span>NEPA's Marketing Partner</span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  // Navbar
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Mobile menu
+  const ham = document.getElementById('nav-ham');
+  const mob = document.getElementById('mob-menu');
+  let open = false;
+  ham.addEventListener('click', () => {
+    open = !open;
+    mob.classList.toggle('open', open);
+    ham.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { if (open) ham.click(); }));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) ham.click(); });
+
+  // Scroll reveal
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+</script>
+
+</body>
+</html>
