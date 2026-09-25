@@ -1,0 +1,126 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import Button from '../components/Button.astro';
+import Accordion from '../components/Accordion.astro';
+import AccordionItem from '../components/AccordionItem.astro';
+import PricingTable from '../components/PricingTable.astro';
+import Stat from '../components/Stat.astro';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import Closing from '../components/Closing.astro';
+
+const work = (await getCollection('case-studies', (s) => s.data.service === 'social-media'))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout
+  title="Social Media Management | Corter Digital"
+  description="We create and post your content on three platforms, from twice a week to daily. 10M+ views generated. Plans from $500 a month."
+>
+  <PageHero
+    meta={['02 — Social Media', 'Done for you', 'From $500/mo', '3 platforms']}
+    title="Get seen by the right people, every week."
+    lead="We plan, create and post your content on three platforms, from twice a week up to every day. You run the business."
+  >
+    <Button href="/contact">Start growing</Button>
+    <Button href="#pricing" variant="secondary">See plans</Button>
+  </PageHero>
+
+  <!-- 01 Record: data row -->
+  <Section n="01" name="Record" meta="All platforms, combined">
+    <div class="frame grid-12">
+      <Stat value={10} suffix="M+" label="Views" note="Generated" class="col-span-2 lg:col-span-4" />
+      <Stat value={60} suffix="K+" label="Followers" note="Gained" class="col-span-2 lg:col-span-4" />
+      <Stat value={250} suffix="K+" label="Views in 30 days" note="One client · Facebook" class="col-span-4 border-t border-line lg:border-t-0" />
+    </div>
+  </Section>
+
+  <!-- 02 Included: split, accordion -->
+  <Section n="02" name="What's included" meta="5 parts">
+    <div class="frame grid-12 py-12 lg:py-20">
+      <p class="cell col-span-4 text-heading lg:col-span-4">Posting when you remember isn't a plan. This is.</p>
+      <div class="col-span-4 mt-10 lg:col-span-8 lg:mt-0">
+        <Accordion>
+          <AccordionItem n="01" title="Content strategy" meta="All plans">We work out what your audience responds to and plan around it. No filler posts.</AccordionItem>
+          <AccordionItem n="02" title="Posting schedule" meta="2/wk to daily">Three platforms, on a schedule that doesn't slip. Launch posts twice a week, Growth three times, Scale every day.</AccordionItem>
+          <AccordionItem n="03" title="Short-form video" meta="Growth, Scale">Video is what gets shared. Growth and Scale include video content.</AccordionItem>
+          <AccordionItem n="04" title="Engagement" meta="All plans">We manage your presence and community, so comments turn into conversations.</AccordionItem>
+          <AccordionItem n="05" title="Monthly summary" meta="All plans">Reach, growth and what we're doing next month, in plain English.</AccordionItem>
+        </Accordion>
+      </div>
+    </div>
+  </Section>
+
+  <!-- 03 Pricing: spec table -->
+  <Section n="03" name="Pricing" meta="3 plans + 2 add-ons" id="pricing" marks>
+    <div class="frame py-12 lg:py-20">
+      <PricingTable
+        title="Plans"
+        caption="Monthly"
+        plans={[
+          { name: 'Launch', note: 'Get consistent', price: '$500', unit: '/mo', features: ['3 platforms managed', '2 posts per week'] },
+          { name: 'Growth', note: 'Build momentum', price: '$1,000', unit: '/mo', features: ['3 platforms managed', '3 posts per week', 'Video content included'] },
+          { name: 'Scale', note: 'Go all in', price: '$2,500', unit: '/mo', features: ['3 platforms managed', 'Posting every day', 'Video content included'] },
+        ]}
+      />
+      <div class="h-16 lg:h-24"></div>
+      <PricingTable
+        title="Add-ons"
+        caption="Any plan"
+        plans={[
+          { name: 'Content shoot', note: 'On-site', price: 'Quoted', features: ['Custom in-person shoot', 'Photo and video for web and social', 'Edited, ready-to-use files'], cta: 'Ask' },
+          { name: 'Clipping', note: 'Reach per shoot', price: 'Quoted', features: ['Long-form footage cut into short clips', 'Posted across multiple accounts'], cta: 'Ask' },
+        ]}
+      />
+    </div>
+  </Section>
+
+  <!-- 04 Process: columns -->
+  <Section n="04" name="Process" meta="3 steps">
+    <ol class="frame grid-12">
+      {[
+        ['Talk', 'We learn the business and the customer, then pick the three platforms that matter.'],
+        ['Create', 'We plan the month, produce the posts and video, and schedule everything.'],
+        ['Grow', 'We watch what performs and make more of it. You get the numbers every month.'],
+      ].map(([t, d], i) => (
+        <li class:list={['cell col-span-4 py-10 lg:py-14', i > 0 && 'border-t border-line lg:border-t-0']}>
+          <p class="label num">Step {String(i + 1).padStart(2, '0')}</p>
+          <h3 class="mt-12 text-heading lg:mt-24">{t}</h3>
+          <p class="muted mt-4 max-w-[34ch]">{d}</p>
+        </li>
+      ))}
+    </ol>
+  </Section>
+
+  <!-- 05 Result: one case, split -->
+  <Section n="05" name="Result" meta="Case 01">
+    <div class="frame grid-12">
+      {work.map((s, i) => (
+        <CaseStudyCard study={s} n={String(i + 1).padStart(2, '0')} class="col-span-4 lg:col-span-6 lg:border-r lg:border-line" />
+      ))}
+      <div class="cell col-span-4 flex flex-col justify-end border-b border-line py-10 lg:col-span-6">
+        <p class="label">Your page next</p>
+        <p class="mt-5 max-w-[30ch] text-heading">Tell us your platforms. We'll tell you what we'd post.</p>
+        <p class="mt-8"><a href="/contact" class="label !text-ink"><span class="u-link">Book a free call</span> <span class="arrow" aria-hidden="true">→</span></a></p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- 06 FAQ: split -->
+  <Section n="06" name="Questions" meta="4 answers">
+    <div class="frame grid-12 py-12 lg:py-20">
+      <p class="cell col-span-4 text-heading lg:col-span-4">Straight answers.</p>
+      <div class="col-span-4 mt-10 lg:col-span-8 lg:mt-0">
+        <Accordion>
+          <AccordionItem n="01" title="Which platforms?">Three on every plan. We help you pick the ones your customers actually use instead of spreading thin.</AccordionItem>
+          <AccordionItem n="02" title="Who makes the content?">We do. We plan, create and post it. Growth and Scale include video, and you can add an on-site shoot any time.</AccordionItem>
+          <AccordionItem n="03" title="How soon will it work?">Consistency compounds. Growth comes from showing up every week and doubling down on what performs. You see the trend in your monthly summary.</AccordionItem>
+          <AccordionItem n="04" title="What's a clipping campaign?">We cut long-form content, like a video, podcast or event, into short clips and post them across multiple accounts. One shoot, many chances to be seen.</AccordionItem>
+        </Accordion>
+      </div>
+    </div>
+  </Section>
+
+  <Closing n="07" title="Start posting like you mean it." cta="Start growing" />
+</BaseLayout>
