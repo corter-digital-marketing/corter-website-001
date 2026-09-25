@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+---
+<BaseLayout
+  title="Contact | Corter Digital"
+  description="Book a free call with Corter Digital. No pitch, just a straight conversation. Call (570) 502-4036 or send a message. We usually reply the same day."
+>
+  <section class="pt-16" aria-labelledby="contact-title">
+    <div class="frame grid-12 border-b border-line">
+      <p class="label cell col-span-2 py-4 lg:col-span-3">Contact</p>
+      <p class="label cell col-span-2 py-4 text-right lg:col-span-3 lg:text-left">Free call</p>
+      <p class="label cell hidden py-4 lg:col-span-3 lg:block">Reply: usually same day</p>
+      <p class="label num cell hidden py-4 text-right lg:col-span-3 lg:block">(570) 502-4036</p>
+    </div>
+
+    <div class="frame grid-12 pb-14 pt-20 lg:pb-20 lg:pt-32">
+      <h1 id="contact-title" class="cell col-span-4 text-display font-medium lg:col-span-10" data-split>No pitch. Just a straight conversation.</h1>
+    </div>
+  </section>
+
+  <section class="band marks" aria-label="Send a message">
+    <div class="frame grid-12 py-14 lg:py-24">
+      <!-- Direct lines -->
+      <div class="cell col-span-4 lg:col-span-5">
+        <p class="label">Direct</p>
+        <dl class="mt-6 border-t border-line text-small">
+          <div class="grid grid-cols-[6rem_1fr] border-b border-line py-4"><dt class="label">Phone</dt><dd><a href="tel:+15705024036" class="u-link num">(570) 502-4036</a></dd></div>
+          <div class="grid grid-cols-[6rem_1fr] border-b border-line py-4"><dt class="label">Email</dt><dd><a href="mailto:andrewcsmma@gmail.com" class="u-link break-all">andrewcsmma@gmail.com</a></dd></div>
+          <div class="grid grid-cols-[6rem_1fr] border-b border-line py-4"><dt class="label">Instagram</dt><dd><a href="https://www.instagram.com/corterdigital" target="_blank" rel="noopener" class="u-link">@corterdigital<span class="sr-only"> (opens in a new tab)</span></a></dd></div>
+          <div class="grid grid-cols-[6rem_1fr] border-b border-line py-4"><dt class="label">Reply</dt><dd>Usually the same day. Calling is fastest.</dd></div>
+        </dl>
+
+        <p class="label mt-16">What happens next</p>
+        <ol class="mt-6 border-t border-line text-small">
+          <li class="grid grid-cols-[3rem_1fr] border-b border-line py-4"><span class="label num">01</span><span>We reply, by phone or email, whichever you prefer.</span></li>
+          <li class="grid grid-cols-[3rem_1fr] border-b border-line py-4"><span class="label num">02</span><span>One call about your business and what you need. No pitch.</span></li>
+          <li class="grid grid-cols-[3rem_1fr] border-b border-line py-4"><span class="label num">03</span><span>You get a plan and a price. You decide.</span></li>
+        </ol>
+      </div>
+
+      <!-- Form -->
+      <div class="cell col-span-4 mt-16 lg:col-span-5 lg:col-start-8 lg:mt-0">
+        <p class="label mb-6">Message</p>
+        <ContactForm id="contact" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

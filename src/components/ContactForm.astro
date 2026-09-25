@@ -19,7 +19,7 @@ const { id = 'contact' } = Astro.props;
       <p class="field-error" id={`${id}-name-err`}></p>
     </div>
     <div class="field">
-      <label class="label" for={`${id}-phone`}>Phone <span class="opacity-60">(optional)</span></label>
+      <label class="label" for={`${id}-phone`}>Phone (optional)</label>
       <input class="input num" id={`${id}-phone`} type="tel" name="phone" autocomplete="tel" />
     </div>
   </div>
@@ -29,7 +29,7 @@ const { id = 'contact' } = Astro.props;
     <p class="field-error" id={`${id}-email-err`}></p>
   </div>
   <div class="field">
-    <label class="label" for={`${id}-message`}>What do you need? <span class="opacity-60">(optional)</span></label>
+    <label class="label" for={`${id}-message`}>What do you need? (optional)</label>
     <textarea class="input" id={`${id}-message`} name="message" rows="4"></textarea>
   </div>
   <Button type="submit" block>Send message</Button>
