@@ -3,684 +3,306 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Work — Corter Digital</title>
-  <meta name="description" content="Browse websites, online marketing, and video work built by Corter Digital for local businesses.">
+  <title>Our Work | Corter Digital</title>
+  <meta name="description" content="Websites, social media campaigns and digital products built by Corter Digital for real businesses, with the results to show for it.">
+  <meta name="theme-color" content="#1D1A17">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Corter Digital">
+  <meta property="og:title" content="Our Work | Corter Digital">
+  <meta property="og:description" content="Websites, social media campaigns and digital products built by Corter Digital for real businesses, with the results to show for it.">
+  <meta property="og:image" content="https://corterdigital.com/icon-512.png">
 
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
   <link rel="icon" type="image/png" href="/icon-512.png" sizes="512x512">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="preconnect" href="https://api.fontshare.com">
-  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:         #1D1A17;
-      --bg-alt:     #262220;
-      --surface:    #262220;
-      --surface-hi: #2E2925;
-      --ink:        #F3EFE8;
-      --ink-70:     rgba(243,239,232,.70);
-      --ink-45:     rgba(243,239,232,.45);
-      --ink-15:     rgba(243,239,232,.15);
-      --ink-08:     rgba(243,239,232,.08);
-      --accent:     #2F7DF6;
-      --accent-hover: #1E5FD1;
-      --accent-08:  rgba(47,125,246,.14);
-      --dark:       #121009;
-      --dark-text:  #F5F2EC;
-      --dark-text-60: rgba(245,242,236,.6);
-      --dark-line:  rgba(245,242,236,.12);
-      --radius:     6px;
-      --ease:       cubic-bezier(.16,1,.3,1);
-    }
-
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg); color: var(--ink);
-      font-family: 'General Sans', system-ui, sans-serif;
-      font-weight: 400;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-      overflow-x: hidden;
-    }
-    ::selection { background: var(--ink); color: var(--bg); }
-    *:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-    a { color: inherit; }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .001ms !important; animation-iteration-count: 1 !important;
-        transition-duration: .001ms !important; scroll-behavior: auto !important;
-      }
-    }
-
-    .eyebrow {
-      display: flex; align-items: center; gap: 12px;
-      font-size: 13px; font-weight: 700; letter-spacing: .08em;
-      text-transform: uppercase; color: var(--ink-45);
-    }
-    .eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--accent); flex-shrink: 0; }
-
-    /* ── NAV ── */
-    #navbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 28px 48px;
-      border-bottom: 1px solid transparent;
-      transition: padding .3s var(--ease), background .3s var(--ease), border-color .3s var(--ease);
-    }
-    #navbar.scrolled {
-      padding: 18px 48px;
-      background: rgba(29,26,23,.86);
-      backdrop-filter: blur(14px);
-      border-bottom-color: var(--ink-08);
-    }
-    .nav-word {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600; font-size: 18px; letter-spacing: -.01em;
-      color: var(--ink); text-decoration: none;
-      display: flex; align-items: center;
-    }
-    .nav-word img { height: 44px; width: auto; display: block; }
-    .nav-left { display: flex; align-items: center; gap: 44px; }
-    .nav-links { display: flex; align-items: center; gap: 36px; }
-    .nav-lnk {
-      font-size: 14px; font-weight: 500;
-      color: var(--ink-70); text-decoration: none;
-      transition: color .2s var(--ease);
-    }
-    .nav-lnk:hover { color: var(--ink); }
-    .nav-lnk.active { color: var(--ink); }
-    .nav-dropdown { position: relative; }
-    .nav-dropdown-trigger { display: inline-flex; align-items: center; gap: 5px; }
-    .nav-dropdown-trigger svg { transition: transform .2s var(--ease); }
-    .nav-dropdown:hover .nav-dropdown-trigger svg,
-    .nav-dropdown:focus-within .nav-dropdown-trigger svg { transform: rotate(180deg); }
-    .nav-dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); padding-top: 16px; }
-    .nav-dropdown-menu-inner {
-      min-width: 230px;
-      background: var(--surface-hi); border: 1px solid var(--ink-08); border-radius: 14px;
-      padding: 10px; box-shadow: 0 20px 44px rgba(0,0,0,.45);
-      opacity: 0; visibility: hidden; pointer-events: none;
-      transform: translateY(-6px);
-      transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s;
-    }
-    .nav-dropdown:hover .nav-dropdown-menu-inner,
-    .nav-dropdown:focus-within .nav-dropdown-menu-inner {
-      opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0);
-    }
-    .nav-dropdown-item {
-      display: flex; flex-direction: column; gap: 2px;
-      padding: 12px 14px; border-radius: 8px;
-      text-decoration: none; color: inherit;
-      transition: background .15s var(--ease);
-    }
-    .nav-dropdown-item:hover { background: var(--bg-alt); }
-    .nav-dropdown-item-title { font-size: 14px; font-weight: 600; color: var(--ink); }
-    .nav-dropdown-item-desc { font-size: 12px; color: var(--ink-45); margin-top: 1px; }
-    .nav-cta {
-      font-size: 14px; font-weight: 600;
-      color: var(--bg); background: var(--ink);
-      padding: 11px 22px; border-radius: var(--radius);
-      text-decoration: none;
-      transition: background .2s var(--ease), color .2s var(--ease), transform .15s var(--ease);
-    }
-    .nav-cta:hover { background: var(--accent); color: #fff; }
-    .nav-cta:active { transform: scale(.97); }
-
-    #nav-ham {
-      display: none; flex-direction: column; gap: 5px;
-      background: none; border: none; padding: 4px;
-    }
-    #nav-ham span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: transform .25s var(--ease), opacity .25s var(--ease); }
-
-    #mob-menu {
-      position: fixed; inset: 0; z-index: 400;
-      background: var(--bg);
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 48px; overflow-y: auto;
-      transform: translateX(100%);
-      transition: transform .5s var(--ease);
-    }
-    #mob-menu.open { transform: translateX(0); }
-    .mob-lnk {
-      font-family: 'General Sans', sans-serif;
-      font-size: clamp(30px, 8vw, 46px);
-      letter-spacing: -.02em; line-height: 1.15;
-      color: var(--ink); text-decoration: none;
-      display: block; margin-bottom: 4px;
-      opacity: 0; transform: translateX(16px);
-      transition: opacity .4s var(--ease), transform .4s var(--ease), color .2s var(--ease);
-    }
-    .mob-lnk:hover { color: var(--accent); }
-    #mob-menu.open .mob-lnk:nth-child(1) { opacity:1; transform:none; transition-delay:.06s; }
-    #mob-menu.open .mob-lnk:nth-child(2) { opacity:1; transform:none; transition-delay:.10s; }
-    #mob-menu.open .mob-lnk:nth-child(3) { opacity:1; transform:none; transition-delay:.14s; }
-    #mob-menu.open .mob-lnk:nth-child(4) { opacity:1; transform:none; transition-delay:.18s; }
-    #mob-menu.open .mob-lnk:nth-child(5) { opacity:1; transform:none; transition-delay:.22s; }
-    #mob-menu.open .mob-lnk:nth-child(6) { opacity:1; transform:none; transition-delay:.26s; }
-    .mob-foot { margin-top: auto; font-size: 14px; font-weight: 500; color: var(--ink-45); }
-
-    /* ── HERO ── */
-    .hero-split {
-      padding: 170px 48px 64px;
-      max-width: 1280px; margin: 0 auto;
-      display: flex; flex-direction: column; align-items: center; text-align: center;
-    }
-    .hero-split-logo { width: clamp(190px, 23vw, 290px); margin: 0 auto 34px; }
-    .hero-split-logo img { width: 100%; height: auto; display: block; }
-    .hero-split-wordmark {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600;
-      font-size: clamp(22px, 3.2vw, 36px);
-      letter-spacing: .05em;
-      text-transform: uppercase;
-      color: var(--ink);
-      display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .3em;
-      margin-bottom: 40px;
-    }
-    .hero-split-wordmark span { color: var(--accent); }
-    .hero-split-text { max-width: 640px; }
-    .hero-split-text h1 {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600;
-      font-size: clamp(40px, 5.5vw, 68px);
-      letter-spacing: -.03em; line-height: 1.05;
-      color: var(--ink); margin: 0 0 22px;
-    }
-    .hero-split-note {
-      font-size: 15px; font-weight: 500; color: var(--ink-45); margin-bottom: 44px;
-    }
-    .hero-cta {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 14px; font-weight: 600;
-      color: var(--bg); background: var(--ink);
-      padding: 15px 30px; border-radius: var(--radius);
-      text-decoration: none;
-      transition: background .2s var(--ease), color .2s var(--ease);
-    }
-    .hero-cta:hover { background: var(--accent); color: #fff; }
-
-    /* ── PORTFOLIO SECTIONS ── */
-    .port-section { padding: 96px 48px; border-top: 1px solid var(--ink-15); scroll-margin-top: 140px; }
-    .port-section-inner { max-width: 1280px; margin: 0 auto; }
-
-    .port-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 56px; flex-wrap: wrap; }
-    .port-label {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600;
-      font-size: clamp(30px, 3.6vw, 44px);
-      letter-spacing: -.02em; line-height: 1;
-      color: var(--ink); margin-top: 14px;
-    }
-
-    .port-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-    }
-
-    .port-card {
-      border-radius: 10px;
-      text-decoration: none; color: inherit;
-      display: block; overflow: hidden;
-      transition: transform .3s var(--ease);
-    }
-    .port-card:hover { transform: translateY(-4px); }
-    .port-card-media { position: relative; overflow: hidden; aspect-ratio: 16/10; background: var(--bg-alt); border: 1px solid var(--ink-08); border-radius: 10px; }
-    .port-card-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s var(--ease); }
-    .port-card:hover .port-card-media img { transform: scale(1.04); }
-    .port-card-media.soon { background: var(--bg-alt); display: flex; align-items: center; justify-content: center; }
-    .port-card-media.logo { background: #fff; display: flex; align-items: center; justify-content: center; padding: 32px; }
-    .port-card-media.logo img { width: auto; height: auto; max-width: 78%; max-height: 60%; object-fit: contain; }
-    .port-card-media.logo.lg img { max-width: 94%; max-height: 82%; }
-    .port-card-visit-label {
-      display: block; font-size: 12px; font-weight: 600; letter-spacing: .04em;
-      color: var(--ink-45); margin-bottom: 12px;
-      transition: color .2s var(--ease);
-    }
-    .port-card:hover .port-card-visit-label { color: var(--accent); }
-    .port-card-soon-badge {
-      font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--ink-45); border: 1px solid var(--ink-15); border-radius: 999px;
-      padding: 8px 18px;
-    }
-    .port-card-overlay {
-      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-      background: rgba(10,10,10,.5); opacity: 0; transition: opacity .3s var(--ease);
-    }
-    .port-card:hover .port-card-overlay { opacity: 1; }
-    .port-card-overlay span {
-      color: #fff; font-size: 13px; font-weight: 600; letter-spacing: .04em;
-      border: 1px solid rgba(255,255,255,.4); border-radius: var(--radius); padding: 10px 20px;
-    }
-    .port-card-body { padding: 22px 4px 0; }
-    .port-card-tag {
-      font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 10px;
-    }
-    .port-card-name {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600;
-      font-size: 19px; letter-spacing: -.01em; line-height: 1.2;
-      color: var(--ink); margin-bottom: 10px;
-    }
-    .port-card-desc { font-size: 14px; font-weight: 500; line-height: 1.6; color: var(--ink-45); }
-
-    /* ── PRODUCTS PANEL ── */
-    .products-panel {
-      background: linear-gradient(155deg, #1a6ce8 0%, #0e5bcf 55%, #0a49ab 100%);
-      border-radius: 16px;
-      padding: 64px 56px;
-      box-shadow: 0 24px 48px rgba(14,91,207,.25);
-    }
-    .products-panel-badge {
-      display: inline-block;
-      font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-      color: #fff; border: 1px solid rgba(255,255,255,.4); border-radius: 999px;
-      padding: 8px 18px; margin-bottom: 24px;
-    }
-    .products-panel h3 {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600; font-size: clamp(26px, 3vw, 38px);
-      letter-spacing: -.02em; line-height: 1.15;
-      color: #fff; margin-bottom: 16px;
-    }
-    .products-panel p {
-      font-size: 17px; font-weight: 500; line-height: 1.65;
-      color: rgba(255,255,255,.85); max-width: 60ch;
-    }
-
-    /* ── SOCIAL MEDIA PANEL ── */
-    .social-panel {
-      background: var(--surface); border: 1px solid var(--ink-08); border-radius: 16px;
-      padding: 56px;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 48px; flex-wrap: wrap;
-    }
-    .social-panel-tag {
-      font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 12px;
-    }
-    .social-panel-name {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600; font-size: clamp(24px, 2.6vw, 32px);
-      letter-spacing: -.015em; color: var(--ink); margin-bottom: 24px;
-    }
-    .social-panel-fb {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 14px; font-weight: 600; color: #fff;
-      background: var(--accent); border-radius: var(--radius);
-      padding: 13px 24px; text-decoration: none;
-      transition: background .2s var(--ease);
-    }
-    .social-panel-fb:hover { background: var(--accent-hover); }
-    .social-panel-stat { text-align: center; flex-shrink: 0; }
-    .social-panel-num {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 700; font-size: clamp(42px, 5vw, 64px);
-      line-height: 1; letter-spacing: -.02em; color: var(--ink);
-    }
-    .social-panel-label {
-      font-size: 13px; font-weight: 700; letter-spacing: .04em;
-      color: var(--ink-45); margin-top: 10px;
-    }
-
-    /* ── CTA BAND ── */
-    .cta-band { background: var(--dark); color: var(--dark-text); padding: 152px 48px; }
-    .cta-inner { max-width: 1280px; margin: 0 auto; }
-    .cta-hl {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600;
-      font-size: clamp(38px, 6vw, 76px);
-      letter-spacing: -.03em; line-height: 1.05;
-      color: var(--dark-text); margin-bottom: 52px;
-    }
-    .cta-hl em { font-style: normal; color: var(--accent); }
-    .cta-actions { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
-    .cta-btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--dark-text); color: var(--dark);
-      font-size: 14px; font-weight: 700; letter-spacing: .01em;
-      padding: 17px 34px; border-radius: var(--radius);
-      text-decoration: none;
-      transition: background .2s var(--ease), color .2s var(--ease);
-    }
-    .cta-btn:hover { background: var(--accent); color: #fff; }
-    .cta-tel {
-      font-size: 14px; color: var(--dark-text-60); text-decoration: none;
-      transition: color .2s var(--ease);
-    }
-    .cta-tel:hover { color: var(--dark-text); }
-
-    /* ── FOOTER ── */
-    footer { background: var(--dark); color: var(--dark-text); border-top: 1px solid var(--dark-line); }
-    .foot-inner { max-width: 1280px; margin: 0 auto; padding: 96px 48px 48px; }
-    .foot-top { display: grid; grid-template-columns: 1.3fr .7fr .7fr .9fr; gap: 48px; padding-bottom: 80px; }
-    .foot-word {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600; font-size: 24px; letter-spacing: -.01em;
-      color: var(--dark-text); text-decoration: none; display: inline-block; margin-bottom: 20px;
-    }
-    .foot-tag { font-size: 15px; color: var(--dark-text-60); line-height: 1.6; max-width: 34ch; }
-    .foot-col-label {
-      font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--dark-text-60); margin-bottom: 22px;
-    }
-    .foot-links { display: flex; flex-direction: column; gap: 14px; }
-    .foot-links a { font-size: 15px; color: var(--dark-text); text-decoration: none; transition: color .2s var(--ease); }
-    .foot-links a:hover { color: var(--accent); }
-    .foot-socials { display: flex; align-items: center; gap: 14px; }
-    .foot-social {
-      width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
-      border: 1px solid var(--dark-line); border-radius: var(--radius);
-      color: var(--dark-text); transition: border-color .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
-    }
-    .foot-social:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-    .foot-bottom {
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
-      padding-top: 32px; border-top: 1px solid var(--dark-line); flex-wrap: wrap;
-    }
-    .foot-bottom span, .foot-bottom a { font-size: 13px; color: var(--dark-text-60); text-decoration: none; transition: color .2s var(--ease); }
-    .foot-bottom a:hover { color: var(--dark-text); }
-
-    /* ── REVEAL ── */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
-    .reveal.in { opacity: 1; transform: none; }
-    .rd1 { transition-delay: .08s; }
-    .rd2 { transition-delay: .16s; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 960px) {
-      .port-grid { grid-template-columns: 1fr 1fr; }
-      .foot-top { grid-template-columns: 1fr 1fr; gap: 40px 24px; text-align: center; }
-      .foot-links { align-items: center; }
-      .foot-socials { justify-content: center; }
-    }
-    @media (max-width: 768px) {
-      #navbar { padding: 18px 24px; }
-      #navbar.scrolled { padding: 14px 24px; }
-      .nav-links, .nav-cta { display: none; }
-      #nav-ham { display: flex; }
-      .hero-split { padding: 120px 24px 32px; }
-      .port-section { padding: 64px 24px; scroll-margin-top: 116px; }
-      .port-head { justify-content: center; text-align: center; }
-      .port-grid { grid-template-columns: 1fr; }
-      .port-card { text-align: center; }
-      .products-panel { padding: 40px 28px; text-align: center; }
-      .products-panel p { margin: 0 auto; }
-      .social-panel { padding: 36px 28px; flex-direction: column; text-align: center; }
-      .port-card-visit-label { text-align: center; }
-      .cta-band { padding: 96px 24px; text-align: center; }
-      .cta-actions { justify-content: center; }
-      .foot-inner { padding: 72px 24px 32px; }
-      .foot-top { grid-template-columns: 1fr; gap: 40px; padding-bottom: 56px; }
-      .foot-bottom { flex-direction: column; align-items: center; gap: 12px; }
-      .foot-tag { margin: 0 auto; }
-      #mob-menu { padding: 100px 32px 48px; justify-content: flex-start; }
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Inter:wght@400..600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add('js')</script>
+  <script src="main.js" defer></script>
 </head>
 <body>
 
-<!-- Mobile menu -->
-<div id="mob-menu" role="dialog" aria-modal="true" aria-label="Site navigation">
-  <a href="/"     class="mob-lnk">Home</a>
-  <a href="/#services" class="mob-lnk">Services</a>
-  <a href="learn.html"     class="mob-lnk">Learn</a>
-  <a href="about.html"     class="mob-lnk">About</a>
-  <a href="contact.html"   class="mob-lnk">Contact</a>
-  <div class="mob-foot">(570) 502-4036</div>
-</div>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<!-- NAV -->
-<nav id="navbar" role="navigation" aria-label="Main navigation">
-  <div class="nav-left">
-    <a href="/" class="nav-word" aria-label="Corter Digital — home"><img src="blackout.png" alt="Corter Digital"></a>
-    <div class="nav-links">
-      <div class="nav-dropdown">
-        <a href="/#services" class="nav-lnk nav-dropdown-trigger">
+<header class="site-header">
+  <nav class="nav container" aria-label="Main">
+    <a href="/" class="brand" aria-label="Corter Digital home">
+      <img src="logo-mark.png" alt="" width="40" height="22">
+      <span>Corter Digital</span>
+    </a>
+
+    <ul class="nav-links">
+      <li class="nav-item has-menu">
+        <button class="nav-link" type="button" aria-expanded="false" aria-controls="menu-services">
           Services
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-        </a>
-        <div class="nav-dropdown-menu">
-          <div class="nav-dropdown-menu-inner">
-            <a href="websites.html" class="nav-dropdown-item">
-              <span class="nav-dropdown-item-title">Websites</span>
-              <span class="nav-dropdown-item-desc">Build, host &amp; maintain</span>
-            </a>
-            <a href="social-media.html" class="nav-dropdown-item">
-              <span class="nav-dropdown-item-title">Social Media</span>
-              <span class="nav-dropdown-item-desc">Grow your following</span>
-            </a>
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg>
+        </button>
+        <div class="nav-menu" id="menu-services">
+          <a href="websites.html">
+            <span class="nav-menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18"/><path d="M7 6.5h.01M10 6.5h.01"/></svg></span>
+            <span><span class="nav-menu-title">Websites</span><span class="nav-menu-desc">Built, hosted and maintained for you</span></span>
+          </a>
+          <a href="social-media.html">
+            <span class="nav-menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l5.5-5.5 4 4L21 7"/><path d="M15 7h6v6"/></svg></span>
+            <span><span class="nav-menu-title">Social Media</span><span class="nav-menu-desc">Content that grows your audience</span></span>
+          </a>
+        </div>
+      </li>
+      <li><a href="portfolio.html" class="nav-link" aria-current="page">Our Work</a></li>
+      <li><a href="learn.html" class="nav-link">Learn</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="contact.html" class="btn btn-primary btn-sm">Book a call</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-nav" id="mobile-nav">
+    <p class="mobile-nav-group-label">Services</p>
+    <ul class="mobile-nav-list mobile-nav-sub">
+      <li><a href="websites.html">Websites <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li><a href="social-media.html">Social Media <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+    </ul>
+    <p class="mobile-nav-group-label">Company</p>
+    <ul class="mobile-nav-list">
+      <li><a href="portfolio.html" aria-current="page">Our Work</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="mobile-nav-foot">
+      <a href="contact.html" class="btn btn-primary btn-lg">Book a call</a>
+      <p class="mobile-nav-contact">Or call <a href="tel:+15705024036">(570) 502-4036</a></p>
+    </div>
+  </div>
+</header>
+
+
+<main id="main">
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="page-hero page-hero--center" aria-labelledby="page-title">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="container page-hero-inner">
+      <p class="eyebrow" data-reveal>Our work</p>
+      <h1 id="page-title" class="display" data-reveal style="--d:1">Built for real businesses. <span class="serif">Measured in results.</span></h1>
+      <p class="lead" data-reveal style="--d:2">The websites, social campaigns and digital products we've built, and what they've done for the people who own them.</p>
+      <div class="hero-ctas" data-reveal style="--d:3">
+        <a href="contact.html" class="btn btn-primary btn-lg">Start your project <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ CASE STUDIES ═══════════ -->
+  <section class="section" style="padding-top: 0" id="work" aria-labelledby="work-title">
+    <div class="container">
+      <h2 id="work-title" class="sr-only">Projects</h2>
+
+      <div class="filter-bar" role="group" aria-label="Filter projects" data-filter-bar="case-grid" data-filter-status="filter-status" data-reveal>
+        <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">All <span class="filter-count"></span></button>
+        <button type="button" class="filter-btn" data-filter="websites" aria-pressed="false">Websites <span class="filter-count"></span></button>
+        <button type="button" class="filter-btn" data-filter="social" aria-pressed="false">Social Media <span class="filter-count"></span></button>
+      </div>
+      <p id="filter-status" class="sr-only" role="status"></p>
+
+      <div class="case-grid" id="case-grid">
+
+        <!-- Finding Treasures: social -->
+        <article class="card work-card" data-category="social" data-reveal>
+          <div class="work-logo work-logo--social">
+            <div>
+              <div class="work-feature-num" data-count="250" data-suffix="K+">250K+</div>
+              <p class="work-feature-label">Facebook views in 30 days</p>
+            </div>
+          </div>
+          <div class="work-body">
+            <div class="work-tags"><span class="tag tag--accent">Social Media</span><span class="tag">Antique store</span></div>
+            <h3>Finding Treasures 4 U</h3>
+            <p><strong>What we did:</strong> Content creation and posting for their Facebook page.</p>
+            <div class="case-result"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l5.5-5.5 4 4L21 7"/><path d="M15 7h6v6"/></svg> 250K+ views in the last 30 days</div>
+            <a href="https://www.facebook.com/profile.php?id=61590902003983" target="_blank" rel="noopener" class="link-arrow">Visit Facebook page <span class="sr-only"> (opens in a new tab)</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+          </div>
+        </article>
+
+        <!-- FoundedCEO -->
+        <article class="card work-card" data-category="websites" data-reveal style="--d:1">
+          <a href="https://foundedceo.com/" target="_blank" rel="noopener" class="work-logo" tabindex="-1" aria-hidden="true"><img src="partnerLogos/black-newlogo.png" alt="" loading="lazy" width="1688" height="275"></a>
+          <div class="work-body">
+            <div class="work-tags"><span class="tag tag--accent">Website</span><span class="tag">Venture capital media</span></div>
+            <h3>FoundedCEO</h3>
+            <p><strong>What we did:</strong> Full site build with a VC raises database, newsletter, and customer conversion flow.</p>
+            <!-- PLACEHOLDER: replace with a real metric, then remove "is-empty" -->
+            <div class="case-result is-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg> [Key result, e.g. newsletter sign-ups or traffic]</div>
+            <a href="https://foundedceo.com/" target="_blank" rel="noopener" class="link-arrow">Visit site <span class="sr-only"> (opens in a new tab)</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+          </div>
+        </article>
+
+        <!-- Jason Stewart Collection -->
+        <article class="card work-card" data-category="websites" data-reveal style="--d:2">
+          <a href="https://www.thejasonstewartcollection.com/" target="_blank" rel="noopener" class="work-logo" tabindex="-1" aria-hidden="true"><img src="partnerLogos/black-cropped.png" alt="" loading="lazy" width="1178" height="802"></a>
+          <div class="work-body">
+            <div class="work-tags"><span class="tag tag--accent">Website</span><span class="tag">Premium drinkware</span></div>
+            <h3>The Jason Stewart Collection</h3>
+            <p><strong>What we did:</strong> Full e-commerce build with integrated checkout, order notifications, and corporate bulk orders.</p>
+            <!-- PLACEHOLDER: replace with a real metric, then remove "is-empty" -->
+            <div class="case-result is-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg> [Key result, e.g. online orders since launch]</div>
+            <a href="https://www.thejasonstewartcollection.com/" target="_blank" rel="noopener" class="link-arrow">Visit site <span class="sr-only"> (opens in a new tab)</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+          </div>
+        </article>
+
+        <!-- Dan McDermott -->
+        <article class="card work-card" data-category="websites" data-reveal>
+          <a href="https://danmcdermottentertainment.com/" target="_blank" rel="noopener" class="work-logo" tabindex="-1" aria-hidden="true"><img src="partnerLogos/danCrop.png" alt="" loading="lazy" width="1187" height="795"></a>
+          <div class="work-body">
+            <div class="work-tags"><span class="tag tag--accent">Website</span><span class="tag">DJ &amp; entertainment</span></div>
+            <h3>Dan McDermott Entertainment</h3>
+            <p><strong>What we did:</strong> Service website with booking request forms sent directly to his email.</p>
+            <!-- PLACEHOLDER: replace with a real metric, then remove "is-empty" -->
+            <div class="case-result is-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg> [Key result, e.g. booking requests per month]</div>
+            <a href="https://danmcdermottentertainment.com/" target="_blank" rel="noopener" class="link-arrow">Visit site <span class="sr-only"> (opens in a new tab)</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+          </div>
+        </article>
+
+        <!-- Finding Treasures: website in progress -->
+        <article class="card work-card" data-category="websites" data-reveal style="--d:1">
+          <div class="work-logo work-logo--status">
+            <div class="status-mark">
+              <span class="status-badge">In development</span>
+              Finding Treasures 4 U
+            </div>
+          </div>
+          <div class="work-body">
+            <div class="work-tags"><span class="tag tag--accent">Website</span><span class="tag">Antique store</span></div>
+            <h3>Finding Treasures 4 U</h3>
+            <p><strong>What we're building:</strong> A store catalog with payment processing and a backend that lets the owner add products themselves.</p>
+            <div class="case-result"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Launching soon</div>
+          </div>
+        </article>
+
+        <!-- CTA card (always visible, no data-category) -->
+        <div class="card work-card work-card--cta" data-reveal style="--d:2">
+          <span class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></svg></span>
+          <h3>Your business could be next.</h3>
+          <p>Tell us what you're working on. We'll tell you exactly how we'd help it grow.</p>
+          <a href="contact.html" class="btn btn-primary">Start your project <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ PRODUCTS ═══════════ -->
+  <section class="section section--alt" id="products" aria-labelledby="products-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow" data-reveal>Corter Digital Products</p>
+        <h2 id="products-title" data-reveal style="--d:1">We build our own, <span class="serif">too.</span></h2>
+        <p data-reveal style="--d:2">Alongside client work, we design and build our own digital products. It keeps our skills sharp and lets us test ideas before we bring them to clients.</p>
+      </div>
+
+      <div class="card lab" data-reveal>
+        <div class="lab-copy">
+          <span class="status-badge">In the lab</span>
+          <h3 class="h3">Our first product is in development.</h3>
+          <p>Built and shipped by Corter Digital, not a client. We'll share it here as soon as it's ready. Want an early look, or have an idea for a product of your own? Let's talk.</p>
+          <div class="lab-list">
+            <span class="tag">Web apps</span>
+            <span class="tag">Digital tools</span>
+            <span class="tag">Online courses</span>
+          </div>
+          <a href="contact.html" class="link-arrow">Get early access <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="lab-visual" aria-hidden="true">
+          <img src="logo-mark.png" alt="" width="747" height="409">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ CTA ═══════════ -->
+  <section class="section section--tight" aria-labelledby="cta-title">
+    <div class="container">
+      <div class="cta-banner" data-reveal>
+        <div class="cta-banner-inner">
+          <div>
+            <h2 id="cta-title">Ready to add your business <span class="serif">to this list?</span></h2>
+            <p>Let's talk about what you need and what it would take to get there.</p>
+          </div>
+          <div class="cta-banner-actions">
+            <a href="contact.html" class="btn btn-light btn-lg">Start the conversation <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a href="tel:+15705024036" class="cta-banner-tel">or call (570) 502-4036</a>
           </div>
         </div>
       </div>
-      <a href="learn.html"          class="nav-lnk">Learn</a>
-      <a href="about.html"          class="nav-lnk">About</a>
     </div>
-  </div>
-  <a href="contact.html" class="nav-cta">Start a project</a>
-  <button id="nav-ham" aria-label="Open menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+  </section>
+
+</main>
 
 
-<!-- HERO -->
-<section class="hero-split" aria-label="Portfolio hero">
-  <div class="hero-split-logo">
-    <img src="blackout.png" alt="Corter Digital">
-  </div>
-  <div class="hero-split-wordmark">Corter<span>Digital</span></div>
-  <div class="hero-split-text">
-    <h1 class="reveal rd1">Our Work</h1>
-    <p class="hero-split-note reveal rd2">A look at the websites, campaigns, and content we've built for real businesses.</p>
-    <a href="contact.html" class="hero-cta reveal rd2">Start your project</a>
-  </div>
-</section>
-
-
-<!-- WEBSITES -->
-<section id="websites" class="port-section">
-  <div class="port-section-inner">
-    <div class="port-head">
-      <div>
-        <h2 class="port-label reveal">Websites</h2>
-      </div>
-    </div>
-
-    <div class="port-grid">
-
-      <a href="https://foundedceo.com/" target="_blank" rel="noopener" class="port-card reveal">
-        <span class="port-card-visit-label">Click to visit site</span>
-        <div class="port-card-media logo">
-          <img src="partnerLogos/black-newlogo.png" alt="FoundedCEO logo">
-          <div class="port-card-overlay"><span>Visit site</span></div>
-        </div>
-        <div class="port-card-body">
-          <div class="port-card-tag">Venture Capital Media</div>
-          <div class="port-card-name">FoundedCEO</div>
-          <p class="port-card-desc">Full site build with comprehensive VC Raises database, newsletter, and customer conversion.</p>
-        </div>
-      </a>
-
-      <a href="https://www.thejasonstewartcollection.com/" target="_blank" rel="noopener" class="port-card reveal rd1">
-        <span class="port-card-visit-label">Click to visit site</span>
-        <div class="port-card-media logo lg">
-          <img src="partnerLogos/black-cropped.png" alt="The Jason Stewart Collection logo">
-          <div class="port-card-overlay"><span>Visit site</span></div>
-        </div>
-        <div class="port-card-body">
-          <div class="port-card-tag">Premium Drinkware</div>
-          <div class="port-card-name">The Jason Stewart Collection</div>
-          <p class="port-card-desc">Full site build with integrated checkout handling, order notification, and corporate bulk orders.</p>
-        </div>
-      </a>
-
-      <a href="https://danmcdermottentertainment.com/" target="_blank" rel="noopener" class="port-card reveal rd2">
-        <span class="port-card-visit-label">Click to visit site</span>
-        <div class="port-card-media logo lg">
-          <img src="partnerLogos/danCrop.png" alt="Dan McDermott Entertainment logo">
-          <div class="port-card-overlay"><span>Visit site</span></div>
-        </div>
-        <div class="port-card-body">
-          <div class="port-card-tag">DJ &amp; Entertainment</div>
-          <div class="port-card-name">Dan McDermott</div>
-          <p class="port-card-desc">Website for DJ Dan showcasing services, with client booking forms sent directly to his email.</p>
-        </div>
-      </a>
-
-      <div class="port-card reveal">
-        <div class="port-card-media soon">
-          <span class="port-card-soon-badge">Coming Soon</span>
-        </div>
-        <div class="port-card-body">
-          <div class="port-card-tag">Local Antique Store</div>
-          <div class="port-card-name">Finding Treasures 4 U</div>
-          <p class="port-card-desc">Store item catalog, payment processing, and a backend that lets the client add products to the site themselves.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- SOCIAL MEDIA -->
-<section id="social-media" class="port-section" style="background: var(--bg-alt);">
-  <div class="port-section-inner">
-    <div class="port-head">
-      <div>
-        <h2 class="port-label reveal">Social Media</h2>
-      </div>
-    </div>
-
-    <div class="social-panel reveal">
-      <div class="social-panel-left">
-        <div class="social-panel-tag">Local Antique Store</div>
-        <div class="social-panel-name">Finding Treasures 4 U</div>
-        <a href="https://www.facebook.com/profile.php?id=61590902003983" target="_blank" rel="noopener" class="social-panel-fb">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          Visit Facebook page
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="brand" aria-label="Corter Digital home">
+          <img src="logo-mark.png" alt="" width="40" height="22">
+          <span>Corter Digital</span>
         </a>
+        <p>A marketing agency for online growth. We build websites, grow social media, and create digital products.</p>
+        <p class="footer-tagline">Online growth, built right</p>
       </div>
-      <div class="social-panel-stat">
-        <div class="social-panel-num">250K+</div>
-        <div class="social-panel-label">Views in the last 30 days</div>
+      <div class="footer-col">
+        <h2>Services</h2>
+        <ul>
+          <li><a href="websites.html">Websites</a></li>
+          <li><a href="social-media.html">Social Media</a></li>
+          <li><a href="services.html">All services</a></li>
+          <li><a href="portfolio.html#products">Digital products</a></li>
+        </ul>
       </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- CORTER DIGITAL PRODUCTS -->
-<section id="products" class="port-section">
-  <div class="port-section-inner">
-    <div class="port-head">
-      <div>
-        <h2 class="port-label reveal">Corter Digital Products</h2>
+      <div class="footer-col">
+        <h2>Company</h2>
+        <ul>
+          <li><a href="portfolio.html">Our Work</a></li>
+          <li><a href="learn.html">Learn</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
       </div>
-    </div>
-
-    <div class="products-panel reveal">
-      <span class="products-panel-badge">Coming Soon</span>
-      <h3>Products coming soon.</h3>
-      <p>This is where we post our own personal projects — built and shipped by Corter Digital, not a client.</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- CTA -->
-<section class="cta-band">
-  <div class="cta-inner">
-    <h2 class="cta-hl reveal">Ready to add your business<br><em>to this list?</em></h2>
-    <div class="cta-actions reveal rd1">
-      <a href="contact.html" class="cta-btn">Start the conversation</a>
-      <a href="tel:+15705024036" class="cta-tel">(570) 502-4036</a>
-    </div>
-  </div>
-</section>
-
-
-<!-- FOOTER -->
-<footer>
-  <div class="foot-inner">
-    <div class="foot-top">
-      <div>
-        <a href="/" class="foot-word">Corter Digital</a>
-        <p class="foot-tag">Websites, social media marketing, and content creation for businesses that want real customers.</p>
-      </div>
-      <div>
-        <div class="foot-col-label">Site</div>
-        <div class="foot-links">
-          <a href="/">Home</a>
-          <a href="/#services">Services</a>
-          <a href="portfolio.html">Our Work</a>
-          <a href="learn.html">Learn</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
-        </div>
-      </div>
-      <div>
-        <div class="foot-col-label">Contact</div>
-        <div class="foot-links">
-          <a href="tel:+15705024036">(570) 502-4036</a>
-          <a href="mailto:andrewcsmma@gmail.com">andrewcsmma@gmail.com</a>
-        </div>
-      </div>
-      <div>
-        <div class="foot-col-label">Follow</div>
-        <div class="foot-socials">
-          <a href="https://www.instagram.com/corterdigital" target="_blank" rel="noopener" class="foot-social" aria-label="Instagram">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      <div class="footer-col">
+        <h2>Get in touch</h2>
+        <ul>
+          <li><a href="tel:+15705024036">(570) 502-4036</a></li>
+          <li><a href="mailto:andrewcsmma@gmail.com">andrewcsmma@gmail.com</a></li>
+        </ul>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/corterdigital" target="_blank" rel="noopener" aria-label="Corter Digital on Instagram (opens in a new tab)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
           </a>
-          <a href="https://www.facebook.com/profile.php?id=61583891445369" target="_blank" rel="noopener" class="foot-social" aria-label="Facebook">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          <a href="https://www.facebook.com/profile.php?id=61583891445369" target="_blank" rel="noopener" aria-label="Corter Digital on Facebook (opens in a new tab)">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5V6.8c0-.8.2-1.3 1.4-1.3H17V2.3c-.3 0-1.3-.1-2.4-.1-2.4 0-4.1 1.5-4.1 4.2v2.1H8v3.5h2.5V22H14v-9.9h2.7l.4-3.6H14z"/></svg>
           </a>
         </div>
       </div>
     </div>
-    <div class="foot-bottom">
-      <span>© 2025 Corter Digital. All rights reserved.</span>
-      <span>NEPA's Marketing Partner</span>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Corter Digital. All rights reserved.</span>
+      <span>Websites · Social media · Digital products</span>
     </div>
   </div>
+  <div class="footer-wordmark" aria-hidden="true">Corter Digital</div>
 </footer>
-
-
-<script>
-  // Navbar
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 40);
-  }, { passive: true });
-
-  // Mobile menu
-  const ham = document.getElementById('nav-ham');
-  const mob = document.getElementById('mob-menu');
-  let open = false;
-  ham.addEventListener('click', () => {
-    open = !open;
-    mob.classList.toggle('open', open);
-    ham.setAttribute('aria-expanded', String(open));
-    document.body.style.overflow = open ? 'hidden' : '';
-  });
-  mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { if (open) ham.click(); }));
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) ham.click(); });
-
-  // Scroll reveal
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-</script>
 
 </body>
 </html>

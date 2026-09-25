@@ -3,675 +3,229 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Services — Corter Digital</title>
-  <meta name="description" content="Functional websites, content creation, and social media management for local businesses.">
+  <title>Services | Corter Digital</title>
+  <meta name="description" content="Websites, social media management, content creation and clipping campaigns. Everything Corter Digital does to grow your business online.">
+  <meta name="theme-color" content="#1D1A17">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Corter Digital">
+  <meta property="og:title" content="Services | Corter Digital">
+  <meta property="og:description" content="Websites, social media management, content creation and clipping campaigns. Everything Corter Digital does to grow your business online.">
+  <meta property="og:image" content="https://corterdigital.com/icon-512.png">
 
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
   <link rel="icon" type="image/png" href="/icon-512.png" sizes="512x512">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="preconnect" href="https://api.fontshare.com">
-  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:         #1D1A17;
-      --bg-alt:     #262220;
-      --surface:    #262220;
-      --surface-hi: #2E2925;
-      --ink:        #F3EFE8;
-      --ink-70:     rgba(243,239,232,.70);
-      --ink-45:     rgba(243,239,232,.45);
-      --ink-15:     rgba(243,239,232,.15);
-      --ink-08:     rgba(243,239,232,.08);
-      --accent:     #2F7DF6;
-      --accent-hover: #1E5FD1;
-      --accent-08:  rgba(47,125,246,.14);
-      --dark:       #121009;
-      --dark-text:  #F5F2EC;
-      --dark-text-60: rgba(245,242,236,.6);
-      --dark-line:  rgba(245,242,236,.12);
-      --radius:     6px;
-      --ease:       cubic-bezier(.16,1,.3,1);
-    }
-
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg); color: var(--ink);
-      font-family: 'General Sans', system-ui, sans-serif;
-      font-weight: 400;
-      -webkit-font-smoothing: antialiased; overflow-x: hidden;
-    }
-    ::selection { background: var(--ink); color: var(--bg); }
-    *:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-    a { color: inherit; }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .001ms !important; animation-iteration-count: 1 !important;
-        transition-duration: .001ms !important; scroll-behavior: auto !important;
-      }
-    }
-
-    .eyebrow {
-      display: flex; align-items: center; gap: 12px;
-      font-size: 13px; font-weight: 700; letter-spacing: .08em;
-      text-transform: uppercase; color: var(--ink-45);
-    }
-    .eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--accent); flex-shrink: 0; }
-
-    /* ── NAV ── */
-    #navbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 28px 48px;
-      border-bottom: 1px solid transparent;
-      transition: padding .3s var(--ease), background .3s var(--ease), border-color .3s var(--ease);
-    }
-    #navbar.scrolled {
-      padding: 18px 48px;
-      background: rgba(29,26,23,.86);
-      backdrop-filter: blur(14px);
-      border-bottom-color: var(--ink-08);
-    }
-    .nav-word {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600; font-size: 18px; letter-spacing: -.01em;
-      color: var(--ink); text-decoration: none;
-      display: flex; align-items: center;
-    }
-    .nav-word img { height: 44px; width: auto; display: block; }
-    .nav-left { display: flex; align-items: center; gap: 44px; }
-    .nav-links { display: flex; align-items: center; gap: 36px; }
-    .nav-lnk {
-      font-size: 14px; font-weight: 500;
-      color: var(--ink-70); text-decoration: none;
-      transition: color .2s var(--ease);
-    }
-    .nav-lnk:hover { color: var(--ink); }
-    .nav-lnk.active { color: var(--ink); }
-    .nav-dropdown { position: relative; }
-    .nav-dropdown-trigger { display: inline-flex; align-items: center; gap: 5px; }
-    .nav-dropdown-trigger svg { transition: transform .2s var(--ease); }
-    .nav-dropdown:hover .nav-dropdown-trigger svg,
-    .nav-dropdown:focus-within .nav-dropdown-trigger svg { transform: rotate(180deg); }
-    .nav-dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); padding-top: 16px; }
-    .nav-dropdown-menu-inner {
-      min-width: 230px;
-      background: var(--surface-hi); border: 1px solid var(--ink-08); border-radius: 14px;
-      padding: 10px; box-shadow: 0 20px 44px rgba(0,0,0,.45);
-      opacity: 0; visibility: hidden; pointer-events: none;
-      transform: translateY(-6px);
-      transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s;
-    }
-    .nav-dropdown:hover .nav-dropdown-menu-inner,
-    .nav-dropdown:focus-within .nav-dropdown-menu-inner {
-      opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0);
-    }
-    .nav-dropdown-item {
-      display: flex; flex-direction: column; gap: 2px;
-      padding: 12px 14px; border-radius: 8px;
-      text-decoration: none; color: inherit;
-      transition: background .15s var(--ease);
-    }
-    .nav-dropdown-item:hover { background: var(--bg-alt); }
-    .nav-dropdown-item-title { font-size: 14px; font-weight: 600; color: var(--ink); }
-    .nav-dropdown-item-desc { font-size: 12px; color: var(--ink-45); margin-top: 1px; }
-    .nav-cta {
-      font-size: 14px; font-weight: 600;
-      color: var(--bg); background: var(--ink);
-      padding: 11px 22px; border-radius: var(--radius);
-      text-decoration: none;
-      transition: background .2s var(--ease), color .2s var(--ease), transform .15s var(--ease);
-    }
-    .nav-cta:hover { background: var(--accent); color: #fff; }
-    .nav-cta:active { transform: scale(.97); }
-
-    #nav-ham {
-      display: none; flex-direction: column; gap: 5px;
-      background: none; border: none; padding: 4px;
-    }
-    #nav-ham span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: transform .25s var(--ease), opacity .25s var(--ease); }
-
-    #mob-menu {
-      position: fixed; inset: 0; z-index: 400; background: var(--bg);
-      display: flex; flex-direction: column; justify-content: center; padding: 48px; overflow-y: auto;
-      transform: translateX(100%); transition: transform .5s var(--ease);
-    }
-    #mob-menu.open { transform: translateX(0); }
-    .mob-lnk {
-      font-family: 'General Sans', sans-serif; font-size: clamp(30px,8vw,46px);
-      letter-spacing: -.02em; line-height: 1.15;
-      color: var(--ink); text-decoration: none; display: block; margin-bottom: 4px;
-      opacity: 0; transform: translateX(16px); transition: opacity .4s var(--ease), transform .4s var(--ease), color .2s var(--ease);
-    }
-    .mob-lnk:hover { color: var(--accent); }
-    #mob-menu.open .mob-lnk:nth-child(1) { opacity:1;transform:none;transition-delay:.06s; }
-    #mob-menu.open .mob-lnk:nth-child(2) { opacity:1;transform:none;transition-delay:.10s; }
-    #mob-menu.open .mob-lnk:nth-child(3) { opacity:1;transform:none;transition-delay:.14s; }
-    #mob-menu.open .mob-lnk:nth-child(4) { opacity:1;transform:none;transition-delay:.18s; }
-    #mob-menu.open .mob-lnk:nth-child(5) { opacity:1;transform:none;transition-delay:.22s; }
-    #mob-menu.open .mob-lnk:nth-child(6) { opacity:1;transform:none;transition-delay:.26s; }
-    .mob-foot { margin-top: auto; font-size: 14px; font-weight: 500; color: var(--ink-45); }
-
-    /* Page header */
-    .page-header {
-      padding: 168px 48px 88px;
-      max-width: 1280px; margin: 0 auto;
-    }
-    .page-hl {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600;
-      font-size: clamp(44px, 6.5vw, 88px);
-      letter-spacing: -.03em; line-height: 1.03;
-      color: var(--ink); margin: 18px 0 24px;
-    }
-    .page-hl em { font-style: normal; color: var(--accent); }
-    .page-sub { font-size: 17px; color: var(--ink-70); line-height: 1.65; max-width: 42ch; }
-
-    /* Services */
-    .svc-list { max-width: 1280px; margin: 0 auto; padding: 0 48px 152px; border-top: 1px solid var(--ink-15); }
-
-    .svc-block { border-bottom: 1px solid var(--ink-15); padding: 88px 0; }
-
-    .svc-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 72px; align-items: start;
-    }
-
-    .svc-index {
-      font-family: 'General Sans', sans-serif; font-size: 13px;
-      font-weight: 600; letter-spacing: .06em;
-      color: var(--ink-45); margin-bottom: 24px;
-    }
-
-    .svc-title {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600;
-      font-size: clamp(32px, 4vw, 48px);
-      letter-spacing: -.02em; line-height: 1.05;
-      color: var(--ink); margin-bottom: 28px;
-    }
-
-    .svc-body { font-size: 16px; color: var(--ink-70); line-height: 1.7; margin-bottom: 36px; max-width: 46ch; }
-
-    .includes-label {
-      font-size: 11px; font-weight: 700; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--ink-45);
-      margin-bottom: 18px;
-    }
-
-    .include-item {
-      display: flex; align-items: center; gap: 14px;
-      padding: 14px 0;
-      border-top: 1px solid var(--ink-08);
-      font-size: 15px; color: var(--ink-70);
-    }
-    .include-item:last-child { padding-bottom: 0; }
-    .include-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-
-    .svc-visual {
-      position: sticky; top: 120px;
-      aspect-ratio: 4/3;
-      background: var(--bg-alt);
-      border: 1px solid var(--ink-08);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
-      padding: 24px;
-    }
-    .svc-visual > div { transform-origin: center center; max-width: 100%; }
-
-    /* CTA */
-    .cta-band { background: var(--dark); color: var(--dark-text); padding: 152px 48px; }
-    .cta-inner { max-width: 1280px; margin: 0 auto; }
-    .cta-hl {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600;
-      font-size: clamp(38px, 6vw, 76px);
-      letter-spacing: -.03em; line-height: 1.05;
-      color: var(--dark-text); margin-bottom: 52px;
-    }
-    .cta-hl em { font-style: normal; color: var(--accent); }
-    .cta-actions { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
-    .cta-btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--dark-text); color: var(--dark);
-      font-size: 14px; font-weight: 700; letter-spacing: .01em;
-      padding: 17px 34px; border-radius: var(--radius);
-      text-decoration: none;
-      transition: background .2s var(--ease), color .2s var(--ease);
-    }
-    .cta-btn:hover { background: var(--accent); color: #fff; }
-    .cta-tel {
-      font-size: 14px; color: var(--dark-text-60); text-decoration: none;
-      transition: color .2s var(--ease);
-    }
-    .cta-tel:hover { color: var(--dark-text); }
-
-    /* ── FOOTER ── */
-    footer { background: var(--dark); color: var(--dark-text); border-top: 1px solid var(--dark-line); }
-    .foot-inner { max-width: 1280px; margin: 0 auto; padding: 96px 48px 48px; }
-    .foot-top { display: grid; grid-template-columns: 1.3fr .7fr .7fr .9fr; gap: 48px; padding-bottom: 80px; }
-    .foot-word {
-      font-family: 'General Sans', sans-serif;
-      font-weight: 600; font-size: 24px; letter-spacing: -.01em;
-      color: var(--dark-text); text-decoration: none; display: inline-block; margin-bottom: 20px;
-    }
-    .foot-tag { font-size: 15px; color: var(--dark-text-60); line-height: 1.6; max-width: 34ch; }
-    .foot-col-label {
-      font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--dark-text-60); margin-bottom: 22px;
-    }
-    .foot-links { display: flex; flex-direction: column; gap: 14px; }
-    .foot-links a { font-size: 15px; color: var(--dark-text); text-decoration: none; transition: color .2s var(--ease); }
-    .foot-links a:hover { color: var(--accent); }
-    .foot-socials { display: flex; align-items: center; gap: 14px; }
-    .foot-social {
-      width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
-      border: 1px solid var(--dark-line); border-radius: var(--radius);
-      color: var(--dark-text); transition: border-color .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
-    }
-    .foot-social:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-    .foot-bottom {
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
-      padding-top: 32px; border-top: 1px solid var(--dark-line); flex-wrap: wrap;
-    }
-    .foot-bottom span, .foot-bottom a { font-size: 13px; color: var(--dark-text-60); text-decoration: none; transition: color .2s var(--ease); }
-    .foot-bottom a:hover { color: var(--dark-text); }
-
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
-    .reveal.in { opacity: 1; transform: none; }
-    .rd1 { transition-delay: .08s; }
-
-    @media (max-width: 900px) {
-      .svc-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-      .svc-grid > div:first-child { display: flex; flex-direction: column; align-items: center; }
-      .svc-body { margin-left: auto; margin-right: auto; }
-      .includes-label { align-self: stretch; }
-      .include-item { align-self: stretch; justify-content: flex-start; }
-      .svc-visual { position: static; aspect-ratio: 16/9; }
-      .foot-top { grid-template-columns: 1fr 1fr; gap: 40px 24px; text-align: center; }
-      .foot-links { align-items: center; }
-      .foot-socials { justify-content: center; }
-    }
-    @media (max-width: 768px) {
-      #navbar { padding: 18px 24px; }
-      #navbar.scrolled { padding: 14px 24px; }
-      .nav-links, .nav-cta { display: none; }
-      #nav-ham { display: flex; }
-      .page-header { padding: 120px 24px 56px; text-align: center; }
-      .page-sub { margin: 0 auto; }
-      .svc-list { padding: 0 24px 96px; }
-      .svc-block { padding: 56px 0; }
-      .svc-visual { aspect-ratio: 4/3; min-height: unset; max-height: 280px; padding: 16px; }
-      .svc-visual > div { transform: scale(0.72); transform-origin: center center; }
-      .cta-band { padding: 96px 24px; text-align: center; }
-      .cta-actions { justify-content: center; }
-      .foot-inner { padding: 72px 24px 32px; }
-      .foot-top { grid-template-columns: 1fr; gap: 40px; padding-bottom: 56px; }
-      .foot-bottom { flex-direction: column; align-items: center; gap: 12px; }
-      .foot-tag { margin: 0 auto; }
-      #mob-menu { padding: 100px 32px 48px; justify-content: flex-start; }
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Inter:wght@400..600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add('js')</script>
+  <script src="main.js" defer></script>
 </head>
 <body>
 
-<div id="mob-menu" role="dialog" aria-modal="true" aria-label="Navigation">
-  <a href="/"     class="mob-lnk">Home</a>
-  <a href="services.html"  class="mob-lnk">Services</a>
-  <a href="learn.html"     class="mob-lnk">Learn</a>
-  <a href="about.html"     class="mob-lnk">About</a>
-  <a href="contact.html"   class="mob-lnk">Contact</a>
-  <div class="mob-foot">(570) 502-4036</div>
-</div>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<nav id="navbar" role="navigation" aria-label="Main navigation">
-  <div class="nav-left">
-    <a href="/" class="nav-word" aria-label="Corter Digital — home"><img src="blackout.png" alt="Corter Digital"></a>
-    <div class="nav-links">
-      <div class="nav-dropdown">
-        <a href="/#services" class="nav-lnk nav-dropdown-trigger">
+<header class="site-header">
+  <nav class="nav container" aria-label="Main">
+    <a href="/" class="brand" aria-label="Corter Digital home">
+      <img src="logo-mark.png" alt="" width="40" height="22">
+      <span>Corter Digital</span>
+    </a>
+
+    <ul class="nav-links">
+      <li class="nav-item has-menu">
+        <button class="nav-link is-current" type="button" aria-expanded="false" aria-controls="menu-services">
           Services
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-        </a>
-        <div class="nav-dropdown-menu">
-          <div class="nav-dropdown-menu-inner">
-            <a href="websites.html" class="nav-dropdown-item">
-              <span class="nav-dropdown-item-title">Websites</span>
-              <span class="nav-dropdown-item-desc">Build, host &amp; maintain</span>
-            </a>
-            <a href="social-media.html" class="nav-dropdown-item">
-              <span class="nav-dropdown-item-title">Social Media</span>
-              <span class="nav-dropdown-item-desc">Grow your following</span>
-            </a>
-          </div>
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg>
+        </button>
+        <div class="nav-menu" id="menu-services">
+          <a href="websites.html">
+            <span class="nav-menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18"/><path d="M7 6.5h.01M10 6.5h.01"/></svg></span>
+            <span><span class="nav-menu-title">Websites</span><span class="nav-menu-desc">Built, hosted and maintained for you</span></span>
+          </a>
+          <a href="social-media.html">
+            <span class="nav-menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l5.5-5.5 4 4L21 7"/><path d="M15 7h6v6"/></svg></span>
+            <span><span class="nav-menu-title">Social Media</span><span class="nav-menu-desc">Content that grows your audience</span></span>
+          </a>
         </div>
-      </div>
-      <a href="learn.html"     class="nav-lnk">Learn</a>
-      <a href="about.html"     class="nav-lnk">About</a>
+      </li>
+      <li><a href="portfolio.html" class="nav-link">Our Work</a></li>
+      <li><a href="learn.html" class="nav-link">Learn</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="contact.html" class="btn btn-primary btn-sm">Book a call</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span></span>
+      </button>
     </div>
-  </div>
-  <a href="contact.html" class="nav-cta">Start a project</a>
-  <button id="nav-ham" aria-label="Open menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+  </nav>
 
-
-<!-- PAGE HEADER -->
-<header>
-  <div class="page-header">
-    <h1 class="page-hl reveal rd1">Built to<br><em>convert.</em></h1>
-    <p class="page-sub reveal rd1">Four services. One goal. Your phone should ring more than it does right now.</p>
+  <div class="mobile-nav" id="mobile-nav">
+    <p class="mobile-nav-group-label">Services</p>
+    <ul class="mobile-nav-list mobile-nav-sub">
+      <li><a href="websites.html">Websites <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li><a href="social-media.html">Social Media <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+    </ul>
+    <p class="mobile-nav-group-label">Company</p>
+    <ul class="mobile-nav-list">
+      <li><a href="portfolio.html">Our Work</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="mobile-nav-foot">
+      <a href="contact.html" class="btn btn-primary btn-lg">Book a call</a>
+      <p class="mobile-nav-contact">Or call <a href="tel:+15705024036">(570) 502-4036</a></p>
+    </div>
   </div>
 </header>
 
 
-<!-- SERVICES -->
-<div class="svc-list">
+<main id="main">
 
-  <!-- 01 Functional Website -->
-  <div class="svc-block reveal" id="web">
-    <div class="svc-grid">
-      <div>
-        <div class="svc-index">01 — Core offering</div>
-        <h2 class="svc-title">Functional website</h2>
-        <div class="includes-label">Includes</div>
-        <div class="include-item"><span class="include-dot"></span>Direct-to-email contact forms</div>
-        <div class="include-item"><span class="include-dot"></span>Local SEO architecture</div>
-        <div class="include-item"><span class="include-dot"></span>Mobile-first, fast-loading build</div>
-        <div class="include-item"><span class="include-dot"></span>Google Business integration</div>
+  <section class="page-hero page-hero--center" aria-labelledby="page-title">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="container page-hero-inner">
+      <p class="eyebrow" data-reveal>Services</p>
+      <h1 id="page-title" class="display" data-reveal style="--d:1">Built to <span class="serif">convert.</span></h1>
+      <p class="lead" data-reveal style="--d:2">Everything we do has one goal: your phone should ring more than it does right now.</p>
+      <div class="hero-ctas" data-reveal style="--d:3">
+        <a href="contact.html" class="btn btn-primary btn-lg">Book a call <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
-      <!-- Visual -->
-      <div class="svc-visual">
-        <div style="width:85%; max-width:380px;">
-          <div style="background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 8px 40px rgba(17,17,17,.1); border:1px solid rgba(17,17,17,.06);">
-            <div style="background:#F1EFEA; padding:9px 14px; display:flex; align-items:center; gap:7px;">
-              <div style="display:flex;gap:5px;">
-                <div style="width:8px;height:8px;border-radius:50%;background:#E1DFD9;"></div>
-                <div style="width:8px;height:8px;border-radius:50%;background:#E1DFD9;"></div>
-                <div style="width:8px;height:8px;border-radius:50%;background:#E1DFD9;"></div>
-              </div>
-              <div style="flex:1;background:#FAFAF8;border-radius:3px;padding:3px 10px;font-size:9px;color:#6A6560;">yourbusiness.com</div>
-            </div>
-            <div style="padding:18px 16px 20px;">
-              <div style="height:9px;background:#111111;border-radius:2px;width:72%;margin-bottom:8px;"></div>
-              <div style="height:6px;background:#EEECE6;border-radius:2px;width:90%;margin-bottom:4px;"></div>
-              <div style="height:6px;background:#EEECE6;border-radius:2px;width:65%;margin-bottom:16px;"></div>
-              <div style="display:flex;gap:8px;margin-bottom:20px;">
-                <div style="background:#0E5BCF;color:#fff;padding:8px 14px;border-radius:4px;font-size:10px;font-weight:600;">Call Now</div>
-                <div style="border:1px solid #D0CEC8;padding:8px 14px;border-radius:4px;font-size:10px;color:#6A6560;">Get a Quote</div>
-              </div>
-              <div style="background:#FAFAF8;padding:12px;border-radius:6px;border:1px solid rgba(17,17,17,.06);">
-                <div style="font-size:9px;font-weight:600;color:#111111;margin-bottom:8px;">Send a message →</div>
-                <div style="height:20px;background:#fff;border-radius:3px;border:1px solid #D0CEC8;margin-bottom:6px;"></div>
-                <div style="height:20px;background:#fff;border-radius:3px;border:1px solid #D0CEC8;margin-bottom:8px;"></div>
-                <div style="background:#111111;color:#F7F6F3;padding:6px 12px;border-radius:3px;font-size:9px;font-weight:600;display:inline-block;">Submit →</div>
-              </div>
-            </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0" aria-labelledby="svc-title">
+    <div class="container">
+      <h2 id="svc-title" class="sr-only">All services</h2>
+      <div class="svc-rows">
+        <a href="websites.html" class="card card--glow svc-row" data-reveal>
+          <span class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18"/><path d="M7 6.5h.01M10 6.5h.01"/></svg></span>
+          <div>
+            <h3>Websites</h3>
+            <p>Custom and template sites that are fast on every phone, set up to be found on Google, and maintained for you after launch.</p>
+            <div class="tag-row"><span class="tag">From $200</span><span class="tag">Care plans from $99/mo</span><span class="tag">E-commerce &amp; booking</span></div>
+          </div>
+          <span class="link-arrow">Explore <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a href="social-media.html" class="card card--glow svc-row" data-reveal style="--d:1">
+          <span class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l5.5-5.5 4 4L21 7"/><path d="M15 7h6v6"/></svg></span>
+          <div>
+            <h3>Social media management</h3>
+            <p>Consistent, on-brand posting across three platforms, with engagement and a monthly performance summary.</p>
+            <div class="tag-row"><span class="tag">From $500/mo</span><span class="tag">Video included on Growth &amp; Scale</span></div>
+          </div>
+          <span class="link-arrow">Explore <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a href="social-media.html#pricing" class="card card--glow svc-row" data-reveal style="--d:2">
+          <span class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h3l2-3h6l2 3h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="4"/></svg></span>
+          <div>
+            <h3>Content creation</h3>
+            <p>A custom in-person content shoot: photo and video for web and social, edited into ready-to-use deliverables.</p>
+            <div class="tag-row"><span class="tag">On-site shoot</span><span class="tag">Photo &amp; video</span></div>
+          </div>
+          <span class="link-arrow">Explore <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a href="social-media.html#pricing" class="card card--glow svc-row" data-reveal style="--d:3">
+          <span class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.1 15.9M14.5 14.5L20 20M8.1 8.1L12 12"/></svg></span>
+          <div>
+            <h3>Clipping campaigns</h3>
+            <p>Long-form content clipped into short, shareable moments and pushed out across multiple accounts. One shoot, dozens of chances to be seen.</p>
+            <div class="tag-row"><span class="tag">Add-on</span><span class="tag">Maximum reach per shoot</span></div>
+          </div>
+          <span class="link-arrow">Explore <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a href="portfolio.html#products" class="card card--glow svc-row" data-reveal style="--d:4">
+          <span class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></span>
+          <div>
+            <h3>Custom digital products</h3>
+            <p>Web apps, online stores, booking systems and databases, built around how your business actually runs.</p>
+            <div class="tag-row"><span class="tag">Quoted per project</span></div>
+          </div>
+          <span class="link-arrow">Explore <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight" aria-labelledby="cta-title">
+    <div class="container">
+      <div class="cta-banner" data-reveal>
+        <div class="cta-banner-inner">
+          <div>
+            <h2 id="cta-title">Not sure where <span class="serif">to start?</span></h2>
+            <p>Tell us about your business and we'll point you to what will make the biggest difference.</p>
+          </div>
+          <div class="cta-banner-actions">
+            <a href="contact.html" class="btn btn-light btn-lg">Start the conversation <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a href="tel:+15705024036" class="cta-banner-tel">or call (570) 502-4036</a>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- 02 Content Creation -->
-  <div class="svc-block reveal" id="content">
-    <div class="svc-grid">
-      <div>
-        <div class="svc-index">02 — On-site</div>
-        <h2 class="svc-title">Content creation</h2>
-        <div class="includes-label">Includes</div>
-        <div class="include-item"><span class="include-dot"></span>Custom in-person content shoot</div>
-        <div class="include-item"><span class="include-dot"></span>Photo and video for web + social</div>
-        <div class="include-item"><span class="include-dot"></span>Edited, ready-to-use deliverables</div>
-      </div>
-      <!-- Visual -->
-      <div class="svc-visual">
-        <div style="width:75%; max-width:280px;">
-          <div style="background:#111111;border-radius:14px;overflow:hidden;box-shadow:0 12px 48px rgba(17,17,17,.25);">
-            <div style="padding:10px 14px;display:flex;align-items:center;justify-content:space-between;">
-              <div style="display:flex;align-items:center;gap:6px;">
-                <div style="width:7px;height:7px;border-radius:50%;background:#0E5BCF;"></div>
-                <span style="color:rgba(247,246,243,.4);font-size:8px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;">REC</span>
-              </div>
-              <span style="color:rgba(247,246,243,.3);font-size:9px;">00:02:14</span>
-            </div>
-            <div style="background:#1A1916;height:150px;display:flex;align-items:center;justify-content:center;position:relative;">
-              <div style="position:absolute;inset:10px;border:1px solid rgba(247,246,243,.07);border-radius:4px;"></div>
-              <div style="position:absolute;top:33%;left:0;right:0;height:1px;background:rgba(247,246,243,.05);"></div>
-              <div style="position:absolute;top:66%;left:0;right:0;height:1px;background:rgba(247,246,243,.05);"></div>
-              <div style="position:absolute;left:33%;top:0;bottom:0;width:1px;background:rgba(247,246,243,.05);"></div>
-              <div style="position:absolute;left:66%;top:0;bottom:0;width:1px;background:rgba(247,246,243,.05);"></div>
-              <div style="width:48px;height:48px;border-radius:50%;background:rgba(247,246,243,.07);border:1px solid rgba(247,246,243,.1);"></div>
-            </div>
-            <div style="padding:12px 16px;display:flex;align-items:center;justify-content:space-between;">
-              <div>
-                <div style="font-size:8px;color:rgba(247,246,243,.3);margin-bottom:2px;text-transform:uppercase;letter-spacing:.08em;">Scene</div>
-                <div style="font-size:11px;font-weight:600;color:#F7F6F3;">Brand Shoot</div>
-              </div>
-              <div style="width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(247,246,243,.2);display:flex;align-items:center;justify-content:center;">
-                <div style="width:12px;height:12px;background:#0E5BCF;border-radius:2px;"></div>
-              </div>
-              <div style="text-align:right;">
-                <div style="font-size:8px;color:rgba(247,246,243,.3);margin-bottom:2px;text-transform:uppercase;letter-spacing:.08em;">Location</div>
-                <div style="font-size:11px;font-weight:600;color:#F7F6F3;">On-Site</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 03 Social Media -->
-  <div class="svc-block reveal" id="social">
-    <div class="svc-grid">
-      <div>
-        <div class="svc-index">03 — Ongoing</div>
-        <h2 class="svc-title">Social media management</h2>
-        <div class="includes-label">Includes</div>
-        <div class="include-item"><span class="include-dot"></span>Manage your online presence</div>
-        <div class="include-item"><span class="include-dot"></span>Consistent posting schedule</div>
-        <div class="include-item"><span class="include-dot"></span>Engagement and community management</div>
-        <div class="include-item"><span class="include-dot"></span>Monthly performance summary</div>
-      </div>
-      <!-- Visual -->
-      <div class="svc-visual">
-        <div style="width:65%; max-width:240px; display:flex; flex-direction:column; gap:10px;">
-          <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 4px 24px rgba(17,17,17,.08);border:1px solid rgba(17,17,17,.06);">
-            <div style="height:72px;background:#0E5BCF;display:flex;align-items:center;justify-content:center;">
-              <div style="color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;opacity:.9;">YOUR BUSINESS</div>
-            </div>
-            <div style="padding:10px 12px;">
-              <div style="height:5px;background:#EEECE6;border-radius:2px;width:88%;margin-bottom:4px;"></div>
-              <div style="height:5px;background:#EEECE6;border-radius:2px;width:62%;margin-bottom:10px;"></div>
-              <div style="display:flex;align-items:center;gap:12px;">
-                <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:#6A6560;">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="#6A6560"><path d="M12 21s-6.7-4.35-9.3-8.1C.8 10.2 1.3 6.6 4.2 5.1 6.4 4 9 4.6 12 8c3-3.4 5.6-4 7.8-2.9 2.9 1.5 3.4 5.1 1.5 7.8C18.7 16.65 12 21 12 21z"/></svg>
-                  248
-                </div>
-                <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:#6A6560;">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="#6A6560"><path d="M4 4h16v12H7l-3 3V4z"/></svg>
-                  34
-                </div>
-              </div>
-            </div>
-          </div>
-          <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 12px rgba(17,17,17,.05);opacity:.6;border:1px solid rgba(17,17,17,.06);">
-            <div style="height:48px;background:#EEECE6;display:flex;align-items:center;justify-content:center;">
-              <div style="height:6px;background:#D0CEC8;border-radius:2px;width:55%;"></div>
-            </div>
-            <div style="padding:8px 12px;">
-              <div style="height:5px;background:#EEECE6;border-radius:2px;width:80%;margin-bottom:4px;"></div>
-              <div style="height:5px;background:#EEECE6;border-radius:2px;width:50%;"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 04 Clipping Campaigns -->
-  <div class="svc-block reveal" id="clipping">
-    <div class="svc-grid">
-      <div>
-        <div class="svc-index">04 — Add-on</div>
-        <h2 class="svc-title">Clipping campaigns</h2>
-        <p class="svc-body">Long-form content clipped into short, shareable moments and pushed out across multiple accounts to maximize reach. One shoot, dozens of chances to be seen.</p>
-        <div class="includes-label">Includes</div>
-        <div class="include-item"><span class="include-dot"></span>Long-form footage cut into short clips</div>
-        <div class="include-item"><span class="include-dot"></span>Distributed across multiple accounts</div>
-        <div class="include-item"><span class="include-dot"></span>Built to maximize reach per shoot</div>
-      </div>
-      <!-- Visual -->
-      <div class="svc-visual">
-        <div style="width:78%; max-width:300px; display:flex; gap:8px;">
-          <div style="flex:1; background:#111111; border-radius:10px; overflow:hidden; box-shadow:0 8px 32px rgba(17,17,17,.18); aspect-ratio:9/16; position:relative;">
-            <div style="position:absolute; inset:0; background:linear-gradient(160deg,#1A1916,#0A0A0A);"></div>
-            <div style="position:absolute; top:8px; left:8px; right:8px; display:flex; justify-content:space-between;">
-              <span style="color:rgba(247,246,243,.4); font-size:7px; font-weight:600; letter-spacing:.06em;">CLIP 1</span>
-              <span style="color:rgba(247,246,243,.4); font-size:7px;">0:18</span>
-            </div>
-            <div style="position:absolute; bottom:8px; left:8px; right:8px;">
-              <div style="height:5px; background:rgba(247,246,243,.15); border-radius:2px; width:70%; margin-bottom:6px;"></div>
-              <div style="display:flex; align-items:center; gap:4px; font-size:7px; color:rgba(247,246,243,.5);">
-                <svg width="8" height="8" viewBox="0 0 24 24" fill="#0E5BCF"><path d="M12 21s-6.7-4.35-9.3-8.1C.8 10.2 1.3 6.6 4.2 5.1 6.4 4 9 4.6 12 8c3-3.4 5.6-4 7.8-2.9 2.9 1.5 3.4 5.1 1.5 7.8C18.7 16.65 12 21 12 21z"/></svg>
-                12.4K
-              </div>
-            </div>
-          </div>
-          <div style="flex:1; background:#111111; border-radius:10px; overflow:hidden; box-shadow:0 8px 32px rgba(17,17,17,.18); aspect-ratio:9/16; position:relative; margin-top:16px;">
-            <div style="position:absolute; inset:0; background:linear-gradient(160deg,#20201c,#111111);"></div>
-            <div style="position:absolute; top:8px; left:8px; right:8px; display:flex; justify-content:space-between;">
-              <span style="color:rgba(247,246,243,.4); font-size:7px; font-weight:600; letter-spacing:.06em;">CLIP 2</span>
-              <span style="color:rgba(247,246,243,.4); font-size:7px;">0:24</span>
-            </div>
-            <div style="position:absolute; bottom:8px; left:8px; right:8px;">
-              <div style="height:5px; background:rgba(247,246,243,.15); border-radius:2px; width:55%; margin-bottom:6px;"></div>
-              <div style="display:flex; align-items:center; gap:4px; font-size:7px; color:rgba(247,246,243,.5);">
-                <svg width="8" height="8" viewBox="0 0 24 24" fill="#0E5BCF"><path d="M12 21s-6.7-4.35-9.3-8.1C.8 10.2 1.3 6.6 4.2 5.1 6.4 4 9 4.6 12 8c3-3.4 5.6-4 7.8-2.9 2.9 1.5 3.4 5.1 1.5 7.8C18.7 16.65 12 21 12 21z"/></svg>
-                8.9K
-              </div>
-            </div>
-          </div>
-          <div style="flex:1; background:#111111; border-radius:10px; overflow:hidden; box-shadow:0 8px 32px rgba(17,17,17,.18); aspect-ratio:9/16; position:relative;">
-            <div style="position:absolute; inset:0; background:linear-gradient(160deg,#1A1916,#0A0A0A);"></div>
-            <div style="position:absolute; top:8px; left:8px; right:8px; display:flex; justify-content:space-between;">
-              <span style="color:rgba(247,246,243,.4); font-size:7px; font-weight:600; letter-spacing:.06em;">CLIP 3</span>
-              <span style="color:rgba(247,246,243,.4); font-size:7px;">0:31</span>
-            </div>
-            <div style="position:absolute; bottom:8px; left:8px; right:8px;">
-              <div style="height:5px; background:rgba(247,246,243,.15); border-radius:2px; width:80%; margin-bottom:6px;"></div>
-              <div style="display:flex; align-items:center; gap:4px; font-size:7px; color:rgba(247,246,243,.5);">
-                <svg width="8" height="8" viewBox="0 0 24 24" fill="#0E5BCF"><path d="M12 21s-6.7-4.35-9.3-8.1C.8 10.2 1.3 6.6 4.2 5.1 6.4 4 9 4.6 12 8c3-3.4 5.6-4 7.8-2.9 2.9 1.5 3.4 5.1 1.5 7.8C18.7 16.65 12 21 12 21z"/></svg>
-                21.7K
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
+</main>
 
 
-<!-- CTA -->
-<section class="cta-band">
-  <div class="cta-inner">
-    <h2 class="cta-hl reveal">One conversation.<br><em>That's all it takes.</em></h2>
-    <div class="cta-actions reveal rd1">
-      <a href="contact.html" class="cta-btn" id="mag-btn">Start the conversation</a>
-      <a href="tel:+15705024036" class="cta-tel">(570) 502-4036</a>
-    </div>
-  </div>
-</section>
-
-
-<!-- FOOTER -->
-<footer>
-  <div class="foot-inner">
-    <div class="foot-top">
-      <div>
-        <a href="/" class="foot-word">Corter Digital</a>
-        <p class="foot-tag">Websites, social media marketing, and content creation for businesses that want real customers.</p>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="brand" aria-label="Corter Digital home">
+          <img src="logo-mark.png" alt="" width="40" height="22">
+          <span>Corter Digital</span>
+        </a>
+        <p>A marketing agency for online growth. We build websites, grow social media, and create digital products.</p>
+        <p class="footer-tagline">Online growth, built right</p>
       </div>
-      <div>
-        <div class="foot-col-label">Site</div>
-        <div class="foot-links">
-          <a href="/">Home</a>
-          <a href="services.html">Services</a>
-          <a href="portfolio.html">Our Work</a>
-          <a href="learn.html">Learn</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
-        </div>
+      <div class="footer-col">
+        <h2>Services</h2>
+        <ul>
+          <li><a href="websites.html">Websites</a></li>
+          <li><a href="social-media.html">Social Media</a></li>
+          <li><a href="services.html">All services</a></li>
+          <li><a href="portfolio.html#products">Digital products</a></li>
+        </ul>
       </div>
-      <div>
-        <div class="foot-col-label">Contact</div>
-        <div class="foot-links">
-          <a href="tel:+15705024036">(570) 502-4036</a>
-          <a href="mailto:andrewcsmma@gmail.com">andrewcsmma@gmail.com</a>
-        </div>
+      <div class="footer-col">
+        <h2>Company</h2>
+        <ul>
+          <li><a href="portfolio.html">Our Work</a></li>
+          <li><a href="learn.html">Learn</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
       </div>
-      <div>
-        <div class="foot-col-label">Follow</div>
-        <div class="foot-socials">
-          <a href="https://www.instagram.com/corterdigital" target="_blank" rel="noopener" class="foot-social" aria-label="Instagram">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      <div class="footer-col">
+        <h2>Get in touch</h2>
+        <ul>
+          <li><a href="tel:+15705024036">(570) 502-4036</a></li>
+          <li><a href="mailto:andrewcsmma@gmail.com">andrewcsmma@gmail.com</a></li>
+        </ul>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/corterdigital" target="_blank" rel="noopener" aria-label="Corter Digital on Instagram (opens in a new tab)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
           </a>
-          <a href="https://www.facebook.com/profile.php?id=61583891445369" target="_blank" rel="noopener" class="foot-social" aria-label="Facebook">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          <a href="https://www.facebook.com/profile.php?id=61583891445369" target="_blank" rel="noopener" aria-label="Corter Digital on Facebook (opens in a new tab)">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5V6.8c0-.8.2-1.3 1.4-1.3H17V2.3c-.3 0-1.3-.1-2.4-.1-2.4 0-4.1 1.5-4.1 4.2v2.1H8v3.5h2.5V22H14v-9.9h2.7l.4-3.6H14z"/></svg>
           </a>
         </div>
       </div>
     </div>
-    <div class="foot-bottom">
-      <span>© 2025 Corter Digital. All rights reserved.</span>
-      <span>NEPA's Marketing Partner</span>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Corter Digital. All rights reserved.</span>
+      <span>Websites · Social media · Digital products</span>
     </div>
   </div>
+  <div class="footer-wordmark" aria-hidden="true">Corter Digital</div>
 </footer>
-
-
-<script>
-  const navbar=document.getElementById('navbar');
-  window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>40),{passive:true});
-
-  const ham=document.getElementById('nav-ham'),mob=document.getElementById('mob-menu');
-  let open=false;
-  ham.addEventListener('click',()=>{
-    open=!open;mob.classList.toggle('open',open);ham.setAttribute('aria-expanded',String(open));
-    document.body.style.overflow=open?'hidden':'';
-  });
-  mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{if(open)ham.click();}));
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&open)ham.click();});
-
-  const io=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
-  },{threshold:0.08});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-  const magBtn=document.getElementById('mag-btn');
-  if(magBtn){
-    magBtn.addEventListener('mousemove',e=>{
-      const r=magBtn.getBoundingClientRect();
-      const dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);
-      magBtn.style.transform=`translate(${dx*.14}px,${dy*.22}px)`;
-      magBtn.style.transition='background .2s ease,color .2s ease';
-    });
-    magBtn.addEventListener('mouseleave',()=>{
-      magBtn.style.transform='';
-      magBtn.style.transition='background .2s ease,color .2s ease,transform .5s cubic-bezier(.16,1,.3,1)';
-    });
-  }
-</script>
 
 </body>
 </html>
