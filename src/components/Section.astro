@@ -1,0 +1,23 @@
+---
+/**
+ * Standard section shell: a full-bleed hairline on top and a metadata row
+ * ("NN — Name ........ meta"). `marks` adds "+" registration marks (use sparingly).
+ */
+import Index from './Index.astro';
+
+interface Props {
+  n: string;
+  name: string;
+  meta?: string;
+  id?: string;
+  marks?: boolean;
+  class?: string;
+}
+const { n, name, meta, id, marks = false, class: cls = '' } = Astro.props;
+---
+<section class:list={['band', marks && 'marks', cls]} id={id} aria-label={name}>
+  <div class="frame grid-12 border-b border-line py-4">
+    <h2 class="cell col-span-4 lg:col-span-12"><Index n={n} meta={meta}>{name}</Index></h2>
+  </div>
+  <slot />
+</section>

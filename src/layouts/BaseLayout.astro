@@ -7,10 +7,8 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
-  /** Set false for pages without a dark full-bleed hero, so the nav starts solid */
-  heroNav?: boolean;
 }
-const { title, description, heroNav = true } = Astro.props;
+const { title, description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 <!doctype html>
@@ -37,25 +35,33 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <!-- Motion is opt-in: hidden "before" states only apply when html.motion is set -->
+    <!-- Motion is opt-in: hidden "before" states only apply under html.motion -->
     <script is:inline>
       (function () {
-        var apply = function (doc) {
-          var el = (doc || document).documentElement;
-          el.classList.add('js');
-          if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) el.classList.add('motion');
-        };
-        apply();
-        document.addEventListener('astro:before-swap', function (e) { apply(e.newDocument); });
+        var motion = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var el = document.documentElement;
+        el.classList.add('js');
+        if (motion) el.classList.add('motion');
+        try { if (motion && !sessionStorage.getItem('cd-seen')) el.classList.add('first-load'); } catch (e) {}
+        document.addEventListener('astro:before-swap', function (e) {
+          e.newDocument.documentElement.classList.add('js');
+          if (motion) e.newDocument.documentElement.classList.add('motion');
+        });
       })();
     </script>
 
     <ClientRouter fallback="swap" />
   </head>
-  <body class:list={[!heroNav && 'nav-solid']}>
-    <a href="#main" class="sr-only z-[100] bg-ink px-4 py-3 font-mono text-xs uppercase tracking-widest text-base focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to content</a>
+  <body>
+    <a href="#main" class="sr-only z-[100] bg-ink px-4 py-3 font-mono text-label uppercase text-base focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to content</a>
+
+    <!-- 12-column hairline grid (4 on mobile) -->
+    <div class="grid-lines" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+
     <Nav />
-    <main id="main">
+    <main id="main" class="relative z-[1]">
       <slot />
     </main>
     <Footer />

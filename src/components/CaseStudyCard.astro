@@ -1,72 +1,56 @@
 ---
-/** Case study card driven by the case-studies content collection. */
+/**
+ * Case study cell (case-studies collection). Cells share hairlines with their
+ * neighbours; place them in a .grid-12 and give each a column span.
+ */
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import ArtVisual from './ArtVisual.astro';
-import Icon from './Icon.astro';
 
 interface Props {
   study: CollectionEntry<'case-studies'>;
-  size?: 'feature' | 'standard';
+  n: string;
   class?: string;
 }
-const { study, size = 'standard', class: cls = '' } = Astro.props;
+const { study, n, class: cls = '' } = Astro.props;
 const d = study.data;
-const serviceLabel = d.service === 'websites' ? 'Website' : 'Social Media';
-const isFeature = size === 'feature';
-const Wrapper = d.link ? 'a' : 'article';
-const wrapperProps = d.link ? { href: d.link, target: '_blank', rel: 'noopener' } : {};
+const service = d.service === 'websites' ? 'Website' : 'Social Media';
+const Tag = d.link ? 'a' : 'article';
+const linkProps = d.link ? { href: d.link, target: '_blank', rel: 'noopener' } : {};
 ---
-<Wrapper
-  {...wrapperProps}
-  class:list={['group relative flex flex-col overflow-hidden border border-ink/10 bg-surface', isFeature && 'lg:flex-row', cls]}
-  data-category={d.service}
->
-  <!-- Media -->
-  <div class:list={['relative overflow-hidden', isFeature ? 'aspect-[4/3] lg:aspect-auto lg:w-[58%] lg:min-h-[520px]' : 'aspect-[16/11]']} data-reveal-img>
-    {d.image && d.imageStyle === 'logo' ? (
-      <div class="media-zoom absolute inset-0 grid place-items-center bg-ink p-[14%]">
-        <Image src={d.image} alt="" class="max-h-full w-auto object-contain mix-blend-multiply" widths={[400, 700]} sizes="(min-width: 1024px) 30vw, 90vw" />
+<Tag {...linkProps} class:list={['group flex flex-col border-b border-line', cls]} data-category={d.service}>
+  <div class="relative aspect-[3/2] overflow-hidden" data-reveal-img>
+    {d.stat ? (
+      <div class="flex h-full flex-col justify-end bg-surface p-[var(--pad)]">
+        <p class="num text-display font-medium text-brand-blue">{d.stat}</p>
+        <p class="label mt-3">{d.statLabel}</p>
+      </div>
+    ) : d.image && d.imageStyle === 'logo' ? (
+      <div class="media grid h-full place-items-center bg-ink p-[16%]">
+        <Image src={d.image} alt={`${d.client} logo`} class="h-full w-full object-contain mix-blend-multiply" widths={[400, 700]} sizes="(min-width: 1024px) 40vw, 90vw" />
       </div>
     ) : d.image ? (
-      <Image src={d.image} alt="" class="media-zoom h-full w-full object-cover" widths={[600, 1000, 1400]} sizes="(min-width: 1024px) 50vw, 100vw" />
+      <Image src={d.image} alt={`${d.client} project`} class="media h-full w-full object-cover" widths={[640, 1024, 1400]} sizes="(min-width: 1024px) 50vw, 100vw" />
     ) : (
-      <ArtVisual variant={d.service === 'social-media' ? 'chart' : 'product'} />
-    )}
-
-    {d.stat && (
-      <div class="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black/70 via-black/10 to-transparent p-6 md:p-10">
-        <p class="display-xl text-ink" data-count={parseInt(d.stat)} data-suffix={d.stat.replace(/^[\d.,]+/, '')}>{d.stat}</p>
-        {d.statLabel && <p class="label mt-3 !text-ink/80">{d.statLabel}</p>}
+      <div class="slot flex h-full flex-col justify-between bg-surface p-[var(--pad)]">
+        <span class="label flex justify-between"><span>{d.client}</span><span>{d.status === 'in-progress' ? 'In development' : 'To supply'}</span></span>
+        <span class="label !text-ink/80">Project screenshot, 3:2</span>
       </div>
     )}
-    {d.status === 'in-progress' && (
-      <span class="label absolute left-5 top-5 inline-flex items-center gap-2 border border-brand-blue/50 bg-base/70 px-3 py-1.5 !text-ink">
-        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-blue"></span> In development
-      </span>
-    )}
   </div>
 
-  <!-- Body -->
-  <div class:list={['flex flex-1 flex-col gap-4 p-6 md:p-8', isFeature && 'lg:justify-center lg:p-12']}>
-    <p class="label flex flex-wrap gap-x-3 gap-y-1">
-      <span class="label-accent">Case study</span><span aria-hidden="true">·</span><span>{serviceLabel}</span><span aria-hidden="true">·</span><span>{d.industry}</span>
-    </p>
-    <h3 class:list={[isFeature ? 'display-md' : 'display-sm', 'text-ink']}>{d.title}</h3>
-    <p class="text-[0.9375rem] leading-relaxed text-ink/70"><span class="text-ink">{d.client}.</span> {d.summary}</p>
+  <div class="cell flex flex-1 flex-col pb-8 pt-6">
+    <p class="label num flex flex-wrap gap-x-4 gap-y-1"><span>{n}</span><span>{service}</span><span>{d.industry}</span></p>
+    <h3 class="mt-5 text-heading"><span class:list={[d.link && 'u-link']}>{d.title}</span></h3>
+    <p class="muted mt-4 max-w-[48ch] text-small">{d.client}. {d.summary}</p>
 
-    {d.result ? (
-      <p class="mt-1 flex items-center gap-3 border-t border-ink/10 pt-4 text-[0.9375rem] text-ink">
-        <Icon name="trend" class="h-4 w-4 shrink-0 text-brand-blue" /> {d.result}
-      </p>
-    ) : (
-      <p class="placeholder mt-1 flex items-center gap-3 px-4 py-3 text-[0.875rem] text-ink/60">
-        <Icon name="trend" class="h-4 w-4 shrink-0" /> [Key result: add a real number in the case study file]
-      </p>
-    )}
-
-    {d.link && (
-      <span class="link-arrow mt-auto pt-4">{d.linkLabel}<span class="sr-only"> (opens in a new tab)</span> <Icon name="arrow-ext" /></span>
-    )}
+    <div class="mt-auto pt-8">
+      <dl class="grid grid-cols-[6rem_1fr] items-baseline border-t border-line pt-4 text-small">
+        <dt class="label">Result</dt>
+        {d.result
+          ? <dd class="num">{d.result}</dd>
+          : <dd class="slot px-2 py-1 text-ink/60">[Add a real number in the case study file]</dd>}
+      </dl>
+      {d.link && <p class="label mt-4 !text-ink">{d.linkLabel} <span class="arrow" aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></p>}
+    </div>
   </div>
-</Wrapper>
+</Tag>

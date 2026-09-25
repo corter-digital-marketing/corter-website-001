@@ -4,40 +4,33 @@
  * Formspree endpoint with the same field names (name, phone, email, message).
  */
 import Button from './Button.astro';
-import Icon from './Icon.astro';
 
-interface Props {
-  id?: string;
-}
+interface Props { id?: string }
 const { id = 'contact' } = Astro.props;
 ---
-<form class="grid gap-5" id={`${id}-form`} action="https://formspree.io/f/mwvzvkaw" method="POST" novalidate data-ajax>
-  <div class="form-status form-status--success" role="status" tabindex="-1">
-    <Icon name="check-circle" /><span><strong>Message sent.</strong> Thanks! We'll be in touch shortly.</span>
-  </div>
-  <div class="form-status form-status--error" role="alert" tabindex="-1">
-    <Icon name="alert" /><span><strong>That didn't go through.</strong> Please try again, or call <a href="tel:+15705024036">(570) 502-4036</a>.</span>
-  </div>
+<form class="grid gap-8" id={`${id}-form`} action="https://formspree.io/f/mwvzvkaw" method="POST" novalidate data-ajax>
+  <p class="form-status form-status--success" role="status" tabindex="-1">Message sent. We'll be in touch, usually the same day.</p>
+  <p class="form-status form-status--error" role="alert" tabindex="-1">That didn't go through. Try again, or call <a href="tel:+15705024036">(570) 502-4036</a>.</p>
 
-  <div class="grid gap-5 sm:grid-cols-2">
+  <div class="grid gap-8 sm:grid-cols-2">
     <div class="field">
-      <label class="field-label" for={`${id}-name`}>Name</label>
-      <input class="input" id={`${id}-name`} type="text" name="name" autocomplete="name" placeholder="Your name" required aria-describedby={`${id}-name-err`} />
+      <label class="label" for={`${id}-name`}>Name</label>
+      <input class="input" id={`${id}-name`} type="text" name="name" autocomplete="name" required aria-describedby={`${id}-name-err`} />
       <p class="field-error" id={`${id}-name-err`}></p>
     </div>
     <div class="field">
-      <label class="field-label" for={`${id}-phone`}>Phone <span class="opt">Optional</span></label>
-      <input class="input" id={`${id}-phone`} type="tel" name="phone" autocomplete="tel" placeholder="Best number to reach you" />
+      <label class="label" for={`${id}-phone`}>Phone <span class="opacity-60">(optional)</span></label>
+      <input class="input num" id={`${id}-phone`} type="tel" name="phone" autocomplete="tel" />
     </div>
   </div>
   <div class="field">
-    <label class="field-label" for={`${id}-email`}>Email</label>
-    <input class="input" id={`${id}-email`} type="email" name="email" autocomplete="email" placeholder="you@business.com" required aria-describedby={`${id}-email-err`} />
+    <label class="label" for={`${id}-email`}>Email</label>
+    <input class="input" id={`${id}-email`} type="email" name="email" autocomplete="email" required aria-describedby={`${id}-email-err`} />
     <p class="field-error" id={`${id}-email-err`}></p>
   </div>
   <div class="field">
-    <label class="field-label" for={`${id}-message`}>Message <span class="opt">Optional</span></label>
-    <textarea class="input" id={`${id}-message`} name="message" rows="5" placeholder="Tell us about your business and what you need."></textarea>
+    <label class="label" for={`${id}-message`}>What do you need? <span class="opacity-60">(optional)</span></label>
+    <textarea class="input" id={`${id}-message`} name="message" rows="4"></textarea>
   </div>
   <Button type="submit" block>Send message</Button>
 </form>

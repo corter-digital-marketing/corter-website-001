@@ -1,35 +1,25 @@
 ---
 /**
- * Email waitlist signup. Posts to the same Formspree form as the contact form,
- * tagged so you can tell them apart in your inbox.
+ * Waitlist signup. Posts to the same Formspree form as the contact form,
+ * with a subject line so you can tell them apart in your inbox.
  */
 import Button from './Button.astro';
-import Icon from './Icon.astro';
 
-interface Props {
-  product: string;
-  id: string;
-}
+interface Props { product: string; id: string }
 const { product, id } = Astro.props;
 ---
-<form class="grid gap-3" action="https://formspree.io/f/mwvzvkaw" method="POST" novalidate data-ajax>
+<form class="grid gap-4" action="https://formspree.io/f/mwvzvkaw" method="POST" novalidate data-ajax>
   <input type="hidden" name="_subject" value={`Waitlist: ${product}`} />
   <input type="hidden" name="form_type" value="waitlist" />
   <input type="hidden" name="product" value={product} />
 
-  <div class="form-status form-status--success" role="status" tabindex="-1">
-    <Icon name="check-circle" /><span><strong>You're on the list.</strong> We'll email you the moment enrollment opens.</span>
-  </div>
-  <div class="form-status form-status--error" role="alert" tabindex="-1">
-    <Icon name="alert" /><span>That didn't go through. Please try again.</span>
-  </div>
+  <p class="form-status form-status--success" role="status" tabindex="-1">You're on the list. We'll email you when enrollment opens.</p>
+  <p class="form-status form-status--error" role="alert" tabindex="-1">That didn't go through. Please try again.</p>
 
   <div class="field">
-    <label class="sr-only" for={`${id}-email`}>Email address</label>
-    <div class="flex flex-col gap-3 sm:flex-row">
-      <input class="input flex-1" id={`${id}-email`} type="email" name="email" autocomplete="email" placeholder="you@business.com" required aria-describedby={`${id}-email-err`} />
-      <Button type="submit">Join the waitlist</Button>
-    </div>
+    <label class="label" for={`${id}-email`}>Email</label>
+    <input class="input" id={`${id}-email`} type="email" name="email" autocomplete="email" placeholder="you@business.com" required aria-describedby={`${id}-email-err`} />
     <p class="field-error" id={`${id}-email-err`}></p>
   </div>
+  <Button type="submit" block>Join the waitlist</Button>
 </form>

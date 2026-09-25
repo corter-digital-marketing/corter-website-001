@@ -1,0 +1,48 @@
+---
+/** Pricing as a spec table: plan | price | what's included | action. */
+interface Plan {
+  name: string;
+  note: string;
+  price: string;
+  unit?: string;
+  features: string[];
+  cta?: string;
+  /** Highlight one plan per page at most (brand color) */
+  highlight?: boolean;
+}
+interface Props {
+  title: string;
+  caption?: string;
+  plans: Plan[];
+}
+const { title, caption, plans } = Astro.props;
+---
+<div>
+  <div class="grid-12 border-b border-line py-4">
+    <h3 class="label cell col-span-2 !text-ink lg:col-span-3">{title}</h3>
+    {caption && <p class="label cell col-span-2 text-right lg:col-span-9 lg:text-left">{caption}</p>}
+  </div>
+  <div class="hidden grid-12 border-b border-line py-3 lg:grid" aria-hidden="true">
+    <span class="label cell col-span-3">Plan</span>
+    <span class="label cell col-span-2">Price</span>
+    <span class="label cell col-span-5">Includes</span>
+  </div>
+  {plans.map((p) => (
+    <div class="grid-12 items-baseline gap-y-5 border-b border-line py-7 lg:py-9">
+      <div class="cell col-span-2 lg:col-span-3">
+        <p class="text-heading">{p.name}</p>
+        <p class="label mt-2">{p.note}</p>
+      </div>
+      <p class="cell col-span-2 text-right lg:col-span-2 lg:text-left">
+        <span class:list={['num text-heading', p.highlight && 'text-brand-blue']}>{p.price}</span>
+        {p.unit && <span class="label ml-1">{p.unit}</span>}
+      </p>
+      <ul class="cell col-span-4 grid gap-1.5 text-small lg:col-span-5">
+        {p.features.map((f) => <li class="muted">{f}</li>)}
+      </ul>
+      <p class="cell col-span-4 lg:col-span-2 lg:text-right">
+        <a href="/contact" class="label !text-ink"><span class="u-link">{p.cta ?? 'Start'}</span> <span class="arrow" aria-hidden="true">→</span></a>
+      </p>
+    </div>
+  ))}
+</div>

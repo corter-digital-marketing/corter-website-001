@@ -2,211 +2,176 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroMedia from '../components/HeroMedia.astro';
-import SectionLabel from '../components/SectionLabel.astro';
 import Button from '../components/Button.astro';
-import StatCounter from '../components/StatCounter.astro';
-import MediaCard from '../components/MediaCard.astro';
-import ProcessSteps from '../components/ProcessSteps.astro';
-import CaseStudyCard from '../components/CaseStudyCard.astro';
+import Index from '../components/Index.astro';
+import Stat from '../components/Stat.astro';
+import IndexRow from '../components/IndexRow.astro';
 import CourseCard from '../components/CourseCard.astro';
 import Testimonial from '../components/Testimonial.astro';
 import ContactForm from '../components/ContactForm.astro';
-import Icon from '../components/Icon.astro';
 
 const studies = (await getCollection('case-studies', (s) => s.data.featured)).sort((a, b) => a.data.order - b.data.order);
 const [featured, ...rest] = studies;
 const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b.data.order);
 ---
 <BaseLayout
-  title="Corter Digital | Websites, Social Media & Courses That Bring in Customers"
-  description="We've driven 10M+ views. Corter Digital builds websites and runs social media that bring in real customers, or teaches you our exact playbook."
+  title="Corter Digital | Websites, Social Media & Courses"
+  description="We've driven 10M+ views. Corter Digital builds websites and runs social media that bring in customers, or teaches you the playbook yourself."
 >
-  <!-- ═══════════ HERO ═══════════ -->
-  <section class="relative flex min-h-[100svh] flex-col justify-end overflow-hidden" data-hero aria-labelledby="hero-title">
-    <HeroMedia name="hero" art="hero" />
+  <!-- ═══ 00 HERO: full-bleed ═══ -->
+  <section class="relative flex min-h-[100svh] flex-col pt-16" aria-labelledby="hero-title">
+    <HeroMedia name="hero" />
+    <div class="frame grid-12 relative border-b border-line">
+      <p class="label cell col-span-2 py-4 lg:col-span-3">Corter Digital</p>
+      <p class="label cell col-span-2 py-4 text-right lg:col-span-3 lg:text-left">Est. 2025</p>
+      <p class="label cell hidden py-4 lg:col-span-3 lg:block">Websites · Social · Courses</p>
+      <p class="label num cell hidden py-4 text-right lg:col-span-3 lg:block">Index 00</p>
+    </div>
 
-    <div class="container-x relative pb-10 pt-40 md:pb-14">
-      <p class="label mb-8 flex items-center gap-3" data-reveal>
-        <span class="h-1.5 w-1.5 bg-brand-blue"></span> Corter Digital · Est. 2025
-      </p>
-      <h1 id="hero-title" class="display-xl max-w-[13ch]" data-split="load">
-        We've driven 10M+ views. <span class="dim">Now we'll do it for your business.</span>
+    <div class="frame grid-12 relative flex-1 content-end pb-10 pt-24 lg:pb-14">
+      <h1 id="hero-title" class="cell col-span-4 text-display font-medium lg:col-span-10" data-split>
+        We've driven 10M+ views. Now we'll do it for your business.
       </h1>
-
-      <div class="mt-10 grid gap-8 md:mt-14 lg:grid-cols-[1fr_auto] lg:items-end">
-        <p class="lead max-w-[46ch]" data-reveal>Websites, social media, and content that bring in real customers. Or learn our exact playbook yourself.</p>
-        <div class="flex flex-col gap-3 sm:flex-row" data-reveal>
-          <Button href="/contact">Book a free call</Button>
-          <Button href="/courses" variant="secondary">Explore courses</Button>
-        </div>
-      </div>
-
-      <!-- hero index bar -->
-      <div class="mt-14 hidden grid-cols-4 border-t border-ink/15 pt-5 md:grid" data-reveal>
-        <a href="/websites" class="label hover:!text-ink"><span class="label-accent">01</span>&nbsp;&nbsp;Websites</a>
-        <a href="/social-media" class="label hover:!text-ink"><span class="label-accent">02</span>&nbsp;&nbsp;Social Media</a>
-        <a href="/courses" class="label hover:!text-ink"><span class="label-accent">03</span>&nbsp;&nbsp;Courses</a>
-        <span class="label flex items-center justify-end gap-2">Scroll <Icon name="arrow-down" class="h-3.5 w-3.5 animate-bounce" /></span>
+      <p class="muted cell col-span-4 mt-12 lg:col-span-4 lg:mt-20">
+        Websites, social media, and content that bring in real customers. Or learn our exact playbook yourself.
+      </p>
+      <div class="cell col-span-4 mt-8 flex flex-col gap-3 sm:flex-row lg:col-span-5 lg:col-start-8 lg:mt-20 lg:self-end lg:justify-end">
+        <Button href="/contact">Book a free call</Button>
+        <Button href="/courses" variant="secondary">Explore courses</Button>
       </div>
     </div>
   </section>
 
 
-  <!-- ═══════════ PROOF ═══════════ -->
-  <section class="border-t border-ink/10 bg-base" aria-labelledby="proof-title">
-    <div class="container-x">
-      <div class="grid border-ink/10 sm:grid-cols-2 lg:grid-cols-4 lg:border-l">
-        <div class="flex flex-col justify-between gap-8 border-b border-ink/10 py-10 sm:border-r lg:border-b-0 lg:p-10">
-          <SectionLabel index="01">Proof</SectionLabel>
-          <h2 id="proof-title" class="display-sm max-w-[12ch]">Numbers, not promises.</h2>
-        </div>
-        <StatCounter value={10} suffix="M+" label="Views generated" class="border-b border-ink/10 !px-0 sm:!px-10 lg:border-b-0 lg:border-r" />
-        <StatCounter value={60} suffix="K+" label="Followers gained" class="border-b border-ink/10 !px-0 sm:border-r sm:!px-10 lg:border-b-0" />
-        <StatCounter value={250} suffix="K+" label="Views in 30 days, one client" class="!px-0 sm:!px-10 lg:border-l lg:border-r lg:border-ink/10" />
-      </div>
-      <p class="label border-t border-ink/10 py-4 !text-[0.625rem]">Views and followers are totals across all platforms.</p>
+  <!-- ═══ 01 RECORD: dense data row ═══ -->
+  <section class="band marks" aria-labelledby="record-title">
+    <div class="frame grid-12 border-b border-line py-4">
+      <h2 id="record-title" class="cell col-span-4 lg:col-span-12"><Index n="01" meta="All platforms, combined">Record</Index></h2>
+    </div>
+    <div class="frame grid-12">
+      <Stat value={10} suffix="M+" label="Views" note="Generated" class="col-span-2 lg:col-span-4" />
+      <Stat value={60} suffix="K+" label="Followers" note="Gained" class="col-span-2 lg:col-span-4" />
+      <Stat value={250} suffix="K+" label="Views in 30 days" note="One client · Facebook" class="col-span-4 border-t border-line lg:border-t-0" />
     </div>
   </section>
 
 
-  <!-- ═══════════ SERVICES ═══════════ -->
-  <section class="section border-t border-ink/10" aria-labelledby="services-title">
-    <div class="container-x">
-      <div class="mb-14 grid gap-8 lg:mb-20 lg:grid-cols-2 lg:items-end">
-        <div>
-          <SectionLabel index="02" class="mb-8">Services</SectionLabel>
-          <h2 id="services-title" class="display-lg" data-split>Done for you.<br /><span class="dim">Or learn it yourself.</span></h2>
-        </div>
-        <p class="lead max-w-[40ch] lg:justify-self-end">Two ways to grow. Hand it to us, or take our playbook and run it yourself.</p>
-      </div>
-
-      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3" data-stagger>
-        <MediaCard
-          href="/websites"
-          kicker="01 — Done for you"
-          title="A website that turns visitors into calls."
-          text="Fast on every phone. Built to be found. Maintained for you."
-          cta="Websites"
-          art="web"
-          fig="Fig. 01 · Website"
-        />
-        <MediaCard
-          href="/social-media"
-          kicker="02 — Done for you"
-          title="Content that gets you seen."
-          text="We plan, create and post. Your audience grows. You get the calls."
-          cta="Social Media"
-          art="social"
-          fig="Fig. 02 · Social"
-        />
-        <MediaCard
-          href="/courses"
-          kicker="03 — Learn it yourself"
-          title="Our playbook, in your hands."
-          text="The exact system behind 10M+ views, as a course you run yourself."
-          cta="Courses"
-          art="course"
-          fig="Fig. 03 · Course"
-          class="md:col-span-2 lg:col-span-1"
-          aspect="aspect-[4/5] md:aspect-[16/9] lg:aspect-[4/5]"
-        />
-      </div>
+  <!-- ═══ 02 SERVICES: index list ═══ -->
+  <section class="band py-section" aria-labelledby="services-title">
+    <div class="frame grid-12 mb-12 lg:mb-20">
+      <div class="cell col-span-4 lg:col-span-3"><Index n="02">Services</Index></div>
+      <h2 id="services-title" class="cell col-span-4 mt-6 text-heading lg:col-span-6 lg:mt-0">Hand it to us, or run it yourself.</h2>
+    </div>
+    <div class="frame border-t border-line">
+      <IndexRow n="01" title="Websites" text="Template builds from $200. Custom builds quoted. Hosting and care from $99 a month." meta="Done for you" href="/websites" />
+      <IndexRow n="02" title="Social Media" text="Content created and posted on three platforms, twice a week up to daily. From $500 a month." meta="Done for you" href="/social-media" />
+      <IndexRow n="03" title="Courses" text="The Social Media Growth Playbook: the system behind 10M+ views, taught step by step." meta="Do it yourself" href="/courses" />
     </div>
   </section>
 
 
-  <!-- ═══════════ PROCESS (pinned on desktop) ═══════════ -->
-  <ProcessSteps
-    index="03"
-    line1="Talk. Build."
-    line2="Grow."
-    steps={[
-      { title: 'Talk', text: 'A straight conversation about your business, your customers, and what isn’t working. No pitch.' },
-      { title: 'Build', text: 'We design your site or plan your content around real goals. You review. We refine. It goes live.' },
-      { title: 'Grow', text: 'We keep posting, updating and improving, month after month, so the calls keep coming.' },
-    ]}
-  />
+  <!-- ═══ 03 PROCESS: three columns ═══ -->
+  <section class="band" aria-labelledby="process-title">
+    <div class="frame grid-12 border-b border-line py-4">
+      <h2 id="process-title" class="cell col-span-4 lg:col-span-12"><Index n="03" meta="3 steps">Process</Index></h2>
+    </div>
+    <ol class="frame grid-12">
+      {[
+        ['Talk', 'One call. We ask about your customers, your numbers, and what isn’t working. No pitch.'],
+        ['Build', 'A template or custom site, or a content plan for three platforms. Nothing goes live until you approve it.'],
+        ['Grow', 'We post, host, and update every month. You watch the calls and messages come in.'],
+      ].map(([t, d], i) => (
+        <li class:list={['cell col-span-4 py-10 lg:py-16', i > 0 && 'border-t border-line lg:border-t-0']}>
+          <p class="label num">Step {String(i + 1).padStart(2, '0')}</p>
+          <h3 class="mt-16 text-heading lg:mt-32">{t}</h3>
+          <p class="muted mt-4 max-w-[34ch]">{d}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
 
 
-  <!-- ═══════════ WORK ═══════════ -->
-  <section class="section border-t border-ink/10" aria-labelledby="work-title">
-    <div class="container-x">
-      <div class="mb-14 flex flex-col gap-8 lg:mb-20 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <SectionLabel index="04" class="mb-8">Case studies</SectionLabel>
-          <h2 id="work-title" class="display-lg" data-split>Outcomes.<br /><span class="dim">Not deliverables.</span></h2>
-        </div>
-        <Button href="/portfolio" variant="secondary">View all work</Button>
-      </div>
-
-      {featured && <CaseStudyCard study={featured} size="feature" class="mb-4" />}
-      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3" data-stagger>
-        {rest.map((s) => <CaseStudyCard study={s} />)}
-      </div>
+  <!-- ═══ 04 STATEMENT: alone in open space ═══ -->
+  <section class="band marks" aria-label="How we work">
+    <div class="frame grid-12 py-section lg:py-56">
+      <p class="label num cell col-span-4 mb-8 lg:col-span-2 lg:mb-0">04</p>
+      <p class="cell col-span-4 text-heading lg:col-span-7 lg:col-start-4">
+        One team builds the site, films and posts the content, and keeps both running. You deal with one phone number: <span class="num">(570) 502-4036</span>.
+      </p>
     </div>
   </section>
 
 
-  <!-- ═══════════ COURSES TEASER ═══════════ -->
-  <section class="section relative overflow-hidden border-t border-ink/10 bg-surface" aria-labelledby="courses-title">
-    <div class="absolute inset-0" style="background: radial-gradient(50% 60% at 100% 50%, rgb(47 125 246 / .16), transparent 70%);" aria-hidden="true"></div>
-    <div class="container-x relative grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-20">
-      <div>
-        <SectionLabel index="05" class="mb-8">Courses</SectionLabel>
-        <h2 id="courses-title" class="display-lg" data-split>Rather do it yourself?<br /><span class="dim">Learn our playbook.</span></h2>
-        <p class="lead mt-8 max-w-[42ch]" data-reveal>The same strategies behind 10M+ views and 60K+ followers, broken down so you can run them at your own pace.</p>
-        <div class="mt-10" data-reveal><Button href="/courses">Explore courses</Button></div>
-      </div>
-      <div data-reveal>
-        {courses[0] && <CourseCard course={courses[0]} compact />}
-      </div>
+  <!-- ═══ 05 WORK: feature split + rows ═══ -->
+  <section class="band" aria-labelledby="work-title">
+    <div class="frame grid-12 border-b border-line py-4">
+      <h2 id="work-title" class="cell col-span-4 lg:col-span-12"><Index n="05" meta={`${studies.length} projects`}>Selected work</Index></h2>
     </div>
-  </section>
 
-
-  <!-- ═══════════ TESTIMONIALS ═══════════ -->
-  <section class="section border-t border-ink/10" aria-labelledby="clients-title">
-    <div class="container-x">
-      <SectionLabel index="06" class="mb-8">Clients</SectionLabel>
-      <h2 id="clients-title" class="display-lg mb-14 lg:mb-20" data-split>In their words.</h2>
-      <!-- Replace placeholders with: <Testimonial quote="..." name="..." role="Owner, Business" /> -->
-      <div class="grid gap-4 md:grid-cols-2" data-stagger>
-        <Testimonial placeholder />
-        <Testimonial placeholder />
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════ CONTACT ═══════════ -->
-  <section class="section relative overflow-hidden border-t border-ink/10" id="contact" aria-labelledby="contact-title">
-    <div class="absolute inset-0" style="background: radial-gradient(60% 70% at 0% 100%, rgb(47 125 246 / .2), transparent 65%);" aria-hidden="true"></div>
-    <div class="grid-guides" aria-hidden="true"></div>
-    <div class="container-x relative grid gap-14 lg:grid-cols-2 lg:gap-20">
-      <div>
-        <SectionLabel index="07" class="mb-8">Contact</SectionLabel>
-        <h2 id="contact-title" class="display-lg" data-split>No pitch.<br /><span class="dim">Just a straight conversation.</span></h2>
-        <p class="lead mt-8 max-w-[40ch]" data-reveal>Tell us where you are and where you want to be. We'll tell you exactly how we'd get you there.</p>
-
-        <dl class="mt-12 grid border-t border-ink/10" data-reveal>
-          <div class="flex items-center justify-between gap-4 border-b border-ink/10 py-5">
-            <dt class="label">Phone</dt>
-            <dd><a href="tel:+15705024036" class="font-display text-xl font-semibold [font-stretch:82%] hover:text-brand-blue">(570) 502-4036</a></dd>
+    {featured && (
+      <a href={featured.data.link} target="_blank" rel="noopener" class="group block border-b border-line">
+        <div class="frame grid-12 py-14 lg:py-24">
+          <div class="cell col-span-4 lg:col-span-6">
+            <p class="num text-display font-medium text-brand-blue" data-count="250" data-suffix="K+">{featured.data.stat}</p>
+            <p class="label mt-4">{featured.data.statLabel}</p>
           </div>
-          <div class="flex items-center justify-between gap-4 border-b border-ink/10 py-5">
-            <dt class="label">Email</dt>
-            <dd><a href="mailto:andrewcsmma@gmail.com" class="break-all text-right font-display text-xl font-semibold [font-stretch:82%] hover:text-brand-blue">andrewcsmma@gmail.com</a></dd>
+          <div class="cell col-span-4 mt-12 flex flex-col lg:col-span-5 lg:col-start-8 lg:mt-0">
+            <p class="label">Social Media · {featured.data.industry}</p>
+            <h3 class="mt-5 text-heading"><span class="u-link">{featured.data.title}</span></h3>
+            <p class="muted mt-5">{featured.data.client}. {featured.data.summary}</p>
+            <p class="label mt-8 !text-ink">{featured.data.linkLabel} <span class="arrow" aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></p>
           </div>
-          <div class="flex items-center justify-between gap-4 border-b border-ink/10 py-5">
-            <dt class="label">Response</dt>
-            <dd class="text-right text-ink/80">Usually the same day</dd>
-          </div>
+        </div>
+      </a>
+    )}
+
+    <div class="frame">
+      {rest.map((s, i) => (
+        <IndexRow n={String(i + 2).padStart(2, '0')} title={s.data.title} text={`${s.data.client}. ${s.data.summary}`} meta={s.data.industry} href={s.data.link} external />
+      ))}
+    </div>
+    <div class="frame grid-12 py-6">
+      <a href="/portfolio" class="label cell col-span-4 !text-ink lg:col-span-3 lg:col-start-10">All work <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+
+  <!-- ═══ 06 COURSES: media split ═══ -->
+  <section class="band" aria-labelledby="courses-title">
+    <div class="frame grid-12 border-b border-line py-4">
+      <h2 id="courses-title" class="cell col-span-4 lg:col-span-12"><Index n="06" meta="Waitlist open">Do it yourself</Index></h2>
+    </div>
+    <div class="frame">
+      {courses[0] && <CourseCard course={courses[0]} compact />}
+    </div>
+  </section>
+
+
+  <!-- ═══ 07 CLIENTS: one quote ═══ -->
+  <section class="band" aria-labelledby="clients-title">
+    <div class="frame grid-12 py-4">
+      <h2 id="clients-title" class="cell col-span-4 lg:col-span-12"><Index n="07">Clients</Index></h2>
+    </div>
+    <div class="frame py-16 lg:py-32">
+      <!-- Replace with: <Testimonial quote="..." name="..." role="Owner, Business" /> -->
+      <Testimonial />
+    </div>
+  </section>
+
+
+  <!-- ═══ 08 CONTACT: form split ═══ -->
+  <section class="band marks" id="contact" aria-labelledby="contact-title">
+    <div class="frame grid-12 py-section">
+      <div class="cell col-span-4 lg:col-span-5">
+        <Index n="08">Contact</Index>
+        <h2 id="contact-title" class="mt-10 text-heading">No pitch. Just a straight conversation.</h2>
+        <dl class="mt-12 border-t border-line text-small">
+          <div class="grid grid-cols-[6rem_1fr] border-b border-line py-4"><dt class="label">Phone</dt><dd><a href="tel:+15705024036" class="u-link num">(570) 502-4036</a></dd></div>
+          <div class="grid grid-cols-[6rem_1fr] border-b border-line py-4"><dt class="label">Email</dt><dd><a href="mailto:andrewcsmma@gmail.com" class="u-link break-all">andrewcsmma@gmail.com</a></dd></div>
+          <div class="grid grid-cols-[6rem_1fr] border-b border-line py-4"><dt class="label">Reply</dt><dd>Usually the same day</dd></div>
         </dl>
       </div>
-
-      <div class="ticks border border-ink/12 bg-base/60 p-6 backdrop-blur md:p-10" data-reveal>
-        <p class="label mb-2">Send a message</p>
-        <p class="mb-8 text-ink/70">Takes a minute. We'll take it from there.</p>
+      <div class="cell col-span-4 mt-16 lg:col-span-5 lg:col-start-8 lg:mt-0">
         <ContactForm id="home" />
       </div>
     </div>

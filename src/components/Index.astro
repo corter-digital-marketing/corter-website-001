@@ -1,0 +1,16 @@
+---
+/**
+ * Section metadata line, like a technical document: "02 — Services".
+ * Optional `meta` renders right-aligned on the same line (e.g. "3 plans").
+ */
+interface Props {
+  n: string;
+  meta?: string;
+  class?: string;
+}
+const { n, meta, class: cls = '' } = Astro.props;
+---
+<div class:list={['label flex items-baseline justify-between gap-4', cls]}>
+  <p><span class="num">{n}</span><span class="mx-3 opacity-50">—</span><slot /></p>
+  {meta && <p class="num hidden sm:block">{meta}</p>}
+</div>

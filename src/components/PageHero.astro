@@ -1,27 +1,31 @@
 ---
-/** Cinematic hero for inner pages: full-bleed media, huge two-line headline. */
+/**
+ * Inner-page hero: a spec-header row of metadata, a large left-aligned
+ * headline across 9–10 columns, and a lead offset to the right columns.
+ */
 import HeroMedia from './HeroMedia.astro';
-import SectionLabel from './SectionLabel.astro';
 
 interface Props {
-  label: string;
-  line1: string;
-  line2?: string;
+  /** Metadata cells across the top, e.g. ["01 — Websites", "From $200", "Care from $99/mo"] */
+  meta: string[];
+  title: string;
   lead?: string;
   media?: string;
-  art?: 'hero' | 'web' | 'social' | 'course' | 'product' | 'chart';
-  tall?: boolean;
 }
-const { label, line1, line2, lead, media = 'hero', art = 'hero', tall = false } = Astro.props;
+const { meta, title, lead, media } = Astro.props;
 ---
-<section class:list={['relative flex items-end overflow-hidden', tall ? 'min-h-[100svh]' : 'min-h-[88svh] md:min-h-[78svh]']}>
-  <HeroMedia name={media} art={art} />
-  <div class="container-x relative pb-14 pt-40 md:pb-20">
-    <SectionLabel class="mb-8" data-reveal>{label}</SectionLabel>
-    <h1 class="display-xl max-w-[15ch]" data-split="load">
-      {line1}{line2 && <><br /><span class="dim">{line2}</span></>}
-    </h1>
-    {lead && <p class="lead mt-8 max-w-[46ch]" data-reveal>{lead}</p>}
-    {Astro.slots.has('default') && <div class="mt-10" data-reveal><slot /></div>}
+<section class="relative overflow-hidden pt-16">
+  {media && <HeroMedia name={media} />}
+  <div class="frame grid-12 relative border-b border-line">
+    {meta.map((m, i) => (
+      <p class:list={['label num cell col-span-2 py-4 lg:col-span-3', i > 1 && 'hidden lg:block']}>{m}</p>
+    ))}
+  </div>
+  <div class="frame grid-12 relative pb-14 pt-20 lg:pb-20 lg:pt-32">
+    <h1 class="cell col-span-4 text-display font-medium lg:col-span-10" data-split>{title}</h1>
+    {lead && <p class="muted cell col-span-4 mt-10 lg:col-span-4 lg:col-start-8 lg:mt-16">{lead}</p>}
+    {Astro.slots.has('default') && (
+      <div class="cell col-span-4 mt-8 flex flex-col gap-3 sm:flex-row lg:col-span-5 lg:col-start-8"><slot /></div>
+    )}
   </div>
 </section>

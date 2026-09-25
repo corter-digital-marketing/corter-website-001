@@ -1,0 +1,31 @@
+---
+/**
+ * A media cell. Shows an image when `image` is passed; otherwise a clearly
+ * marked empty slot that says what footage/photo belongs there.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  image?: ImageMetadata;
+  alt?: string;
+  /** What the owner should supply, e.g. "Studio footage, 16:9" */
+  need: string;
+  /** Short ID shown in the slot, e.g. "MEDIA 01" */
+  id?: string;
+  aspect?: string;
+  class?: string;
+  sizes?: string;
+}
+const { image, alt = '', need, id = 'Media', aspect = 'aspect-[16/9]', class: cls = '', sizes = '100vw' } = Astro.props;
+---
+<figure class:list={['group relative overflow-hidden', aspect, cls]} data-reveal-img>
+  {image ? (
+    <Image src={image} alt={alt} class="media h-full w-full object-cover" widths={[640, 1024, 1600]} sizes={sizes} />
+  ) : (
+    <div class="slot flex h-full w-full flex-col justify-between bg-surface p-[var(--pad)]">
+      <span class="label flex justify-between"><span>{id}</span><span>To supply</span></span>
+      <span class="label !text-ink/80">{need}</span>
+    </div>
+  )}
+</figure>

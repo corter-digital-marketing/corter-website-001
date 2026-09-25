@@ -1,74 +1,64 @@
 ---
 /**
- * Product card for a course or digital product (courses collection).
+ * Course / digital product (courses collection), laid out as a spec sheet.
  * status "live" + checkoutUrl -> Buy button. status "waitlist" -> email signup.
+ * CHECKOUT: paste your Stripe / Gumroad / Lemon Squeezy link into the course
+ * file's `checkoutUrl` and set `status: "live"`.
  */
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import ArtVisual from './ArtVisual.astro';
 import Button from './Button.astro';
-import Icon from './Icon.astro';
+import MediaSlot from './MediaSlot.astro';
 import WaitlistForm from './WaitlistForm.astro';
 
 interface Props {
   course: CollectionEntry<'courses'>;
+  /** compact: teaser version with a link instead of the signup form */
   compact?: boolean;
-  class?: string;
 }
-const { course, compact = false, class: cls = '' } = Astro.props;
+const { course, compact = false } = Astro.props;
 const d = course.data;
 const isLive = d.status === 'live' && d.checkoutUrl;
+const specs: [string, string][] = [
+  ['Format', d.format],
+  ['For', d.audience],
+  ['Outcome', d.outcome],
+  ['Price', d.price ?? 'Set at launch'],
+  ['Status', isLive ? 'Available now' : 'Waitlist open'],
+];
 ---
-<article class:list={['group relative grid overflow-hidden border border-ink/10 bg-surface', !compact && 'lg:grid-cols-[1.05fr_1fr]', d.placeholder && 'placeholder', cls]}>
-  {d.placeholder && <span class="placeholder-tag absolute right-4 top-4 z-10">Placeholder</span>}
-
-  <div class:list={['relative overflow-hidden', compact ? 'aspect-[16/10]' : 'aspect-[16/11] lg:aspect-auto lg:min-h-[560px]']} data-reveal-img>
-    {d.image ? (
-      <Image src={d.image} alt="" class="media-zoom h-full w-full object-cover" widths={[600, 1000]} sizes="(min-width: 1024px) 50vw, 100vw" />
-    ) : (
-      <ArtVisual variant="course" fig={`${d.kicker} · ${d.format}`} />
-    )}
-    <span class="label absolute bottom-5 left-5 inline-flex items-center gap-2 border border-ink/25 bg-base/70 px-3 py-1.5 !text-ink backdrop-blur">
-      <span class:list={['h-1.5 w-1.5 rounded-full', isLive ? 'bg-success' : 'animate-pulse bg-brand-blue']}></span>
-      {isLive ? 'Available now' : 'Enrolling soon'}
-    </span>
+<article class="grid-12 border-b border-line">
+  <div class="col-span-4 lg:col-span-6 lg:border-r lg:border-line">
+    <MediaSlot image={d.image} alt="" need="Course cover or trailer still, 4:3" id={d.kicker} aspect="aspect-[4/3]" sizes="(min-width: 1024px) 50vw, 100vw" />
   </div>
 
-  <div class:list={['flex flex-col gap-6 p-6 md:p-10', !compact && 'lg:p-14']}>
-    <p class="label"><span class="label-accent">{d.kicker}</span> · {d.format}</p>
-    <h3 class:list={[compact ? 'display-sm' : 'display-md']}>{d.title}</h3>
+  <div class="col-span-4 flex flex-col lg:col-span-6">
+    <div class="cell pb-8 pt-6">
+      <p class="label">{d.kicker}</p>
+      <h3 class="mt-5 text-heading">{d.title}</h3>
+    </div>
 
-    <dl class="grid gap-5 border-t border-ink/10 pt-6 text-[0.9375rem] leading-relaxed">
-      <div>
-        <dt class="label mb-1.5">Who it's for</dt>
-        <dd class="text-ink/80">{d.audience}</dd>
-      </div>
-      <div>
-        <dt class="label mb-1.5">The outcome</dt>
-        <dd class="text-ink/80">{d.outcome}</dd>
-      </div>
+    <dl class="border-t border-line">
+      {specs.map(([k, v]) => (
+        <div class="grid grid-cols-[7rem_1fr] border-b border-line py-3.5 text-small lg:grid-cols-[9rem_1fr]">
+          <dt class="label cell">{k}</dt>
+          <dd class="cell">{v}</dd>
+        </div>
+      ))}
     </dl>
 
     {!compact && d.highlights.length > 0 && (
-      <ul class="grid gap-2.5">
-        {d.highlights.map((h) => (
-          <li class="flex gap-3 text-[0.9375rem] text-ink/85"><Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-brand-blue" />{h}</li>
+      <ul class="cell border-b border-line py-5 text-small">
+        {d.highlights.map((h, i) => (
+          <li class="grid grid-cols-[3rem_1fr] py-1"><span class="label num">{String(i + 1).padStart(2, '0')}</span>{h}</li>
         ))}
       </ul>
     )}
 
-    <div class="mt-auto grid gap-4 border-t border-ink/10 pt-6">
-      <div class="flex items-baseline justify-between gap-4">
-        <span class="label">Price</span>
-        {d.price
-          ? <span class="font-display text-3xl font-bold tracking-tight [font-stretch:82%]">{d.price}</span>
-          : <span class="label !text-ink">Announced at launch</span>}
-      </div>
-
+    <div class="cell mt-auto py-8">
       {compact ? (
-        <Button href="/courses" variant="secondary" block>View course</Button>
+        <Button href="/courses" variant="secondary" block>View the course</Button>
       ) : isLive ? (
-        <Button href={d.checkoutUrl} external block>Buy now</Button>
+        <Button href={d.checkoutUrl} external block>Buy now{d.price ? ` · ${d.price}` : ''}</Button>
       ) : (
         <WaitlistForm product={d.title} id={`wl-${course.id}`} />
       )}

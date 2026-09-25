@@ -1,0 +1,31 @@
+---
+/**
+ * Spec-sheet row: 01 | Title | description + meta | →
+ * Aligned to the 12-column grid. Replaces icon-card rows.
+ */
+interface Props {
+  n: string;
+  title: string;
+  text?: string;
+  meta?: string;
+  href?: string;
+  external?: boolean;
+}
+const { n, title, text, meta, href, external = false } = Astro.props;
+const Tag = href ? 'a' : 'div';
+const linkProps = href ? { href, ...(external ? { target: '_blank', rel: 'noopener' } : {}) } : {};
+---
+<Tag {...linkProps} class="row group grid-12 items-baseline gap-y-4 py-7 lg:py-9">
+  <span class="label num cell col-span-1">{n}</span>
+  <span class="cell col-span-3 text-heading lg:col-span-5">
+    <span class:list={[href && 'u-link']}>{title}</span>
+  </span>
+  <span class="cell col-span-3 col-start-2 lg:col-span-4 lg:col-start-7">
+    {text && <span class="muted block">{text}</span>}
+    {meta && <span class="label mt-3 block">{meta}</span>}
+  </span>
+  {href && (
+    <span class="cell hidden text-right lg:col-start-12 lg:block" aria-hidden="true"><span class="arrow">{external ? '↗' : '→'}</span></span>
+  )}
+  {external && <span class="sr-only">(opens in a new tab)</span>}
+</Tag>
