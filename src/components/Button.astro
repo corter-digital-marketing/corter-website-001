@@ -1,0 +1,42 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'light';
+  size?: 'md' | 'sm';
+  arrow?: boolean;
+  external?: boolean;
+  block?: boolean;
+  type?: 'button' | 'submit';
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  arrow = true,
+  external = false,
+  block = false,
+  type = 'button',
+  class: cls = '',
+  ...rest
+} = Astro.props;
+
+const classes = ['btn', `btn-${variant}`, size === 'sm' && 'btn-sm', block && 'btn-block', cls].filter(Boolean).join(' ');
+---
+{href ? (
+  <a href={href} class={classes} {...(external ? { target: '_blank', rel: 'noopener' } : {})} {...rest}>
+    <span class="btn-label"><slot /></span>
+    {external && <span class="sr-only"> (opens in a new tab)</span>}
+    {arrow && <Icon name={external ? 'arrow-ext' : 'arrow'} class="btn-arrow" />}
+  </a>
+) : (
+  <button type={type} class={classes} {...rest}>
+    <span class="btn-label"><slot /></span>
+    <span class="spinner" aria-hidden="true"></span>
+    {arrow && <Icon name="arrow" class="btn-arrow" />}
+  </button>
+)}

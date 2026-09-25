@@ -1,0 +1,11 @@
+---
+/** Wrapper for AccordionItems. Set `single` so opening one closes the others. */
+interface Props {
+  single?: boolean;
+  class?: string;
+}
+const { single = true, class: cls = '' } = Astro.props;
+---
+<div class:list={['accordion', cls]} data-accordion={single ? 'single' : 'multi'}>
+  <slot />
+</div>

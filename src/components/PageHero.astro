@@ -1,0 +1,27 @@
+---
+/** Cinematic hero for inner pages: full-bleed media, huge two-line headline. */
+import HeroMedia from './HeroMedia.astro';
+import SectionLabel from './SectionLabel.astro';
+
+interface Props {
+  label: string;
+  line1: string;
+  line2?: string;
+  lead?: string;
+  media?: string;
+  art?: 'hero' | 'web' | 'social' | 'course' | 'product' | 'chart';
+  tall?: boolean;
+}
+const { label, line1, line2, lead, media = 'hero', art = 'hero', tall = false } = Astro.props;
+---
+<section class:list={['relative flex items-end overflow-hidden', tall ? 'min-h-[100svh]' : 'min-h-[88svh] md:min-h-[78svh]']}>
+  <HeroMedia name={media} art={art} />
+  <div class="container-x relative pb-14 pt-40 md:pb-20">
+    <SectionLabel class="mb-8" data-reveal>{label}</SectionLabel>
+    <h1 class="display-xl max-w-[15ch]" data-split="load">
+      {line1}{line2 && <><br /><span class="dim">{line2}</span></>}
+    </h1>
+    {lead && <p class="lead mt-8 max-w-[46ch]" data-reveal>{lead}</p>}
+    {Astro.slots.has('default') && <div class="mt-10" data-reveal><slot /></div>}
+  </div>
+</section>

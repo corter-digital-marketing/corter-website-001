@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+---
+<BaseLayout title="Page not found | Corter Digital" description="This page doesn't exist. Head back to the Corter Digital homepage.">
+  <PageHero label="Error 404" line1="Nothing here." line2="Let's get you back." art="chart" tall>
+    <div class="flex flex-col gap-3 sm:flex-row">
+      <Button href="/">Back to home</Button>
+      <Button href="/contact" variant="secondary">Contact us</Button>
+    </div>
+  </PageHero>
+</BaseLayout>

@@ -1,0 +1,42 @@
+---
+import Button from './Button.astro';
+import SectionLabel from './SectionLabel.astro';
+
+interface Props {
+  label?: string;
+  line1: string;
+  line2: string;
+  text?: string;
+  cta?: string;
+  href?: string;
+}
+const {
+  label = 'Next step',
+  line1,
+  line2,
+  text = 'No pitch. Just a straight conversation.',
+  cta = 'Book a free call',
+  href = '/contact',
+} = Astro.props;
+---
+<section class="relative overflow-hidden border-t border-ink/10 bg-base" aria-label="Get started">
+  <div
+    class="absolute inset-0"
+    style="background: radial-gradient(70% 90% at 85% 100%, rgb(47 125 246 / .32), transparent 60%), radial-gradient(40% 60% at 0% 0%, rgb(14 91 207 / .18), transparent 70%);"
+    aria-hidden="true"
+  ></div>
+  <div class="grid-guides" aria-hidden="true"></div>
+  <div class="container-x section relative">
+    <SectionLabel class="mb-8">{label}</SectionLabel>
+    <h2 class="display-xl max-w-[14ch]" data-split>
+      {line1}<br /><span class="dim">{line2}</span>
+    </h2>
+    <div class="mt-12 flex flex-col gap-8 border-t border-ink/15 pt-8 md:flex-row md:items-center md:justify-between" data-reveal>
+      <p class="lead max-w-[44ch]">{text}</p>
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <Button href={href}>{cta}</Button>
+        <a href="tel:+15705024036" class="link-arrow justify-center px-4 py-3">(570) 502-4036</a>
+      </div>
+    </div>
+  </div>
+</section>

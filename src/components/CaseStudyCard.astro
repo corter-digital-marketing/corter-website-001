@@ -1,0 +1,72 @@
+---
+/** Case study card driven by the case-studies content collection. */
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import ArtVisual from './ArtVisual.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  study: CollectionEntry<'case-studies'>;
+  size?: 'feature' | 'standard';
+  class?: string;
+}
+const { study, size = 'standard', class: cls = '' } = Astro.props;
+const d = study.data;
+const serviceLabel = d.service === 'websites' ? 'Website' : 'Social Media';
+const isFeature = size === 'feature';
+const Wrapper = d.link ? 'a' : 'article';
+const wrapperProps = d.link ? { href: d.link, target: '_blank', rel: 'noopener' } : {};
+---
+<Wrapper
+  {...wrapperProps}
+  class:list={['group relative flex flex-col overflow-hidden border border-ink/10 bg-surface', isFeature && 'lg:flex-row', cls]}
+  data-category={d.service}
+>
+  <!-- Media -->
+  <div class:list={['relative overflow-hidden', isFeature ? 'aspect-[4/3] lg:aspect-auto lg:w-[58%] lg:min-h-[520px]' : 'aspect-[16/11]']} data-reveal-img>
+    {d.image && d.imageStyle === 'logo' ? (
+      <div class="media-zoom absolute inset-0 grid place-items-center bg-ink p-[14%]">
+        <Image src={d.image} alt="" class="max-h-full w-auto object-contain mix-blend-multiply" widths={[400, 700]} sizes="(min-width: 1024px) 30vw, 90vw" />
+      </div>
+    ) : d.image ? (
+      <Image src={d.image} alt="" class="media-zoom h-full w-full object-cover" widths={[600, 1000, 1400]} sizes="(min-width: 1024px) 50vw, 100vw" />
+    ) : (
+      <ArtVisual variant={d.service === 'social-media' ? 'chart' : 'product'} />
+    )}
+
+    {d.stat && (
+      <div class="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black/70 via-black/10 to-transparent p-6 md:p-10">
+        <p class="display-xl text-ink" data-count={parseInt(d.stat)} data-suffix={d.stat.replace(/^[\d.,]+/, '')}>{d.stat}</p>
+        {d.statLabel && <p class="label mt-3 !text-ink/80">{d.statLabel}</p>}
+      </div>
+    )}
+    {d.status === 'in-progress' && (
+      <span class="label absolute left-5 top-5 inline-flex items-center gap-2 border border-brand-blue/50 bg-base/70 px-3 py-1.5 !text-ink">
+        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-blue"></span> In development
+      </span>
+    )}
+  </div>
+
+  <!-- Body -->
+  <div class:list={['flex flex-1 flex-col gap-4 p-6 md:p-8', isFeature && 'lg:justify-center lg:p-12']}>
+    <p class="label flex flex-wrap gap-x-3 gap-y-1">
+      <span class="label-accent">Case study</span><span aria-hidden="true">·</span><span>{serviceLabel}</span><span aria-hidden="true">·</span><span>{d.industry}</span>
+    </p>
+    <h3 class:list={[isFeature ? 'display-md' : 'display-sm', 'text-ink']}>{d.title}</h3>
+    <p class="text-[0.9375rem] leading-relaxed text-ink/70"><span class="text-ink">{d.client}.</span> {d.summary}</p>
+
+    {d.result ? (
+      <p class="mt-1 flex items-center gap-3 border-t border-ink/10 pt-4 text-[0.9375rem] text-ink">
+        <Icon name="trend" class="h-4 w-4 shrink-0 text-brand-blue" /> {d.result}
+      </p>
+    ) : (
+      <p class="placeholder mt-1 flex items-center gap-3 px-4 py-3 text-[0.875rem] text-ink/60">
+        <Icon name="trend" class="h-4 w-4 shrink-0" /> [Key result: add a real number in the case study file]
+      </p>
+    )}
+
+    {d.link && (
+      <span class="link-arrow mt-auto pt-4">{d.linkLabel}<span class="sr-only"> (opens in a new tab)</span> <Icon name="arrow-ext" /></span>
+    )}
+  </div>
+</Wrapper>

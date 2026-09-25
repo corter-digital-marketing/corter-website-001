@@ -1,0 +1,48 @@
+---
+/**
+ * Large image-led card. Text overlays the media at the bottom.
+ * Pass `image` for a photo, otherwise `art` renders schematic line-art.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import ArtVisual from './ArtVisual.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  href: string;
+  kicker: string;
+  title: string;
+  text?: string;
+  cta?: string;
+  image?: ImageMetadata;
+  imageAlt?: string;
+  art?: 'web' | 'social' | 'course' | 'product' | 'hero' | 'chart';
+  fig?: string;
+  aspect?: string;
+  class?: string;
+}
+
+const { href, kicker, title, text, cta = 'Explore', image, imageAlt = '', art = 'web', fig, aspect = 'aspect-[4/5]', class: cls = '' } = Astro.props;
+---
+<a href={href} class:list={['group relative block overflow-hidden bg-base border border-ink/10', aspect, cls]}>
+  {image ? (
+    <div class="absolute inset-0" data-reveal-img>
+      <Image src={image} alt={imageAlt} class="media-zoom h-full w-full object-cover" widths={[480, 800, 1200]} sizes="(min-width: 1024px) 33vw, 100vw" />
+    </div>
+  ) : (
+    <div class="absolute inset-x-0 top-0 bottom-[34%] [mask-image:linear-gradient(to_bottom,#000_65%,transparent)]" data-reveal-img>
+      <ArtVisual variant={art} fig={fig} />
+    </div>
+  )}
+  <div class="scrim-bottom absolute inset-0"></div>
+
+  <div class="relative flex h-full flex-col justify-end p-6 md:p-8">
+    <p class="label mb-4 !text-ink/75">{kicker}</p>
+    <h3 class="display-sm max-w-[18ch] text-ink">{title}</h3>
+    {text && <p class="mt-3 max-w-[40ch] text-[0.9375rem] leading-relaxed text-ink/75">{text}</p>}
+    <span class="link-arrow mt-6">{cta} <Icon name="arrow" /></span>
+  </div>
+
+  <!-- blue edge on hover -->
+  <span class="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-brand-blue transition-transform duration-700 ease-out-expo group-hover:scale-x-100" aria-hidden="true"></span>
+</a>

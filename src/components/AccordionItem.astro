@@ -1,0 +1,24 @@
+---
+interface Props {
+  title: string;
+  index?: string;
+  meta?: string;
+  open?: boolean;
+  size?: 'lg' | 'md';
+}
+const { title, index, meta, open = false, size = 'md' } = Astro.props;
+---
+<details open={open}>
+  <summary>
+    <span class="label label-accent w-8">{index ?? ''}</span>
+    <span class:list={[size === 'lg' ? 'display-sm' : 'font-display text-[1.1875rem] font-semibold leading-snug tracking-[-0.015em] [font-stretch:82%]']}>
+      {title}
+      {meta && <span class="label ml-3 hidden align-middle sm:inline">{meta}</span>}
+    </span>
+    <span class="acc-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="acc-body grid grid-cols-[2rem_1fr] gap-5 sm:grid-cols-[2rem_1fr_36px]">
+    <span></span>
+    <div class="max-w-[62ch]"><slot /></div>
+  </div>
+</details>

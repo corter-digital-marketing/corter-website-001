@@ -1,0 +1,68 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Set false for pages without a dark full-bleed hero, so the nav starts solid */
+  heroNav?: boolean;
+}
+const { title, description, heroNav = true } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#121009" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Corter Digital" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL('/icon-512.png', Astro.site)} />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Motion is opt-in: hidden "before" states only apply when html.motion is set -->
+    <script is:inline>
+      (function () {
+        var apply = function (doc) {
+          var el = (doc || document).documentElement;
+          el.classList.add('js');
+          if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) el.classList.add('motion');
+        };
+        apply();
+        document.addEventListener('astro:before-swap', function (e) { apply(e.newDocument); });
+      })();
+    </script>
+
+    <ClientRouter fallback="swap" />
+  </head>
+  <body class:list={[!heroNav && 'nav-solid']}>
+    <a href="#main" class="sr-only z-[100] bg-ink px-4 py-3 font-mono text-xs uppercase tracking-widest text-base focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to content</a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      import '../scripts/ui';
+      import '../scripts/motion';
+    </script>
+  </body>
+</html>

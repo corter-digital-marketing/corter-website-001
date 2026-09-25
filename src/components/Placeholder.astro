@@ -1,0 +1,15 @@
+---
+/**
+ * Visible slot for content the owner still needs to supply.
+ * Delete the <Placeholder> once the real content is in.
+ */
+interface Props {
+  label?: string;
+  class?: string;
+}
+const { label = 'Placeholder', class: cls = '' } = Astro.props;
+---
+<div class:list={['placeholder', cls]}>
+  <span class="placeholder-tag absolute top-3 right-3">{label}</span>
+  <slot />
+</div>

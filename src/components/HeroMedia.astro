@@ -1,0 +1,57 @@
+---
+/**
+ * Full-bleed background media for heroes.
+ *
+ * To add footage, drop these files into /public/video/ (see README):
+ *   hero.mp4          desktop, 1920px wide, ~4–8 MB
+ *   hero-mobile.mp4   phones, 720px wide, ~1.5–3 MB
+ *   hero-poster.jpg   first frame, shown while the video loads
+ * Pass a different `name` to use other files (e.g. name="websites" -> websites.mp4).
+ *
+ * The video only starts loading after the page is interactive, and is skipped
+ * entirely for visitors with Data Saver or reduced motion (they see the poster).
+ */
+import fs from 'node:fs';
+import path from 'node:path';
+import ArtVisual from './ArtVisual.astro';
+
+interface Props {
+  name?: string;
+  art?: 'hero' | 'web' | 'social' | 'course' | 'product' | 'chart';
+  overlay?: 'strong' | 'medium';
+}
+const { name = 'hero', art = 'hero', overlay = 'strong' } = Astro.props;
+
+const pub = (f: string) => fs.existsSync(path.join(process.cwd(), 'public', 'video', f));
+const desktop = pub(`${name}.mp4`) ? `/video/${name}.mp4` : null;
+const mobile = pub(`${name}-mobile.mp4`) ? `/video/${name}-mobile.mp4` : desktop;
+const poster = pub(`${name}-poster.jpg`) ? `/video/${name}-poster.jpg` : null;
+---
+<div class="absolute inset-0 overflow-hidden bg-base" data-hero-media aria-hidden="true">
+  {poster ? (
+    <img src={poster} alt="" class="absolute inset-0 h-full w-full scale-105 object-cover" fetchpriority="high" decoding="async" data-parallax />
+  ) : (
+    <div class="absolute inset-0" data-parallax><ArtVisual variant={art} class="opacity-90" /></div>
+  )}
+
+  {desktop && (
+    <video
+      class="absolute inset-0 h-full w-full scale-105 object-cover opacity-0 transition-opacity duration-1000"
+      muted
+      loop
+      playsinline
+      preload="none"
+      poster={poster ?? undefined}
+      data-hero-video
+      data-src-desktop={desktop}
+      data-src-mobile={mobile}
+      data-parallax
+    ></video>
+  )}
+
+  <!-- Dark cinematic overlays -->
+  <div class:list={['absolute inset-0', overlay === 'strong' ? 'bg-black/55' : 'bg-black/40']}></div>
+  <div class="absolute inset-0 bg-linear-to-t from-base via-base/20 to-black/40"></div>
+  <div class="absolute inset-0 bg-linear-to-r from-black/60 via-transparent to-transparent"></div>
+  <div class="grid-guides"></div>
+</div>

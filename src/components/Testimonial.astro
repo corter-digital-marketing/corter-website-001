@@ -1,0 +1,32 @@
+---
+/**
+ * Client testimonial. With `placeholder`, renders a clearly-marked empty slot.
+ * To publish a real one: <Testimonial quote="..." name="..." role="Owner, Business" />
+ */
+import Icon from './Icon.astro';
+
+interface Props {
+  quote?: string;
+  name?: string;
+  role?: string;
+  placeholder?: boolean;
+  class?: string;
+}
+const { quote, name, role, placeholder = false, class: cls = '' } = Astro.props;
+---
+<figure class:list={['relative flex h-full flex-col justify-between gap-10 p-6 md:p-10', placeholder && 'placeholder', cls]}>
+  {placeholder && <span class="placeholder-tag absolute right-4 top-4">Placeholder</span>}
+  <Icon name="quote" class="h-7 w-7 text-brand-blue" />
+  <blockquote class:list={['font-display text-[clamp(1.375rem,1.1rem+1.1vw,2rem)] font-medium leading-[1.2] tracking-[-0.02em] [font-stretch:82%]', placeholder ? 'text-ink/55' : 'text-ink']}>
+    {placeholder ? '[Client quote. One or two sentences about the result: more calls, more customers, less stress.]' : quote}
+  </blockquote>
+  <figcaption class="flex items-center gap-4 border-t border-ink/10 pt-5">
+    <span class="grid h-10 w-10 place-items-center border border-ink/20 font-mono text-xs text-ink/60" aria-hidden="true">
+      {placeholder ? '—' : name?.split(' ').map((w) => w[0]).join('').slice(0, 2)}
+    </span>
+    <span>
+      <span class="block text-[0.9375rem] font-semibold">{placeholder ? '[Client name]' : name}</span>
+      <span class="label block !text-[0.625rem]">{placeholder ? '[Business]' : role}</span>
+    </span>
+  </figcaption>
+</figure>

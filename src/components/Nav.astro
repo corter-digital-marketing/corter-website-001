@@ -1,0 +1,167 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo-mark.png';
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const is = (href: string) => path === href;
+const inServices = is('/websites') || is('/social-media');
+
+const links = [
+  { href: '/portfolio', label: 'Our Work' },
+  { href: '/courses', label: 'Courses' },
+  { href: '/learn', label: 'Learn' },
+  { href: '/about', label: 'About' },
+];
+const services = [
+  { href: '/websites', label: 'Websites', desc: 'Built, hosted and maintained' },
+  { href: '/social-media', label: 'Social Media', desc: 'Content that grows your audience' },
+];
+const mobileLinks = [
+  ...services.map((s) => ({ href: s.href, label: s.label })),
+  ...links,
+  { href: '/contact', label: 'Contact' },
+];
+---
+<header class="site-header fixed inset-x-0 top-0 z-50 border-b border-transparent transition-[background-color,border-color,backdrop-filter] duration-500 ease-out-expo" data-header>
+  <nav class="container-x flex h-[72px] items-center justify-between gap-6" aria-label="Main">
+    <a href="/" class="flex shrink-0 items-center gap-3" aria-label="Corter Digital home">
+      <Image src={logo} alt="" width={38} densities={[1, 2]} class="h-auto w-[38px]" loading="eager" />
+      <span class="font-display text-[1.0625rem] font-bold uppercase tracking-[0.02em] [font-stretch:90%]">Corter Digital</span>
+    </a>
+
+    <ul class="hidden items-center gap-1 lg:flex">
+      <li class="relative" data-dropdown>
+        <button
+          type="button"
+          class:list={['nav-link flex items-center gap-1.5', inServices && 'is-active']}
+          aria-expanded="false"
+          aria-controls="menu-services"
+        >
+          Services <Icon name="chevron" class="h-3 w-3 transition-transform duration-300" />
+        </button>
+        <div id="menu-services" class="dropdown absolute left-0 top-full pt-3">
+          <ul class="w-[300px] border border-ink/12 bg-base/95 p-2 backdrop-blur-xl">
+            {services.map((s) => (
+              <li>
+                <a href={s.href} class="group flex items-start justify-between gap-4 p-4 transition-colors hover:bg-ink/5" aria-current={is(s.href) ? 'page' : undefined}>
+                  <span>
+                    <span class="block font-display text-lg font-semibold [font-stretch:82%]">{s.label}</span>
+                    <span class="mt-0.5 block text-sm text-ink/60">{s.desc}</span>
+                  </span>
+                  <Icon name="arrow" class="mt-1.5 h-3.5 w-3.5 text-ink/40 transition-all group-hover:translate-x-0.5 group-hover:text-brand-blue" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </li>
+      {links.map((l) => (
+        <li><a href={l.href} class:list={['nav-link', is(l.href) && 'is-active']} aria-current={is(l.href) ? 'page' : undefined}>{l.label}</a></li>
+      ))}
+    </ul>
+
+    <div class="flex items-center gap-2">
+      <Button href="/contact" size="sm" class="hidden sm:inline-flex">Book a call</Button>
+      <button
+        type="button"
+        class="menu-toggle -mr-2 grid h-11 w-11 place-items-center lg:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open menu"
+        data-menu-toggle
+      >
+        <span class="relative block h-3 w-6" aria-hidden="true">
+          <span class="bar absolute left-0 top-0 h-px w-full bg-ink transition-transform duration-500 ease-out-expo"></span>
+          <span class="bar absolute bottom-0 left-0 h-px w-full bg-ink transition-transform duration-500 ease-out-expo"></span>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Full-screen mobile menu -->
+  <div id="mobile-menu" class="mobile-menu fixed inset-0 top-[72px] z-40 flex flex-col overflow-y-auto bg-base lg:hidden" data-mobile-menu inert>
+    <div class="grid-guides" aria-hidden="true"></div>
+    <div class="absolute inset-0" style="background: radial-gradient(80% 50% at 100% 100%, rgb(47 125 246 / .22), transparent 70%);" aria-hidden="true"></div>
+    <nav class="container-x relative flex flex-1 flex-col py-8" aria-label="Mobile">
+      <p class="label mb-4">Menu</p>
+      <ul class="border-t border-ink/10">
+        {mobileLinks.map((l, i) => (
+          <li class="mm-item border-b border-ink/10">
+            <a href={l.href} class="group flex items-baseline gap-4 py-4" aria-current={is(l.href) ? 'page' : undefined}>
+              <span class="label label-accent w-7">{String(i + 1).padStart(2, '0')}</span>
+              <span class:list={['display-md transition-colors group-hover:text-brand-blue', is(l.href) ? 'text-brand-blue' : 'text-ink']}>{l.label}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="mm-item mt-auto grid gap-4 pt-10">
+        <Button href="/contact" block>Book a free call</Button>
+        <div class="flex items-center justify-between gap-4">
+          <a href="tel:+15705024036" class="link-arrow">(570) 502-4036</a>
+          <div class="flex gap-2">
+            <a href="https://www.instagram.com/corterdigital" target="_blank" rel="noopener" class="grid h-10 w-10 place-items-center border border-ink/20 transition-colors hover:border-brand-blue" aria-label="Instagram (opens in a new tab)"><Icon name="instagram" /></a>
+            <a href="https://www.facebook.com/profile.php?id=61583891445369" target="_blank" rel="noopener" class="grid h-10 w-10 place-items-center border border-ink/20 transition-colors hover:border-brand-blue" aria-label="Facebook (opens in a new tab)"><Icon name="facebook" /></a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav-link {
+    height: 40px;
+    padding-inline: 14px;
+    font-family: var(--font-mono);
+    font-size: .6875rem;
+    font-weight: 500;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--color-ink) 70%, transparent);
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    transition: color .3s var(--ease-out-expo);
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute; left: 14px; right: 14px; bottom: 8px; height: 1px;
+    background: var(--color-brand-blue);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .5s var(--ease-out-expo);
+  }
+  .nav-link:hover, .nav-link.is-active { color: var(--color-ink); }
+  .nav-link:hover::after, .nav-link.is-active::after { transform: scaleX(1); }
+
+  .site-header.is-scrolled,
+  .site-header.menu-open {
+    background: rgb(18 16 9 / .82);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border-bottom-color: color-mix(in oklab, var(--color-ink) 10%, transparent);
+  }
+
+  .dropdown { opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity .35s var(--ease-out-expo), transform .35s var(--ease-out-expo), visibility .35s; }
+  [data-dropdown].is-open .dropdown { opacity: 1; visibility: visible; transform: none; }
+  [data-dropdown].is-open button svg { transform: rotate(180deg); }
+  @media (hover: hover) {
+    [data-dropdown]:hover .dropdown { opacity: 1; visibility: visible; transform: none; }
+    [data-dropdown]:hover button svg { transform: rotate(180deg); }
+  }
+
+  .mobile-menu { opacity: 0; visibility: hidden; clip-path: inset(0 0 100% 0); transition: clip-path .7s var(--ease-in-out-quart), opacity .3s, visibility .7s; }
+  .site-header.menu-open .mobile-menu { opacity: 1; visibility: visible; clip-path: inset(0 0 0 0); }
+  .mm-item { opacity: 0; transform: translateY(16px); transition: opacity .6s var(--ease-out-expo), transform .6s var(--ease-out-expo); }
+  .site-header.menu-open .mm-item { opacity: 1; transform: none; }
+  .site-header.menu-open .mm-item:nth-child(1) { transition-delay: .15s; }
+  .site-header.menu-open .mm-item:nth-child(2) { transition-delay: .2s; }
+  .site-header.menu-open .mm-item:nth-child(3) { transition-delay: .25s; }
+  .site-header.menu-open .mm-item:nth-child(4) { transition-delay: .3s; }
+  .site-header.menu-open .mm-item:nth-child(5) { transition-delay: .35s; }
+  .site-header.menu-open .mm-item:nth-child(6) { transition-delay: .4s; }
+  .site-header.menu-open .mm-item:nth-child(7) { transition-delay: .45s; }
+  .site-header.menu-open .menu-toggle .bar:first-child { transform: translateY(5.5px) rotate(45deg); }
+  .site-header.menu-open .menu-toggle .bar:last-child { transform: translateY(-5.5px) rotate(-45deg); }
+</style>
