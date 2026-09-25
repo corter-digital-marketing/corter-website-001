@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import CourseCard from '../components/CourseCard.astro';
+import IndexRow from '../components/IndexRow.astro';
+
+const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b.data.order);
+const open = courses.filter((c) => c.data.status === 'waitlist').length;
+---
+<BaseLayout
+  title="Courses | Corter Digital"
+  description="Learn the social media system behind 10M+ views and 60K+ followers. The Social Media Growth Playbook, self-paced. Join the waitlist."
+>
+  <PageHero
+    meta={['Courses', 'Do it yourself', `${courses.length} product${courses.length === 1 ? '' : 's'}`, open ? 'Waitlist open' : 'Enrolling']}
+    title="The playbook behind 10M+ views. Yours to run."
+    lead="Everything we do for clients on social media, broken into lessons you work through at your own pace."
+  />
+
+  <!-- 01 Products -->
+  <Section n="01" name="Products" meta={`${courses.length} listed`}>
+    <div class="frame">
+      {courses.map((c) => <CourseCard course={c} />)}
+    </div>
+  </Section>
+
+  <!-- 02 How it works: rows -->
+  <Section n="02" name="How enrollment works" meta="3 steps">
+    <div class="frame">
+      <IndexRow n="01" title="Join the waitlist" text="Leave your email on the course above. That's it." meta="Today" />
+      <IndexRow n="02" title="Get the email" text="We email you when enrollment opens, with the price and the link." meta="At launch" />
+      <IndexRow n="03" title="Work through it" text="Self-paced. Start when you want, go as fast or slow as your week allows." meta="Your pace" />
+    </div>
+  </Section>
+
+  <!-- 03 Or hand it over: statement + two links -->
+  <section class="band marks" aria-labelledby="dfy-title">
+    <div class="frame grid-12 py-section">
+      <p class="label num cell col-span-4 mb-8 lg:col-span-2 lg:mb-0">03</p>
+      <div class="cell col-span-4 lg:col-span-7 lg:col-start-4">
+        <h2 id="dfy-title" class="text-heading">Don't have time to run it yourself? We'll run it for you.</h2>
+        <p class="mt-10 flex flex-col gap-4 sm:flex-row sm:gap-10">
+          <a href="/social-media" class="label !text-ink"><span class="u-link">Social media plans</span> <span class="arrow" aria-hidden="true">→</span></a>
+          <a href="/websites" class="label !text-ink"><span class="u-link">Websites</span> <span class="arrow" aria-hidden="true">→</span></a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
