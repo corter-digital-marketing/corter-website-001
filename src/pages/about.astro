@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import MediaSlot from '../components/MediaSlot.astro';
+import IndexRow from '../components/IndexRow.astro';
+import Stat from '../components/Stat.astro';
+import Closing from '../components/Closing.astro';
+---
+<BaseLayout
+  title="About | Corter Digital"
+  description="Corter Digital builds websites, runs social media and teaches the playbook. Everything is designed, built and maintained in-house. Est. 2025."
+>
+  <PageHero
+    meta={['About', 'Est. 2025', 'In-house', 'Corter Digital']}
+    title="We build it, post it, and keep it running."
+    lead="Corter Digital designs, builds and runs marketing for businesses that want their phone to ring more. Nothing is handed off."
+  />
+
+  <!-- 01 Founder: media split -->
+  <Section n="01" name="Founder">
+    <div class="frame grid-12">
+      <div class="col-span-4 lg:col-span-5 lg:border-r lg:border-line">
+        <!-- Replace with a real photo: import it and pass image={photo} alt="[Name], founder of Corter Digital" -->
+        <MediaSlot need="Founder portrait, 4:5, natural light" id="Photo 01" aspect="aspect-[4/5]" sizes="(min-width: 1024px) 40vw, 100vw" />
+      </div>
+      <div class="cell col-span-4 flex flex-col py-10 lg:col-span-6 lg:col-start-7 lg:py-14">
+        <p class="label">[Founder name] — Founder</p>
+        <div class="slot mt-8 p-[var(--pad)]">
+          <p class="label mb-4">To supply</p>
+          <p class="muted">[Three or four sentences in your own words. How you got into this. The first result you were proud of. Why you do the work yourself instead of handing it off.]</p>
+        </div>
+        <p class="mt-auto pt-12 text-heading">We only count results that show up in your inbox or on your phone.</p>
+        <p class="label mt-4">How we measure</p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- 02 Story: statement alone -->
+  <section class="band marks" aria-labelledby="story-title">
+    <div class="frame grid-12 py-section lg:py-48">
+      <h2 id="story-title" class="label num cell col-span-4 mb-8 lg:col-span-2 lg:mb-0">02 — Why</h2>
+      <div class="cell col-span-4 lg:col-span-7 lg:col-start-4">
+        <p class="text-heading">Plenty of good businesses are invisible online. Great work, happy customers, and a website nobody finds.</p>
+        <p class="muted mt-10 max-w-[52ch]">Corter Digital exists to fix that, with one rule: marketing is judged by whether it brings in customers. So one team designs the site, builds it, hosts it and keeps it running, and the same team plans, films and posts the content.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 How we're different: rows -->
+  <Section n="03" name="How we're different" meta="4 rules">
+    <div class="frame">
+      <IndexRow n="01" title="We do the work" text="Design, build, hosting, content. All in-house. The person on the call is the person doing it." meta="No handoffs" />
+      <IndexRow n="02" title="Straight talk" text="What will work, what it costs, what it won't do. If we're not the right fit, we'll say so." meta="No pitch" />
+      <IndexRow n="03" title="Results over reach" text="Views and followers are a means. We measure calls, bookings and customers." meta="Outcomes" />
+      <IndexRow n="04" title="We stay" text="Care plans and monthly social plans keep the work running long after launch day." meta="Ongoing" />
+    </div>
+  </Section>
+
+  <!-- 04 Record: data row -->
+  <Section n="04" name="Record" meta="All platforms, combined">
+    <div class="frame grid-12">
+      <Stat value={10} suffix="M+" label="Views" note="Generated" class="col-span-2 lg:col-span-4" />
+      <Stat value={60} suffix="K+" label="Followers" note="Gained" class="col-span-2 lg:col-span-4" />
+      <Stat value={3} count={false} label="Services" note="Websites · Social · Courses" class="col-span-4 border-t border-line lg:border-t-0" />
+    </div>
+  </Section>
+
+  <Closing n="05" title="Talk to the people who'd do the work." />
+</BaseLayout>
