@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import Closing from '../components/Closing.astro';
+
+const studies = (await getCollection('case-studies')).sort((a, b) => a.data.order - b.data.order);
+const count = (s: string) => studies.filter((x) => x.data.service === s).length;
+const filters = [
+  { key: 'all', label: 'All', n: studies.length },
+  { key: 'websites', label: 'Websites', n: count('websites') },
+  { key: 'social-media', label: 'Social Media', n: count('social-media') },
+];
+---
+<BaseLayout
+  title="Work | Corter Digital"
+  description="Websites and social media campaigns by Corter Digital, titled by what they did: 250K views in 30 days, online stores, booking sites."
+>
+  <PageHero
+    meta={['Work', `${studies.length} projects`, 'Websites · Social', 'Index 03']}
+    title="Titled by what happened, not who paid."
+    lead="Every project below is named for its outcome. Where we don't have the number yet, the slot says so."
+  />
+
+  <section class="band" aria-labelledby="work-title">
+    <h2 id="work-title" class="sr-only">Projects</h2>
+
+    <!-- Filter bar -->
+    <div class="frame grid-12 border-b border-line" role="group" aria-label="Filter projects" data-filter-bar="case-grid" data-filter-status="filter-status">
+      {filters.map((f, i) => (
+        <button
+          type="button"
+          class:list={['filter cell col-span-4 flex items-baseline justify-between border-line py-4 text-left lg:col-span-3', i > 0 && 'border-t lg:border-t-0']}
+          data-filter={f.key}
+          aria-pressed={i === 0 ? 'true' : 'false'}
+        >
+          <span class="label">{f.label}</span>
+          <span class="label num" data-count-label>{String(f.n).padStart(2, '0')}</span>
+        </button>
+      ))}
+    </div>
+    <p id="filter-status" class="sr-only" role="status"></p>
+
+    <div class="frame grid-12" id="case-grid">
+      {studies.map((s, i) => (
+        <CaseStudyCard study={s} n={String(i + 1).padStart(2, '0')} class="col-span-4 lg:col-span-6 lg:border-r lg:border-line" />
+      ))}
+      <div class="cell col-span-4 flex flex-col justify-end border-b border-line py-12 lg:col-span-6">
+        <p class="label">Next project</p>
+        <p class="mt-5 max-w-[22ch] text-heading">Yours, if the numbers make sense.</p>
+        <p class="mt-8"><a href="/contact" class="label !text-ink"><span class="u-link">Start a project</span> <span class="arrow" aria-hidden="true">→</span></a></p>
+      </div>
+    </div>
+  </section>
+
+  <Closing n="02" title="Add your business to this page." cta="Start a project" />
+</BaseLayout>
+
+<style>
+  .filter { color: rgb(243 239 232 / .6); transition: color .4s var(--ease-precise); position: relative; }
+  .filter:hover { color: var(--color-ink); }
+  .filter[aria-pressed="true"] .label { color: var(--color-ink); }
+  /* Active filter: a 1px brand-blue rule under the cell */
+  .filter[aria-pressed="true"]::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--color-brand-blue);
+  }
+</style>
