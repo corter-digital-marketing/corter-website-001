@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Section from '../../components/Section.astro';
+import IndexRow from '../../components/IndexRow.astro';
+
+const articles = (await getCollection('articles')).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout
+  title="Learn | Corter Digital"
+  description="Plain answers on websites and social media from the team behind 10M+ views: why sites don't get calls, how often to post, template vs custom."
+>
+  <PageHero
+    meta={['Learn', `${articles.length} guides`, 'Websites · Social', 'Free']}
+    title="What we'd tell you over coffee."
+    lead="Short, specific guides on websites and social media. No email required."
+  />
+
+  <Section n="01" name="Guides" meta={`${articles.length} entries`}>
+    <div class="frame">
+      {articles.map((a, i) => (
+        <IndexRow
+          n={`No. ${String(i + 1).padStart(2, '0')}`}
+          title={a.data.title}
+          text={a.data.description}
+          meta={`${a.data.topic} · ${a.data.readingTime} read`}
+          href={`/learn/${a.id}`}
+        />
+      ))}
+    </div>
+  </Section>
+
+  <section class="band marks" aria-labelledby="course-cta">
+    <div class="frame grid-12 py-section">
+      <p class="label num cell col-span-4 mb-8 lg:col-span-2 lg:mb-0">02</p>
+      <div class="cell col-span-4 lg:col-span-7 lg:col-start-4">
+        <h2 id="course-cta" class="text-heading">Want the whole system, not just the notes? The Social Media Growth Playbook is on the waitlist.</h2>
+        <p class="mt-10"><a href="/courses" class="label !text-ink"><span class="u-link">See the course</span> <span class="arrow" aria-hidden="true">→</span></a></p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

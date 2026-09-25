@@ -66,8 +66,6 @@ const articles = defineCollection({
     description: z.string(),
     topic: z.enum(['Websites', 'Social Media', 'Growth']),
     readingTime: z.string(),
-    /** Short word shown on the article card art */
-    cardWord: z.string(),
     order: z.number().default(100),
   }),
 });
