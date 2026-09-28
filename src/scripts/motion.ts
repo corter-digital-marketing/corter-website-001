@@ -1,9 +1,8 @@
 /**
- * Motion. Only four moments animate (see CLAUDE.md):
+ * Motion. Only three moments animate (see CLAUDE.md):
  *   1. [data-split]       hero headline, line by line, on load
- *   2. .grid-lines        column hairlines draw in, first page load of the visit only
- *   3. [data-reveal-img]  media clip reveal when scrolled into view
- *   4. [data-count]       stat counters
+ *   2. [data-reveal-img]  media clip reveal when scrolled into view
+ *   3. [data-count]       stat counters
  * Plus Lenis smooth scrolling. Nothing runs under prefers-reduced-motion.
  */
 import gsap from 'gsap';
@@ -42,17 +41,6 @@ function stopLenis() {
 
 function animatePage() {
   ctx = gsap.context(() => {
-    const root = document.documentElement;
-
-    /* 2. Gridlines draw in, once per visit */
-    if (root.classList.contains('first-load')) {
-      gsap.to('.grid-lines > i', {
-        scaleY: 1, duration: 1.6, ease: 'precise', stagger: 0.04,
-        onComplete: () => root.classList.remove('first-load'),
-      });
-      try { sessionStorage.setItem('cd-seen', '1'); } catch { /* storage blocked */ }
-    }
-
     /* 1. Hero headline, line by line */
     document.querySelectorAll<HTMLElement>('[data-split]').forEach((el) => {
       SplitText.create(el, {
@@ -66,7 +54,7 @@ function animatePage() {
       });
     });
 
-    /* 3. Media clip reveal */
+    /* 2. Media clip reveal */
     gsap.utils.toArray<HTMLElement>('[data-reveal-img]').forEach((el) => {
       gsap.fromTo(el, { clipPath: 'inset(0% 0% 100% 0%)' }, {
         clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4, ease: 'precise',
@@ -74,7 +62,7 @@ function animatePage() {
       });
     });
 
-    /* 4. Counters */
+    /* 3. Counters */
     gsap.utils.toArray<HTMLElement>('[data-count]').forEach((el) => {
       const target = parseFloat(el.dataset.count || '0');
       const prefix = el.dataset.prefix || '';

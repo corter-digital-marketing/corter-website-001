@@ -124,24 +124,6 @@
   /* Full-bleed horizontal rule between sections */
   .band { position: relative; border-top: 1px solid var(--color-line); }
 
-  /* Column hairlines running the full height of the page (body is the containing block) */
-  .grid-lines {
-    position: absolute;
-    inset-block: 0;
-    left: 50%;
-    width: var(--frame-w);
-    transform: translateX(-50%);
-    display: grid;
-    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
-    pointer-events: none;
-    z-index: 0;
-  }
-  .grid-lines > i { border-left: 1px solid var(--color-line); transform-origin: top; }
-  .grid-lines > i:last-child { border-right: 1px solid var(--color-line); }
-  @media (max-width: 1023px) {
-    .grid-lines > i:nth-child(n + 5) { display: none; }
-    .grid-lines > i:nth-child(4) { border-right: 1px solid var(--color-line); }
-  }
 
   /* "+" registration marks where a band meets the frame edges (use sparingly) */
   .marks::before, .marks::after {
@@ -280,12 +262,11 @@
 
 /* ==========================================================================
    Motion initial states. Only when motion is allowed (html.motion).
-   Only four things animate: hero headline, gridlines on first load,
-   image clip reveals, stat counters.
+   Only three things animate: hero headline, image clip reveals,
+   stat counters.
    ========================================================================== */
 html.motion [data-split] { visibility: hidden; }
 html.motion [data-reveal-img] { clip-path: inset(0 0 100% 0); }
-html.motion.first-load .grid-lines > i { transform: scaleY(0); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

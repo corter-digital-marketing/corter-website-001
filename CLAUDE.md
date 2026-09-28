@@ -14,7 +14,7 @@ Target feel: a minimal, precise, expensive technical company (Anduril, Vercel, L
 
 ## Grid (the structure everything hangs on)
 - One 12-column frame, max 1440px, outer margin `--margin`. **4 columns below 1024px.**
-- Columns have no gutters. 1px hairlines sit on every column boundary (`.grid-lines` in BaseLayout, absolute over the full page height, behind content).
+- Columns have no gutters. **No vertical column lines** (the owner asked for them to be removed); structure comes from horizontal hairlines and alignment. Vertical rules appear only as explicit cell borders where two cells meet (e.g. case study grid).
 - Content is inset from its gridline by `--pad` (`.cell`). Text starts at a line + pad, always.
 - Sections are full-bleed bands separated by a 1px top rule (`.band`). Sections share borders; nothing floats as a separate card with gaps.
 - Use `.grid-12` with Tailwind `col-span-*` / `lg:col-span-*` / `lg:col-start-*`. Mobile spans are out of 4.
@@ -52,11 +52,10 @@ Tokens in `src/styles/global.css` `@theme`. Brand colors come from the original 
 - Corners: sharp, `rounded-sm` (2px) max.
 
 ## Motion
-Only four things animate (`src/scripts/motion.ts`), all disabled under `prefers-reduced-motion`:
+Only three things animate (`src/scripts/motion.ts`), all disabled under `prefers-reduced-motion`:
 1. `data-split` — the page's hero headline, line by line on load
-2. `.grid-lines` — hairlines draw in on the first page load of a visit
-3. `data-reveal-img` — media clip reveal on scroll
-4. `data-count` — stat counters
+2. `data-reveal-img` — media clip reveal on scroll
+3. `data-count` — stat counters
 Easing: `--ease-precise` `cubic-bezier(.7,0,.2,1)` / GSAP `precise`, and `settle` for outs. No bounce, no overshoot, no pulsing.
 Hover: underline draws in (`.u-link`), arrow shifts 3px (`.arrow`), media scales 2% (`.media`). Nothing else.
 

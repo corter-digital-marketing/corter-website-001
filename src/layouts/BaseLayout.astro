@@ -42,7 +42,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         var el = document.documentElement;
         el.classList.add('js');
         if (motion) el.classList.add('motion');
-        try { if (motion && !sessionStorage.getItem('cd-seen')) el.classList.add('first-load'); } catch (e) {}
         document.addEventListener('astro:before-swap', function (e) {
           e.newDocument.documentElement.classList.add('js');
           if (motion) e.newDocument.documentElement.classList.add('motion');
@@ -54,11 +53,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   </head>
   <body>
     <a href="#main" class="sr-only z-[100] bg-ink px-4 py-3 font-mono text-label uppercase text-base focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to content</a>
-
-    <!-- 12-column hairline grid (4 on mobile) -->
-    <div class="grid-lines" aria-hidden="true">
-      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-    </div>
 
     <Nav />
     <main id="main" class="relative z-[1]">
