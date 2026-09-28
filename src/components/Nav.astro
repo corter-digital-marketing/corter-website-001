@@ -4,7 +4,7 @@ import logo from '../assets/logo-mark.png';
 
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const is = (href: string) => path === href || path.startsWith(href + '/');
-const inServices = is('/websites') || is('/social-media');
+const inServices = is('/websites') || is('/social-media') || is('/seo');
 
 const links = [
   { href: '/portfolio', label: 'Work' },
@@ -15,6 +15,7 @@ const links = [
 const services = [
   { href: '/websites', label: 'Websites', meta: 'From $200' },
   { href: '/social-media', label: 'Social Media', meta: 'From $500/mo' },
+  { href: '/seo', label: 'SEO', meta: 'Google · AI' },
 ];
 const mobileLinks = [...services, ...links.map((l) => ({ ...l, meta: '' })), { href: '/contact', label: 'Contact', meta: '' }];
 ---

@@ -1,6 +1,10 @@
 # Corter Digital website
 
-Marketing agency site. Offers: **websites** and **social media** (done for you), plus **courses and digital products** (do it yourself).
+Marketing agency site. Offers three done-for-you services, each with exactly two options, plus courses (do it yourself):
+- **Websites**: Template build · Custom build (+ monthly care plans)
+- **Social Media**: Management · Content creation
+- **SEO**: The Basics (Google and Bing) · AI Fundamentals (ChatGPT, Claude, Gemini)
+- **Courses**: Social Media Growth Playbook (waitlist). On the homepage, Courses comes before "What We Offer".
 
 Target feel: a minimal, precise, expensive technical company (Anduril, Vercel, Linear, Palantir). It must not look AI-generated or templated.
 
@@ -10,6 +14,8 @@ Target feel: a minimal, precise, expensive technical company (Anduril, Vercel, L
 - Banned words: elevate, unlock, seamless, supercharge, empower, cutting-edge, game-changing, journey, leverage, "next level", "built right".
 - Case studies are titled by outcome, not client.
 - Never invent results, testimonials, prices, timelines, guarantees, team size or founder facts. Missing content = a visible `.slot` placeholder.
+- Stat rows show only **10M+ total views** and **60K+ followers** (owner's request: no 250K in stat rows; it stays only inside the Finding Treasures case study).
+- SEO prices aren't set yet: render them with `pricePending` (a visible `[Price]` slot) until the owner supplies them.
 - Real facts: 10M+ views and 60K+ followers gained (all platforms combined), 250K+ Facebook views in 30 days for Finding Treasures 4 U, prices on /websites and /social-media, phone (570) 502-4036, email andrewcsmma@gmail.com, "No pitch. Just a straight conversation."
 
 ## Grid (the structure everything hangs on)
@@ -60,7 +66,7 @@ Easing: `--ease-precise` `cubic-bezier(.7,0,.2,1)` / GSAP `precise`, and `settle
 Hover: underline draws in (`.u-link`), arrow shifts 3px (`.arrow`), media scales 2% (`.media`). Nothing else.
 
 ## Banned patterns (the audit list)
-Gradient text · glowing blobs/orbs · radial color washes · glassmorphism/backdrop blur · pill badges with emoji/sparkles · pulsing/bouncing dots · rows of identical icon cards · icon-in-rounded-square · decorative dot/grid/stripe backgrounds not aligned to the real grid · corner-tick ornaments · filler illustrations (fake browsers, phones, rising charts) · "Fig. 01" captions on fake art · bright-line/dim-line headline trick · every section using label → headline → subhead → cards · uniform large radii · drop shadows · cards with border + shadow + background · fade-up on every element · generic icons as decoration · more than 5 sizes or 2 weights · buzzword copy.
+Gradient text · glowing blobs/orbs · radial color washes · glassmorphism/backdrop blur · pill badges with emoji/sparkles · pulsing/bouncing dots · rows of identical icon cards · icon-in-rounded-square · decorative dot/grid/stripe backgrounds not aligned to the real grid · corner-tick ornaments · filler illustrations (fake browsers, phones, rising charts) · "Fig. 01" captions on fake art · bright-line/dim-line headline trick · every section using label → headline → subhead → cards · uniform large radii · drop shadows · cards with border + shadow + background · fade-up on every element · generic icons as decoration (exception: monochrome platform marks in `BrandMarks` on /seo, showing where clients get found) · more than 5 sizes or 2 weights · buzzword copy.
 
 ## Tech stack
 - Astro 7 (static), `<ClientRouter />` view transitions, Tailwind CSS 4 (`@tailwindcss/vite`), GSAP 3 (ScrollTrigger, SplitText, CustomEase), Lenis
@@ -71,7 +77,7 @@ Gradient text · glowing blobs/orbs · radial color washes · glassmorphism/back
 - Deploy: Netlify (`netlify.toml`: build, 301s from old `.html` URLs, caching)
 
 ## Components (`src/components`)
-`Section`, `Index`, `PageHero`, `HeroMedia`, `MediaSlot`, `Stat`, `IndexRow`, `Accordion`/`AccordionItem`, `PricingTable`, `CaseStudyCard`, `CourseCard`, `Testimonial`, `Closing`, `ContactForm`, `WaitlistForm`, `Button`, `Nav`, `Footer`. Reuse before writing new markup.
+`Section`, `Index`, `PageHero`, `BrandMarks`, `HeroMedia`, `MediaSlot`, `Stat`, `IndexRow`, `Accordion`/`AccordionItem`, `PricingTable`, `CaseStudyCard`, `CourseCard`, `Testimonial`, `Closing`, `ContactForm`, `WaitlistForm`, `Button`, `Nav`, `Footer`. Reuse before writing new markup.
 
 ## Verification (every page)
 `npm run build` with zero errors; all internal links and anchors resolve; unique title + description; one `h1`; screenshots at 375 / 768 / 1440 reviewed against the banned-patterns list; Lighthouse mobile ≥ 90.

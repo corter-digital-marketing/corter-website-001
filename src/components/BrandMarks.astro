@@ -1,0 +1,39 @@
+---
+/**
+ * Platform marks (search engines / AI assistants), monochrome, each in a
+ * grid cell with its name. Used only to show where clients get found —
+ * not as decoration. Logos: LobeHub icons (MIT). Trademarks belong to their owners.
+ */
+import chatgpt from '../assets/logos/chatgpt.svg?raw';
+import claude from '../assets/logos/claude.svg?raw';
+import gemini from '../assets/logos/gemini.svg?raw';
+import google from '../assets/logos/google.svg?raw';
+import bing from '../assets/logos/bing.svg?raw';
+
+const all = {
+  google: { name: 'Google', svg: google },
+  bing: { name: 'Bing', svg: bing },
+  chatgpt: { name: 'ChatGPT', svg: chatgpt },
+  claude: { name: 'Claude', svg: claude },
+  gemini: { name: 'Gemini', svg: gemini },
+};
+type Key = keyof typeof all;
+
+interface Props {
+  items: Key[];
+  class?: string;
+}
+const { items, class: cls = '' } = Astro.props;
+
+// Size the SVG with CSS instead of its inline 1em attributes
+const clean = (s: string) =>
+  s.replace(/\s(width|height|style)="[^"]*"/g, '').replace('<svg', '<svg class="h-7 w-7 lg:h-8 lg:w-8" aria-hidden="true" focusable="false"');
+---
+<ul class:list={['grid border-t border-line', cls]} style={`grid-template-columns: repeat(${items.length}, minmax(0, 1fr));`}>
+  {items.map((k, i) => (
+    <li class:list={['cell flex flex-col gap-6 border-b border-line py-8', i > 0 && 'border-l']}>
+      <span class="text-ink" set:html={clean(all[k].svg)} />
+      <span class="label !text-ink">{all[k].name}</span>
+    </li>
+  ))}
+</ul>

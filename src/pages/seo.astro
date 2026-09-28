@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import Button from '../components/Button.astro';
+import BrandMarks from '../components/BrandMarks.astro';
+import PricingTable from '../components/PricingTable.astro';
+import Accordion from '../components/Accordion.astro';
+import AccordionItem from '../components/AccordionItem.astro';
+import Closing from '../components/Closing.astro';
+---
+<BaseLayout
+  title="SEO | Corter Digital"
+  description="Get found on Google and Bing, and in answers from ChatGPT, Claude and Gemini. Two options: The Basics and AI Fundamentals."
+>
+  <PageHero
+    meta={['03 — SEO', 'Done for you', 'Google · Bing', 'AI search']}
+    title="Get found on Google, Bing, and in AI answers."
+    lead="Two options. The search basics every business needs, and the groundwork for showing up when customers ask ChatGPT, Claude or Gemini."
+  >
+    <Button href="/contact">Get found</Button>
+    <Button href="#options" variant="secondary">See the options</Button>
+  </PageHero>
+
+  <!-- 01 Where you show up: two-option split with platform marks -->
+  <Section n="01" name="Where you show up" meta="2 options · 5 platforms">
+    <div class="frame grid-12">
+      <div class="col-span-4 lg:col-span-5 lg:border-r lg:border-line">
+        <div class="cell pb-8 pt-10 lg:pt-14">
+          <p class="label">Option 01</p>
+          <h3 class="mt-5 text-heading">The Basics</h3>
+          <p class="muted mt-4 max-w-[36ch]">Show up when people search for what you do on Google and Bing.</p>
+        </div>
+        <BrandMarks items={['google', 'bing']} />
+      </div>
+      <div class="col-span-4 border-t border-line lg:col-span-7 lg:border-t-0">
+        <div class="cell pb-8 pt-10 lg:pt-14">
+          <p class="label">Option 02</p>
+          <h3 class="mt-5 text-heading">AI Fundamentals</h3>
+          <p class="muted mt-4 max-w-[44ch]">Get recommended when people ask an AI assistant instead of searching.</p>
+        </div>
+        <BrandMarks items={['chatgpt', 'claude', 'gemini']} />
+      </div>
+    </div>
+    <div class="frame grid-12">
+      <p class="label cell col-span-4 py-4 lg:col-span-12">Logos are trademarks of their owners. Corter Digital isn't affiliated with Google, Microsoft, OpenAI, Anthropic or Google DeepMind.</p>
+    </div>
+  </Section>
+
+  <!-- 02 Options: spec table -->
+  <Section n="02" name="Options" meta="2 options" id="options" marks>
+    <div class="frame py-12 lg:py-20">
+      <PricingTable
+        title="SEO"
+        caption="Choose one or both"
+        plans={[
+          {
+            name: 'The Basics', note: 'Google and Bing', price: '', pricePending: true,
+            features: [
+              'Google Business Profile set up and completed',
+              'Google Search Console and Bing Webmaster Tools',
+              'Sitemap submitted to Google and Bing',
+              'Clear titles and descriptions on every page',
+            ],
+            cta: 'Get started',
+          },
+          {
+            name: 'AI Fundamentals', note: 'ChatGPT, Claude, Gemini', price: '', pricePending: true,
+            features: [
+              'Structured data so AI tools can read your business details',
+              'The same name, address and hours everywhere online',
+              'Pages that answer the questions customers ask AI',
+              'Your site open to AI crawlers',
+            ],
+            cta: 'Get started',
+          },
+        ]}
+      />
+    </div>
+  </Section>
+
+  <!-- 03 Statement alone -->
+  <section class="band" aria-labelledby="shift-title">
+    <div class="frame grid-12 py-section lg:py-48">
+      <p class="label num cell col-span-4 mb-8 lg:col-span-2 lg:mb-0">03</p>
+      <div class="cell col-span-4 lg:col-span-7 lg:col-start-4">
+        <h2 id="shift-title" class="text-heading">More people now ask an AI what to buy and who to call. If it can't read your business, it can't recommend you.</h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 Process: columns -->
+  <Section n="04" name="Process" meta="3 steps">
+    <ol class="frame grid-12">
+      {[
+        ['Check', 'We look at how you show up today on Google, Bing, and in AI answers.'],
+        ['Fix', 'We set up your listings, fix your pages, and add what search engines and AI tools need to read.'],
+        ['Confirm', 'We check that your business appears correctly, and show you where.'],
+      ].map(([t, d], i) => (
+        <li class:list={['cell col-span-4 py-10 lg:py-14', i > 0 && 'border-t border-line lg:border-t-0']}>
+          <p class="label num">Step {String(i + 1).padStart(2, '0')}</p>
+          <h3 class="mt-12 text-heading lg:mt-24">{t}</h3>
+          <p class="muted mt-4 max-w-[34ch]">{d}</p>
+        </li>
+      ))}
+    </ol>
+  </Section>
+
+  <!-- 05 FAQ: split -->
+  <Section n="05" name="Questions" meta="4 answers">
+    <div class="frame grid-12 py-12 lg:py-20">
+      <p class="cell col-span-4 text-heading lg:col-span-4">Straight answers.</p>
+      <div class="col-span-4 mt-10 lg:col-span-8 lg:mt-0">
+        <Accordion>
+          <AccordionItem n="01" title="What's the difference between the two?">The Basics gets you found in search results on Google and Bing. AI Fundamentals gets your business understood and recommended by assistants like ChatGPT, Claude and Gemini. Most businesses need the Basics first.</AccordionItem>
+          <AccordionItem n="02" title="Can you guarantee a #1 ranking?">No, and nobody honest can. Search engines and AI tools decide what to show. We make sure they can find, read and trust your business.</AccordionItem>
+          <AccordionItem n="03" title="Do I need a new website?">Not always. We work with the site you have. If it's holding you back, we'll tell you, and we can build a new one.</AccordionItem>
+          <AccordionItem n="04" title="Does this work with your other services?">Yes. It pairs with a website build or care plan, and with social media, since active profiles help you get found.</AccordionItem>
+        </Accordion>
+      </div>
+    </div>
+  </Section>
+
+  <Closing n="06" title="Get found where people are looking." cta="Get found" />
+</BaseLayout>

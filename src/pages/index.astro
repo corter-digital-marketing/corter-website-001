@@ -24,7 +24,7 @@ const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b
     <div class="frame grid-12 relative border-b border-line">
       <p class="label cell col-span-2 py-4 lg:col-span-3">Corter Digital</p>
       <p class="label cell col-span-2 py-4 text-right lg:col-span-3 lg:text-left">Est. 2025</p>
-      <p class="label cell hidden py-4 lg:col-span-3 lg:block">Websites · Social · Courses</p>
+      <p class="label cell hidden py-4 lg:col-span-3 lg:block">Websites · Social · SEO</p>
       <p class="label num cell hidden py-4 text-right lg:col-span-3 lg:block">Index 00</p>
     </div>
 
@@ -49,31 +49,41 @@ const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b
       <h2 id="record-title" class="cell col-span-4 lg:col-span-12"><Index n="01" meta="All platforms, combined">Record</Index></h2>
     </div>
     <div class="frame grid-12">
-      <Stat value={10} suffix="M+" label="Views" note="Generated" class="col-span-2 lg:col-span-4" />
-      <Stat value={60} suffix="K+" label="Followers" note="Gained" class="col-span-2 lg:col-span-4" />
-      <Stat value={250} suffix="K+" label="Views in 30 days" note="One client · Facebook" class="col-span-4 border-t border-line lg:border-t-0" />
+      <Stat value={10} suffix="M+" label="Total views" note="Generated" class="col-span-2 lg:col-span-6" />
+      <Stat value={60} suffix="K+" label="Followers" note="Gained" class="col-span-2 lg:col-span-6" />
     </div>
   </section>
 
 
-  <!-- ═══ 02 SERVICES: index list ═══ -->
+  <!-- ═══ 02 COURSES: media split ═══ -->
+  <section class="band" aria-labelledby="courses-title">
+    <div class="frame grid-12 border-b border-line py-4">
+      <h2 id="courses-title" class="cell col-span-4 lg:col-span-12"><Index n="02" meta="Waitlist open">Courses</Index></h2>
+    </div>
+    <div class="frame">
+      {courses[0] && <CourseCard course={courses[0]} compact />}
+    </div>
+  </section>
+
+
+  <!-- ═══ 03 WHAT WE OFFER: index list ═══ -->
   <section class="band py-section" aria-labelledby="services-title">
     <div class="frame grid-12 mb-12 lg:mb-20">
-      <div class="cell col-span-4 lg:col-span-3"><Index n="02">Services</Index></div>
-      <h2 id="services-title" class="cell col-span-4 mt-6 text-heading lg:col-span-6 lg:mt-0">Hand it to us, or run it yourself.</h2>
+      <div class="cell col-span-4 lg:col-span-3"><Index n="03">Services</Index></div>
+      <h2 id="services-title" class="cell col-span-4 mt-6 text-heading lg:col-span-6 lg:mt-0">What We Offer</h2>
     </div>
     <div class="frame border-t border-line">
-      <IndexRow n="01" title="Websites" text="Template builds from $200. Custom builds quoted. Hosting and care from $99 a month." meta="Done for you" href="/websites" />
-      <IndexRow n="02" title="Social Media" text="Content created and posted on three platforms, twice a week up to daily. From $500 a month." meta="Done for you" href="/social-media" />
-      <IndexRow n="03" title="Courses" text="The Social Media Growth Playbook: the system behind 10M+ views, taught step by step." meta="Do it yourself" href="/courses" />
+      <IndexRow n="01" title="Websites" text="Template builds from $200, or a custom build quoted for your business. Hosting and care from $99 a month." meta="Template build · Custom build" href="/websites" />
+      <IndexRow n="02" title="Social Media" text="We run your pages on three platforms from $500 a month, or shoot and edit the content for you to post." meta="Management · Content creation" href="/social-media" />
+      <IndexRow n="03" title="SEO" text="Get found on Google and Bing, and in answers from ChatGPT, Claude and Gemini." meta="The Basics · AI Fundamentals" href="/seo" />
     </div>
   </section>
 
 
-  <!-- ═══ 03 PROCESS: three columns ═══ -->
+  <!-- ═══ 04 PROCESS: three columns ═══ -->
   <section class="band" aria-labelledby="process-title">
     <div class="frame grid-12 border-b border-line py-4">
-      <h2 id="process-title" class="cell col-span-4 lg:col-span-12"><Index n="03" meta="3 steps">Process</Index></h2>
+      <h2 id="process-title" class="cell col-span-4 lg:col-span-12"><Index n="04" meta="3 steps">Process</Index></h2>
     </div>
     <ol class="frame grid-12">
       {[
@@ -91,10 +101,10 @@ const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b
   </section>
 
 
-  <!-- ═══ 04 STATEMENT: alone in open space ═══ -->
+  <!-- ═══ 05 STATEMENT: alone in open space ═══ -->
   <section class="band marks" aria-label="How we work">
     <div class="frame grid-12 py-section lg:py-56">
-      <p class="label num cell col-span-4 mb-8 lg:col-span-2 lg:mb-0">04</p>
+      <p class="label num cell col-span-4 mb-8 lg:col-span-2 lg:mb-0">05</p>
       <p class="cell col-span-4 text-heading lg:col-span-7 lg:col-start-4">
         One team builds the site, films and posts the content, and keeps both running. You deal with one phone number: <span class="num">(570) 502-4036</span>.
       </p>
@@ -102,10 +112,10 @@ const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b
   </section>
 
 
-  <!-- ═══ 05 WORK: feature split + rows ═══ -->
+  <!-- ═══ 06 WORK: feature split + rows ═══ -->
   <section class="band" aria-labelledby="work-title">
     <div class="frame grid-12 border-b border-line py-4">
-      <h2 id="work-title" class="cell col-span-4 lg:col-span-12"><Index n="05" meta={`${studies.length} projects`}>Selected work</Index></h2>
+      <h2 id="work-title" class="cell col-span-4 lg:col-span-12"><Index n="06" meta={`${studies.length} projects`}>Selected work</Index></h2>
     </div>
 
     {featured && (
@@ -132,17 +142,6 @@ const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b
     </div>
     <div class="frame grid-12 py-6">
       <a href="/portfolio" class="label cell col-span-4 !text-ink lg:col-span-3 lg:col-start-10">All work <span class="arrow" aria-hidden="true">→</span></a>
-    </div>
-  </section>
-
-
-  <!-- ═══ 06 COURSES: media split ═══ -->
-  <section class="band" aria-labelledby="courses-title">
-    <div class="frame grid-12 border-b border-line py-4">
-      <h2 id="courses-title" class="cell col-span-4 lg:col-span-12"><Index n="06" meta="Waitlist open">Do it yourself</Index></h2>
-    </div>
-    <div class="frame">
-      {courses[0] && <CourseCard course={courses[0]} compact />}
     </div>
   </section>
 

@@ -9,6 +9,8 @@ interface Plan {
   cta?: string;
   /** Highlight one plan per page at most (brand color) */
   highlight?: boolean;
+  /** Price not set yet: renders a visible 'to supply' slot */
+  pricePending?: boolean;
 }
 interface Props {
   title: string;
@@ -34,8 +36,14 @@ const { title, caption, plans } = Astro.props;
         <p class="label mt-2">{p.note}</p>
       </div>
       <p class="cell col-span-2 text-right lg:col-span-2 lg:text-left">
-        <span class:list={['num text-heading', p.highlight && 'text-brand-blue']}>{p.price}</span>
-        {p.unit && <span class="label ml-1">{p.unit}</span>}
+        {p.pricePending ? (
+          <span class="slot label inline-block px-2 py-1">[Price]</span>
+        ) : (
+          <>
+            <span class:list={['num text-heading', p.highlight && 'text-brand-blue']}>{p.price}</span>
+            {p.unit && <span class="label ml-1">{p.unit}</span>}
+          </>
+        )}
       </p>
       <ul class="cell col-span-4 grid gap-1.5 text-small lg:col-span-5">
         {p.features.map((f) => <li class="muted">{f}</li>)}

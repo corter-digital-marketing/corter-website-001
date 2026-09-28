@@ -18,7 +18,7 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'web
   description="Websites that turn visitors into calls. Template builds from $200, custom builds quoted, hosting and care plans from $99 a month."
 >
   <PageHero
-    meta={['01 — Websites', 'Done for you', 'Builds from $200', 'Care from $99/mo']}
+    meta={['01 — Websites', 'Done for you', 'Template · Custom', 'From $200']}
     title="A website that turns visitors into calls."
     lead="Template builds from $200. Custom builds for stores, bookings and databases. We host it and keep it running after launch."
   >
@@ -44,11 +44,11 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'web
   </Section>
 
   <!-- 02 Pricing: spec table -->
-  <Section n="02" name="Pricing" meta="5 plans" id="pricing" marks>
+  <Section n="02" name="Options" meta="2 builds + care" id="pricing" marks>
     <div class="frame py-12 lg:py-20">
       <PricingTable
-        title="Build"
-        caption="One-time"
+        title="Two options"
+        caption="One-time build"
         plans={[
           { name: 'Template', note: 'Fastest way online', price: '$200', unit: 'once', features: ['Professional template, customized to your brand', 'Mobile-first, fast-loading build', 'Contact forms sent to your email'], cta: 'Get started' },
           { name: 'Custom', note: 'Built around your business', price: 'Quoted', features: ['Fully custom design, no template', 'SEO architecture and Google Business integration', 'Booking, e-commerce, databases, and more'], cta: 'Request a quote', highlight: false },
@@ -56,8 +56,8 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'web
       />
       <div class="h-16 lg:h-24"></div>
       <PricingTable
-        title="Care"
-        caption="Monthly"
+        title="Care plans"
+        caption="Monthly · for either build"
         plans={[
           { name: 'Essentials', note: 'Keep it running', price: '$99', unit: '/mo', features: ['Hosting', 'Backups', 'Security monitoring', 'Uptime monitoring'] },
           { name: 'Growth', note: 'Keep it improving', price: '$199', unit: '/mo', features: ['Everything in Essentials', 'Monthly content edits', 'Monthly performance reporting', 'Speed optimization'] },
