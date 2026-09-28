@@ -18,40 +18,23 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'web
   description="Websites that turn visitors into calls. Template builds from $200, custom builds quoted, hosting and care plans from $99 a month."
 >
   <PageHero
-    meta={['01 — Websites', 'Done for you', 'Template · Custom', 'From $200']}
+    meta={['Websites', 'Two options: template or custom', 'From $200']}
     title="A website that turns visitors into calls."
     lead="Template builds from $200. Custom builds for stores, bookings and databases. We host it and keep it running after launch."
   >
     <Button href="/contact">Get a quote</Button>
-    <Button href="#pricing" variant="secondary">See pricing</Button>
+    <Button href="#pricing" variant="secondary">See the two options</Button>
   </PageHero>
 
-  <!-- 01 Included: split, accordion -->
-  <Section n="01" name="What's included" meta="6 parts">
-    <div class="frame grid-12 py-12 lg:py-20">
-      <p class="cell col-span-4 text-heading lg:col-span-4">Every build is set up to be found and to get you contacted.</p>
-      <div class="col-span-4 mt-10 lg:col-span-8 lg:mt-0">
-        <Accordion>
-          <AccordionItem n="01" title="Design" meta="Template or custom">A professional template customized to your brand, or a fully custom design with no template underneath.</AccordionItem>
-          <AccordionItem n="02" title="Mobile-first build" meta="All builds">Most visitors arrive on a phone. Every site is built for phones first and loads fast.</AccordionItem>
-          <AccordionItem n="03" title="Found on Google" meta="Custom builds">SEO architecture and Google Business integration, so people searching for what you do find you.</AccordionItem>
-          <AccordionItem n="04" title="Leads to your inbox" meta="All builds">Contact and booking forms that send straight to your email. Nothing to log into.</AccordionItem>
-          <AccordionItem n="05" title="Stores, bookings, databases" meta="Custom builds">Checkout, bulk ordering and booking requests are live on sites we've built. A self-managed product catalog is in development now.</AccordionItem>
-          <AccordionItem n="06" title="Hosting and care" meta="From $99/mo">Hosting, backups, security and uptime monitoring, with edits and reporting on higher plans.</AccordionItem>
-        </Accordion>
-      </div>
-    </div>
-  </Section>
-
-  <!-- 02 Pricing: spec table -->
-  <Section n="02" name="Options" meta="2 builds + care" id="pricing" marks>
+  <!-- Pricing: spec table -->
+  <Section n="02" name="Your two options" id="pricing" marks>
     <div class="frame py-12 lg:py-20">
       <PricingTable
-        title="Two options"
+        title="Build your site"
         caption="One-time build"
         plans={[
           { name: 'Template', note: 'Fastest way online', price: '$200', unit: 'once', features: ['Professional template, customized to your brand', 'Mobile-first, fast-loading build', 'Contact forms sent to your email'], cta: 'Get started' },
-          { name: 'Custom', note: 'Built around your business', price: 'Quoted', features: ['Fully custom design, no template', 'SEO architecture and Google Business integration', 'Booking, e-commerce, databases, and more'], cta: 'Request a quote', highlight: false },
+          { name: 'Custom', note: 'Built around your business', price: 'Quoted', features: ['Fully custom design, no template', 'SEO architecture and Google Business integration', 'Booking, e-commerce, databases, and more'], cta: 'Get a quote', highlight: false },
         ]}
       />
       <div class="h-16 lg:h-24"></div>
@@ -67,8 +50,25 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'web
     </div>
   </Section>
 
-  <!-- 03 Process: columns -->
-  <Section n="03" name="Process" meta="3 steps">
+  <!-- Included: split, accordion -->
+  <Section n="01" name="What’s included">
+    <div class="frame grid-12 py-12 lg:py-20">
+      <p class="cell col-span-4 text-heading lg:col-span-4">Every build is set up to be found and to get you contacted.</p>
+      <div class="col-span-4 mt-10 lg:col-span-8 lg:mt-0">
+        <Accordion>
+          <AccordionItem n="01" title="Design" meta="Template or custom">A professional template customized to your brand, or a fully custom design with no template underneath.</AccordionItem>
+          <AccordionItem n="02" title="Mobile-first build" meta="All builds">Most visitors arrive on a phone. Every site is built for phones first and loads fast.</AccordionItem>
+          <AccordionItem n="03" title="Found on Google" meta="Custom builds">SEO architecture and Google Business integration, so people searching for what you do find you.</AccordionItem>
+          <AccordionItem n="04" title="Leads to your inbox" meta="All builds">Contact and booking forms that send straight to your email. Nothing to log into.</AccordionItem>
+          <AccordionItem n="05" title="Stores, bookings, databases" meta="Custom builds">Checkout, bulk ordering and booking requests are live on sites we've built. A self-managed product catalog is in development now.</AccordionItem>
+          <AccordionItem n="06" title="Hosting and care" meta="From $99/mo">Hosting, backups, security and uptime monitoring, with edits and reporting on higher plans.</AccordionItem>
+        </Accordion>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Process: columns -->
+  <Section n="03" name="How it works">
     <ol class="frame grid-12">
       {[
         ['Talk', 'One call about your business, your customers, and what the site has to do. You leave with a price.'],
@@ -84,8 +84,8 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'web
     </ol>
   </Section>
 
-  <!-- 04 Results: case cells -->
-  <Section n="04" name="Sites we've built" meta={`${work.length} live`}>
+  <!-- Results: case cells -->
+  <Section n="04" name="Websites we’ve built">
     <div class="frame grid-12">
       {work.map((s, i) => (
         <CaseStudyCard study={s} n={String(i + 1).padStart(2, '0')} class="col-span-4 lg:border-r lg:border-line lg:last:border-r-0" />
@@ -93,8 +93,8 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'web
     </div>
   </Section>
 
-  <!-- 05 FAQ: split -->
-  <Section n="05" name="Questions" meta="5 answers">
+  <!-- FAQ: split -->
+  <Section n="05" name="Common questions">
     <div class="frame grid-12 py-12 lg:py-20">
       <p class="cell col-span-4 text-heading lg:col-span-4">Straight answers.</p>
       <div class="col-span-4 mt-10 lg:col-span-8 lg:mt-0">

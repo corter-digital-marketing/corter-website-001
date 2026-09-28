@@ -12,12 +12,12 @@ const articles = (await getCollection('articles')).sort((a, b) => a.data.order -
   description="Plain answers on websites and social media from the team behind 10M+ views: why sites don't get calls, how often to post, template vs custom."
 >
   <PageHero
-    meta={['Learn', `${articles.length} guides`, 'Websites · Social', 'Free']}
+    meta={['Learn', `${articles.length} free guides`]}
     title="What we'd tell you over coffee."
     lead="Short, specific guides on websites and social media. No email required."
   />
 
-  <Section n="01" name="Guides" meta={`${articles.length} entries`}>
+  <Section n="01" name="Free guides">
     <div class="frame">
       {articles.map((a, i) => (
         <IndexRow

@@ -19,7 +19,7 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'soc
   description="Two options: social media management on three platforms from $500 a month, or content creation on its own. 10M+ views generated."
 >
   <PageHero
-    meta={['02 — Social Media', 'Done for you', 'Management · Content', 'From $500/mo']}
+    meta={['Social Media', 'Two options: management or content', 'From $500 a month']}
     title="Get seen by the right people, every week."
     lead="Two options. Hand us your pages and we run them, from twice a week to every day. Or just get the content, shot and edited, and post it yourself."
   >
@@ -27,32 +27,8 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'soc
     <Button href="#pricing" variant="secondary">See the options</Button>
   </PageHero>
 
-  <!-- 01 Record: data row -->
-  <Section n="01" name="Record" meta="All platforms, combined">
-    <div class="frame grid-12">
-      <Stat value={10} suffix="M+" label="Total views" note="Generated" class="col-span-2 lg:col-span-6" />
-      <Stat value={60} suffix="K+" label="Followers" note="Gained" class="col-span-2 lg:col-span-6" />
-    </div>
-  </Section>
-
-  <!-- 02 Included: split, accordion -->
-  <Section n="02" name="What's included" meta="5 parts">
-    <div class="frame grid-12 py-12 lg:py-20">
-      <p class="cell col-span-4 text-heading lg:col-span-4">Posting when you remember isn't a plan. This is.</p>
-      <div class="col-span-4 mt-10 lg:col-span-8 lg:mt-0">
-        <Accordion>
-          <AccordionItem n="01" title="Content strategy" meta="All plans">We work out what your audience responds to and plan around it. No filler posts.</AccordionItem>
-          <AccordionItem n="02" title="Posting schedule" meta="2/wk to daily">Three platforms, on a schedule that doesn't slip. Launch posts twice a week, Growth three times, Scale every day.</AccordionItem>
-          <AccordionItem n="03" title="Short-form video" meta="Growth, Scale">Video is what gets shared. Growth and Scale include video content.</AccordionItem>
-          <AccordionItem n="04" title="Engagement" meta="All plans">We manage your presence and community, so comments turn into conversations.</AccordionItem>
-          <AccordionItem n="05" title="Monthly summary" meta="All plans">Reach, growth and what we're doing next month, in plain English.</AccordionItem>
-        </Accordion>
-      </div>
-    </div>
-  </Section>
-
-  <!-- 03 Pricing: spec table -->
-  <Section n="03" name="Options" meta="2 options" id="pricing" marks>
+  <!-- Pricing: spec table -->
+  <Section n="03" name="Your two options" id="pricing" marks>
     <div class="frame py-12 lg:py-20">
       <PricingTable
         title="Option 01 — Management"
@@ -75,8 +51,24 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'soc
     </div>
   </Section>
 
-  <!-- 04 Process: columns -->
-  <Section n="04" name="Process" meta="3 steps">
+  <!-- Included: split, accordion -->
+  <Section n="02" name="What’s included">
+    <div class="frame grid-12 py-12 lg:py-20">
+      <p class="cell col-span-4 text-heading lg:col-span-4">Posting when you remember isn't a plan. This is.</p>
+      <div class="col-span-4 mt-10 lg:col-span-8 lg:mt-0">
+        <Accordion>
+          <AccordionItem n="01" title="Content strategy" meta="All plans">We work out what your audience responds to and plan around it. No filler posts.</AccordionItem>
+          <AccordionItem n="02" title="Posting schedule" meta="2/wk to daily">Three platforms, on a schedule that doesn't slip. Launch posts twice a week, Growth three times, Scale every day.</AccordionItem>
+          <AccordionItem n="03" title="Short-form video" meta="Growth, Scale">Video is what gets shared. Growth and Scale include video content.</AccordionItem>
+          <AccordionItem n="04" title="Engagement" meta="All plans">We manage your presence and community, so comments turn into conversations.</AccordionItem>
+          <AccordionItem n="05" title="Monthly summary" meta="All plans">Reach, growth and what we're doing next month, in plain English.</AccordionItem>
+        </Accordion>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Process: columns -->
+  <Section n="04" name="How it works">
     <ol class="frame grid-12">
       {[
         ['Talk', 'We learn the business and the customer, then pick the three platforms that matter.'],
@@ -92,8 +84,16 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'soc
     </ol>
   </Section>
 
-  <!-- 05 Result: one case, split -->
-  <Section n="05" name="Result" meta="Case 01">
+  <!-- Record: data row -->
+  <Section n="01" name="Our results" meta="Across all platforms">
+    <div class="frame grid-12">
+      <Stat value={10} suffix="M+" label="Total views" note="Generated" class="col-span-2 lg:col-span-6" />
+      <Stat value={60} suffix="K+" label="Followers" note="Gained" class="col-span-2 lg:col-span-6" />
+    </div>
+  </Section>
+
+  <!-- Result: one case, split -->
+  <Section n="05" name="A recent result">
     <div class="frame grid-12">
       {work.map((s, i) => (
         <CaseStudyCard study={s} n={String(i + 1).padStart(2, '0')} class="col-span-4 lg:col-span-6 lg:border-r lg:border-line" />
@@ -106,8 +106,8 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'soc
     </div>
   </Section>
 
-  <!-- 06 FAQ: split -->
-  <Section n="06" name="Questions" meta="4 answers">
+  <!-- FAQ: split -->
+  <Section n="06" name="Common questions">
     <div class="frame grid-12 py-12 lg:py-20">
       <p class="cell col-span-4 text-heading lg:col-span-4">Straight answers.</p>
       <div class="col-span-4 mt-10 lg:col-span-8 lg:mt-0">

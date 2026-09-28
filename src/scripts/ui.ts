@@ -62,7 +62,7 @@ function initMobileMenu() {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && header.classList.contains('menu-open')) { setOpen(false); toggle.focus(); }
   }, { signal: page.signal });
-  window.matchMedia('(min-width: 1024px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); }, { signal: page.signal });
+  window.matchMedia('(min-width: 1280px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); }, { signal: page.signal });
 }
 
 /* ── Accordions: optionally only one open at a time ────────── */

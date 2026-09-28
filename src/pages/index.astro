@@ -6,6 +6,7 @@ import Button from '../components/Button.astro';
 import Index from '../components/Index.astro';
 import Stat from '../components/Stat.astro';
 import IndexRow from '../components/IndexRow.astro';
+import ServiceChooser from '../components/ServiceChooser.astro';
 import CourseCard from '../components/CourseCard.astro';
 import Testimonial from '../components/Testimonial.astro';
 import ContactForm from '../components/ContactForm.astro';
@@ -15,38 +16,43 @@ const [featured, ...rest] = studies;
 const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b.data.order);
 ---
 <BaseLayout
-  title="Corter Digital | Websites, Social Media & Courses"
-  description="We've driven 10M+ views. Corter Digital builds websites and runs social media that bring in customers, or teaches you the playbook yourself."
+  title="Corter Digital | Websites, Social Media, SEO & Courses"
+  description="We've driven 10M+ views. Corter Digital builds websites, runs social media and gets you found on Google, so more customers call. Free quotes: (570) 502-4036."
 >
-  <!-- ═══ 00 HERO: full-bleed ═══ -->
-  <section class="relative flex min-h-[100svh] flex-col pt-16" aria-labelledby="hero-title">
+  <!-- ═══ HERO ═══ -->
+  <section class="relative flex min-h-[78svh] flex-col pt-[72px]" aria-labelledby="hero-title">
     <HeroMedia name="hero" />
-    <div class="frame grid-12 relative border-b border-line">
-      <p class="label cell col-span-2 py-4 lg:col-span-3">Corter Digital</p>
-      <p class="label cell col-span-2 py-4 text-right lg:col-span-3 lg:text-left">Est. 2025</p>
-      <p class="label cell hidden py-4 lg:col-span-3 lg:block">Websites · Social · SEO</p>
-      <p class="label num cell hidden py-4 text-right lg:col-span-3 lg:block">Index 00</p>
-    </div>
-
-    <div class="frame grid-12 relative flex-1 content-end pb-10 pt-24 lg:pb-14">
+    <div class="frame grid-12 relative flex-1 content-end pb-10 pt-16 lg:pb-14">
       <h1 id="hero-title" class="cell col-span-4 text-display font-medium lg:col-span-10" data-split>
         We've driven 10M+ views. Now we'll do it for your business.
       </h1>
-      <p class="muted cell col-span-4 mt-12 lg:col-span-4 lg:mt-20">
-        Websites, social media, and content that bring in real customers. Or learn our exact playbook yourself.
+      <p class="muted cell col-span-4 mt-10 text-body lg:col-span-5 lg:mt-14">
+        We build websites, run social media, and help you show up on Google, so more customers find you and call.
       </p>
-      <div class="cell col-span-4 mt-8 flex flex-col gap-3 sm:flex-row lg:col-span-5 lg:col-start-8 lg:mt-20 lg:self-end lg:justify-end">
-        <Button href="/contact">Book a free call</Button>
-        <Button href="/courses" variant="secondary">Explore courses</Button>
+      <div class="cell col-span-4 mt-8 flex flex-col gap-3 sm:flex-row lg:col-span-5 lg:col-start-8 lg:mt-14 lg:self-end lg:justify-end">
+        <Button href="/contact">Get a free quote</Button>
+        <Button href="#services" variant="secondary">See our services</Button>
       </div>
     </div>
   </section>
 
 
-  <!-- ═══ 01 RECORD: dense data row ═══ -->
-  <section class="band marks" aria-labelledby="record-title">
+  <!-- ═══ WHAT WE OFFER: plain-language chooser ═══ -->
+  <section class="band marks" id="services" aria-labelledby="services-title">
+    <div class="frame grid-12 pb-10 pt-12 lg:pb-14 lg:pt-20">
+      <p class="cell col-span-4 text-small font-medium lg:col-span-12">What we offer</p>
+      <h2 id="services-title" class="cell col-span-4 mt-4 text-heading lg:col-span-8">What do you need help with?</h2>
+    </div>
+    <div class="frame">
+      <ServiceChooser />
+    </div>
+  </section>
+
+
+  <!-- ═══ RECORD: dense data row ═══ -->
+  <section class="band" aria-labelledby="record-title">
     <div class="frame grid-12 border-b border-line py-4">
-      <h2 id="record-title" class="cell col-span-4 lg:col-span-12"><Index n="01" meta="All platforms, combined">Record</Index></h2>
+      <h2 id="record-title" class="cell col-span-4 lg:col-span-12"><Index n="01" meta="Across all platforms">Our results</Index></h2>
     </div>
     <div class="frame grid-12">
       <Stat value={10} suffix="M+" label="Total views" note="Generated" class="col-span-2 lg:col-span-6" />
@@ -55,35 +61,10 @@ const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b
   </section>
 
 
-  <!-- ═══ 02 COURSES: media split ═══ -->
-  <section class="band" aria-labelledby="courses-title">
-    <div class="frame grid-12 border-b border-line py-4">
-      <h2 id="courses-title" class="cell col-span-4 lg:col-span-12"><Index n="02" meta="Waitlist open">Courses</Index></h2>
-    </div>
-    <div class="frame">
-      {courses[0] && <CourseCard course={courses[0]} compact />}
-    </div>
-  </section>
-
-
-  <!-- ═══ 03 WHAT WE OFFER: index list ═══ -->
-  <section class="band py-section" aria-labelledby="services-title">
-    <div class="frame grid-12 mb-12 lg:mb-20">
-      <div class="cell col-span-4 lg:col-span-3"><Index n="03">Services</Index></div>
-      <h2 id="services-title" class="cell col-span-4 mt-6 text-heading lg:col-span-6 lg:mt-0">What We Offer</h2>
-    </div>
-    <div class="frame border-t border-line">
-      <IndexRow n="01" title="Websites" text="Template builds from $200, or a custom build quoted for your business. Hosting and care from $99 a month." meta="Template build · Custom build" href="/websites" />
-      <IndexRow n="02" title="Social Media" text="We run your pages on three platforms from $500 a month, or shoot and edit the content for you to post." meta="Management · Content creation" href="/social-media" />
-      <IndexRow n="03" title="SEO" text="Get found on Google and Bing, and in answers from ChatGPT, Claude and Gemini." meta="The Basics · AI Fundamentals" href="/seo" />
-    </div>
-  </section>
-
-
-  <!-- ═══ 04 PROCESS: three columns ═══ -->
+  <!-- ═══ PROCESS: three columns ═══ -->
   <section class="band" aria-labelledby="process-title">
     <div class="frame grid-12 border-b border-line py-4">
-      <h2 id="process-title" class="cell col-span-4 lg:col-span-12"><Index n="04" meta="3 steps">Process</Index></h2>
+      <h2 id="process-title" class="cell col-span-4 lg:col-span-12"><Index n="04">How it works</Index></h2>
     </div>
     <ol class="frame grid-12">
       {[
@@ -101,21 +82,10 @@ const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b
   </section>
 
 
-  <!-- ═══ 05 STATEMENT: alone in open space ═══ -->
-  <section class="band marks" aria-label="How we work">
-    <div class="frame grid-12 py-section lg:py-56">
-      <p class="label num cell col-span-4 mb-8 lg:col-span-2 lg:mb-0">05</p>
-      <p class="cell col-span-4 text-heading lg:col-span-7 lg:col-start-4">
-        One team builds the site, films and posts the content, and keeps both running. You deal with one phone number: <span class="num">(570) 502-4036</span>.
-      </p>
-    </div>
-  </section>
-
-
-  <!-- ═══ 06 WORK: feature split + rows ═══ -->
+  <!-- ═══ WORK: feature split + rows ═══ -->
   <section class="band" aria-labelledby="work-title">
     <div class="frame grid-12 border-b border-line py-4">
-      <h2 id="work-title" class="cell col-span-4 lg:col-span-12"><Index n="06" meta={`${studies.length} projects`}>Selected work</Index></h2>
+      <h2 id="work-title" class="cell col-span-4 lg:col-span-12"><Index n="06">Our work</Index></h2>
     </div>
 
     {featured && (
@@ -146,10 +116,21 @@ const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b
   </section>
 
 
-  <!-- ═══ 07 CLIENTS: one quote ═══ -->
+  <!-- ═══ COURSES: media split ═══ -->
+  <section class="band" aria-labelledby="courses-title">
+    <div class="frame grid-12 border-b border-line py-4">
+      <h2 id="courses-title" class="cell col-span-4 lg:col-span-12"><Index n="02" meta="Waitlist open">Learn to do it yourself</Index></h2>
+    </div>
+    <div class="frame">
+      {courses[0] && <CourseCard course={courses[0]} compact />}
+    </div>
+  </section>
+
+
+  <!-- ═══ CLIENTS: one quote ═══ -->
   <section class="band" aria-labelledby="clients-title">
     <div class="frame grid-12 py-4">
-      <h2 id="clients-title" class="cell col-span-4 lg:col-span-12"><Index n="07">Clients</Index></h2>
+      <h2 id="clients-title" class="cell col-span-4 lg:col-span-12"><Index n="07">What clients say</Index></h2>
     </div>
     <div class="frame py-16 lg:py-32">
       <!-- Replace with: <Testimonial quote="..." name="..." role="Owner, Business" /> -->
@@ -158,11 +139,11 @@ const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b
   </section>
 
 
-  <!-- ═══ 08 CONTACT: form split ═══ -->
+  <!-- ═══ CONTACT: form split ═══ -->
   <section class="band marks" id="contact" aria-labelledby="contact-title">
     <div class="frame grid-12 py-section">
       <div class="cell col-span-4 lg:col-span-5">
-        <Index n="08">Contact</Index>
+        <Index n="08">Contact us</Index>
         <h2 id="contact-title" class="mt-10 text-heading">No pitch. Just a straight conversation.</h2>
         <dl class="mt-12 border-t border-line text-small">
           <div class="grid grid-cols-[6rem_1fr] border-b border-line py-4"><dt class="label">Phone</dt><dd><a href="tel:+15705024036" class="u-link num">(570) 502-4036</a></dd></div>

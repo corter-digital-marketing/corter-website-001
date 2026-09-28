@@ -1,16 +1,17 @@
 ---
 /**
- * Section metadata line, like a technical document: "02 — Services".
- * Optional `meta` renders right-aligned on the same line (e.g. "3 plans").
+ * Section heading row: a plain section name, with an optional short note on
+ * the right (e.g. "Waitlist open"). `n` is accepted for ordering in code but
+ * not shown: plain words are easier to follow than numbering.
  */
 interface Props {
-  n: string;
+  n?: string;
   meta?: string;
   class?: string;
 }
-const { n, meta, class: cls = '' } = Astro.props;
+const { meta, class: cls = '' } = Astro.props;
 ---
-<div class:list={['label flex items-baseline justify-between gap-4', cls]}>
-  <p><span class="num">{n}</span><span class="mx-3 opacity-50">—</span><slot /></p>
-  {meta && <p class="num hidden sm:block">{meta}</p>}
+<div class:list={['flex items-baseline justify-between gap-4', cls]}>
+  <p class="text-small font-medium"><slot /></p>
+  {meta && <p class="muted hidden text-small sm:block">{meta}</p>}
 </div>

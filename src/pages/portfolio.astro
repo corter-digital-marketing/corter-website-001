@@ -18,9 +18,9 @@ const filters = [
   description="Websites and social media campaigns by Corter Digital, titled by what they did: 250K views in 30 days, online stores, booking sites."
 >
   <PageHero
-    meta={['Work', `${studies.length} projects`, 'Websites · Social', 'Index 03']}
-    title="Titled by what happened, not who paid."
-    lead="Every project below is named for its outcome. Where we don't have the number yet, the slot says so."
+    meta={['Our Work', `${studies.length} projects`]}
+    title="Businesses we’ve helped."
+    lead="Real projects and what each one did for the business. Use the buttons below to see websites or social media."
   />
 
   <section class="band" aria-labelledby="work-title">
@@ -35,8 +35,8 @@ const filters = [
           data-filter={f.key}
           aria-pressed={i === 0 ? 'true' : 'false'}
         >
-          <span class="label">{f.label}</span>
-          <span class="label num" data-count-label>{String(f.n).padStart(2, '0')}</span>
+          <span class="text-small font-medium">{f.label}</span>
+          <span class="muted num text-small" data-count-label>{String(f.n).padStart(2, '0')}</span>
         </button>
       ))}
     </div>
@@ -47,9 +47,9 @@ const filters = [
         <CaseStudyCard study={s} n={String(i + 1).padStart(2, '0')} class="col-span-4 lg:col-span-6 lg:border-r lg:border-line" />
       ))}
       <div class="cell col-span-4 flex flex-col justify-end border-b border-line py-12 lg:col-span-6">
-        <p class="label">Next project</p>
-        <p class="mt-5 max-w-[22ch] text-heading">Yours, if the numbers make sense.</p>
-        <p class="mt-8"><a href="/contact" class="label !text-ink"><span class="u-link">Start a project</span> <span class="arrow" aria-hidden="true">→</span></a></p>
+        <p class="muted text-small">Your business next?</p>
+        <p class="mt-5 max-w-[22ch] text-heading">Tell us what you need. We’ll give you a free quote.</p>
+        <p class="mt-8"><a href="/contact" class="btn btn-secondary">Get a free quote <span class="arrow" aria-hidden="true">→</span></a></p>
       </div>
     </div>
   </section>
@@ -60,7 +60,7 @@ const filters = [
 <style>
   .filter { color: rgb(243 239 232 / .6); transition: color .4s var(--ease-precise); position: relative; }
   .filter:hover { color: var(--color-ink); }
-  .filter[aria-pressed="true"] .label { color: var(--color-ink); }
+  .filter[aria-pressed="true"] { color: var(--color-ink); }
   /* Active filter: a 1px brand-blue rule under the cell */
   .filter[aria-pressed="true"]::after {
     content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--color-brand-blue);

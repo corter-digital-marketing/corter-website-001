@@ -1,22 +1,21 @@
 ---
 const cols = [
-  { title: 'Done for you', links: [ { href: '/websites', label: 'Websites' }, { href: '/social-media', label: 'Social Media' }, { href: '/seo', label: 'SEO' }, { href: '/portfolio', label: 'Work' } ] },
-  { title: 'Do it yourself', links: [ { href: '/courses', label: 'Courses' } ] },
-  { title: 'Company', links: [ { href: '/about', label: 'About' }, { href: '/learn', label: 'Learn' }, { href: '/contact', label: 'Contact' } ] },
+  { title: 'Services', links: [ { href: '/websites', label: 'Websites' }, { href: '/social-media', label: 'Social Media' }, { href: '/seo', label: 'SEO' } ] },
+  { title: 'Learn it yourself', links: [ { href: '/courses', label: 'Courses' }, { href: '/learn', label: 'Free guides' } ] },
+  { title: 'Company', links: [ { href: '/portfolio', label: 'Our Work' }, { href: '/about', label: 'About' }, { href: '/contact', label: 'Contact' } ] },
 ];
 const now = new Date();
-const rev = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}`;
 ---
 <footer class="band relative z-[1] marks">
   <div class="frame grid-12 gap-y-12 py-16 lg:py-24">
     <div class="cell col-span-4">
-      <p class="label !text-ink">Corter Digital</p>
+      <p class="text-small font-medium">Corter Digital</p>
       <p class="muted mt-4 max-w-[32ch] text-small">Websites and social media, done for you. The playbook behind 10M+ views, if you'd rather do it yourself.</p>
     </div>
 
     {cols.map((c) => (
       <div class="cell col-span-2">
-        <h2 class="label mb-5">{c.title}</h2>
+        <h2 class="muted mb-4 text-small font-medium">{c.title}</h2>
         <ul class="grid gap-2.5 text-small">
           {c.links.map((l) => <li><a href={l.href} class="u-link">{l.label}</a></li>)}
         </ul>
@@ -24,7 +23,7 @@ const rev = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}
     ))}
 
     <div class="cell col-span-4 lg:col-span-2">
-      <h2 class="label mb-5">Contact</h2>
+      <h2 class="muted mb-4 text-small font-medium">Contact</h2>
       <ul class="grid gap-2.5 text-small">
         <li><a href="tel:+15705024036" class="u-link num">(570) 502-4036</a></li>
         <li><a href="mailto:andrewcsmma@gmail.com" class="u-link break-all">andrewcsmma@gmail.com</a></li>
@@ -36,9 +35,9 @@ const rev = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}
 
   <div class="band">
     <div class="frame grid-12 py-5">
-      <p class="label cell col-span-2 lg:col-span-4">© <span data-year>{now.getFullYear()}</span> Corter Digital</p>
-      <p class="label cell col-span-2 text-right lg:col-span-4 lg:text-left">Est. 2025</p>
-      <p class="label cell col-span-4 mt-2 lg:mt-0 lg:text-right">Rev. {rev}</p>
+      <p class="muted cell col-span-2 text-small lg:col-span-4">© <span data-year>{now.getFullYear()}</span> Corter Digital</p>
+      <p class="muted cell col-span-2 text-right text-small lg:col-span-4 lg:text-left">Est. 2025</p>
+      <p class="muted cell col-span-4 mt-2 text-small lg:mt-0 lg:text-right"><a href="tel:+15705024036" class="num u-link">(570) 502-4036</a></p>
     </div>
   </div>
 </footer>

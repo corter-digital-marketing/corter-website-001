@@ -1,29 +1,41 @@
 ---
 /**
- * Inner-page hero: a spec-header row of metadata, a large left-aligned
- * headline across 9–10 columns, and a lead offset to the right columns.
+ * Inner-page hero: a breadcrumb (Home › Page) with a few key facts, a large
+ * left-aligned headline, a plain-English lead, and the main actions.
  */
 import HeroMedia from './HeroMedia.astro';
 
 interface Props {
-  /** Metadata cells across the top, e.g. ["01 — Websites", "From $200", "Care from $99/mo"] */
+  /** First item is the page name (used in the breadcrumb); the rest are short facts, e.g. "From $200" */
   meta: string[];
   title: string;
   lead?: string;
   media?: string;
+  /** Optional parent crumb, e.g. { href: '/learn', label: 'Learn' } */
+  parent?: { href: string; label: string };
 }
-const { meta, title, lead, media } = Astro.props;
+const { meta, title, lead, media, parent } = Astro.props;
+const [page, ...facts] = meta;
 ---
-<section class="relative overflow-hidden pt-16">
+<section class="relative overflow-hidden pt-[72px]">
   {media && <HeroMedia name={media} />}
   <div class="frame grid-12 relative border-b border-line">
-    {meta.map((m, i) => (
-      <p class:list={['label num cell col-span-2 py-4 lg:col-span-3', i > 1 && 'hidden lg:block']}>{m}</p>
-    ))}
+    <nav class="cell col-span-4 py-4 text-small lg:col-span-6" aria-label="Breadcrumb">
+      <ol class="flex flex-wrap items-center gap-2">
+        <li><a href="/" class="muted u-link">Home</a></li>
+        {parent && <li class="muted" aria-hidden="true">›</li>}
+        {parent && <li><a href={parent.href} class="muted u-link">{parent.label}</a></li>}
+        <li class="muted" aria-hidden="true">›</li>
+        <li aria-current="page" class="font-medium">{page}</li>
+      </ol>
+    </nav>
+    {facts.length > 0 && (
+      <p class="muted cell hidden py-4 text-right text-small lg:col-span-6 lg:block">{facts.join('  ·  ')}</p>
+    )}
   </div>
-  <div class="frame grid-12 relative pb-14 pt-20 lg:pb-20 lg:pt-32">
+  <div class="frame grid-12 relative pb-14 pt-14 lg:pb-20 lg:pt-24">
     <h1 class="cell col-span-4 text-display font-medium lg:col-span-10" data-split>{title}</h1>
-    {lead && <p class="muted cell col-span-4 mt-10 lg:col-span-4 lg:col-start-8 lg:mt-16">{lead}</p>}
+    {lead && <p class="muted cell col-span-4 mt-8 text-body lg:col-span-5 lg:col-start-8 lg:mt-14">{lead}</p>}
     {Astro.slots.has('default') && (
       <div class="cell col-span-4 mt-8 flex flex-col gap-3 sm:flex-row lg:col-span-5 lg:col-start-8"><slot /></div>
     )}

@@ -14,22 +14,22 @@ const { id = 'contact' } = Astro.props;
 
   <div class="grid gap-8 sm:grid-cols-2">
     <div class="field">
-      <label class="label" for={`${id}-name`}>Name</label>
+      <label class="text-small font-medium" for={`${id}-name`}>Name</label>
       <input class="input" id={`${id}-name`} type="text" name="name" autocomplete="name" required aria-describedby={`${id}-name-err`} />
       <p class="field-error" id={`${id}-name-err`}></p>
     </div>
     <div class="field">
-      <label class="label" for={`${id}-phone`}>Phone (optional)</label>
+      <label class="text-small font-medium" for={`${id}-phone`}>Phone (optional)</label>
       <input class="input num" id={`${id}-phone`} type="tel" name="phone" autocomplete="tel" />
     </div>
   </div>
   <div class="field">
-    <label class="label" for={`${id}-email`}>Email</label>
+    <label class="text-small font-medium" for={`${id}-email`}>Email</label>
     <input class="input" id={`${id}-email`} type="email" name="email" autocomplete="email" required aria-describedby={`${id}-email-err`} />
     <p class="field-error" id={`${id}-email-err`}></p>
   </div>
   <div class="field">
-    <label class="label" for={`${id}-message`}>What do you need? (optional)</label>
+    <label class="text-small font-medium" for={`${id}-message`}>What do you need? (optional)</label>
     <textarea class="input" id={`${id}-message`} name="message" rows="4"></textarea>
   </div>
   <Button type="submit" block>Send message</Button>

@@ -17,12 +17,16 @@ const d = article.data;
 ---
 <BaseLayout title={`${d.title} | Corter Digital`} description={d.description}>
   <article>
-    <header class="pt-16">
+    <header class="pt-[72px]">
       <div class="frame grid-12 border-b border-line">
-        <p class="label cell col-span-2 py-4 lg:col-span-3"><a href="/learn" class="u-link">Learn</a> / No. {String(n).padStart(2, '0')}</p>
-        <p class="label cell col-span-2 py-4 text-right lg:col-span-3 lg:text-left">{d.topic}</p>
-        <p class="label cell hidden py-4 lg:col-span-3 lg:block">{d.readingTime} read</p>
-        <p class="label cell hidden py-4 text-right lg:col-span-3 lg:block">Corter Digital</p>
+        <nav class="cell col-span-4 py-4 text-small lg:col-span-8" aria-label="Breadcrumb">
+          <ol class="flex flex-wrap items-center gap-2">
+            <li><a href="/" class="muted u-link">Home</a></li><li class="muted" aria-hidden="true">›</li>
+            <li><a href="/learn" class="muted u-link">Free guides</a></li><li class="muted" aria-hidden="true">›</li>
+            <li aria-current="page" class="font-medium">Guide {n}</li>
+          </ol>
+        </nav>
+        <p class="muted cell hidden py-4 text-right text-small lg:col-span-4 lg:block">{d.topic} · {d.readingTime} read</p>
       </div>
       <div class="frame grid-12 pb-16 pt-20 lg:pb-24 lg:pt-28">
         <h1 class="cell col-span-4 text-heading lg:col-span-8" data-split>{d.title}</h1>

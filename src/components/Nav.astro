@@ -1,62 +1,47 @@
 ---
+/**
+ * Main navigation. Kept deliberately simple: every service is a top-level
+ * link (no hidden dropdowns), and the phone number is always visible.
+ */
 import { Image } from 'astro:assets';
 import logo from '../assets/logo-mark.png';
 
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const is = (href: string) => path === href || path.startsWith(href + '/');
-const inServices = is('/websites') || is('/social-media') || is('/seo');
 
-const links = [
-  { href: '/portfolio', label: 'Work' },
-  { href: '/courses', label: 'Courses' },
-  { href: '/learn', label: 'Learn' },
-  { href: '/about', label: 'About' },
-];
 const services = [
-  { href: '/websites', label: 'Websites', meta: 'From $200' },
-  { href: '/social-media', label: 'Social Media', meta: 'From $500/mo' },
-  { href: '/seo', label: 'SEO', meta: 'Google · AI' },
+  { href: '/websites', label: 'Websites', desc: 'A new website, built and looked after' },
+  { href: '/social-media', label: 'Social Media', desc: 'We run your pages or make your content' },
+  { href: '/seo', label: 'SEO', desc: 'Show up on Google and in AI answers' },
 ];
-const mobileLinks = [...services, ...links.map((l) => ({ ...l, meta: '' })), { href: '/contact', label: 'Contact', meta: '' }];
+const more = [
+  { href: '/courses', label: 'Courses', desc: 'Learn to do it yourself' },
+  { href: '/portfolio', label: 'Our Work', desc: 'Businesses we’ve helped' },
+  { href: '/about', label: 'About', desc: 'Who we are' },
+  { href: '/contact', label: 'Contact', desc: 'Call, email or send a message' },
+];
+const desktop = [...services, ...more.filter((l) => l.href !== '/contact')];
 ---
 <header class="site-header fixed inset-x-0 top-0 z-50 border-b border-transparent transition-[background-color,border-color] duration-500" data-header>
-  <nav class="frame grid-12 h-16 items-center" aria-label="Main">
-    <a href="/" class="cell col-span-3 flex items-center gap-2.5 whitespace-nowrap lg:col-span-3" aria-label="Corter Digital home">
-      <Image src={logo} alt="" width={30} densities={[1, 2]} class="h-auto w-[30px]" loading="eager" />
-      <span class="label !text-ink">Corter Digital</span>
+  <nav class="frame flex h-[72px] items-center justify-between gap-1 sm:gap-4" aria-label="Main">
+    <a href="/" class="cell flex min-w-0 shrink items-center gap-2 !pr-0 sm:gap-2.5" aria-label="Corter Digital home">
+      <Image src={logo} alt="" width={32} densities={[1, 2]} class="h-auto w-7 sm:w-8" loading="eager" />
+      <span class="truncate text-small font-medium">Corter Digital</span>
     </a>
 
-    <ul class="col-span-6 hidden items-center lg:flex">
-      <li class="relative" data-dropdown>
-        <button type="button" class:list={['nav-link', inServices && 'is-active']} aria-expanded="false" aria-controls="menu-services">
-          Services <span class="acc-sign ml-1 inline-block transition-transform duration-500" aria-hidden="true">+</span>
-        </button>
-        <div id="menu-services" class="dropdown absolute left-0 top-full w-[320px] border border-line bg-base">
-          <ul>
-            {services.map((s, i) => (
-              <li class="border-b border-line last:border-b-0">
-                <a href={s.href} class="group flex items-baseline justify-between gap-4 px-5 py-4" aria-current={is(s.href) ? 'page' : undefined}>
-                  <span class="flex items-baseline gap-4">
-                    <span class="label">{String(i + 1).padStart(2, '0')}</span>
-                    <span class="u-link">{s.label}</span>
-                  </span>
-                  <span class="label">{s.meta}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </li>
-      {links.map((l) => (
+    <ul class="hidden items-center xl:flex">
+      {desktop.map((l) => (
         <li><a href={l.href} class:list={['nav-link', is(l.href) && 'is-active']} aria-current={is(l.href) ? 'page' : undefined}>{l.label}</a></li>
       ))}
     </ul>
 
-    <div class="col-span-1 flex justify-end lg:col-span-3">
-      <a href="/contact" class="btn btn-primary hidden !min-h-10 sm:inline-flex">Book a call <span class="arrow" aria-hidden="true">→</span></a>
+    <div class="flex items-center gap-2 pr-[var(--pad)] sm:gap-3">
+      <a href="tel:+15705024036" class="num u-link hidden text-small font-medium md:inline">(570) 502-4036</a>
+      <a href="/contact" class="btn btn-primary hidden sm:inline-flex">Free quote <span class="arrow" aria-hidden="true">→</span></a>
+      <a href="tel:+15705024036" class="btn btn-secondary !min-h-11 !px-3.5 sm:hidden" aria-label="Call (570) 502-4036">Call</a>
       <button
         type="button"
-        class="menu-toggle label -mr-2 flex h-11 items-center px-2 !text-ink lg:hidden"
+        class="btn btn-secondary !min-h-11 !px-3.5 xl:hidden"
         aria-expanded="false"
         aria-controls="mobile-menu"
         data-menu-toggle
@@ -66,29 +51,44 @@ const mobileLinks = [...services, ...links.map((l) => ({ ...l, meta: '' })), { h
     </div>
   </nav>
 
-  <!-- Full-screen mobile menu -->
-  <div id="mobile-menu" class="mobile-menu fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto border-t border-line bg-base lg:hidden" data-mobile-menu inert>
-    <nav class="frame flex min-h-full flex-col" aria-label="Mobile">
-      <ul>
-        {mobileLinks.map((l, i) => (
-          <li class="mm-item border-b border-line">
-            <a href={l.href} class="cell grid grid-cols-[3rem_1fr_auto] items-baseline py-5" aria-current={is(l.href) ? 'page' : undefined}>
-              <span class="label">{String(i + 1).padStart(2, '0')}</span>
-              <span class:list={['text-heading', is(l.href) && 'text-brand-blue']}>{l.label}</span>
-              <span class="label">{l.meta}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-      <div class="mm-item cell mt-auto grid gap-5 py-8">
-        <a href="/contact" class="btn btn-primary btn-block">Book a free call <span class="arrow" aria-hidden="true">→</span></a>
-        <div class="flex justify-between">
-          <a href="tel:+15705024036" class="label !text-ink">(570) 502-4036</a>
-          <span class="flex gap-5">
-            <a href="https://www.instagram.com/corterdigital" target="_blank" rel="noopener" class="label !text-ink">IG<span class="sr-only"> Instagram (opens in a new tab)</span></a>
-            <a href="https://www.facebook.com/profile.php?id=61583891445369" target="_blank" rel="noopener" class="label !text-ink">FB<span class="sr-only"> Facebook (opens in a new tab)</span></a>
-          </span>
-        </div>
+  <!-- Full-screen menu (phones, tablets, small laptops) -->
+  <div id="mobile-menu" class="mobile-menu fixed inset-x-0 bottom-0 top-[72px] z-40 overflow-y-auto border-t border-line bg-base xl:hidden" data-mobile-menu inert>
+    <nav class="frame grid-12 pb-10" aria-label="Menu">
+      <div class="col-span-4 lg:col-span-6">
+        <p class="cell muted pb-3 pt-8 text-small font-medium">Our services</p>
+        <ul class="border-t border-line">
+          {services.map((l) => (
+            <li class="border-b border-line">
+              <a href={l.href} class="cell group flex items-center justify-between gap-4 py-5" aria-current={is(l.href) ? 'page' : undefined}>
+                <span>
+                  <span class:list={['block text-heading', is(l.href) && 'text-brand-blue']}>{l.label}</span>
+                  <span class="muted mt-1 block text-small">{l.desc}</span>
+                </span>
+                <span class="arrow text-heading" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="col-span-4 lg:col-span-6">
+        <p class="cell muted pb-3 pt-8 text-small font-medium">More</p>
+        <ul class="border-t border-line">
+          {more.map((l) => (
+            <li class="border-b border-line">
+              <a href={l.href} class="cell group flex items-center justify-between gap-4 py-4" aria-current={is(l.href) ? 'page' : undefined}>
+                <span>
+                  <span class:list={['block text-body font-medium', is(l.href) && 'text-brand-blue']}>{l.label}</span>
+                  <span class="muted block text-small">{l.desc}</span>
+                </span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="cell col-span-4 mt-8 grid gap-3 sm:grid-cols-2 lg:col-span-12">
+        <a href="tel:+15705024036" class="btn btn-secondary btn-block">Call (570) 502-4036 <span class="arrow" aria-hidden="true">→</span></a>
+        <a href="/contact" class="btn btn-primary btn-block">Get a free quote <span class="arrow" aria-hidden="true">→</span></a>
       </div>
     </nav>
   </div>
@@ -99,21 +99,18 @@ const mobileLinks = [...services, ...links.map((l) => ({ ...l, meta: '' })), { h
     position: relative;
     display: inline-flex;
     align-items: center;
-    height: 64px;
-    padding-inline: var(--pad);
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
-    letter-spacing: var(--text-label--letter-spacing);
-    text-transform: uppercase;
-    color: rgb(243 239 232 / .62);
+    height: 72px;
+    padding-inline: .8rem;
+    font-size: var(--text-small);
+    font-weight: 500;
+    color: rgb(243 239 232 / .8);
     transition: color .4s var(--ease-precise);
   }
-  .nav-link:hover { color: var(--color-ink); }
-  .nav-link.is-active { color: var(--color-ink); }
-  /* Active page: a 1px brand-blue rule on the header's bottom edge */
+  .nav-link:hover, .nav-link.is-active { color: var(--color-ink); }
+  /* Active page: a brand-blue rule on the header's bottom edge */
   .nav-link.is-active::after {
     content: "";
-    position: absolute; left: var(--pad); right: var(--pad); bottom: -1px; height: 1px;
+    position: absolute; left: .8rem; right: .8rem; bottom: -1px; height: 2px;
     background: var(--color-brand-blue);
   }
 
@@ -122,15 +119,7 @@ const mobileLinks = [...services, ...links.map((l) => ({ ...l, meta: '' })), { h
     border-bottom-color: var(--color-line);
   }
 
-  .dropdown { opacity: 0; visibility: hidden; transition: opacity .4s var(--ease-precise), visibility .4s; }
-  [data-dropdown].is-open .dropdown { opacity: 1; visibility: visible; }
-  [data-dropdown].is-open .acc-sign { transform: rotate(45deg); }
-  @media (hover: hover) {
-    [data-dropdown]:hover .dropdown { opacity: 1; visibility: visible; }
-    [data-dropdown]:hover .acc-sign { transform: rotate(45deg); }
-  }
-
-  .mobile-menu { opacity: 0; visibility: hidden; transition: opacity .5s var(--ease-precise), visibility .5s; }
+  .mobile-menu { opacity: 0; visibility: hidden; transition: opacity .4s var(--ease-precise), visibility .4s; }
   .site-header.menu-open .mobile-menu { opacity: 1; visibility: visible; }
   .site-header.menu-open .menu-word-open { display: none; }
   .site-header.menu-open .menu-word-close { display: inline; }

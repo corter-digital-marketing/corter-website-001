@@ -8,6 +8,15 @@ Marketing agency site. Offers three done-for-you services, each with exactly two
 
 Target feel: a minimal, precise, expensive technical company (Anduril, Vercel, Linear, Palantir). It must not look AI-generated or templated.
 
+## Easy to use comes first (owner's request)
+Many visitors are older business owners. Simplicity beats cleverness:
+- **Navigation:** every service is a top-level link (Websites, Social Media, SEO, Courses, Our Work, About). No dropdowns. Phone number always visible in the header; on phones, big **Call** and **Menu** buttons. The menu lists services first, each with a one-line plain description.
+- **Homepage:** right under the hero, "What do you need help with?" (`ServiceChooser`): one big plain-language choice per service ("I need a website") with price and a clear button, plus "Not sure? Call...".
+- **Service pages:** breadcrumb (Home › Page), then the **two options with prices and real buttons first**, then details, how it works, results, FAQ.
+- **Plain words:** section headings are plain names ("How it works", "Common questions"), not numbered codes. No jargon metadata (no "Index 00", "Rev.", "Case 01"). Clever headlines lose to clear ones.
+- **Readable:** body 18px, small 16px; buttons and form labels in normal-case sans, not tiny uppercase mono. Mono labels only for minor metadata. Muted text at ≥78% opacity.
+- Every clickable row or card shows a visible arrow or button, on phones too.
+
 ## Positioning & copy
 - **No regional references.** Never mention PA, NEPA, Northeastern PA, "local", coordinates or a service area. Metadata uses non-regional values (Est. 2025, Rev. YYYY.MM, indices, categories).
 - Short, specific, plain. Real numbers. If a sentence could be on any agency's site, rewrite it so it could only be on this one.
@@ -25,7 +34,7 @@ Target feel: a minimal, precise, expensive technical company (Anduril, Vercel, L
 - Sections are full-bleed bands separated by a 1px top rule (`.band`). Sections share borders; nothing floats as a separate card with gaps.
 - Use `.grid-12` with Tailwind `col-span-*` / `lg:col-span-*` / `lg:col-start-*`. Mobile spans are out of 4.
 - "+" registration marks (`.marks` on a band) only on 2–3 major intersections per page.
-- Every section starts with a metadata row: `<Section n="02" name="Services" meta="3 plans">` or `<Index>`.
+- Every section starts with a plain heading row: `<Section n="02" name="How it works">` or `<Index>` (the number is not displayed).
 
 ## Layout rules
 - Left-aligned, asymmetric, editorial. Headlines span 7–10 columns; body text sits in narrower offset columns (e.g. `lg:col-span-4 lg:col-start-8`). Center only rare single statements.
@@ -77,7 +86,7 @@ Gradient text · glowing blobs/orbs · radial color washes · glassmorphism/back
 - Deploy: Netlify (`netlify.toml`: build, 301s from old `.html` URLs, caching)
 
 ## Components (`src/components`)
-`Section`, `Index`, `PageHero`, `BrandMarks`, `HeroMedia`, `MediaSlot`, `Stat`, `IndexRow`, `Accordion`/`AccordionItem`, `PricingTable`, `CaseStudyCard`, `CourseCard`, `Testimonial`, `Closing`, `ContactForm`, `WaitlistForm`, `Button`, `Nav`, `Footer`. Reuse before writing new markup.
+`Section`, `Index`, `PageHero`, `ServiceChooser`, `BrandMarks`, `HeroMedia`, `MediaSlot`, `Stat`, `IndexRow`, `Accordion`/`AccordionItem`, `PricingTable`, `CaseStudyCard`, `CourseCard`, `Testimonial`, `Closing`, `ContactForm`, `WaitlistForm`, `Button`, `Nav`, `Footer`. Reuse before writing new markup.
 
 ## Verification (every page)
 `npm run build` with zero errors; all internal links and anchors resolve; unique title + description; one `h1`; screenshots at 375 / 768 / 1440 reviewed against the banned-patterns list; Lighthouse mobile ≥ 90.

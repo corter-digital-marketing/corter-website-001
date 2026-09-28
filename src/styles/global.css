@@ -42,13 +42,13 @@
   --text-heading: clamp(1.625rem, 1.1rem + 2.1vw, 3rem);
   --text-heading--line-height: 1.06;
   --text-heading--letter-spacing: -.035em;
-  --text-body: 1.0625rem;
+  --text-body: 1.125rem;
   --text-body--line-height: 1.6;
-  --text-small: .875rem;
+  --text-small: 1rem;
   --text-small--line-height: 1.5;
-  --text-label: .75rem;
+  --text-label: .8125rem;
   --text-label--line-height: 1.4;
-  --text-label--letter-spacing: .14em;
+  --text-label--letter-spacing: .08em;
 
   /* Two weights */
   --font-weight-*: initial;
@@ -71,7 +71,7 @@
     --margin: clamp(1rem, 0.4rem + 2.6vw, 2.5rem);   /* outer page margin */
     --pad: 1rem;                                       /* inner cell padding from a gridline */
     --cols: 4;
-    --header-h: 64px;
+    --header-h: 72px;
     --frame-w: min(100vw - var(--margin) * 2, 1440px);
     color-scheme: dark;
   }
@@ -153,9 +153,9 @@
     letter-spacing: var(--text-label--letter-spacing);
     text-transform: uppercase;
     font-weight: 400;
-    color: rgb(243 239 232 / .6);
+    color: rgb(243 239 232 / .72);
   }
-  .muted { color: rgb(243 239 232 / .62); }
+  .muted { color: rgb(243 239 232 / .78); }
   .num { font-variant-numeric: tabular-nums; }
 
   /* ── Links & buttons ────────────────────────────────────── */
@@ -173,14 +173,13 @@
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2.5rem;
-    min-height: 48px;
-    padding: 0 1rem;
+    gap: 1.5rem;
+    min-height: 52px;
+    padding: 0 1.25rem;
     border-radius: var(--radius-sm);
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
-    letter-spacing: var(--text-label--letter-spacing);
-    text-transform: uppercase;
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    font-weight: 500;
     white-space: nowrap;
     transition: background-color .4s var(--ease-precise), border-color .4s var(--ease-precise), color .4s var(--ease-precise);
   }
