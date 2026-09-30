@@ -24,7 +24,7 @@ const linkProps = d.link ? { href: d.link, target: '_blank', rel: 'noopener' } :
         <p class="muted mt-3 text-small">{d.statLabel}</p>
       </div>
     ) : d.image && d.imageStyle === 'logo' ? (
-      <div class="media grid h-full place-items-center bg-ink p-[16%]">
+      <div class="media absolute inset-0 bg-ink px-[14%] py-[8%]">
         <Image src={d.image} alt={`${d.client} logo`} class="h-full w-full object-contain mix-blend-multiply" widths={[400, 700]} sizes="(min-width: 1024px) 40vw, 90vw" />
       </div>
     ) : d.image ? (
