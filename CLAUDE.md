@@ -1,7 +1,9 @@
 # Corter Digital website
 
 Marketing agency site. Offers three done-for-you services, each with exactly two options, plus courses (do it yourself):
-- **Websites**: Template build · Custom build (+ monthly care plans)
+- **Websites**: Template build · Custom build (+ website maintenance)
+
+**No prices or packages anywhere on the site** (owner's request, 2026-09-30). No dollar amounts, no tiers (Launch/Growth/Scale, Essentials/Priority…), no "from $X", no price slots. Every option leads to "Get a quote".
 - **Social Media**: Management · Content creation
 - **SEO**: The Basics (Google and Bing) · AI Fundamentals (ChatGPT, Claude, Gemini)
 - **Courses**: Social Media Growth Playbook (waitlist).
@@ -9,8 +11,8 @@ Marketing agency site. Offers three done-for-you services, each with exactly two
 ## Live-site parity (owner's request, 2026-09-30)
 Every page keeps the **same layout and information as the live corterdigital.com** (the pre-Astro HTML on `main`, commit `3b4f2c3`), recreated in this style. Exceptions the owner chose: no NEPA/PA wording; homepage headline is "Proven solutions to help grow your business."; no "Products coming soon" sections; SEO and Courses are extra pages (SEO also appears as a third Services card on the homepage).
 - Home: centered logo (no wordmark) → headline centered across the full width → stats panel centered below it (10M+ views achieved, 60K+ followers gained, *across all social medias combined, "Speak to a professional") → Services cards (View more) + "Looking for something that's not listed here? We take on custom work too." → "Let's talk about your business." + form + phone/email.
-- Websites: "Built. Hosted. Cared for." → Website build (Template $200 / Custom quoted) → Care plans → Websites we've built → "Ready to get your site online?"
-- Social Media: "Grow the right way." → Monthly plans → Content creation → Real results, real clients → "Ready to grow your following?"
+- Websites: "Built. Hosted. Cared for." → Website build (Template / Custom) → Website maintenance (Care) → Websites we've built → "Ready to get your site online?"
+- Social Media: "Grow the right way." → What we offer (Social media management · Content creation) → Real results, real clients → "Ready to grow your following?"
 - Our Work: Websites grid only (no Social Media section, owner's request) → "Ready to add your business to this list?"
 - Learn: **removed** (owner's request). `/learn` and `/learn.html` 301 to `/courses`. Courses page has no "How it works" section.
 - About: "Elevate your business." (live copy, kept on purpose) → stats → contact links.
@@ -22,7 +24,7 @@ Target feel: a minimal, precise, expensive technical company (Anduril, Vercel, L
 ## Easy to use comes first (owner's request)
 Many visitors are older business owners. Simplicity beats cleverness:
 - **Navigation:** every service is a top-level link (Websites, Social Media, SEO, Courses, Our Work, About; no Learn). No dropdowns. Phone number always visible in the header; on phones, big **Call** and **Menu** buttons. The menu lists services first, each with a one-line plain description.
-- **Pages:** breadcrumb (Home › Page) at the top of every inner page; prices shown with real buttons.
+- **Pages:** breadcrumb (Home › Page) at the top of every inner page; every option has a real "Get a quote" button.
 - **Plain words:** section headings are plain names ("How it works", "Common questions"), not numbered codes. No jargon metadata (no "Index 00", "Rev.", "Case 01"). Clever headlines lose to clear ones.
 - **Readable:** body 18px, small 16px; buttons and form labels in normal-case sans, not tiny uppercase mono. Mono labels only for minor metadata. Muted text at ≥78% opacity.
 - Every clickable row or card shows a visible arrow or button, on phones too.
@@ -33,8 +35,7 @@ Many visitors are older business owners. Simplicity beats cleverness:
 - Banned words: elevate, unlock, seamless, supercharge, empower, cutting-edge, game-changing, journey, leverage, "next level", "built right".
 - Never invent results, testimonials, prices, timelines, guarantees, team size or founder facts. Missing content = a visible `.slot` placeholder.
 - Stat rows show only **10M+ total views** and **60K+ followers**. The 250K Finding Treasures figure is **not shown anywhere** (owner's request).
-- SEO prices aren't set yet: render them with `pricePending` (a visible `[Price]` slot) until the owner supplies them.
-- Real facts: 10M+ views and 60K+ followers gained (all platforms combined), prices on /websites and /social-media, phone (570) 502-4036, email andrewcsmma@gmail.com, "No pitch. Just a straight conversation."
+- Real facts: 10M+ views and 60K+ followers gained (all platforms combined), phone (570) 502-4036, email andrewcsmma@gmail.com, "No pitch. Just a straight conversation."
 
 ## Grid (the structure everything hangs on)
 - One 12-column frame, max 1440px, outer margin `--margin`. **4 columns below 1024px.**
@@ -44,11 +45,11 @@ Many visitors are older business owners. Simplicity beats cleverness:
 - Use `.grid-12` with Tailwind `col-span-*` / `lg:col-span-*` / `lg:col-start-*`. Mobile spans are out of 4.
 - "+" registration marks (`.marks` on a band) only on 2–3 major intersections per page.
 - Every section starts with a big bold title via `<Section name="Website build" meta="one-line intro">`. No small header strips, no numbering, no "+" marks on service pages.
-- **Service pages are deliberately minimal:** hero → one section per offering (title, one-line intro, option rows: name · price · what you get · button) → work/results → closing. No column-header rows, bullets, statements or process blocks.
+- **Service pages are deliberately minimal:** hero → one section per offering (title, one-line intro, option rows via `OptionList`: name + one line · what it includes · Get a quote) → work/results → closing. No column-header rows, bullets, statements or process blocks.
 
 ## Layout rules
 - Left-aligned, asymmetric, editorial. Headlines span 7–10 columns; body text sits in narrower offset columns (e.g. `lg:col-span-4 lg:col-start-8`). Center only rare single statements.
-- No two consecutive sections share a layout. Rotate: full-bleed media, dense data row (`Stat`), index list (`IndexRow`), columns, statement alone in open space, split (text | accordion / form / media), spec table (`PricingTable`).
+- No two consecutive sections share a layout. Rotate: full-bleed media, dense data row (`Stat`), index list (`IndexRow`), columns, statement alone in open space, split (text | accordion / form / media), option list (`OptionList`).
 - Lists of services/cases/values are `IndexRow`s (`01  Title  description  meta  →`), never icon-card grids.
 - Generous negative space. Remove anything that doesn't earn its place.
 
@@ -97,7 +98,7 @@ Gradient text · glowing blobs/orbs · radial color washes · glassmorphism/back
 - Deploy: Netlify (`netlify.toml`: build, 301s from old `.html` URLs, caching)
 
 ## Components (`src/components`)
-`Section`, `Index`, `PageHero`, `BrandMarks`, `HeroMedia`, `MediaSlot`, `Stat`, `IndexRow`, `Accordion`/`AccordionItem`, `PricingTable`, `CaseStudyCard`, `CourseCard`, `Testimonial`, `Closing`, `ContactForm`, `WaitlistForm`, `Button`, `Nav`, `Footer`. Reuse before writing new markup.
+`Section`, `Index`, `PageHero`, `BrandMarks`, `HeroMedia`, `MediaSlot`, `Stat`, `IndexRow`, `Accordion`/`AccordionItem`, `OptionList`, `CaseStudyCard`, `CourseCard`, `Testimonial`, `Closing`, `ContactForm`, `WaitlistForm`, `Button`, `Nav`, `Footer`. Reuse before writing new markup.
 
 ## Verification (every page)
 `npm run build` with zero errors; all internal links and anchors resolve; unique title + description; one `h1`; screenshots at 375 / 768 / 1440 reviewed against the banned-patterns list; Lighthouse mobile ≥ 90.

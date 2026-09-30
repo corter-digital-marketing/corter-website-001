@@ -22,7 +22,6 @@ const specs: [string, string][] = [
   ['Format', d.format],
   ['For', d.audience],
   ['Outcome', d.outcome],
-  ['Price', d.price ?? 'Set at launch'],
   ['Status', isLive ? 'Available now' : 'Waitlist open'],
 ];
 ---
@@ -58,7 +57,7 @@ const specs: [string, string][] = [
       {compact ? (
         <Button href="/courses" variant="secondary" block>View the course</Button>
       ) : isLive ? (
-        <Button href={d.checkoutUrl} external block>Buy now{d.price ? ` · ${d.price}` : ''}</Button>
+        <Button href={d.checkoutUrl} external block>Buy now</Button>
       ) : (
         <WaitlistForm product={d.title} id={`wl-${course.id}`} />
       )}

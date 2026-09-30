@@ -45,7 +45,7 @@ const courses = defineCollection({
       audience: z.string(),
       /** What you'll be able to do after */
       outcome: z.string(),
-      /** Display price, e.g. "$97". Leave empty while the price isn't set. */
+      /** Not displayed: the site shows no prices (owner's request). The price appears on the checkout page. */
       price: z.string().optional(),
       highlights: z.array(z.string()).default([]),
       image: image().optional(),

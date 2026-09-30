@@ -1,10 +1,10 @@
 ---
-/** Social Media. Same information as the live social media page, laid out simply. */
+/** Social Media. Same information as the live social media page, laid out simply, without prices. */
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import Section from '../components/Section.astro';
-import PricingTable from '../components/PricingTable.astro';
+import OptionList from '../components/OptionList.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
 import Closing from '../components/Closing.astro';
 
@@ -12,7 +12,7 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'soc
 ---
 <BaseLayout
   title="Social Media Management | Corter Digital"
-  description="Engaging content for your business, a growing following, and new clients. Social media management plans from $500 a month, plus content creation."
+  description="Engaging content for your business, a growing following, and new clients. Social media management and content creation. Get a free quote."
 >
   <PageHero
     meta={['Social Media']}
@@ -20,24 +20,12 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'soc
     lead="Create engaging content for your business, grow your following and find new clients. We know what works, and we put your content in front of the right people to make it memorable."
   />
 
-  <Section name="Social media management" id="pricing" meta="Consistent, on-brand posting across your platforms. Pick the pace that matches your growth goals.">
+  <Section name="What we offer" id="options" meta="Hand us your pages, or just get the content. Built around your goals.">
     <div class="frame">
-      <PricingTable
-        plans={[
-          { name: 'Launch', note: 'Get consistent', price: '$500', unit: '/mo', features: ['3 platforms managed', '2 posts per week'] },
-          { name: 'Growth', note: 'Build momentum', price: '$1,000', unit: '/mo', features: ['3 platforms managed', '3 posts per week', 'Video content included'] },
-          { name: 'Scale', note: 'Go all in', price: '$2,500', unit: '/mo', features: ['3 platforms managed', 'Posting every day', 'Video content included'] },
-        ]}
-      />
-    </div>
-  </Section>
-
-  <Section name="Content creation" meta="Get the photos and videos without the management. Post them yourself, or add them to a monthly plan.">
-    <div class="frame">
-      <PricingTable
-        plans={[
-          { name: 'Content shoot', note: 'On-site', price: 'Quoted', features: ['Custom in-person shoot', 'Photo and video for web and social', 'Edited, ready-to-use files'], cta: 'Get a quote' },
-          { name: 'Clipping', note: 'More reach from one shoot', price: 'Quoted', features: ['Long-form footage cut into short clips', 'Posted across multiple accounts'], cta: 'Get a quote' },
+      <OptionList
+        options={[
+          { name: 'Social media management', text: 'Consistent, on-brand posting across your platforms.', features: ['Up to 3 platforms managed', 'Posting from twice a week to every day', 'Video content'] },
+          { name: 'Content creation', text: 'Photos and videos made for you. Post them yourself, or add management.', features: ['Custom in-person content shoot', 'Photo and video for web and social', 'Long-form footage clipped into short videos'] },
         ]}
       />
     </div>

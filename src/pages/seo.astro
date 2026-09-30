@@ -1,5 +1,5 @@
 ---
-/** SEO. Two options, each with where you'll show up, what's included, price and a button. */
+/** SEO. Two options, each with where you'll show up, what's included and a button. No prices. */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import Section from '../components/Section.astro';
@@ -54,9 +54,8 @@ const options = [
         <ul class="cell col-span-4 grid gap-2 lg:col-span-6">
           {o.features.map((f) => <li>{f}</li>)}
         </ul>
-        <p class="cell col-span-4 mt-6 lg:col-span-2 lg:col-start-8 lg:mt-0"><span class="slot label inline-block px-2 py-1">[Price]</span></p>
         <p class="cell col-span-4 mt-6 lg:col-span-3 lg:col-start-10 lg:mt-0 lg:text-right">
-          <a href="/contact" class="btn btn-primary w-full lg:w-auto">Get started <span class="arrow" aria-hidden="true">→</span><span class="sr-only"> with {o.name}</span></a>
+          <a href="/contact" class="btn btn-primary w-full lg:w-auto">Get a quote <span class="arrow" aria-hidden="true">→</span><span class="sr-only"> for {o.name}</span></a>
         </p>
       </div>
     </Section>
@@ -73,5 +72,5 @@ const options = [
     <p class="frame grid-12"><span class="muted cell col-span-4 py-6 text-small lg:col-span-12">Logos are trademarks of their owners. Corter Digital isn't affiliated with Google, Microsoft, OpenAI, Anthropic or Google DeepMind.</span></p>
   </Section>
 
-  <Closing n="06" title="Get found where people are looking." cta="Get started" />
+  <Closing n="06" title="Get found where people are looking." cta="Get a quote" />
 </BaseLayout>

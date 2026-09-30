@@ -1,10 +1,10 @@
 ---
-/** Websites. Same information as the live websites page, laid out simply. */
+/** Websites. Same information as the live websites page, laid out simply, without prices. */
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import Section from '../components/Section.astro';
-import PricingTable from '../components/PricingTable.astro';
+import OptionList from '../components/OptionList.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
 import Closing from '../components/Closing.astro';
 
@@ -12,7 +12,7 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'web
 ---
 <BaseLayout
   title="Websites | Corter Digital"
-  description="Custom tailored websites built to serve your business. Template builds from $200, custom builds quoted, and care plans from $99 a month."
+  description="Custom tailored websites built to serve your business. Template or fully custom builds, plus hosting and ongoing care. Get a free quote."
 >
   <PageHero
     meta={['Websites']}
@@ -20,12 +20,12 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'web
     lead="Custom tailored websites built to serve your business. We build, deploy and maintain your site to ensure quality and consistency throughout the entire process."
   />
 
-  <Section name="Website build" id="pricing" meta="A one-time build to get your business online, from a fast template launch to a fully custom site.">
+  <Section name="Website build" id="options" meta="Get your business online, from a fast template launch to a fully custom site.">
     <div class="frame">
-      <PricingTable
-        plans={[
-          { name: 'Template Build', note: 'Fastest way to get online', price: '$200', unit: 'one-time', features: ['Professionally designed template, customized to your brand', 'Mobile-first, fast-loading build', 'Direct-to-email contact forms'], cta: 'Get started' },
-          { name: 'Custom Build', note: 'Built around your business', price: 'Quoted', features: ['Fully custom design, no template', 'SEO and Google Business integration', 'Booking, e-commerce, databases, and more'], cta: 'Get a quote' },
+      <OptionList
+        options={[
+          { name: 'Template Build', text: 'The fastest way to get online.', features: ['Professionally designed template, customized to your brand', 'Mobile-first, fast-loading build', 'Direct-to-email contact forms'] },
+          { name: 'Custom Build', text: 'Built around your business.', features: ['Fully custom design, no template', 'SEO and Google Business integration', 'Booking, e-commerce, databases, and more'] },
         ]}
       />
     </div>
@@ -33,11 +33,9 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'web
 
   <Section name="Website maintenance" meta="Ongoing hosting and upkeep so your site stays fast, secure, and up to date long after launch.">
     <div class="frame">
-      <PricingTable
-        plans={[
-          { name: 'Essentials', note: 'Keep it running', price: '$99', unit: '/mo', features: ['Hosting', 'Backups', 'Security monitoring', 'Uptime monitoring'] },
-          { name: 'Growth', note: 'Everything in Essentials, plus:', price: '$199', unit: '/mo', features: ['Monthly content edits', 'Monthly performance reporting', 'Speed optimization'] },
-          { name: 'Priority', note: 'Everything in Growth, plus:', price: '$349', unit: '/mo', features: ['Same-day changes', 'Conversion tweaks', 'A/B testing'] },
+      <OptionList
+        options={[
+          { name: 'Care', text: 'We look after your site so you don’t have to.', features: ['Hosting and backups', 'Security and uptime monitoring', 'Content edits and speed optimization', 'Performance reporting'] },
         ]}
       />
     </div>

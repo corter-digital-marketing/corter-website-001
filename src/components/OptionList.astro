@@ -1,0 +1,33 @@
+---
+/**
+ * Service options, one row each: name + one line | what it includes | button.
+ * No prices or packages are shown anywhere on the site (owner's request);
+ * every option leads to a free quote.
+ */
+interface Option {
+  name: string;
+  text: string;
+  features: string[];
+  cta?: string;
+}
+interface Props {
+  options: Option[];
+}
+const { options } = Astro.props;
+---
+<div class="border-t border-line">
+  {options.map((o) => (
+    <div class="grid-12 items-start gap-y-5 border-b border-line py-8 lg:py-10">
+      <div class="cell col-span-4 lg:col-span-5">
+        <h3 class="text-body font-semibold">{o.name}</h3>
+        <p class="muted mt-2 max-w-[42ch]">{o.text}</p>
+      </div>
+      <ul class="cell col-span-4 grid gap-2 lg:col-span-4">
+        {o.features.map((f) => <li>{f}</li>)}
+      </ul>
+      <p class="cell col-span-4 lg:col-span-3 lg:text-right">
+        <a href="/contact" class="btn btn-primary w-full lg:w-auto">{o.cta ?? 'Get a quote'} <span class="arrow" aria-hidden="true">→</span><span class="sr-only"> for {o.name}</span></a>
+      </p>
+    </div>
+  ))}
+</div>

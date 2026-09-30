@@ -77,11 +77,10 @@ Courses live in `src/content/courses/`. The Social Media Growth Playbook is alre
 1. Create a checkout link in Stripe (Payment Links), Gumroad, or Lemon Squeezy.
 2. Open `src/content/courses/social-media-growth-playbook.md` and change:
    ```yaml
-   price: "$97"                                   # your price
    checkoutUrl: "https://buy.stripe.com/xxxxxxx"  # your checkout link
    status: "live"                                 # was "waitlist"
    ```
-   (Remove the `#` at the start of the `price` and `checkoutUrl` lines.)
+   (Remove the `#` at the start of the `checkoutUrl` line.) The site never shows the price; your checkout page does.
 3. The waitlist form becomes a **Buy now** button.
 
 **To add a cover image:** put it in `src/assets/work/`, then add `image: "../../assets/work/your-file.jpg"` to the course file.
