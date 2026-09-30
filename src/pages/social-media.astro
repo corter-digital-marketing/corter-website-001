@@ -1,14 +1,10 @@
 ---
 /** Social Media. Same information as the live social media page, laid out simply, without prices. */
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import Section from '../components/Section.astro';
 import OptionList from '../components/OptionList.astro';
-import CaseStudyCard from '../components/CaseStudyCard.astro';
 import Closing from '../components/Closing.astro';
-
-const work = (await getCollection('case-studies', (s) => s.data.service === 'social-media')).sort((a, b) => a.data.order - b.data.order);
 ---
 <BaseLayout
   title="Social Media Management | Corter Digital"
@@ -28,12 +24,6 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'soc
           { name: 'Content creation', text: 'Photos and videos made for you. Post them yourself, or add management.', features: ['Custom in-person content shoot', 'Photo and video for web and social', 'Long-form footage clipped into short videos'] },
         ]}
       />
-    </div>
-  </Section>
-
-  <Section name="Real results, real clients">
-    <div class="frame grid-12 border-t border-line">
-      {work.map((s) => <CaseStudyCard study={s} class="col-span-4 lg:col-span-6 lg:border-r lg:border-line" />)}
     </div>
   </Section>
 

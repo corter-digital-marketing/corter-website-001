@@ -12,7 +12,7 @@ Marketing agency site. Offers three done-for-you services, each with exactly two
 Every page keeps the **same layout and information as the live corterdigital.com** (the pre-Astro HTML on `main`, commit `3b4f2c3`), recreated in this style. Exceptions the owner chose: no NEPA/PA wording; homepage headline is "Proven solutions to help grow your business."; no "Products coming soon" sections; SEO and Courses are extra pages (SEO also appears as a third Services card on the homepage).
 - Home: centered logo (no wordmark) → headline centered across the full width → stats panel centered below it (10M+ views achieved, 60K+ followers gained, *across all social medias combined, "Speak to a professional") → Services cards (View more) + "Looking for something that's not listed here? We take on custom work too." → "Let's talk about your business." + form + phone/email.
 - Websites: "Built. Hosted. Cared for." → Website build (Template / Custom) → Website maintenance (Care) → Websites we've built → "Ready to get your site online?"
-- Social Media: "Grow the right way." → What we offer (Social media management · Content creation) → Real results, real clients → "Ready to grow your following?"
+- Social Media: "Grow the right way." → What we offer (Social media management · Content creation) → (no results section, owner's request) → "Ready to grow your following?"
 - Our Work: Websites grid only (no Social Media section, owner's request) → "Ready to add your business to this list?"
 - Learn: **removed** (owner's request). `/learn` and `/learn.html` 301 to `/courses`. Courses page has no "How it works" section.
 - About: "Elevate your business." (live copy, kept on purpose) → stats → contact links.
