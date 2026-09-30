@@ -29,9 +29,6 @@ const [page, ...facts] = meta;
         <li aria-current="page" class="font-medium">{page}</li>
       </ol>
     </nav>
-    {facts.length > 0 && (
-      <p class="muted cell hidden py-4 text-right text-small lg:col-span-6 lg:block">{facts.join('  ·  ')}</p>
-    )}
   </div>
   <div class="frame grid-12 relative pb-14 pt-14 lg:pb-20 lg:pt-24">
     <h1 class="cell col-span-4 text-display font-medium lg:col-span-10" data-split>{title}</h1>

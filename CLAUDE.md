@@ -43,7 +43,8 @@ Many visitors are older business owners. Simplicity beats cleverness:
 - Sections are full-bleed bands separated by a 1px top rule (`.band`). Sections share borders; nothing floats as a separate card with gaps.
 - Use `.grid-12` with Tailwind `col-span-*` / `lg:col-span-*` / `lg:col-start-*`. Mobile spans are out of 4.
 - "+" registration marks (`.marks` on a band) only on 2–3 major intersections per page.
-- Every section starts with a plain heading row: `<Section n="02" name="How it works">` or `<Index>` (the number is not displayed).
+- Every section starts with a big bold title via `<Section name="Website build" meta="one-line intro">`. No small header strips, no numbering, no "+" marks on service pages.
+- **Service pages are deliberately minimal:** hero → one section per offering (title, one-line intro, option rows: name · price · what you get · button) → work/results → closing. No column-header rows, bullets, statements or process blocks.
 
 ## Layout rules
 - Left-aligned, asymmetric, editorial. Headlines span 7–10 columns; body text sits in narrower offset columns (e.g. `lg:col-span-4 lg:col-start-8`). Center only rare single statements.
@@ -55,7 +56,8 @@ Many visitors are older business owners. Simplicity beats cleverness:
 - **Geist** (sans) and **Geist Mono** (labels, metadata, buttons). Self-hosted via Fontsource.
 - Exactly **5 sizes** (Tailwind's scale is removed; only these utilities exist):
   `text-display` (hero / closing / big stats) · `text-heading` (section headings, row titles) · `text-body` · `text-small` · `text-label` (mono, uppercase, tracked).
-- Exactly **2 weights**: 400 (`font-normal`) and 500 (`font-medium`).
+- **3 weights**: 400 (`font-normal`), 500 (`font-medium`), and 600 (`font-semibold`) for section titles and option names only.
+- Section titles (`<Section name=...>`) are `text-heading font-semibold`, the biggest thing in a section, so sections are easy to tell apart. Option names and prices inside a section are `text-body font-semibold`.
 - Tight tracking on display/heading (built into the tokens); wide tracking on mono labels (`.label`). Tabular numerals on every number (`.num`).
 
 ## Color & surfaces

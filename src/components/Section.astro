@@ -1,23 +1,25 @@
 ---
 /**
- * Standard section shell: a full-bleed hairline on top and a metadata row
- * ("NN — Name ........ meta"). `marks` adds "+" registration marks (use sparingly).
+ * Page section: a big, bold title with an optional one-line intro, then the
+ * section content. Sections are separated by a full-bleed hairline.
+ * (`n` and `marks` are accepted for compatibility; neither is shown.)
  */
-import Index from './Index.astro';
-
 interface Props {
-  n: string;
+  n?: string;
   name: string;
+  /** Optional one-line intro under the title */
   meta?: string;
   id?: string;
   marks?: boolean;
   class?: string;
 }
-const { n, name, meta, id, marks = false, class: cls = '' } = Astro.props;
+const { name, meta, id, class: cls = '' } = Astro.props;
+const headingId = `${id ?? name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-title`;
 ---
-<section class:list={['band', marks && 'marks', cls]} id={id} aria-label={name}>
-  <div class="frame grid-12 border-b border-line py-4">
-    <h2 class="cell col-span-4 lg:col-span-12"><Index n={n} meta={meta}>{name}</Index></h2>
+<section class:list={['band', cls]} id={id} aria-labelledby={headingId}>
+  <div class="frame grid-12 pb-10 pt-16 lg:pb-14 lg:pt-24">
+    <h2 id={headingId} class="cell col-span-4 text-heading font-semibold lg:col-span-12">{name}</h2>
+    {meta && <p class="muted cell col-span-4 mt-4 text-body lg:col-span-7">{meta}</p>}
   </div>
   <slot />
 </section>

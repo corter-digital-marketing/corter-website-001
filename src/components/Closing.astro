@@ -10,7 +10,7 @@ interface Props {
 }
 const { n, title, cta = 'Book a free call', href = '/contact' } = Astro.props;
 ---
-<section class="band marks" aria-labelledby={`closing-${n}`}>
+<section class="band" aria-labelledby={`closing-${n}`}>
   <div class="frame grid-12 py-section">
     <h2 id={`closing-${n}`} class="cell col-span-4 text-display font-medium lg:col-span-10">{title}</h2>
     <div class="cell col-span-4 mt-12 flex flex-col gap-3 sm:flex-row lg:col-span-10">

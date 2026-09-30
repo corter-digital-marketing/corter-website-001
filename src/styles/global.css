@@ -54,6 +54,7 @@
   --font-weight-*: initial;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
+  --font-weight-semibold: 600; /* section titles only */
 
   /* Corners: sharp, 2px max */
   --radius-*: initial;

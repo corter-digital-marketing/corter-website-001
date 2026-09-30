@@ -1,5 +1,5 @@
 ---
-/** Social Media. Same layout and information as the live social media page, in the new style. */
+/** Social Media. Same information as the live social media page, laid out simply. */
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
@@ -15,17 +15,14 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'soc
   description="Engaging content for your business, a growing following, and new clients. Social media management plans from $500 a month, plus content creation."
 >
   <PageHero
-    meta={['Social Media', 'Plans from $500/mo']}
+    meta={['Social Media']}
     title="Grow the right way."
     lead="Create engaging content for your business, grow your following and find new clients. We know what works, and we put your content in front of the right people to make it memorable."
   />
 
-  <!-- Social media management -->
-  <Section n="01" name="Social media management" id="pricing" marks>
-    <div class="frame py-12 lg:py-16">
+  <Section name="Social media management" id="pricing" meta="Consistent, on-brand posting across your platforms. Pick the pace that matches your growth goals.">
+    <div class="frame">
       <PricingTable
-        title="Monthly plans"
-        caption="Consistent, on-brand posting across your platforms. Pick the pace that matches your growth goals."
         plans={[
           { name: 'Launch', note: 'Get consistent', price: '$500', unit: '/mo', features: ['3 platforms managed', '2 posts per week'] },
           { name: 'Growth', note: 'Build momentum', price: '$1,000', unit: '/mo', features: ['3 platforms managed', '3 posts per week', 'Video content included'] },
@@ -35,12 +32,9 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'soc
     </div>
   </Section>
 
-  <!-- Content creation -->
-  <Section n="02" name="Content creation">
-    <div class="frame py-12 lg:py-16">
+  <Section name="Content creation" meta="Get the photos and videos without the management. Post them yourself, or add them to a monthly plan.">
+    <div class="frame">
       <PricingTable
-        title="Photo and video, made for you"
-        caption="Get the content without the management. Post it yourself, or add it to a monthly plan."
         plans={[
           { name: 'Content shoot', note: 'On-site', price: 'Quoted', features: ['Custom in-person shoot', 'Photo and video for web and social', 'Edited, ready-to-use files'], cta: 'Get a quote' },
           { name: 'Clipping', note: 'More reach from one shoot', price: 'Quoted', features: ['Long-form footage cut into short clips', 'Posted across multiple accounts'], cta: 'Get a quote' },
@@ -49,11 +43,7 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'soc
     </div>
   </Section>
 
-  <!-- Our work -->
-  <Section n="03" name="Our work">
-    <div class="frame grid-12 pb-8 pt-12 lg:pt-16">
-      <h2 class="cell col-span-4 text-heading lg:col-span-8">Real results, real clients</h2>
-    </div>
+  <Section name="Real results, real clients">
     <div class="frame grid-12 border-t border-line">
       {work.map((s) => <CaseStudyCard study={s} class="col-span-4 lg:col-span-6 lg:border-r lg:border-line" />)}
     </div>

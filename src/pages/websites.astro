@@ -1,5 +1,5 @@
 ---
-/** Websites. Same layout and information as the live websites page, in the new style. */
+/** Websites. Same information as the live websites page, laid out simply. */
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
@@ -15,31 +15,25 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'web
   description="Custom tailored websites built to serve your business. Template builds from $200, custom builds quoted, and care plans from $99 a month."
 >
   <PageHero
-    meta={['Websites', 'Template builds from $200', 'Care plans from $99/mo']}
+    meta={['Websites']}
     title="Built. Hosted. Cared for."
     lead="Custom tailored websites built to serve your business. We build, deploy and maintain your site to ensure quality and consistency throughout the entire process."
   />
 
-  <!-- Website build -->
-  <Section n="01" name="Website build" id="pricing" marks>
-    <div class="frame py-12 lg:py-16">
+  <Section name="Website build" id="pricing" meta="A one-time build to get your business online, from a fast template launch to a fully custom site.">
+    <div class="frame">
       <PricingTable
-        title="Pick your starting point"
-        caption="A one-time build to get your business online, from a fast template launch to a fully custom site."
         plans={[
           { name: 'Template Build', note: 'Fastest way to get online', price: '$200', unit: 'one-time', features: ['Professionally designed template, customized to your brand', 'Mobile-first, fast-loading build', 'Direct-to-email contact forms'], cta: 'Get started' },
-          { name: 'Custom Build', note: 'Built around your business', price: 'Quoted', features: ['Fully custom design, no template', 'SEO architecture and Google Business integration', 'Built for whatever your business actually needs: booking, e-commerce, databases, and more'], cta: 'Get a quote' },
+          { name: 'Custom Build', note: 'Built around your business', price: 'Quoted', features: ['Fully custom design, no template', 'SEO and Google Business integration', 'Booking, e-commerce, databases, and more'], cta: 'Get a quote' },
         ]}
       />
     </div>
   </Section>
 
-  <!-- Website maintenance -->
-  <Section n="02" name="Website maintenance">
-    <div class="frame py-12 lg:py-16">
+  <Section name="Website maintenance" meta="Ongoing hosting and upkeep so your site stays fast, secure, and up to date long after launch.">
+    <div class="frame">
       <PricingTable
-        title="Care plans"
-        caption="Ongoing hosting and upkeep so your site stays fast, secure, and up to date long after launch."
         plans={[
           { name: 'Essentials', note: 'Keep it running', price: '$99', unit: '/mo', features: ['Hosting', 'Backups', 'Security monitoring', 'Uptime monitoring'] },
           { name: 'Growth', note: 'Everything in Essentials, plus:', price: '$199', unit: '/mo', features: ['Monthly content edits', 'Monthly performance reporting', 'Speed optimization'] },
@@ -49,11 +43,7 @@ const work = (await getCollection('case-studies', (s) => s.data.service === 'web
     </div>
   </Section>
 
-  <!-- Our work -->
-  <Section n="03" name="Our work">
-    <div class="frame grid-12 pb-8 pt-12 lg:pt-16">
-      <h2 class="cell col-span-4 text-heading lg:col-span-8">Websites we've built</h2>
-    </div>
+  <Section name="Websites we've built">
     <div class="frame grid-12 border-t border-line">
       {work.map((s, i) => (
         <CaseStudyCard study={s} class:list={['col-span-4 lg:col-span-6', i % 2 === 0 && 'lg:border-r lg:border-line']} />
