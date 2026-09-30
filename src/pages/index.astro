@@ -24,21 +24,23 @@ const services = [
   <section class="relative pt-[72px]" aria-labelledby="hero-title">
     <HeroMedia name="hero" />
 
-    <!-- Brand mark and wordmark (as on the live site) -->
+    <!-- Brand mark, centered -->
     <div class="frame grid-12 relative pt-14 lg:pt-20">
-      <div class="cell col-span-4 flex items-center gap-5 lg:col-span-12">
-        <Image src={logo} alt="" width={120} densities={[1, 2]} class="h-auto w-20 lg:w-28" loading="eager" />
-        <p class="text-heading font-medium uppercase tracking-[0.06em]" aria-hidden="true">Corter <span class="text-brand-blue">Digital</span></p>
+      <div class="cell col-span-4 flex justify-center lg:col-span-12">
+        <Image src={logo} alt="Corter Digital" width={176} densities={[1, 2]} class="h-auto w-28 lg:w-44" loading="eager" />
       </div>
     </div>
 
-    <div class="frame grid-12 relative pb-16 pt-12 lg:pb-24 lg:pt-20">
-      <h1 id="hero-title" class="cell col-span-4 text-display font-medium lg:col-span-7" data-split>
+    <!-- Headline across the full width -->
+    <div class="frame grid-12 relative pt-10 lg:pt-14">
+      <h1 id="hero-title" class="cell col-span-4 text-center text-display font-medium lg:col-span-12" data-split>
         Proven solutions to help grow your business.
       </h1>
+    </div>
 
-      <!-- Stats panel -->
-      <div class="col-span-4 mt-12 border border-line lg:col-span-5 lg:mt-0 lg:self-end">
+    <!-- Views and followers, below the headline -->
+    <div class="frame grid-12 relative pb-16 pt-12 lg:pb-24 lg:pt-16">
+      <div class="col-span-4 border border-line text-center lg:col-span-6 lg:col-start-4">
         <div class="grid grid-cols-2">
           <div class="cell border-r border-line py-7">
             <p class="num text-heading font-medium" data-count="10" data-suffix="M+">10M+</p>
