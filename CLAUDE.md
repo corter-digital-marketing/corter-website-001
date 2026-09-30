@@ -32,9 +32,9 @@ Many visitors are older business owners. Simplicity beats cleverness:
 - Short, specific, plain. Real numbers. If a sentence could be on any agency's site, rewrite it so it could only be on this one.
 - Banned words: elevate, unlock, seamless, supercharge, empower, cutting-edge, game-changing, journey, leverage, "next level", "built right".
 - Never invent results, testimonials, prices, timelines, guarantees, team size or founder facts. Missing content = a visible `.slot` placeholder.
-- Stat rows show only **10M+ total views** and **60K+ followers** (owner's request: no 250K in stat rows; it stays only inside the Finding Treasures case study).
+- Stat rows show only **10M+ total views** and **60K+ followers**. The 250K Finding Treasures figure is **not shown anywhere** (owner's request).
 - SEO prices aren't set yet: render them with `pricePending` (a visible `[Price]` slot) until the owner supplies them.
-- Real facts: 10M+ views and 60K+ followers gained (all platforms combined), 250K+ Facebook views in 30 days for Finding Treasures 4 U, prices on /websites and /social-media, phone (570) 502-4036, email andrewcsmma@gmail.com, "No pitch. Just a straight conversation."
+- Real facts: 10M+ views and 60K+ followers gained (all platforms combined), prices on /websites and /social-media, phone (570) 502-4036, email andrewcsmma@gmail.com, "No pitch. Just a straight conversation."
 
 ## Grid (the structure everything hangs on)
 - One 12-column frame, max 1440px, outer margin `--margin`. **4 columns below 1024px.**

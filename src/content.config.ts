@@ -7,7 +7,7 @@ const caseStudies = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/case-studies' }),
   schema: ({ image }) =>
     z.object({
-      /** Outcome-first title, e.g. "250K views in 30 days for an antique shop" */
+      /** Outcome-first title, e.g. "Social media for an antique store" */
       title: z.string(),
       client: z.string(),
       /** Which filter the project appears under on /portfolio */
@@ -17,7 +17,7 @@ const caseStudies = defineCollection({
       summary: z.string(),
       /** The headline number or result. Leave empty to show a placeholder slot. */
       result: z.string().optional(),
-      /** Optional big stat shown on the card art, e.g. "250K+" */
+      /** Optional big stat shown on the card art, e.g. "10M+" */
       stat: z.string().optional(),
       statLabel: z.string().optional(),
       /** Client logo or project screenshot (put the file in src/assets/work) */
