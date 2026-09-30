@@ -4,15 +4,25 @@ Marketing agency site. Offers three done-for-you services, each with exactly two
 - **Websites**: Template build · Custom build (+ monthly care plans)
 - **Social Media**: Management · Content creation
 - **SEO**: The Basics (Google and Bing) · AI Fundamentals (ChatGPT, Claude, Gemini)
-- **Courses**: Social Media Growth Playbook (waitlist). On the homepage, Courses comes before "What We Offer".
+- **Courses**: Social Media Growth Playbook (waitlist).
+
+## Live-site parity (owner's request, 2026-09-30)
+Every page keeps the **same layout and information as the live corterdigital.com** (the pre-Astro HTML on `main`, commit `3b4f2c3`), recreated in this style. Exceptions the owner chose: no NEPA/PA wording; homepage headline is "Proven solutions to help grow your business."; no "Products coming soon" sections; SEO and Courses are extra pages (SEO also appears as a third Services card on the homepage).
+- Home: brand mark + wordmark → headline + stats panel (10M+ views achieved, 60K+ followers gained, *across all social medias combined, "Speak to a professional") → Services cards (View more) + "Looking for something that's not listed here? We take on custom work too." → "Let's talk about your business." + form + phone/email.
+- Websites: "Built. Hosted. Cared for." → Website build (Template $200 / Custom quoted) → Care plans → Websites we've built → "Ready to get your site online?"
+- Social Media: "Grow the right way." → Monthly plans → Content creation → Real results, real clients → "Ready to grow your following?"
+- Our Work: Websites grid → Social Media → "Ready to add your business to this list?"
+- Learn: "Learn what actually works." → course waitlist → free guides → "Skip the course. Let us do it for you."
+- About: "Elevate your business." (live copy, kept on purpose) → stats → contact links.
+- Contact: "Let's build something great." → Reach us directly + Send us a message.
+- Case study cards show client name, industry and the live description (not outcome titles).
 
 Target feel: a minimal, precise, expensive technical company (Anduril, Vercel, Linear, Palantir). It must not look AI-generated or templated.
 
 ## Easy to use comes first (owner's request)
 Many visitors are older business owners. Simplicity beats cleverness:
 - **Navigation:** every service is a top-level link (Websites, Social Media, SEO, Courses, Our Work, About). No dropdowns. Phone number always visible in the header; on phones, big **Call** and **Menu** buttons. The menu lists services first, each with a one-line plain description.
-- **Homepage:** right under the hero, "What do you need help with?" (`ServiceChooser`): one big plain-language choice per service ("I need a website") with price and a clear button, plus "Not sure? Call...".
-- **Service pages:** breadcrumb (Home › Page), then the **two options with prices and real buttons first**, then details, how it works, results, FAQ.
+- **Pages:** breadcrumb (Home › Page) at the top of every inner page; prices shown with real buttons.
 - **Plain words:** section headings are plain names ("How it works", "Common questions"), not numbered codes. No jargon metadata (no "Index 00", "Rev.", "Case 01"). Clever headlines lose to clear ones.
 - **Readable:** body 18px, small 16px; buttons and form labels in normal-case sans, not tiny uppercase mono. Mono labels only for minor metadata. Muted text at ≥78% opacity.
 - Every clickable row or card shows a visible arrow or button, on phones too.
@@ -21,7 +31,6 @@ Many visitors are older business owners. Simplicity beats cleverness:
 - **No regional references.** Never mention PA, NEPA, Northeastern PA, "local", coordinates or a service area. Metadata uses non-regional values (Est. 2025, Rev. YYYY.MM, indices, categories).
 - Short, specific, plain. Real numbers. If a sentence could be on any agency's site, rewrite it so it could only be on this one.
 - Banned words: elevate, unlock, seamless, supercharge, empower, cutting-edge, game-changing, journey, leverage, "next level", "built right".
-- Case studies are titled by outcome, not client.
 - Never invent results, testimonials, prices, timelines, guarantees, team size or founder facts. Missing content = a visible `.slot` placeholder.
 - Stat rows show only **10M+ total views** and **60K+ followers** (owner's request: no 250K in stat rows; it stays only inside the Finding Treasures case study).
 - SEO prices aren't set yet: render them with `pricePending` (a visible `[Price]` slot) until the owner supplies them.
@@ -86,7 +95,7 @@ Gradient text · glowing blobs/orbs · radial color washes · glassmorphism/back
 - Deploy: Netlify (`netlify.toml`: build, 301s from old `.html` URLs, caching)
 
 ## Components (`src/components`)
-`Section`, `Index`, `PageHero`, `ServiceChooser`, `BrandMarks`, `HeroMedia`, `MediaSlot`, `Stat`, `IndexRow`, `Accordion`/`AccordionItem`, `PricingTable`, `CaseStudyCard`, `CourseCard`, `Testimonial`, `Closing`, `ContactForm`, `WaitlistForm`, `Button`, `Nav`, `Footer`. Reuse before writing new markup.
+`Section`, `Index`, `PageHero`, `BrandMarks`, `HeroMedia`, `MediaSlot`, `Stat`, `IndexRow`, `Accordion`/`AccordionItem`, `PricingTable`, `CaseStudyCard`, `CourseCard`, `Testimonial`, `Closing`, `ContactForm`, `WaitlistForm`, `Button`, `Nav`, `Footer`. Reuse before writing new markup.
 
 ## Verification (every page)
 `npm run build` with zero errors; all internal links and anchors resolve; unique title + description; one `h1`; screenshots at 375 / 768 / 1440 reviewed against the banned-patterns list; Lighthouse mobile ≥ 90.

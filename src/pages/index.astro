@@ -1,153 +1,111 @@
 ---
-import { getCollection } from 'astro:content';
+/**
+ * Homepage. Same layout and information as the live corterdigital.com homepage
+ * (brand mark, intro + stats, services, custom work, contact), in the new style.
+ */
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroMedia from '../components/HeroMedia.astro';
 import Button from '../components/Button.astro';
-import Index from '../components/Index.astro';
-import Stat from '../components/Stat.astro';
-import IndexRow from '../components/IndexRow.astro';
-import ServiceChooser from '../components/ServiceChooser.astro';
-import CourseCard from '../components/CourseCard.astro';
-import Testimonial from '../components/Testimonial.astro';
 import ContactForm from '../components/ContactForm.astro';
+import logo from '../assets/logo-mark.png';
 
-const studies = (await getCollection('case-studies', (s) => s.data.featured)).sort((a, b) => a.data.order - b.data.order);
-const [featured, ...rest] = studies;
-const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b.data.order);
+const services = [
+  { title: 'Websites', text: 'We build, deploy, and maintain your website.', href: '/websites' },
+  { title: 'Social Media', text: 'Handle your social media, and reach the right audience.', href: '/social-media' },
+  { title: 'SEO', text: 'Get found on Google and Bing, and in AI answers from ChatGPT, Claude and Gemini.', href: '/seo' },
+];
 ---
 <BaseLayout
-  title="Corter Digital | Websites, Social Media, SEO & Courses"
-  description="We've driven 10M+ views. Corter Digital builds websites, runs social media and gets you found on Google, so more customers call. Free quotes: (570) 502-4036."
+  title="Corter Digital | Websites, Social Media & Content Creation"
+  description="Corter Digital builds professional websites and runs social media marketing and content creation for businesses that want real customers. 10M+ views, 60K+ followers gained."
 >
-  <!-- ═══ HERO ═══ -->
-  <section class="relative flex min-h-[78svh] flex-col pt-[72px]" aria-labelledby="hero-title">
+  <!-- ═══ HERO: brand mark + intro + stats ═══ -->
+  <section class="relative pt-[72px]" aria-labelledby="hero-title">
     <HeroMedia name="hero" />
-    <div class="frame grid-12 relative flex-1 content-end pb-10 pt-16 lg:pb-14">
-      <h1 id="hero-title" class="cell col-span-4 text-display font-medium lg:col-span-10" data-split>
+
+    <!-- Brand mark and wordmark (as on the live site) -->
+    <div class="frame grid-12 relative pt-14 lg:pt-20">
+      <div class="cell col-span-4 flex items-center gap-5 lg:col-span-12">
+        <Image src={logo} alt="" width={120} densities={[1, 2]} class="h-auto w-20 lg:w-28" loading="eager" />
+        <p class="text-heading font-medium uppercase tracking-[0.06em]" aria-hidden="true">Corter <span class="text-brand-blue">Digital</span></p>
+      </div>
+    </div>
+
+    <div class="frame grid-12 relative pb-16 pt-12 lg:pb-24 lg:pt-20">
+      <h1 id="hero-title" class="cell col-span-4 text-display font-medium lg:col-span-7" data-split>
         Proven solutions to help grow your business.
       </h1>
-      <div class="cell col-span-4 mt-10 flex flex-col gap-3 sm:flex-row lg:col-span-12 lg:mt-14">
-        <Button href="/contact">Get a free quote</Button>
-        <Button href="#services" variant="secondary">See our services</Button>
-      </div>
-    </div>
-  </section>
 
-
-  <!-- ═══ WHAT WE OFFER: plain-language chooser ═══ -->
-  <section class="band marks" id="services" aria-labelledby="services-title">
-    <div class="frame grid-12 pb-10 pt-12 lg:pb-14 lg:pt-20">
-      <p class="cell col-span-4 text-small font-medium lg:col-span-12">What we offer</p>
-      <h2 id="services-title" class="cell col-span-4 mt-4 text-heading lg:col-span-8">What do you need help with?</h2>
-    </div>
-    <div class="frame">
-      <ServiceChooser />
-    </div>
-  </section>
-
-
-  <!-- ═══ RECORD: dense data row ═══ -->
-  <section class="band" aria-labelledby="record-title">
-    <div class="frame grid-12 border-b border-line py-4">
-      <h2 id="record-title" class="cell col-span-4 lg:col-span-12"><Index n="01" meta="Across all platforms">Our results</Index></h2>
-    </div>
-    <div class="frame grid-12">
-      <Stat value={10} suffix="M+" label="Total views" note="Generated" class="col-span-2 lg:col-span-6" />
-      <Stat value={60} suffix="K+" label="Followers" note="Gained" class="col-span-2 lg:col-span-6" />
-    </div>
-  </section>
-
-
-  <!-- ═══ PROCESS: three columns ═══ -->
-  <section class="band" aria-labelledby="process-title">
-    <div class="frame grid-12 border-b border-line py-4">
-      <h2 id="process-title" class="cell col-span-4 lg:col-span-12"><Index n="04">How it works</Index></h2>
-    </div>
-    <ol class="frame grid-12">
-      {[
-        ['Talk', 'One call. We ask about your customers, your numbers, and what isn’t working. No pitch.'],
-        ['Build', 'A template or custom site, or a content plan for three platforms. Nothing goes live until you approve it.'],
-        ['Grow', 'We post, host, and update every month. You watch the calls and messages come in.'],
-      ].map(([t, d], i) => (
-        <li class:list={['cell col-span-4 py-10 lg:py-16', i > 0 && 'border-t border-line lg:border-t-0']}>
-          <p class="label num">Step {String(i + 1).padStart(2, '0')}</p>
-          <h3 class="mt-16 text-heading lg:mt-32">{t}</h3>
-          <p class="muted mt-4 max-w-[34ch]">{d}</p>
-        </li>
-      ))}
-    </ol>
-  </section>
-
-
-  <!-- ═══ WORK: feature split + rows ═══ -->
-  <section class="band" aria-labelledby="work-title">
-    <div class="frame grid-12 border-b border-line py-4">
-      <h2 id="work-title" class="cell col-span-4 lg:col-span-12"><Index n="06">Our work</Index></h2>
-    </div>
-
-    {featured && (
-      <a href={featured.data.link} target="_blank" rel="noopener" class="group block border-b border-line">
-        <div class="frame grid-12 py-14 lg:py-24">
-          <div class="cell col-span-4 lg:col-span-6">
-            <p class="num text-display font-medium text-brand-blue" data-count="250" data-suffix="K+">{featured.data.stat}</p>
-            <p class="label mt-4">{featured.data.statLabel}</p>
+      <!-- Stats panel -->
+      <div class="col-span-4 mt-12 border border-line lg:col-span-5 lg:mt-0 lg:self-end">
+        <div class="grid grid-cols-2">
+          <div class="cell border-r border-line py-7">
+            <p class="num text-heading font-medium" data-count="10" data-suffix="M+">10M+</p>
+            <p class="mt-2 text-small font-medium">Views achieved</p>
           </div>
-          <div class="cell col-span-4 mt-12 flex flex-col lg:col-span-5 lg:col-start-8 lg:mt-0">
-            <p class="label">Social Media · {featured.data.industry}</p>
-            <h3 class="mt-5 text-heading"><span class="u-link">{featured.data.title}</span></h3>
-            <p class="muted mt-5">{featured.data.client}. {featured.data.summary}</p>
-            <p class="label mt-8 !text-ink">{featured.data.linkLabel} <span class="arrow" aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></p>
+          <div class="cell py-7">
+            <p class="num text-heading font-medium" data-count="60" data-suffix="K+">60K+</p>
+            <p class="mt-2 text-small font-medium">Followers gained</p>
           </div>
         </div>
-      </a>
-    )}
+        <p class="muted cell border-t border-line py-3 text-small">*Across all social medias combined</p>
+        <div class="cell border-t border-line py-5">
+          <Button href="/contact" block>Speak to a professional</Button>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <div class="frame">
-      {rest.map((s, i) => (
-        <IndexRow n={String(i + 2).padStart(2, '0')} title={s.data.title} text={`${s.data.client}. ${s.data.summary}`} meta={s.data.industry} href={s.data.link} external />
+
+  <!-- ═══ SERVICES ═══ -->
+  <section class="band marks" id="services" aria-labelledby="services-title">
+    <div class="frame grid-12 pb-10 pt-14 lg:pb-14 lg:pt-20">
+      <h2 id="services-title" class="cell col-span-4 text-display font-medium lg:col-span-12">Services</h2>
+    </div>
+
+    <ul class="frame grid-12 border-t border-line">
+      {services.map((s, i) => (
+        <li class:list={['col-span-4 border-b border-line', i < services.length - 1 && 'lg:border-r']}>
+          <a href={s.href} class="group cell flex h-full min-h-[300px] flex-col py-10 lg:min-h-[380px] lg:py-12">
+            <h3 class="text-heading"><span class="u-link">{s.title}</span></h3>
+            <p class="muted mt-4 max-w-[34ch]">{s.text}</p>
+            <p class="mt-auto pt-10"><span class="btn btn-primary">View more <span class="arrow" aria-hidden="true">→</span></span></p>
+          </a>
+        </li>
       ))}
-    </div>
-    <div class="frame grid-12 py-6">
-      <a href="/portfolio" class="label cell col-span-4 !text-ink lg:col-span-3 lg:col-start-10">All work <span class="arrow" aria-hidden="true">→</span></a>
-    </div>
-  </section>
+    </ul>
 
-
-  <!-- ═══ COURSES: media split ═══ -->
-  <section class="band" aria-labelledby="courses-title">
-    <div class="frame grid-12 border-b border-line py-4">
-      <h2 id="courses-title" class="cell col-span-4 lg:col-span-12"><Index n="02" meta="Waitlist open">Learn to do it yourself</Index></h2>
-    </div>
-    <div class="frame">
-      {courses[0] && <CourseCard course={courses[0]} compact />}
+    <!-- Custom work -->
+    <div class="frame grid-12 border-b border-line py-8 lg:py-10">
+      <p class="cell col-span-4 text-body font-medium lg:col-span-8">Looking for something that's not listed here? We take on custom work too.</p>
+      <div class="cell col-span-4 mt-6 lg:col-span-4 lg:mt-0 lg:text-right">
+        <Button href="/contact" variant="secondary">Fill out the form</Button>
+      </div>
     </div>
   </section>
 
 
-  <!-- ═══ CLIENTS: one quote ═══ -->
-  <section class="band" aria-labelledby="clients-title">
-    <div class="frame grid-12 py-4">
-      <h2 id="clients-title" class="cell col-span-4 lg:col-span-12"><Index n="07">What clients say</Index></h2>
-    </div>
-    <div class="frame py-16 lg:py-32">
-      <!-- Replace with: <Testimonial quote="..." name="..." role="Owner, Business" /> -->
-      <Testimonial />
-    </div>
-  </section>
-
-
-  <!-- ═══ CONTACT: form split ═══ -->
-  <section class="band marks" id="contact" aria-labelledby="contact-title">
+  <!-- ═══ CONTACT ═══ -->
+  <section class="band" id="contact" aria-labelledby="contact-title">
     <div class="frame grid-12 py-section">
       <div class="cell col-span-4 lg:col-span-5">
-        <Index n="08">Contact us</Index>
-        <h2 id="contact-title" class="mt-10 text-heading">No pitch. Just a straight conversation.</h2>
-        <dl class="mt-12 border-t border-line text-small">
-          <div class="grid grid-cols-[6rem_1fr] border-b border-line py-4"><dt class="label">Phone</dt><dd><a href="tel:+15705024036" class="u-link num">(570) 502-4036</a></dd></div>
-          <div class="grid grid-cols-[6rem_1fr] border-b border-line py-4"><dt class="label">Email</dt><dd><a href="mailto:andrewcsmma@gmail.com" class="u-link break-all">andrewcsmma@gmail.com</a></dd></div>
-          <div class="grid grid-cols-[6rem_1fr] border-b border-line py-4"><dt class="label">Reply</dt><dd>Usually the same day</dd></div>
+        <p class="muted text-small font-medium">Get started</p>
+        <h2 id="contact-title" class="mt-6 text-display font-medium">Let's talk about <span class="text-brand-blue">your business.</span></h2>
+        <p class="muted mt-8 max-w-[40ch] text-body">No pitch. Just a straight conversation about where you are and where you want to be.</p>
+
+        <dl class="mt-12 border-t border-line">
+          <div class="grid grid-cols-[6rem_1fr] items-baseline border-b border-line py-5">
+            <dt class="muted text-small">Phone</dt>
+            <dd><a href="tel:+15705024036" class="num u-link text-heading">(570) 502-4036</a></dd>
+          </div>
+          <div class="grid grid-cols-[6rem_1fr] items-baseline border-b border-line py-5">
+            <dt class="muted text-small">Email</dt>
+            <dd><a href="mailto:andrewcsmma@gmail.com" class="u-link break-all text-body">andrewcsmma@gmail.com</a></dd>
+          </div>
         </dl>
       </div>
+
       <div class="cell col-span-4 mt-16 lg:col-span-5 lg:col-start-8 lg:mt-0">
         <ContactForm id="home" />
       </div>

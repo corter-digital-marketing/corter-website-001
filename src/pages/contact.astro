@@ -1,48 +1,40 @@
 ---
+/** Contact. Same layout and information as the live contact page, in the new style. */
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
 import ContactForm from '../components/ContactForm.astro';
 ---
 <BaseLayout
   title="Contact | Corter Digital"
-  description="Book a free call with Corter Digital. No pitch, just a straight conversation. Call (570) 502-4036 or send a message. We usually reply the same day."
+  description="No pitch. Just a real conversation about your business and where you want to take it. Call (570) 502-4036 or send a message. We typically respond the same day."
 >
-  <section class="pt-[72px]" aria-labelledby="contact-title">
-    <div class="frame grid-12 border-b border-line">
-      <nav class="cell col-span-4 py-4 text-small lg:col-span-6" aria-label="Breadcrumb">
-        <ol class="flex items-center gap-2"><li><a href="/" class="muted u-link">Home</a></li><li class="muted" aria-hidden="true">›</li><li aria-current="page" class="font-medium">Contact</li></ol>
-      </nav>
-      <p class="muted cell hidden py-4 text-right text-small lg:col-span-6 lg:block">We usually reply the same day</p>
-    </div>
+  <PageHero
+    meta={['Contact', 'We typically respond the same day']}
+    title="Let's build something great."
+    lead="No pitch. Just a real conversation about your business and where you want to take it."
+  />
 
-    <div class="frame grid-12 pb-10 pt-14 lg:pb-14 lg:pt-24">
-      <h1 id="contact-title" class="cell col-span-4 text-display font-medium lg:col-span-10" data-split>No pitch. Just a straight conversation.</h1>
-      <p class="cell col-span-4 mt-8 text-heading lg:col-span-8">Call <a href="tel:+15705024036" class="num underline underline-offset-8">(570) 502-4036</a>, or send a message below.</p>
-    </div>
-  </section>
-
-  <section class="band marks" aria-label="Send a message">
+  <section class="band marks" aria-label="Contact details and form">
     <div class="frame grid-12 py-14 lg:py-24">
-      <!-- Direct lines -->
+      <!-- Reach us directly -->
       <div class="cell col-span-4 lg:col-span-5">
-        <h2 class="text-small font-medium">Reach us directly</h2>
-        <dl class="mt-6 border-t border-line text-small">
-          <div class="grid grid-cols-[6rem_1fr] border-b border-line py-4"><dt class="label">Phone</dt><dd><a href="tel:+15705024036" class="u-link num">(570) 502-4036</a></dd></div>
-          <div class="grid grid-cols-[6rem_1fr] border-b border-line py-4"><dt class="label">Email</dt><dd><a href="mailto:andrewcsmma@gmail.com" class="u-link break-all">andrewcsmma@gmail.com</a></dd></div>
-          <div class="grid grid-cols-[6rem_1fr] border-b border-line py-4"><dt class="label">Instagram</dt><dd><a href="https://www.instagram.com/corterdigital" target="_blank" rel="noopener" class="u-link">@corterdigital<span class="sr-only"> (opens in a new tab)</span></a></dd></div>
-          <div class="grid grid-cols-[6rem_1fr] border-b border-line py-4"><dt class="label">Reply</dt><dd>Usually the same day. Calling is fastest.</dd></div>
+        <h2 class="text-heading">Reach us directly</h2>
+        <dl class="mt-8 border-t border-line">
+          <div class="grid grid-cols-[6rem_1fr] items-baseline border-b border-line py-5">
+            <dt class="muted text-small">Phone</dt>
+            <dd><a href="tel:+15705024036" class="num u-link text-heading">(570) 502-4036</a></dd>
+          </div>
+          <div class="grid grid-cols-[6rem_1fr] items-baseline border-b border-line py-5">
+            <dt class="muted text-small">Email</dt>
+            <dd><a href="mailto:andrewcsmma@gmail.com" class="u-link break-all text-body">andrewcsmma@gmail.com</a></dd>
+          </div>
         </dl>
-
-        <h2 class="mt-16 text-small font-medium">What happens next</h2>
-        <ol class="mt-6 border-t border-line text-small">
-          <li class="grid grid-cols-[3rem_1fr] border-b border-line py-4"><span class="label num">01</span><span>We reply, by phone or email, whichever you prefer.</span></li>
-          <li class="grid grid-cols-[3rem_1fr] border-b border-line py-4"><span class="label num">02</span><span>One call about your business and what you need. No pitch.</span></li>
-          <li class="grid grid-cols-[3rem_1fr] border-b border-line py-4"><span class="label num">03</span><span>You get a plan and a price. You decide.</span></li>
-        </ol>
+        <p class="muted mt-8 max-w-[40ch]">We typically respond the same day. For fastest results, call us directly.</p>
       </div>
 
-      <!-- Form -->
+      <!-- Send us a message -->
       <div class="cell col-span-4 mt-16 lg:col-span-5 lg:col-start-8 lg:mt-0">
-        <h2 class="mb-6 text-small font-medium">Send a message</h2>
+        <h2 class="mb-8 text-heading">Send us a message</h2>
         <ContactForm id="contact" />
       </div>
     </div>

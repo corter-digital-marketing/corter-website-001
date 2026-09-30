@@ -1,19 +1,18 @@
 ---
 /**
- * Case study cell (case-studies collection). Cells share hairlines with their
- * neighbours; place them in a .grid-12 and give each a column span.
+ * Project card (case-studies collection), laid out like the live site:
+ * logo/media, industry tag, client name, one-line description, visit link.
+ * Cells share hairlines with their neighbours; place in a .grid-12.
  */
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   study: CollectionEntry<'case-studies'>;
-  n: string;
   class?: string;
 }
-const { study, n, class: cls = '' } = Astro.props;
+const { study, class: cls = '' } = Astro.props;
 const d = study.data;
-const service = d.service === 'websites' ? 'Website' : 'Social Media';
 const Tag = d.link ? 'a' : 'article';
 const linkProps = d.link ? { href: d.link, target: '_blank', rel: 'noopener' } : {};
 ---
@@ -22,35 +21,28 @@ const linkProps = d.link ? { href: d.link, target: '_blank', rel: 'noopener' } :
     {d.stat ? (
       <div class="flex h-full flex-col justify-end bg-surface p-[var(--pad)]">
         <p class="num text-display font-medium text-brand-blue">{d.stat}</p>
-        <p class="label mt-3">{d.statLabel}</p>
+        <p class="muted mt-3 text-small">{d.statLabel}</p>
       </div>
     ) : d.image && d.imageStyle === 'logo' ? (
       <div class="media grid h-full place-items-center bg-ink p-[16%]">
         <Image src={d.image} alt={`${d.client} logo`} class="h-full w-full object-contain mix-blend-multiply" widths={[400, 700]} sizes="(min-width: 1024px) 40vw, 90vw" />
       </div>
     ) : d.image ? (
-      <Image src={d.image} alt={`${d.client} project`} class="media h-full w-full object-cover" widths={[640, 1024, 1400]} sizes="(min-width: 1024px) 50vw, 100vw" />
+      <Image src={d.image} alt={`${d.client} website`} class="media h-full w-full object-cover" widths={[640, 1024, 1400]} sizes="(min-width: 1024px) 50vw, 100vw" />
     ) : (
-      <div class="slot flex h-full flex-col justify-between bg-surface p-[var(--pad)]">
-        <span class="label flex justify-between"><span>{d.client}</span><span>{d.status === 'in-progress' ? 'In development' : 'To supply'}</span></span>
-        <span class="label !text-ink/80">Project screenshot, 3:2</span>
+      <div class="flex h-full items-center justify-center bg-surface">
+        <span class="text-small font-medium">{d.status === 'in-progress' ? 'Coming soon' : d.client}</span>
       </div>
     )}
   </div>
 
   <div class="cell flex flex-1 flex-col pb-8 pt-6">
-    <p class="label num flex flex-wrap gap-x-4 gap-y-1"><span>{n}</span><span>{service}</span><span>{d.industry}</span></p>
-    <h3 class="mt-5 text-heading"><span class:list={[d.link && 'u-link']}>{d.title}</span></h3>
-    <p class="muted mt-4 max-w-[48ch] text-small">{d.client}. {d.summary}</p>
-
-    <div class="mt-auto pt-8">
-      <dl class="grid grid-cols-[6rem_1fr] items-baseline border-t border-line pt-4 text-small">
-        <dt class="label">Result</dt>
-        {d.result
-          ? <dd class="num">{d.result}</dd>
-          : <dd class="slot px-2 py-1 text-ink/60">[Add a real number in the case study file]</dd>}
-      </dl>
-      {d.link && <p class="label mt-4 !text-ink">{d.linkLabel} <span class="arrow" aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></p>}
-    </div>
+    <p class="muted text-small">{d.industry}</p>
+    <h3 class="mt-2 text-heading"><span class:list={[d.link && 'u-link']}>{d.client}</span></h3>
+    <p class="muted mt-3 max-w-[48ch]">{d.summary}</p>
+    {d.result && <p class="mt-4 text-small font-medium">{d.result}</p>}
+    {d.link && (
+      <p class="mt-auto pt-6"><span class="btn btn-secondary">{d.linkLabel} <span class="arrow" aria-hidden="true">↗</span></span><span class="sr-only"> (opens in a new tab)</span></p>
+    )}
   </div>
 </Tag>

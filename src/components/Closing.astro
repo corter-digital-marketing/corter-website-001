@@ -12,12 +12,11 @@ const { n, title, cta = 'Book a free call', href = '/contact' } = Astro.props;
 ---
 <section class="band marks" aria-labelledby={`closing-${n}`}>
   <div class="frame grid-12 py-section">
-    <p class="label num cell col-span-4 mb-10 lg:col-span-2 lg:mb-0">{n} — Next</p>
-    <h2 id={`closing-${n}`} class="cell col-span-4 text-display font-medium lg:col-span-9">{title}</h2>
-    <div class="cell col-span-4 mt-12 flex flex-col gap-3 sm:flex-row lg:col-span-6 lg:col-start-3">
+    <h2 id={`closing-${n}`} class="cell col-span-4 text-display font-medium lg:col-span-10">{title}</h2>
+    <div class="cell col-span-4 mt-12 flex flex-col gap-3 sm:flex-row lg:col-span-10">
       <Button href={href}>{cta}</Button>
       <Button href="tel:+15705024036" variant="secondary">(570) 502-4036</Button>
     </div>
-    <p class="label cell col-span-4 mt-6 lg:col-span-6 lg:col-start-3">No pitch. Just a straight conversation.</p>
+    <p class="muted cell col-span-4 mt-6 text-small lg:col-span-10">No pitch. Just a straight conversation.</p>
   </div>
 </section>

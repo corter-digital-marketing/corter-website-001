@@ -1,113 +1,65 @@
 ---
+/** Websites. Same layout and information as the live websites page, in the new style. */
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import Section from '../components/Section.astro';
-import Button from '../components/Button.astro';
-import Accordion from '../components/Accordion.astro';
-import AccordionItem from '../components/AccordionItem.astro';
 import PricingTable from '../components/PricingTable.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
 import Closing from '../components/Closing.astro';
 
-const work = (await getCollection('case-studies', (s) => s.data.service === 'websites' && s.data.status === 'live'))
-  .sort((a, b) => a.data.order - b.data.order);
+const work = (await getCollection('case-studies', (s) => s.data.service === 'websites')).sort((a, b) => a.data.order - b.data.order);
 ---
 <BaseLayout
   title="Websites | Corter Digital"
-  description="Websites that turn visitors into calls. Template builds from $200, custom builds quoted, hosting and care plans from $99 a month."
+  description="Custom tailored websites built to serve your business. Template builds from $200, custom builds quoted, and care plans from $99 a month."
 >
   <PageHero
-    meta={['Websites', 'Two options: template or custom', 'From $200']}
-    title="A website that turns visitors into calls."
-    lead="Template builds from $200. Custom builds for stores, bookings and databases. We host it and keep it running after launch."
-  >
-    <Button href="/contact">Get a quote</Button>
-    <Button href="#pricing" variant="secondary">See the two options</Button>
-  </PageHero>
+    meta={['Websites', 'Template builds from $200', 'Care plans from $99/mo']}
+    title="Built. Hosted. Cared for."
+    lead="Custom tailored websites built to serve your business. We build, deploy and maintain your site to ensure quality and consistency throughout the entire process."
+  />
 
-  <!-- Pricing: spec table -->
-  <Section n="02" name="Your two options" id="pricing" marks>
-    <div class="frame py-12 lg:py-20">
+  <!-- Website build -->
+  <Section n="01" name="Website build" id="pricing" marks>
+    <div class="frame py-12 lg:py-16">
       <PricingTable
-        title="Build your site"
-        caption="One-time build"
+        title="Pick your starting point"
+        caption="A one-time build to get your business online, from a fast template launch to a fully custom site."
         plans={[
-          { name: 'Template', note: 'Fastest way online', price: '$200', unit: 'once', features: ['Professional template, customized to your brand', 'Mobile-first, fast-loading build', 'Contact forms sent to your email'], cta: 'Get started' },
-          { name: 'Custom', note: 'Built around your business', price: 'Quoted', features: ['Fully custom design, no template', 'SEO architecture and Google Business integration', 'Booking, e-commerce, databases, and more'], cta: 'Get a quote', highlight: false },
+          { name: 'Template Build', note: 'Fastest way to get online', price: '$200', unit: 'one-time', features: ['Professionally designed template, customized to your brand', 'Mobile-first, fast-loading build', 'Direct-to-email contact forms'], cta: 'Get started' },
+          { name: 'Custom Build', note: 'Built around your business', price: 'Quoted', features: ['Fully custom design, no template', 'SEO architecture and Google Business integration', 'Built for whatever your business actually needs: booking, e-commerce, databases, and more'], cta: 'Get a quote' },
         ]}
       />
-      <div class="h-16 lg:h-24"></div>
+    </div>
+  </Section>
+
+  <!-- Website maintenance -->
+  <Section n="02" name="Website maintenance">
+    <div class="frame py-12 lg:py-16">
       <PricingTable
         title="Care plans"
-        caption="Monthly · for either build"
+        caption="Ongoing hosting and upkeep so your site stays fast, secure, and up to date long after launch."
         plans={[
           { name: 'Essentials', note: 'Keep it running', price: '$99', unit: '/mo', features: ['Hosting', 'Backups', 'Security monitoring', 'Uptime monitoring'] },
-          { name: 'Growth', note: 'Keep it improving', price: '$199', unit: '/mo', features: ['Everything in Essentials', 'Monthly content edits', 'Monthly performance reporting', 'Speed optimization'] },
-          { name: 'Priority', note: 'Keep it converting', price: '$349', unit: '/mo', features: ['Everything in Growth', 'Same-day changes', 'Conversion tweaks', 'A/B testing'] },
+          { name: 'Growth', note: 'Everything in Essentials, plus:', price: '$199', unit: '/mo', features: ['Monthly content edits', 'Monthly performance reporting', 'Speed optimization'] },
+          { name: 'Priority', note: 'Everything in Growth, plus:', price: '$349', unit: '/mo', features: ['Same-day changes', 'Conversion tweaks', 'A/B testing'] },
         ]}
       />
     </div>
   </Section>
 
-  <!-- Included: split, accordion -->
-  <Section n="01" name="What’s included">
-    <div class="frame grid-12 py-12 lg:py-20">
-      <p class="cell col-span-4 text-heading lg:col-span-4">Every build is set up to be found and to get you contacted.</p>
-      <div class="col-span-4 mt-10 lg:col-span-8 lg:mt-0">
-        <Accordion>
-          <AccordionItem n="01" title="Design" meta="Template or custom">A professional template customized to your brand, or a fully custom design with no template underneath.</AccordionItem>
-          <AccordionItem n="02" title="Mobile-first build" meta="All builds">Most visitors arrive on a phone. Every site is built for phones first and loads fast.</AccordionItem>
-          <AccordionItem n="03" title="Found on Google" meta="Custom builds">SEO architecture and Google Business integration, so people searching for what you do find you.</AccordionItem>
-          <AccordionItem n="04" title="Leads to your inbox" meta="All builds">Contact and booking forms that send straight to your email. Nothing to log into.</AccordionItem>
-          <AccordionItem n="05" title="Stores, bookings, databases" meta="Custom builds">Checkout, bulk ordering and booking requests are live on sites we've built. A self-managed product catalog is in development now.</AccordionItem>
-          <AccordionItem n="06" title="Hosting and care" meta="From $99/mo">Hosting, backups, security and uptime monitoring, with edits and reporting on higher plans.</AccordionItem>
-        </Accordion>
-      </div>
+  <!-- Our work -->
+  <Section n="03" name="Our work">
+    <div class="frame grid-12 pb-8 pt-12 lg:pt-16">
+      <h2 class="cell col-span-4 text-heading lg:col-span-8">Websites we've built</h2>
     </div>
-  </Section>
-
-  <!-- Process: columns -->
-  <Section n="03" name="How it works">
-    <ol class="frame grid-12">
-      {[
-        ['Talk', 'One call about your business, your customers, and what the site has to do. You leave with a price.'],
-        ['Build', 'We design and build. You review it, we revise it, and it goes live when you sign off.'],
-        ['Run', 'We deploy, host, back up and monitor it. Edits and reporting are included on Growth and Priority.'],
-      ].map(([t, d], i) => (
-        <li class:list={['cell col-span-4 py-10 lg:py-14', i > 0 && 'border-t border-line lg:border-t-0']}>
-          <p class="label num">Step {String(i + 1).padStart(2, '0')}</p>
-          <h3 class="mt-12 text-heading lg:mt-24">{t}</h3>
-          <p class="muted mt-4 max-w-[34ch]">{d}</p>
-        </li>
-      ))}
-    </ol>
-  </Section>
-
-  <!-- Results: case cells -->
-  <Section n="04" name="Websites we’ve built">
-    <div class="frame grid-12">
+    <div class="frame grid-12 border-t border-line">
       {work.map((s, i) => (
-        <CaseStudyCard study={s} n={String(i + 1).padStart(2, '0')} class="col-span-4 lg:border-r lg:border-line lg:last:border-r-0" />
+        <CaseStudyCard study={s} class:list={['col-span-4 lg:col-span-6', i % 2 === 0 && 'lg:border-r lg:border-line']} />
       ))}
     </div>
   </Section>
 
-  <!-- FAQ: split -->
-  <Section n="05" name="Common questions">
-    <div class="frame grid-12 py-12 lg:py-20">
-      <p class="cell col-span-4 text-heading lg:col-span-4">Straight answers.</p>
-      <div class="col-span-4 mt-10 lg:col-span-8 lg:mt-0">
-        <Accordion>
-          <AccordionItem n="01" title="Template or custom: which do I need?">If your site mainly explains what you do and gets people to call, start with a template. If customers need to buy, book, or log in, go custom.</AccordionItem>
-          <AccordionItem n="02" title="How long does it take?">Templates are the fastest way online. Custom timelines depend on what the site has to do. You get a date on the first call, before any work starts.</AccordionItem>
-          <AccordionItem n="03" title="What do care plans cover?">Essentials: hosting, backups, security and uptime monitoring. Growth adds monthly edits, reporting and speed work. Priority adds same-day changes, conversion tweaks and A/B testing.</AccordionItem>
-          <AccordionItem n="04" title="Can you add a store or bookings?">Yes. We've shipped checkout with bulk ordering and booking request forms, and we're building a catalog the owner updates themselves.</AccordionItem>
-          <AccordionItem n="05" title="Can I change things after launch?">Yes. Growth includes monthly edits and Priority includes same-day changes. We can also build in a way for you to edit it yourself.</AccordionItem>
-        </Accordion>
-      </div>
-    </div>
-  </Section>
-
-  <Closing n="06" title="Get your site online." cta="Get a quote" />
+  <Closing n="04" title="Ready to get your site online?" cta="Start the conversation" />
 </BaseLayout>
