@@ -23,7 +23,7 @@ Target feel: a minimal, precise, expensive technical company (Anduril, Vercel, L
 
 ## Easy to use comes first (owner's request)
 Many visitors are older business owners. Simplicity beats cleverness:
-- **Navigation:** every service is a top-level link (Websites, Social Media, SEO, Our Work, About; no Learn, no Courses). No dropdowns. Phone number always visible in the header; on phones, big **Call** and **Menu** buttons. The menu lists services first, each with a one-line plain description.
+- **Navigation:** every service is a top-level link (Websites, Social Media, SEO, Our Work, About; no Learn, no Courses). No dropdowns. Phone number always visible in the header; on phones, a phone icon button and a three-line menu icon (turns into an X). The menu is one plain list of six links in large text, then one "Get a free quote" button and the phone number. No descriptions or group labels.
 - **Pages:** breadcrumb (Home › Page) at the top of every inner page; every option has a real "Get a quote" button.
 - **Plain words:** section headings are plain names ("How it works", "Common questions"), not numbered codes. No jargon metadata (no "Index 00", "Rev.", "Case 01"). Clever headlines lose to clear ones.
 - **Readable:** body 18px, small 16px; buttons and form labels in normal-case sans, not tiny uppercase mono. Mono labels only for minor metadata. Muted text at ≥78% opacity.
