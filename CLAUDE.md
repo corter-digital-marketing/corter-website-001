@@ -6,7 +6,7 @@ Marketing agency site. Offers three done-for-you services, each with exactly two
 **No prices or packages anywhere on the site** (owner's request, 2026-09-30). No dollar amounts, no tiers (Launch/Growth/Scale, Essentials/Priority…), no "from $X", no price slots. Every option leads to "Get a quote".
 - **Social Media**: Management · Content creation
 - **SEO**: The Basics (Google and Bing) · AI Fundamentals (ChatGPT, Claude, Gemini)
-- **Courses: paused** (owner's request, 2026-09-30). The /courses page and its nav/footer links are removed; `CourseCard`, `WaitlistForm` and `src/content/courses/` are kept for when it returns (restore `src/pages/courses.astro` from git, re-add the nav/footer links, and remove the `/courses` redirect in `netlify.toml`).
+- **Courses: paused** (owner's request, 2026-09-30). The /courses page and its nav/footer links are removed; `CourseCard`, `WaitlistForm` and `src/content/courses/` are kept for when it returns (restore `src/pages/courses.astro` from git, re-add the nav/footer links, and remove the `/courses` redirect in `vercel.json`).
 
 ## Live-site parity (owner's request, 2026-09-30)
 Every page keeps the **same layout and information as the live corterdigital.com** (the pre-Astro HTML on `main`, commit `3b4f2c3`), recreated in this style. Exceptions the owner chose: no NEPA/PA wording; homepage headline is "Proven solutions to help grow your business."; no "Products coming soon" sections; SEO and Courses are extra pages (SEO also appears as a third Services card on the homepage).
@@ -95,7 +95,7 @@ Gradient text · glowing blobs/orbs · radial color washes · glassmorphism/back
 - Forms: Formspree `https://formspree.io/f/mwvzvkaw` (contact + waitlist, waitlist tagged via `_subject`)
 - Content collections (`src/content.config.ts`): `case-studies`, `courses`
 - Hero footage: drop `hero.mp4`, `hero-mobile.mp4`, `hero-poster.jpg` in `public/video/` (see README)
-- Deploy: Netlify (`netlify.toml`: build, 301s from old `.html` URLs, caching)
+- Deploy: **Vercel** (the live host). `vercel.json` holds framework/build/output settings, 301s from old `.html` URLs, and caching. Production publishes from `main`; other branches get preview deployments. Never add a `netlify.toml`.
 
 ## Components (`src/components`)
 `Section`, `Index`, `PageHero`, `BrandMarks`, `HeroMedia`, `MediaSlot`, `Stat`, `IndexRow`, `Accordion`/`AccordionItem`, `OptionList`, `CaseStudyCard`, `CourseCard`, `Testimonial`, `Closing`, `ContactForm`, `WaitlistForm`, `Button`, `Nav`, `Footer`. Reuse before writing new markup.

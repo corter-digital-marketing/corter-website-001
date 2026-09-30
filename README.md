@@ -71,7 +71,7 @@ If it ends with "Complete!" you're good. If it prints an error, it names the fil
 
 ## 5. Courses (paused)
 
-Courses are hidden for now: there is no /courses page and no link to it. The course content is still saved in `src/content/courses/`. To bring courses back, ask Claude to "restore the courses page" (it's in the git history), or restore `src/pages/courses.astro` yourself, add Courses back to the menu and footer, and delete the `/courses` redirect in `netlify.toml`.
+Courses are hidden for now: there is no /courses page and no link to it. The course content is still saved in `src/content/courses/`. To bring courses back, ask Claude to "restore the courses page" (it's in the git history), or restore `src/pages/courses.astro` yourself, add Courses back to the menu and footer, and delete the `/courses` redirect in `vercel.json`.
 
 ## 6. Add the hero video
 
@@ -112,26 +112,29 @@ Both the contact form and the course waitlist send to your existing Formspree fo
 
 ---
 
-## 9. Publish to Netlify (step by step)
+## 9. Publish on Vercel (step by step)
 
-The code is on GitHub at `corter-digital-marketing/corter-website-001`. The new site is on the **`redesign`** branch.
+corterdigital.com is hosted on **Vercel**, connected to the GitHub repo `corter-digital-marketing/corter-website-001`. The new site is on the **`redesign`** branch. The live site publishes from **`main`**.
 
-**First time:**
-1. Merge `redesign` into `main` once you're happy (or ask Claude to open a pull request).
-2. Go to https://app.netlify.com and sign up / log in **with GitHub**.
-3. Click **Add new site → Import an existing project → GitHub**.
-4. Pick **corter-website-001**. Branch to deploy: **main**.
-5. Netlify reads `netlify.toml` and fills in the settings (build command `npm run build`, publish directory `dist`). Click **Deploy**.
-6. Wait about a minute. You get a temporary address like `something.netlify.app`. Check it.
+All the settings Vercel needs are in `vercel.json` (build command `npm run build`, output folder `dist`, framework Astro, redirects, caching). You don't need to type them in anywhere.
 
-**Connect corterdigital.com:**
-1. In Netlify: **Site configuration → Domain management → Add a domain** → type `corterdigital.com`.
-2. Netlify shows DNS records. At your domain registrar (where you bought the domain), either switch the nameservers to Netlify's, or add the records Netlify lists.
-3. HTTPS turns on automatically once DNS updates (minutes to a few hours).
+**1. Check the preview first**
+1. Go to https://vercel.com and open the Corter Digital project.
+2. Click **Deployments**. Every push to `redesign` gets its own deployment with a **preview link**. Open the newest one for the `redesign` branch.
+3. Click through every page on your computer and your phone. The live site isn't affected by previews.
 
-**After that:** every time changes are pushed to `main`, Netlify rebuilds and publishes the site automatically.
+If the preview still shows the *old* site: open **Settings → Build & Deployment** and make sure **Framework Preset** is **Astro**, and that "Build Command", "Output Directory" and "Install Command" are either left on their defaults or match `vercel.json`. Turn off any manual overrides, then **Redeploy** the preview.
 
-**Old links keep working:** `netlify.toml` permanently redirects the old addresses (`/websites.html`, `/about.html`, etc.) to the new ones, and the old Learn page to Courses, so you keep your search rankings.
+**2. Go live**
+1. On GitHub, open a pull request from `redesign` into `main`: https://github.com/corter-digital-marketing/corter-website-001/compare/main...redesign (or ask Claude to do it).
+2. Click **Merge pull request**.
+3. Vercel sees the change on `main`, builds the site, and publishes it to corterdigital.com automatically, usually within a minute or two. Watch it under **Deployments**.
+
+**If something goes wrong after going live:** in Vercel, open **Deployments**, find the last good production deployment (the old site), click the **⋯** menu, and choose **Promote to Production** (or **Instant Rollback**). The old site is back in seconds.
+
+**After that:** every push to `main` publishes automatically. Pushes to other branches only create previews.
+
+**Old links keep working:** `vercel.json` permanently redirects the old addresses (`/websites.html`, `/about.html`, `/learn.html`, etc.) to the new pages, so you keep your search rankings.
 
 ---
 
