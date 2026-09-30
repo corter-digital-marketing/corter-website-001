@@ -6,7 +6,7 @@ Marketing agency site. Offers three done-for-you services, each with exactly two
 **No prices or packages anywhere on the site** (owner's request, 2026-09-30). No dollar amounts, no tiers (Launch/Growth/Scale, Essentials/Priority…), no "from $X", no price slots. Every option leads to "Get a quote".
 - **Social Media**: Management · Content creation
 - **SEO**: The Basics (Google and Bing) · AI Fundamentals (ChatGPT, Claude, Gemini)
-- **Courses**: Social Media Growth Playbook (waitlist).
+- **Courses: paused** (owner's request, 2026-09-30). The /courses page and its nav/footer links are removed; `CourseCard`, `WaitlistForm` and `src/content/courses/` are kept for when it returns (restore `src/pages/courses.astro` from git, re-add the nav/footer links, and remove the `/courses` redirect in `netlify.toml`).
 
 ## Live-site parity (owner's request, 2026-09-30)
 Every page keeps the **same layout and information as the live corterdigital.com** (the pre-Astro HTML on `main`, commit `3b4f2c3`), recreated in this style. Exceptions the owner chose: no NEPA/PA wording; homepage headline is "Proven solutions to help grow your business."; no "Products coming soon" sections; SEO and Courses are extra pages (SEO also appears as a third Services card on the homepage).
@@ -14,7 +14,7 @@ Every page keeps the **same layout and information as the live corterdigital.com
 - Websites: "Built. Hosted. Cared for." → Website build (Template / Custom) → Website maintenance (Care) → Websites we've built → "Ready to get your site online?"
 - Social Media: "Grow the right way." → What we offer (Social media management · Content creation) → (no results section, owner's request) → "Ready to grow your following?"
 - Our Work: Websites grid only (no Social Media section, owner's request) → "Ready to add your business to this list?"
-- Learn: **removed** (owner's request). `/learn` and `/learn.html` 301 to `/courses`. Courses page has no "How it works" section.
+- Learn: **removed** (owner's request). `/learn` and `/learn.html` 301 to `/`. Courses page has no "How it works" section.
 - About: "Elevate your business." (live copy, kept on purpose) → stats → contact links.
 - Contact: "Let's build something great." → Reach us directly + Send us a message.
 - Case study cards show client name, industry and the live description (not outcome titles).
@@ -23,7 +23,7 @@ Target feel: a minimal, precise, expensive technical company (Anduril, Vercel, L
 
 ## Easy to use comes first (owner's request)
 Many visitors are older business owners. Simplicity beats cleverness:
-- **Navigation:** every service is a top-level link (Websites, Social Media, SEO, Courses, Our Work, About; no Learn). No dropdowns. Phone number always visible in the header; on phones, big **Call** and **Menu** buttons. The menu lists services first, each with a one-line plain description.
+- **Navigation:** every service is a top-level link (Websites, Social Media, SEO, Our Work, About; no Learn, no Courses). No dropdowns. Phone number always visible in the header; on phones, big **Call** and **Menu** buttons. The menu lists services first, each with a one-line plain description.
 - **Pages:** breadcrumb (Home › Page) at the top of every inner page; every option has a real "Get a quote" button.
 - **Plain words:** section headings are plain names ("How it works", "Common questions"), not numbered codes. No jargon metadata (no "Index 00", "Rev.", "Case 01"). Clever headlines lose to clear ones.
 - **Readable:** body 18px, small 16px; buttons and form labels in normal-case sans, not tiny uppercase mono. Mono labels only for minor metadata. Muted text at ≥78% opacity.

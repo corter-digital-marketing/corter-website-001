@@ -69,23 +69,9 @@ If it ends with "Complete!" you're good. If it prints an error, it names the fil
 
 **To fill in the missing results** on the existing projects, open each file and replace the commented `# result:` line with a real one (remove the `#`).
 
-## 5. Add or launch a course
+## 5. Courses (paused)
 
-Courses live in `src/content/courses/`. The Social Media Growth Playbook is already there with the waitlist on.
-
-**When you're ready to sell it:**
-1. Create a checkout link in Stripe (Payment Links), Gumroad, or Lemon Squeezy.
-2. Open `src/content/courses/social-media-growth-playbook.md` and change:
-   ```yaml
-   checkoutUrl: "https://buy.stripe.com/xxxxxxx"  # your checkout link
-   status: "live"                                 # was "waitlist"
-   ```
-   (Remove the `#` at the start of the `checkoutUrl` line.) The site never shows the price; your checkout page does.
-3. The waitlist form becomes a **Buy now** button.
-
-**To add a cover image:** put it in `src/assets/work/`, then add `image: "../../assets/work/your-file.jpg"` to the course file.
-
-**To add a second product:** copy the course file, rename it, and change the fields. Set `order` to control the order.
+Courses are hidden for now: there is no /courses page and no link to it. The course content is still saved in `src/content/courses/`. To bring courses back, ask Claude to "restore the courses page" (it's in the git history), or restore `src/pages/courses.astro` yourself, add Courses back to the menu and footer, and delete the `/courses` redirect in `netlify.toml`.
 
 ## 6. Add the hero video
 

@@ -32,20 +32,27 @@
 
 [[redirects]]
   from = "/learn.html"
-  to = "/courses"
+  to = "/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/learn"
-  to = "/courses"
+  to = "/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/learn/*"
-  to = "/courses"
+  to = "/"
   status = 301
+  force = true
+
+# Courses are paused. Remove this redirect when src/pages/courses.astro is restored.
+[[redirects]]
+  from = "/courses"
+  to = "/"
+  status = 302
   force = true
 
 [[redirects]]
