@@ -32,7 +32,19 @@
 
 [[redirects]]
   from = "/learn.html"
-  to = "/learn"
+  to = "/courses"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/learn"
+  to = "/courses"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/learn/*"
+  to = "/courses"
   status = 301
   force = true
 

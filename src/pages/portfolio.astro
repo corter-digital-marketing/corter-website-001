@@ -10,7 +10,6 @@ import Closing from '../components/Closing.astro';
 
 const all = (await getCollection('case-studies')).sort((a, b) => a.data.order - b.data.order);
 const websites = all.filter((s) => s.data.service === 'websites');
-const social = all.filter((s) => s.data.service === 'social-media');
 ---
 <BaseLayout
   title="Our Work | Corter Digital"
@@ -25,18 +24,11 @@ const social = all.filter((s) => s.data.service === 'social-media');
   </PageHero>
 
   <!-- Websites -->
-  <Section n="01" name="Websites" id="websites" marks>
-    <div class="frame grid-12">
+  <Section n="01" name="Websites" id="websites">
+    <div class="frame grid-12 border-t border-line">
       {websites.map((s, i) => (
         <CaseStudyCard study={s} class:list={['col-span-4 lg:col-span-6', i % 2 === 0 && 'lg:border-r lg:border-line']} />
       ))}
-    </div>
-  </Section>
-
-  <!-- Social Media -->
-  <Section n="02" name="Social Media" id="social-media">
-    <div class="frame grid-12">
-      {social.map((s) => <CaseStudyCard study={s} class="col-span-4 lg:col-span-6 lg:border-r lg:border-line" />)}
     </div>
   </Section>
 

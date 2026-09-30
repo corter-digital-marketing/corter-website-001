@@ -11,7 +11,7 @@ interface Props {
   title: string;
   lead?: string;
   media?: string;
-  /** Optional parent crumb, e.g. { href: '/learn', label: 'Learn' } */
+  /** Optional parent crumb, e.g. { href: '/websites', label: 'Websites' } */
   parent?: { href: string; label: string };
 }
 const { meta, title, lead, media, parent } = Astro.props;

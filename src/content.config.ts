@@ -58,16 +58,4 @@ const courses = defineCollection({
     }),
 });
 
-/** Learn articles: one Markdown file per article in src/content/articles */
-const articles = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/articles' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    topic: z.enum(['Websites', 'Social Media', 'Growth']),
-    readingTime: z.string(),
-    order: z.number().default(100),
-  }),
-});
-
-export const collections = { 'case-studies': caseStudies, courses, articles };
+export const collections = { 'case-studies': caseStudies, courses };

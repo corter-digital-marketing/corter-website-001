@@ -11,8 +11,8 @@ Every page keeps the **same layout and information as the live corterdigital.com
 - Home: centered logo (no wordmark) → headline centered across the full width → stats panel centered below it (10M+ views achieved, 60K+ followers gained, *across all social medias combined, "Speak to a professional") → Services cards (View more) + "Looking for something that's not listed here? We take on custom work too." → "Let's talk about your business." + form + phone/email.
 - Websites: "Built. Hosted. Cared for." → Website build (Template $200 / Custom quoted) → Care plans → Websites we've built → "Ready to get your site online?"
 - Social Media: "Grow the right way." → Monthly plans → Content creation → Real results, real clients → "Ready to grow your following?"
-- Our Work: Websites grid → Social Media → "Ready to add your business to this list?"
-- Learn: "Learn what actually works." → course waitlist → free guides → "Skip the course. Let us do it for you."
+- Our Work: Websites grid only (no Social Media section, owner's request) → "Ready to add your business to this list?"
+- Learn: **removed** (owner's request). `/learn` and `/learn.html` 301 to `/courses`. Courses page has no "How it works" section.
 - About: "Elevate your business." (live copy, kept on purpose) → stats → contact links.
 - Contact: "Let's build something great." → Reach us directly + Send us a message.
 - Case study cards show client name, industry and the live description (not outcome titles).
@@ -21,7 +21,7 @@ Target feel: a minimal, precise, expensive technical company (Anduril, Vercel, L
 
 ## Easy to use comes first (owner's request)
 Many visitors are older business owners. Simplicity beats cleverness:
-- **Navigation:** every service is a top-level link (Websites, Social Media, SEO, Courses, Our Work, About). No dropdowns. Phone number always visible in the header; on phones, big **Call** and **Menu** buttons. The menu lists services first, each with a one-line plain description.
+- **Navigation:** every service is a top-level link (Websites, Social Media, SEO, Courses, Our Work, About; no Learn). No dropdowns. Phone number always visible in the header; on phones, big **Call** and **Menu** buttons. The menu lists services first, each with a one-line plain description.
 - **Pages:** breadcrumb (Home › Page) at the top of every inner page; prices shown with real buttons.
 - **Plain words:** section headings are plain names ("How it works", "Common questions"), not numbered codes. No jargon metadata (no "Index 00", "Rev.", "Case 01"). Clever headlines lose to clear ones.
 - **Readable:** body 18px, small 16px; buttons and form labels in normal-case sans, not tiny uppercase mono. Mono labels only for minor metadata. Muted text at ≥78% opacity.
@@ -92,7 +92,7 @@ Gradient text · glowing blobs/orbs · radial color washes · glassmorphism/back
 - Astro 7 (static), `<ClientRouter />` view transitions, Tailwind CSS 4 (`@tailwindcss/vite`), GSAP 3 (ScrollTrigger, SplitText, CustomEase), Lenis
 - UI behavior in `src/scripts/ui.ts` (header, dropdown, mobile menu, accordions, filters, forms, hero video). Re-runs on `astro:page-load`.
 - Forms: Formspree `https://formspree.io/f/mwvzvkaw` (contact + waitlist, waitlist tagged via `_subject`)
-- Content collections (`src/content.config.ts`): `case-studies`, `courses`, `articles`
+- Content collections (`src/content.config.ts`): `case-studies`, `courses`
 - Hero footage: drop `hero.mp4`, `hero-mobile.mp4`, `hero-poster.jpg` in `public/video/` (see README)
 - Deploy: Netlify (`netlify.toml`: build, 301s from old `.html` URLs, caching)
 

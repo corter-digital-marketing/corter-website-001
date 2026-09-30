@@ -40,7 +40,6 @@ If it ends with "Complete!" you're good. If it prints an error, it names the fil
 | Page text and layout | `src/pages/` (`index.astro` is the homepage, `websites.astro` is /websites, etc.) |
 | Case studies | `src/content/case-studies/` (one file per project) |
 | Courses & products | `src/content/courses/` (one file per product) |
-| Learn articles | `src/content/articles/` (one file per article) |
 | Images for case studies/courses | `src/assets/work/` |
 | Hero video | `public/video/` |
 | Colors, fonts, spacing | `src/styles/global.css` (see `CLAUDE.md` for the rules) |
@@ -89,11 +88,7 @@ Courses live in `src/content/courses/`. The Social Media Growth Playbook is alre
 
 **To add a second product:** copy the course file, rename it, and change the fields. Set `order` to control the order.
 
-## 6. Add a Learn article
-
-Copy a file in `src/content/articles/`, rename it (the file name becomes the URL, e.g. `pricing-your-services.md` → `/learn/pricing-your-services`), edit the fields at the top, and write the article below the second `---` using normal Markdown (`## Heading`, `- bullet`, `**bold**`).
-
-## 7. Add the hero video
+## 6. Add the hero video
 
 Put these three files in `public/video/` (create the folder if it's missing), with exactly these names:
 
@@ -115,7 +110,7 @@ ffmpeg -i public/video/hero.mp4 -frames:v 1 -q:v 4 public/video/hero-poster.jpg
 
 The video only loads after the page is ready, pauses when scrolled off screen, and is skipped for visitors with Data Saver or reduced motion (they see the poster). This keeps phone performance high.
 
-## 8. Replace placeholders
+## 7. Replace placeholders
 
 Anything still to supply shows a dashed outline and a "To supply" label on the site:
 
@@ -126,13 +121,13 @@ Anything still to supply shows a dashed outline and a "To supply" label on the s
 
 ---
 
-## 9. Forms
+## 8. Forms
 
 Both the contact form and the course waitlist send to your existing Formspree form (`mwvzvkaw`), so messages arrive in the same inbox as before. Waitlist signups have the subject **"Waitlist: [course name]"**. Nothing to set up. To see or export submissions, log in at https://formspree.io.
 
 ---
 
-## 10. Publish to Netlify (step by step)
+## 9. Publish to Netlify (step by step)
 
 The code is on GitHub at `corter-digital-marketing/corter-website-001`. The new site is on the **`redesign`** branch.
 
@@ -151,10 +146,10 @@ The code is on GitHub at `corter-digital-marketing/corter-website-001`. The new 
 
 **After that:** every time changes are pushed to `main`, Netlify rebuilds and publishes the site automatically.
 
-**Old links keep working:** `netlify.toml` permanently redirects the old addresses (`/websites.html`, `/about.html`, etc.) to the new ones, so you keep your search rankings.
+**Old links keep working:** `netlify.toml` permanently redirects the old addresses (`/websites.html`, `/about.html`, etc.) to the new ones, and the old Learn page to Courses, so you keep your search rankings.
 
 ---
 
-## 11. Old site files
+## 10. Old site files
 
 The old site's files (`index.html`, `websites.html`, `styles.css`, `main.js`, `partnerLogos/`, etc. in the project root) are still here and are **not** used by the new site. Once the new site is live and you're happy, they can be deleted.

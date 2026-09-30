@@ -4,7 +4,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import Section from '../components/Section.astro';
 import CourseCard from '../components/CourseCard.astro';
-import IndexRow from '../components/IndexRow.astro';
 
 const courses = (await getCollection('courses')).sort((a, b) => a.data.order - b.data.order);
 const open = courses.filter((c) => c.data.status === 'waitlist').length;
@@ -23,15 +22,6 @@ const open = courses.filter((c) => c.data.status === 'waitlist').length;
   <Section n="01" name="Courses">
     <div class="frame">
       {courses.map((c) => <CourseCard course={c} />)}
-    </div>
-  </Section>
-
-  <!-- How it works: rows -->
-  <Section n="02" name="How it works">
-    <div class="frame">
-      <IndexRow n="01" title="Join the waitlist" text="Leave your email on the course above. That's it." meta="Today" />
-      <IndexRow n="02" title="Get the email" text="We email you when enrollment opens, with the price and the link." meta="At launch" />
-      <IndexRow n="03" title="Work through it" text="Self-paced. Start when you want, go as fast or slow as your week allows." meta="Your pace" />
     </div>
   </Section>
 
