@@ -140,4 +140,4 @@ If the preview still shows the *old* site: open **Settings → Build & Deploymen
 
 ## 10. Old site files
 
-The old site's files (`index.html`, `websites.html`, `styles.css`, `main.js`, `partnerLogos/`, etc. in the project root) are still here and are **not** used by the new site. Once the new site is live and you're happy, they can be deleted.
+The old site's files (`index.html`, `websites.html`, `styles.css`, `main.js` in the project root, and their images in `photos/`) are still here and are **not** used by the new site. Once the new site is live and you're happy, they can be deleted.

@@ -104,4 +104,4 @@ Gradient text · glowing blobs/orbs · radial color washes · glassmorphism/back
 `npm run build` with zero errors; all internal links and anchors resolve; unique title + description; one `h1`; screenshots at 375 / 768 / 1440 reviewed against the banned-patterns list; Lighthouse mobile ≥ 90.
 
 ## Old site
-Pre-Astro files in the project root (`*.html`, `styles.css`, `main.js`, loose images) are kept until the owner approves deleting them. Astro ignores them.
+Pre-Astro files in the project root (`*.html`, `styles.css`, `main.js`) are kept until the owner approves deleting them; their images (and original client logos in `photos/partnerLogos/`) live in `photos/`. Astro ignores all of them. The new site's images are in `src/assets/` (optimized at build) and `public/` (favicons). New client logos the owner drops in `photos/partnerLogos/` must be copied into `src/assets/work/` to be used.
