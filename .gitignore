@@ -3,3 +3,9 @@ dist/
 .astro/
 .netlify/
 .env
+
+# Paid products: never commit (this repo is public)
+private/
+.env.*
+!.env.example
+.vercel/

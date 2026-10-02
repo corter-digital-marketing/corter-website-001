@@ -1,0 +1,30 @@
+---
+/**
+ * Where Stripe sends buyers after payment (set as the Payment Link's
+ * "after payment" redirect). Hidden from search engines. Note: this page does
+ * not verify payment; anyone with the address can download (owner's choice).
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { guide } from '../config/guide';
+---
+<BaseLayout title="Thank you | Corter Digital" description="Your purchase is confirmed. Download your guide." noindex>
+  <section class="relative pt-[72px]" aria-labelledby="ty-title">
+    <div class="frame grid-12 pb-16 pt-16 lg:pb-24 lg:pt-28">
+      <p class="cell col-span-4 text-small font-medium text-brand-blue lg:col-span-12">Purchase confirmed</p>
+      <h1 id="ty-title" class="cell col-span-4 mt-4 text-display font-medium lg:col-span-10" data-split>Thank you. Your guide is ready.</h1>
+      <p class="muted cell col-span-4 mt-8 text-body lg:col-span-6">{guide.name}</p>
+
+      <div class="cell col-span-4 mt-10 lg:col-span-5">
+        <a href={guide.file} download={guide.downloadName} class="btn btn-primary btn-block" data-astro-prefetch="false" data-astro-reload>
+          Download Your Guide <span class="arrow" aria-hidden="true">↓</span>
+        </a>
+      </div>
+
+      <ul class="cell col-span-4 mt-10 grid gap-3 border-t border-line pt-8 lg:col-span-7">
+        <li><span class="font-semibold">Save the file to your device</span> so you have it for good. On a phone, choose "Save to Files" or "Download".</li>
+        <li>It's a PDF ({guide.pages} pages). It opens in any browser or PDF reader.</li>
+        <li>Problem with the download? Email <a href={`mailto:${guide.supportEmail}`} class="underline underline-offset-4">{guide.supportEmail}</a> and we'll send it to you.</li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

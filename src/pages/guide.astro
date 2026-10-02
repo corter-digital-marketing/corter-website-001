@@ -1,0 +1,74 @@
+---
+/** Product page for the paid PDF guide. Payment is a Stripe Payment Link (see src/config/guide.ts). */
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import BuyButton from '../components/BuyButton.astro';
+import { guide } from '../config/guide';
+import cover from '../assets/guide-cover.png';
+---
+<BaseLayout
+  title={`${guide.shortName} | Corter Digital`}
+  description={`${guide.tagline}. A ${guide.pages}-page PDF guide with a 90-day roadmap, 9 modules, checklists and templates. ${guide.price}, instant download.`}
+>
+  <section class="relative pt-[72px]" aria-labelledby="guide-title">
+    <div class="frame grid-12 border-b border-line">
+      <nav class="cell col-span-4 py-4 text-small lg:col-span-12" aria-label="Breadcrumb">
+        <ol class="flex items-center gap-2">
+          <li><a href="/" class="muted u-link">Home</a></li><li class="muted" aria-hidden="true">›</li>
+          <li aria-current="page" class="font-medium">Guide</li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="frame grid-12 gap-y-12 pb-16 pt-12 lg:pb-24 lg:pt-20">
+      <div class="cell col-span-4 lg:col-span-5">
+        <Image src={cover} alt={`Cover of ${guide.name}`} class="h-auto w-full border border-line" widths={[400, 700, 1000]} sizes="(min-width: 1024px) 40vw, 100vw" loading="eager" />
+      </div>
+
+      <div class="cell col-span-4 lg:col-span-6 lg:col-start-7">
+        <p class="text-small font-medium text-brand-blue">Just released</p>
+        <h1 id="guide-title" class="mt-4 text-heading font-semibold">{guide.name}</h1>
+        <p class="muted mt-4 text-body">{guide.tagline}. The practical playbook for business owners who run their own social media.</p>
+
+        <dl class="mt-8 border-t border-line">
+          <div class="grid grid-cols-[8rem_1fr] border-b border-line py-3.5"><dt class="muted text-small">Format</dt><dd>PDF, {guide.pages} pages, instant download</dd></div>
+          <div class="grid grid-cols-[8rem_1fr] border-b border-line py-3.5"><dt class="muted text-small">Inside</dt><dd>90-day roadmap, 9 modules, checklists, templates</dd></div>
+          <div class="grid grid-cols-[8rem_1fr] border-b border-line py-3.5"><dt class="muted text-small">Written by</dt><dd>{guide.author}</dd></div>
+          <div class="grid grid-cols-[8rem_1fr] border-b border-line py-3.5"><dt class="muted text-small">Price</dt><dd class="num font-semibold">{guide.price} <span class="muted font-normal">one-time</span></dd></div>
+        </dl>
+
+        <div class="mt-8"><BuyButton block /></div>
+        <p class="muted mt-4 text-small">Secure checkout by Stripe. You download the guide right after payment.</p>
+      </div>
+    </div>
+  </section>
+
+  <Section name="What's inside" meta="Nine modules. Each one fixes a specific problem.">
+    <ol class="frame border-t border-line">
+      {guide.modules.map((m, i) => (
+        <li class="grid-12 items-baseline gap-y-2 border-b border-line py-6">
+          <span class="muted num cell col-span-4 text-small lg:col-span-1">{String(i + 1).padStart(2, '0')}</span>
+          <span class="cell col-span-4 text-body font-semibold lg:col-span-6">{m.title}</span>
+          <span class="muted cell col-span-4 lg:col-span-5">{m.solves}</span>
+        </li>
+      ))}
+      <li class="grid-12 items-baseline gap-y-2 border-b border-line py-6">
+        <span class="muted cell col-span-4 text-small lg:col-span-1">Plus</span>
+        <span class="cell col-span-4 text-body font-semibold lg:col-span-6">Your 90-Day Growth Roadmap</span>
+        <span class="muted cell col-span-4 lg:col-span-5">A week-by-week plan, about 2 to 4 hours a week</span>
+      </li>
+    </ol>
+  </Section>
+
+  <section class="band" aria-labelledby="guide-buy">
+    <div class="frame grid-12 py-section">
+      <h2 id="guide-buy" class="cell col-span-4 text-display font-medium lg:col-span-10">Get the guide.</h2>
+      <div class="cell col-span-4 mt-10 lg:col-span-5"><BuyButton block /></div>
+      <p class="muted cell col-span-4 mt-6 text-small lg:col-span-10">
+        Questions or a problem with your download? Email <a href={`mailto:${guide.supportEmail}`} class="underline underline-offset-4">{guide.supportEmail}</a>.
+        Rather have us run your social media for you? <a href="/social-media" class="underline underline-offset-4">See social media</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

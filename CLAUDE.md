@@ -8,6 +8,14 @@ Marketing agency site. Offers three done-for-you services, each with exactly two
 - **SEO**: The Basics (Google and Bing) · AI Fundamentals (ChatGPT, Claude, Gemini)
 - **Courses: paused** (owner's request, 2026-09-30). The /courses page and its nav/footer links are removed; `CourseCard`, `WaitlistForm` and `src/content/courses/` are kept for when it returns (restore `src/pages/courses.astro` from git, re-add the nav/footer links, and remove the `/courses` redirect in `vercel.json`).
 
+## The paid PDF guide (added 2026-10-02)
+- Product: **The 90-Day Social Media Growth Guide for Local Businesses**, $27, 42-page PDF. All product data is in `src/config/guide.ts`.
+- **Exceptions to the site rules, for this product only:** its **$27 price is shown** (the no-prices rule still applies to services), and its name keeps **"for Local Businesses"** (the no-"local" rule still applies to the rest of the copy).
+- Flow: homepage "Just released" band directly under the hero → `/guide` (product page, `BuyButton`) → Stripe **Payment Link** (`guide.paymentLink`) → Stripe redirects to `/thank-you` (noindex, not in sitemap) → download from `public/downloads/<hard-to-guess>.pdf`.
+- Owner chose the simple setup on purpose: **no payment verification, no server code, no webhook**; the PDF is public-but-unlisted (and in this public repo). Don't add serverless functions unless asked.
+- `private/` is git-ignored (owner's master copy of the PDF). Never commit it.
+- Describe the guide only with facts from the PDF (9 modules, 90-day roadmap, checklists, templates, 2 to 4 hours a week). No income or follower promises.
+
 ## Live-site parity (owner's request, 2026-09-30)
 Every page keeps the **same layout and information as the live corterdigital.com** (the pre-Astro HTML on `main`, commit `3b4f2c3`), recreated in this style. Exceptions the owner chose: no NEPA/PA wording; homepage headline is "Proven solutions to help grow your business."; no "Products coming soon" sections; SEO and Courses are extra pages (SEO also appears as a third Services card on the homepage).
 - Home: centered logo (no wordmark) → headline centered across the full width → stats panel centered below it (10M+ views achieved, 60K+ followers gained, *across all social medias combined, "Speak to a professional") → Services cards (View more) + "Looking for something that's not listed here? We take on custom work too." → "Let's talk about your business." + form + phone/email.
@@ -98,7 +106,7 @@ Gradient text · glowing blobs/orbs · radial color washes · glassmorphism/back
 - Deploy: **Vercel** (the live host). `vercel.json` holds framework/build/output settings, 301s from old `.html` URLs, and caching. Production publishes from `main`; other branches get preview deployments. Never add a `netlify.toml`.
 
 ## Components (`src/components`)
-`Section`, `Index`, `PageHero`, `BrandMarks`, `HeroMedia`, `MediaSlot`, `Stat`, `IndexRow`, `Accordion`/`AccordionItem`, `OptionList`, `CaseStudyCard`, `CourseCard`, `Testimonial`, `Closing`, `ContactForm`, `WaitlistForm`, `Button`, `Nav`, `Footer`. Reuse before writing new markup.
+`Section`, `Index`, `PageHero`, `BrandMarks`, `HeroMedia`, `MediaSlot`, `Stat`, `IndexRow`, `Accordion`/`AccordionItem`, `OptionList`, `BuyButton`, `CaseStudyCard`, `CourseCard`, `Testimonial`, `Closing`, `ContactForm`, `WaitlistForm`, `Button`, `Nav`, `Footer`. Reuse before writing new markup.
 
 ## Verification (every page)
 `npm run build` with zero errors; all internal links and anchors resolve; unique title + description; one `h1`; screenshots at 375 / 768 / 1440 reviewed against the banned-patterns list; Lighthouse mobile ≥ 90.

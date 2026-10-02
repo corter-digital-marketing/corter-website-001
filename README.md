@@ -69,6 +69,42 @@ If it ends with "Complete!" you're good. If it prints an error, it names the fil
 
 **To fill in the missing results** on the existing projects, open each file and replace the commented `# result:` line with a real one (remove the `#`).
 
+## 4b. Sell the guide (PDF + Stripe)
+
+The guide is sold with a **Stripe Payment Link**: Stripe hosts the payment page, then sends the buyer to your **/thank-you** page, which has the download button. There is no server code and nothing secret in this project.
+
+Everything about the product is in one file: `src/config/guide.ts` (name, price shown on the site, the Stripe link, and which PDF file is downloaded).
+
+**Set it up (about 10 minutes, start in Test mode)**
+1. Log in at https://dashboard.stripe.com. Turn on **Test mode** (toggle, top right).
+2. **Product catalog → Add product.** Name: `The 90-Day Social Media Growth Guide for Local Businesses`. Price: `27.00 USD`, **One-off**. Save.
+3. On the product, click **Create payment link**.
+4. Under **After payment**, choose **Don't show confirmation page → Redirect customers to your website** and enter:
+   `https://corterdigital.com/thank-you`
+   (While testing on a Vercel preview, use the preview address instead, e.g. `https://your-preview.vercel.app/thank-you`.)
+5. Click **Create link** and copy it (it looks like `https://buy.stripe.com/test_...`).
+6. Open `src/config/guide.ts` and paste it between the quotes on the `paymentLink:` line. Save, commit, push.
+
+**Test it**
+- Open the guide page, click **Buy now**, and pay with Stripe's test card: `4242 4242 4242 4242`, any future expiry date, any 3-digit CVC, any ZIP.
+- You should land on the thank-you page. Click **Download Your Guide** and check the PDF opens.
+- Click the back arrow on Stripe's payment page to check that cancelling brings you back to the site.
+
+**Go live**
+1. In Stripe, turn **Test mode off**. Products and links are separate in live mode, so repeat steps 2 to 5 there (redirect to `https://corterdigital.com/thank-you`).
+2. Paste the **live** link (`https://buy.stripe.com/...` without `test_`) into `src/config/guide.ts`, commit and push.
+3. In Stripe **Settings → Business → Customer emails**, turn on **Successful payments** so buyers get a receipt.
+
+**Change the price:** edit the price in Stripe (create a new price and a new payment link), then update `price:` and `paymentLink:` in `src/config/guide.ts`.
+
+**Replace the PDF with a new version**
+1. Put the new PDF in `public/downloads/`. Give it a new, hard-to-guess file name (for example add a few random letters to the end).
+2. Delete the old PDF from `public/downloads/`.
+3. In `src/config/guide.ts`, change `file:` to the new file name. Update `pages:` if the page count changed.
+4. Commit and push. (Optional: keep your master copy in `private/`; that folder is never uploaded.)
+
+**Good to know:** the download is not locked to payment. Anyone who has the thank-you address or the PDF link can download it, and because this GitHub repo is public the PDF is visible there too. That was a deliberate choice to keep things simple. If you ever want downloads locked to paying customers only, ask Claude to "add verified downloads for the guide".
+
 ## 5. Courses (paused)
 
 Courses are hidden for now: there is no /courses page and no link to it. The course content is still saved in `src/content/courses/`. To bring courses back, ask Claude to "restore the courses page" (it's in the git history), or restore `src/pages/courses.astro` yourself, add Courses back to the menu and footer, and delete the `/courses` redirect in `vercel.json`.

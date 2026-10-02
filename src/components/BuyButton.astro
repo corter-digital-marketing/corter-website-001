@@ -1,0 +1,21 @@
+---
+/**
+ * "Buy now" for the PDF guide. Opens the Stripe Payment Link from
+ * src/config/guide.ts. Until that link is set, shows a visible note instead
+ * of a dead button.
+ */
+import { guide } from '../config/guide';
+
+interface Props {
+  block?: boolean;
+  label?: string;
+}
+const { block = false, label = `Buy now · ${guide.price}` } = Astro.props;
+---
+{guide.paymentLink ? (
+  <a href={guide.paymentLink} class:list={['btn btn-primary', block && 'btn-block']}>
+    {label} <span class="arrow" aria-hidden="true">→</span>
+  </a>
+) : (
+  <p class="slot px-4 py-3 text-small">Buy button appears here once the Stripe Payment Link is added in <code>src/config/guide.ts</code>.</p>
+)}

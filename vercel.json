@@ -5,26 +5,102 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "redirects": [
-    { "source": "/index.html", "destination": "/", "permanent": true },
-    { "source": "/websites.html", "destination": "/websites", "permanent": true },
-    { "source": "/social-media.html", "destination": "/social-media", "permanent": true },
-    { "source": "/portfolio.html", "destination": "/portfolio", "permanent": true },
-    { "source": "/about.html", "destination": "/about", "permanent": true },
-    { "source": "/contact.html", "destination": "/contact", "permanent": true },
-    { "source": "/services.html", "destination": "/", "permanent": true },
-    { "source": "/learn.html", "destination": "/", "permanent": true },
-    { "source": "/learn", "destination": "/", "permanent": true },
-    { "source": "/learn/:path*", "destination": "/", "permanent": true },
-    { "source": "/courses", "destination": "/", "permanent": false }
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/websites.html",
+      "destination": "/websites",
+      "permanent": true
+    },
+    {
+      "source": "/social-media.html",
+      "destination": "/social-media",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio.html",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/about.html",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/services.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/learn.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/learn",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/learn/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/courses",
+      "destination": "/",
+      "permanent": false
+    }
   ],
   "headers": [
     {
       "source": "/_astro/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     },
     {
       "source": "/video/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=2592000" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000"
+        }
+      ]
+    },
+    {
+      "source": "/thank-you",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/downloads/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store"
+        }
+      ]
     }
   ]
 }
