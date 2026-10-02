@@ -9,7 +9,7 @@ import HeroMedia from '../components/HeroMedia.astro';
 import Button from '../components/Button.astro';
 import ContactForm from '../components/ContactForm.astro';
 import logo from '../assets/logo-mark.png';
-import cover from '../assets/guide-cover.png';
+import cover from '../assets/guide-mockup.png';
 import { guide } from '../config/guide';
 
 const services = [
@@ -66,7 +66,7 @@ const services = [
   <section class="band marks" aria-labelledby="guide-title">
     <a href="/guide" class="group frame grid-12 items-center gap-y-8 py-12 lg:py-16">
       <div class="cell col-span-4 lg:col-span-3">
-        <Image src={cover} alt={`Cover of ${guide.name}`} class="media h-auto w-full max-w-[260px] border border-line" widths={[260, 520]} sizes="260px" />
+        <Image src={cover} alt={`Cover of ${guide.name}`} class="media h-auto w-full max-w-[300px]" widths={[300, 600]} sizes="300px" />
       </div>
       <div class="cell col-span-4 lg:col-span-6">
         <p class="text-small font-medium text-brand-blue">Just released</p>

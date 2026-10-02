@@ -5,7 +5,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Section from '../components/Section.astro';
 import BuyButton from '../components/BuyButton.astro';
 import { guide } from '../config/guide';
-import cover from '../assets/guide-cover.png';
+import cover from '../assets/guide-mockup.png';
 ---
 <BaseLayout
   title={`${guide.shortName} | Corter Digital`}
@@ -23,7 +23,7 @@ import cover from '../assets/guide-cover.png';
 
     <div class="frame grid-12 gap-y-12 pb-16 pt-12 lg:pb-24 lg:pt-20">
       <div class="cell col-span-4 lg:col-span-5">
-        <Image src={cover} alt={`Cover of ${guide.name}`} class="h-auto w-full border border-line" widths={[400, 700, 1000]} sizes="(min-width: 1024px) 40vw, 100vw" loading="eager" />
+        <Image src={cover} alt={`Cover of ${guide.name}`} class="h-auto w-full" widths={[400, 700, 1000]} sizes="(min-width: 1024px) 40vw, 100vw" loading="eager" />
       </div>
 
       <div class="cell col-span-4 lg:col-span-6 lg:col-start-7">
