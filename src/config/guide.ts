@@ -14,7 +14,7 @@ export const guide = {
   supportEmail: 'andrewcsmma@gmail.com',
 
   /** Stripe Payment Link, e.g. "https://buy.stripe.com/abc123". Leave '' until you have it. */
-  paymentLink: '',
+  paymentLink: 'https://buy.stripe.com/7sYcN50XpdBj2lx0S9gYU09',
 
   /** The file buyers download (in public/downloads/). Change this if you replace the PDF. */
   file: '/downloads/The-90-Day-Social-Media-Growth-Guide-f8d92ff4f641.pdf',
