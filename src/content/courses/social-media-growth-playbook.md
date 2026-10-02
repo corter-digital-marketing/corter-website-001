@@ -13,4 +13,4 @@ status: "waitlist"
 order: 1
 ---
 
-The exact approach behind 10M+ views and 60K+ followers gained across social media: content strategy, posting cadence, and how to turn followers into customers.
+The exact approach behind 10M+ views and 150K+ followers gained across social media: content strategy, posting cadence, and how to turn followers into customers.

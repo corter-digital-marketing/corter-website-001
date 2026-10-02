@@ -18,7 +18,7 @@ Marketing agency site. Offers three done-for-you services, each with exactly two
 
 ## Live-site parity (owner's request, 2026-09-30)
 Every page keeps the **same layout and information as the live corterdigital.com** (the pre-Astro HTML on `main`, commit `3b4f2c3`), recreated in this style. Exceptions the owner chose: no NEPA/PA wording; homepage headline is "Proven solutions to help grow your business."; no "Products coming soon" sections; SEO and Courses are extra pages (SEO also appears as a third Services card on the homepage).
-- Home: centered logo (no wordmark) → headline centered across the full width → stats panel centered below it (10M+ views achieved, 60K+ followers gained, *across all social medias combined, "Speak to a professional") → Services cards (View more) + "Looking for something that's not listed here? We take on custom work too." → "Let's talk about your business." + form + phone/email.
+- Home: centered logo (no wordmark) → headline centered across the full width → stats panel centered below it (10M+ views achieved, 150K+ followers gained, *across all social medias combined, "Speak to a professional") → Services cards (View more) + "Looking for something that's not listed here? We take on custom work too." → "Let's talk about your business." + form + phone/email.
 - Websites: "Built. Hosted. Cared for." → Website build (Template / Custom) → Website maintenance (Care) → Websites we've built → "Ready to get your site online?"
 - Social Media: "Grow the right way." → What we offer (Social media management · Content creation) → (no results section, owner's request) → "Ready to grow your following?"
 - Our Work: Websites grid only (no Social Media section, owner's request) → "Ready to add your business to this list?"
@@ -42,8 +42,8 @@ Many visitors are older business owners. Simplicity beats cleverness:
 - Short, specific, plain. Real numbers. If a sentence could be on any agency's site, rewrite it so it could only be on this one.
 - Banned words: elevate, unlock, seamless, supercharge, empower, cutting-edge, game-changing, journey, leverage, "next level", "built right".
 - Never invent results, testimonials, prices, timelines, guarantees, team size or founder facts. Missing content = a visible `.slot` placeholder.
-- Stat rows show only **10M+ total views** and **60K+ followers**. The 250K Finding Treasures figure is **not shown anywhere** (owner's request).
-- Real facts: 10M+ views and 60K+ followers gained (all platforms combined), phone (570) 502-4036, email andrewcsmma@gmail.com, "No pitch. Just a straight conversation."
+- Stat rows show only **10M+ total views** and **150K+ followers**. The 250K Finding Treasures figure is **not shown anywhere** (owner's request).
+- Real facts: 10M+ views and 150K+ followers gained (all platforms combined), phone (570) 502-4036, email andrewcsmma@gmail.com, "No pitch. Just a straight conversation."
 
 ## Grid (the structure everything hangs on)
 - One 12-column frame, max 1440px, outer margin `--margin`. **4 columns below 1024px.**
